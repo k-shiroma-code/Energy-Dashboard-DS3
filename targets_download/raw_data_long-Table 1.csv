@@ -1,0 +1,2144 @@
+COUNTRY_CODE,TARGET_YEAR,FUEL_CATEGORY,METRIC,VALUE,SOURCE_ID,NUMBER_OF_UPDATES,COLLECTION_YEAR
+MMR,2030,Hydro,capacity_total_gw,7.45,169,1,2024
+MMR,2030,Coal,capacity_total_gw,3.06,169,1,2024
+MMR,2030,Gas,capacity_total_gw,1.67,169,1,2024
+MMR,2030,Solar,capacity_total_gw,0.3,169,1,2024
+MMR,2030,Other Fossil,capacity_total_gw,2.5,169,1,2024
+IRL,2030,Onshore Wind,capacity_total_gw,9,113,1,2023
+IRL,2030,Solar,capacity_total_gw,8,113,1,2023
+IRL,2030,Offshore Wind,capacity_total_gw,5,113,1,2023
+IRL,2030,Renewables,share_of_consumption_pct,80,113,1,2023
+IRL,2030,Bioenergy,capacity_total_gw,0.93,117,1,2023
+IRL,2030,Hydro,capacity_total_gw,0.7,117,1,2023
+IRL,2030,Solar,capacity_total_gw,8,133,2,2024
+IRL,2030,Onshore Wind,capacity_total_gw,9,133,2,2024
+IRL,2030,Offshore Wind,capacity_total_gw,7,133,2,2024
+IRL,2030,Bioenergy,capacity_total_gw,0.148,133,2,2024
+IRL,2030,Hydro,capacity_total_gw,0.237,133,2,2024
+IRL,2030,Other Renewables,capacity_total_gw,0.077,133,2,2024
+IRL,2030,Solar,generation_twh,3.98,133,2,2024
+IRL,2030,Wind,generation_twh,26.77,133,2,2024
+IRL,2030,Bioenergy,generation_twh,1,133,2,2024
+IRL,2030,Hydro,generation_twh,0.67,133,2,2024
+IRL,2030,Other Renewables,generation_twh,0.41,133,2,2024
+IRL,2030,Solar,capacity_total_gw,6.5,190,3,2024
+IRL,2030,Onshore Wind,capacity_total_gw,7.16,190,3,2024
+IRL,2030,Offshore Wind,capacity_total_gw,4,190,3,2024
+IRL,2030,Bioenergy,capacity_total_gw,0.19,190,3,2024
+IRL,2030,Hydro,capacity_total_gw,0.23,190,3,2024
+IRL,2030,Other Renewables,capacity_total_gw,0.03,190,3,2024
+IRL,2030,Coal,capacity_total_gw,0.04,190,3,2024
+IRL,2030,Gas,capacity_total_gw,5.81,190,3,2024
+IRL,2030,Other Fossil,capacity_total_gw,0.96,190,3,2024
+IRL,2030,Solar,generation_twh,7.29,190,3,2024
+IRL,2030,Wind,generation_twh,29.19,190,3,2024
+IRL,2030,Bioenergy,generation_twh,1.33,190,3,2024
+IRL,2030,Hydro,generation_twh,0.62,190,3,2024
+IRL,2030,Other Renewables,generation_twh,0.09,190,3,2024
+IRL,2030,Coal,generation_twh,0.28,190,3,2024
+IRL,2030,Gas,generation_twh,8.89,190,3,2024
+IRL,2030,Solar,share_of_generation_pct,15.29,190,3,2024
+IRL,2030,Wind,share_of_generation_pct,61.21,190,3,2024
+IRL,2030,Bioenergy,share_of_generation_pct,2.79,190,3,2024
+IRL,2030,Hydro,share_of_generation_pct,1.3,190,3,2024
+IRL,2030,Other Renewables,share_of_generation_pct,0.19,190,3,2024
+IRL,2030,Coal,share_of_generation_pct,0.59,190,3,2024
+IRL,2030,Gas,share_of_generation_pct,18.64,190,3,2024
+IRL,2030,Battery,capacity_total_gw,1.7,206,3,2024
+IRL,2030,Pumped hydro,capacity_total_gw,0.3,206,3,2024
+IRL,2030,Onshore Wind,capacity_total_gw,9,207,4,2024
+IRL,2030,Solar,capacity_total_gw,8,207,4,2024
+IRL,2030,Offshore Wind,capacity_total_gw,5,207,4,2024
+NLD,2030,Coal,generation_twh,0,76,1,2023
+NLD,2030,Gas,generation_twh,28.644,76,1,2023
+NLD,2030,Hydro,generation_twh,0.114,76,1,2023
+NLD,2030,Nuclear,generation_twh,3.434,76,1,2023
+NLD,2030,Other Fossil,generation_twh,4.439,76,1,2023
+NLD,2030,Other Renewables,generation_twh,3.452,76,1,2023
+NLD,2030,Solar,generation_twh,23.437,76,1,2023
+NLD,2030,Wind,generation_twh,91.671,76,1,2023
+NLD,2040,Coal,generation_twh,0,76,1,2023
+NLD,2040,Gas,generation_twh,35.08,76,1,2023
+NLD,2040,Hydro,generation_twh,0.113,76,1,2023
+NLD,2040,Nuclear,generation_twh,0,76,1,2023
+NLD,2040,Other Fossil,generation_twh,3.16,76,1,2023
+NLD,2040,Other Renewables,generation_twh,3.448,76,1,2023
+NLD,2040,Solar,generation_twh,39.49,76,1,2023
+NLD,2040,Wind,generation_twh,113.655,76,1,2023
+NLD,2030,Coal,share_of_generation_pct,0,76,1,2023
+NLD,2030,Gas,share_of_generation_pct,18.46,76,1,2023
+NLD,2030,Hydro,share_of_generation_pct,0.07,76,1,2023
+NLD,2030,Nuclear,share_of_generation_pct,2.21,76,1,2023
+NLD,2030,Other Fossil,share_of_generation_pct,2.86,76,1,2023
+NLD,2030,Other Renewables,share_of_generation_pct,2.22,76,1,2023
+NLD,2030,Solar,share_of_generation_pct,15.1,76,1,2023
+NLD,2030,Wind,share_of_generation_pct,59.07,76,1,2023
+NLD,2040,Coal,share_of_generation_pct,0,76,1,2023
+NLD,2040,Gas,share_of_generation_pct,17.99,76,1,2023
+NLD,2040,Hydro,share_of_generation_pct,0.06,76,1,2023
+NLD,2040,Nuclear,share_of_generation_pct,0,76,1,2023
+NLD,2040,Other Fossil,share_of_generation_pct,1.62,76,1,2023
+NLD,2040,Other Renewables,share_of_generation_pct,1.77,76,1,2023
+NLD,2040,Solar,share_of_generation_pct,20.26,76,1,2023
+NLD,2040,Wind,share_of_generation_pct,58.3,76,1,2023
+NLD,2030,Coal,capacity_total_gw,0,76,1,2023
+NLD,2030,Gas,capacity_total_gw,16.56,76,1,2023
+NLD,2030,Hydro,capacity_total_gw,0.04,76,1,2023
+NLD,2030,Nuclear,capacity_total_gw,0.5,76,1,2023
+NLD,2030,Other Renewables,capacity_total_gw,0.59,76,1,2023
+NLD,2030,Solar,capacity_total_gw,25.75,76,1,2023
+NLD,2030,Wind,capacity_total_gw,23.2,76,1,2023
+NLD,2040,Gas,capacity_total_gw,20.53,76,1,2023
+NLD,2040,Nuclear,capacity_total_gw,0,76,1,2023
+NLD,2040,Other Renewables,capacity_total_gw,0.59,76,1,2023
+NLD,2040,Coal,capacity_total_gw,0,76,1,2023
+NLD,2040,Hydro,capacity_total_gw,0.04,76,1,2023
+NLD,2030,Solar,capacity_total_gw,25.75,180,2,2024
+NLD,2030,Wind,capacity_total_gw,23.2,180,2,2024
+NLD,2030,Hydro,capacity_total_gw,0.04,180,2,2024
+NLD,2030,Other Renewables,capacity_total_gw,0.59,180,2,2024
+NLD,2030,Gas,capacity_total_gw,16.56,180,2,2024
+NLD,2030,Nuclear,capacity_total_gw,0.5,180,2,2024
+NLD,2030,Solar,generation_twh,23.44,180,2,2024
+NLD,2030,Wind,generation_twh,91.67,180,2,2024
+NLD,2030,Hydro,generation_twh,0.11,180,2,2024
+NLD,2030,Other Renewables,generation_twh,3.45,180,2,2024
+NLD,2030,Gas,generation_twh,28.64,180,2,2024
+NLD,2030,Other Fossil,generation_twh,4.44,180,2,2024
+NLD,2030,Nuclear,generation_twh,3.43,180,2,2024
+NLD,2030,Solar,share_of_generation_pct,15,180,2,2024
+NLD,2030,Wind,share_of_generation_pct,59,180,2,2024
+NLD,2030,Hydro,share_of_generation_pct,0,180,2,2024
+NLD,2030,Other Renewables,share_of_generation_pct,2,180,2,2024
+NLD,2030,Gas,share_of_generation_pct,18,180,2,2024
+NLD,2030,Other Fossil,share_of_generation_pct,3,180,2,2024
+NLD,2030,Nuclear,share_of_generation_pct,2,180,2,2024
+NLD,2030,Battery,capacity_total_gw,9,196,2,2024
+NLD,2030,Coal,capacity_total_gw,,180,2,2024
+NLD,2030,Coal,share_of_generation_pct,,180,2,2024
+NLD,2030,Coal,generation_twh,,180,2,2024
+PHL,2022,Coal,capacity_additional_mw,0,44,1,2023
+PHL,2030,Coal,capacity_additional_mw,0,44,1,2023
+PHL,2035,Coal,capacity_additional_mw,0,44,1,2023
+PHL,2040,Coal,capacity_additional_mw,0,44,1,2023
+PHL,2022,Gas,capacity_additional_mw,0,44,1,2023
+PHL,2030,Gas,capacity_additional_mw,1820,44,1,2023
+PHL,2035,Gas,capacity_additional_mw,9720,44,1,2023
+PHL,2040,Gas,capacity_additional_mw,19060,44,1,2023
+PHL,2022,Other Renewables,capacity_additional_mw,0,44,1,2023
+PHL,2030,Other Renewables,capacity_additional_mw,400,44,1,2023
+PHL,2035,Other Renewables,capacity_additional_mw,400,44,1,2023
+PHL,2040,Other Renewables,capacity_additional_mw,480,44,1,2023
+PHL,2022,Hydro,capacity_additional_mw,0,44,1,2023
+PHL,2030,Hydro,capacity_additional_mw,1905,44,1,2023
+PHL,2035,Hydro,capacity_additional_mw,5450,44,1,2023
+PHL,2040,Hydro,capacity_additional_mw,11565,44,1,2023
+PHL,2022,Solar,capacity_additional_mw,6,44,1,2023
+PHL,2030,Solar,capacity_additional_mw,18384,44,1,2023
+PHL,2035,Solar,capacity_additional_mw,25838,44,1,2023
+PHL,2040,Solar,capacity_additional_mw,31316,44,1,2023
+PHL,2022,Wind,capacity_additional_mw,0,44,1,2023
+PHL,2030,Wind,capacity_additional_mw,640,44,1,2023
+PHL,2035,Wind,capacity_additional_mw,910,44,1,2023
+PHL,2040,Wind,capacity_additional_mw,1452,44,1,2023
+PHL,2022,Bioenergy,capacity_additional_mw,0,44,1,2023
+PHL,2030,Bioenergy,capacity_additional_mw,0,44,1,2023
+PHL,2035,Bioenergy,capacity_additional_mw,0,44,1,2023
+PHL,2040,Bioenergy,capacity_additional_mw,90,44,1,2023
+PHL,2022,Coal,capacity_total_gw,12.13,44,1,2023
+PHL,2030,Coal,capacity_total_gw,12.13,44,1,2023
+PHL,2035,Coal,capacity_total_gw,12.13,44,1,2023
+PHL,2040,Coal,capacity_total_gw,12.13,44,1,2023
+PHL,2022,Gas,capacity_total_gw,3.32,44,1,2023
+PHL,2030,Gas,capacity_total_gw,5.14,44,1,2023
+PHL,2035,Gas,capacity_total_gw,13.04,44,1,2023
+PHL,2040,Gas,capacity_total_gw,22.38,44,1,2023
+PHL,2022,Other Renewables,capacity_total_gw,1.93,44,1,2023
+PHL,2030,Other Renewables,capacity_total_gw,2.33,44,1,2023
+PHL,2035,Other Renewables,capacity_total_gw,2.33,44,1,2023
+PHL,2040,Other Renewables,capacity_total_gw,2.41,44,1,2023
+PHL,2022,Hydro,capacity_total_gw,3.04,44,1,2023
+PHL,2030,Hydro,capacity_total_gw,4.945,44,1,2023
+PHL,2035,Hydro,capacity_total_gw,8.49,44,1,2023
+PHL,2040,Hydro,capacity_total_gw,14.605,44,1,2023
+PHL,2022,Solar,capacity_total_gw,1.626,44,1,2023
+PHL,2030,Solar,capacity_total_gw,20.004,44,1,2023
+PHL,2035,Solar,capacity_total_gw,27.458,44,1,2023
+PHL,2040,Solar,capacity_total_gw,32.936,44,1,2023
+PHL,2022,Wind,capacity_total_gw,0.44,44,1,2023
+PHL,2030,Wind,capacity_total_gw,1.08,44,1,2023
+PHL,2035,Wind,capacity_total_gw,1.35,44,1,2023
+PHL,2040,Wind,capacity_total_gw,1.892,44,1,2023
+PHL,2022,Bioenergy,capacity_total_gw,0.63,44,1,2023
+PHL,2030,Bioenergy,capacity_total_gw,0.63,44,1,2023
+PHL,2035,Bioenergy,capacity_total_gw,0.63,44,1,2023
+PHL,2040,Bioenergy,capacity_total_gw,0.72,44,1,2023
+PHL,2030,Coal,generation_twh,87.75,44,1,2023
+PHL,2035,Coal,generation_twh,89.1,44,1,2023
+PHL,2040,Coal,generation_twh,89.72,44,1,2023
+PHL,2030,Other Fossil,generation_twh,1.05,44,1,2023
+PHL,2035,Other Fossil,generation_twh,0.36,44,1,2023
+PHL,2040,Other Fossil,generation_twh,0.28,44,1,2023
+PHL,2030,Gas,generation_twh,37.51,44,1,2023
+PHL,2035,Gas,generation_twh,84.85,44,1,2023
+PHL,2040,Gas,generation_twh,146.86,44,1,2023
+PHL,2030,Other Renewables,generation_twh,15.63,44,1,2023
+PHL,2035,Other Renewables,generation_twh,15.63,44,1,2023
+PHL,2040,Other Renewables,generation_twh,16.18,44,1,2023
+PHL,2030,Hydro,generation_twh,15.87,44,1,2023
+PHL,2035,Hydro,generation_twh,28.97,44,1,2023
+PHL,2040,Hydro,generation_twh,51.55,44,1,2023
+PHL,2030,Solar,generation_twh,32.06,44,1,2023
+PHL,2035,Solar,generation_twh,44.25,44,1,2023
+PHL,2040,Solar,generation_twh,53.06,44,1,2023
+PHL,2030,Wind,generation_twh,3.31,44,1,2023
+PHL,2035,Wind,generation_twh,3.94,44,1,2023
+PHL,2040,Wind,generation_twh,5.12,44,1,2023
+PHL,2030,Bioenergy,generation_twh,1.14,44,1,2023
+PHL,2035,Bioenergy,generation_twh,1.06,44,1,2023
+PHL,2040,Bioenergy,generation_twh,1.62,44,1,2023
+PHL,2030,Coal,share_of_generation_pct,45.16,44,1,2023
+PHL,2035,Coal,share_of_generation_pct,33.23,44,1,2023
+PHL,2040,Coal,share_of_generation_pct,24.62,44,1,2023
+PHL,2030,Other Fossil,share_of_generation_pct,0.54,44,1,2023
+PHL,2035,Other Fossil,share_of_generation_pct,0.13,44,1,2023
+PHL,2040,Other Fossil,share_of_generation_pct,0.08,44,1,2023
+PHL,2030,Gas,share_of_generation_pct,19.3,44,1,2023
+PHL,2035,Gas,share_of_generation_pct,31.64,44,1,2023
+PHL,2040,Gas,share_of_generation_pct,40.3,44,1,2023
+PHL,2030,Other Renewables,share_of_generation_pct,8.04,44,1,2023
+PHL,2035,Other Renewables,share_of_generation_pct,5.83,44,1,2023
+PHL,2040,Other Renewables,share_of_generation_pct,4.44,44,1,2023
+PHL,2030,Hydro,share_of_generation_pct,8.17,44,1,2023
+PHL,2035,Hydro,share_of_generation_pct,10.8,44,1,2023
+PHL,2040,Hydro,share_of_generation_pct,14.15,44,1,2023
+PHL,2030,Solar,share_of_generation_pct,16.5,44,1,2023
+PHL,2035,Solar,share_of_generation_pct,16.5,44,1,2023
+PHL,2040,Solar,share_of_generation_pct,14.56,44,1,2023
+PHL,2030,Wind,share_of_generation_pct,1.7,44,1,2023
+PHL,2035,Wind,share_of_generation_pct,1.47,44,1,2023
+PHL,2040,Wind,share_of_generation_pct,1.41,44,1,2023
+PHL,2030,Bioenergy,share_of_generation_pct,0.59,44,1,2023
+PHL,2035,Bioenergy,share_of_generation_pct,0.4,44,1,2023
+PHL,2040,Bioenergy,share_of_generation_pct,0.44,44,1,2023
+UGA,2040,Hydro,capacity_total_gw,4.5,171,1,2024
+UGA,2040,Other Renewables,capacity_total_gw,1.5,171,1,2024
+UGA,2040,Nuclear,capacity_total_gw,24,171,1,2024
+UGA,2040,Solar,capacity_total_gw,5,171,1,2024
+UGA,2040,Bioenergy,capacity_total_gw,1.7,171,1,2024
+UGA,2040,Other Fossil,capacity_total_gw,0.8,171,1,2024
+UGA,2040,Coal,capacity_total_gw,4.3,171,1,2024
+DZA,2030,Renewables,share_of_generation_pct,27,138,1,2024
+DZA,2030,Solar,capacity_total_gw,15.575,138,1,2024
+DZA,2030,Wind,capacity_total_gw,5.01,138,1,2024
+DZA,2030,Bioenergy,capacity_total_gw,1.4,138,1,2024
+DZA,2030,Other Renewables,capacity_total_gw,0.015,138,1,2024
+SRB,2030,Renewables,share_of_generation_pct,29,139,1,2024
+SRB,2030,Coal,capacity_total_gw,4.65,139,1,2024
+SRB,2030,Hydro,capacity_total_gw,3.162,139,1,2024
+SRB,2030,Wind,capacity_total_gw,0.744,139,1,2024
+SRB,2030,Solar,capacity_total_gw,0.372,139,1,2024
+SRB,2030,Bioenergy,capacity_total_gw,0.186,139,1,2024
+SRB,2030,Gas,capacity_total_gw,0.279,139,1,2024
+NOR,2030,Coal,generation_twh,0.052,116,1,2023
+NOR,2030,Gas,generation_twh,2.302,116,1,2023
+NOR,2030,Hydro,generation_twh,148.789,116,1,2023
+NOR,2030,Bioenergy,generation_twh,1.002,116,1,2023
+NOR,2030,Wind,generation_twh,21.173,116,1,2023
+NOR,2030,Solar,generation_twh,5.989,116,1,2023
+NOR,2030,Coal,share_of_generation_pct,0.03,116,1,2023
+NOR,2030,Gas,share_of_generation_pct,1.28,116,1,2023
+NOR,2030,Hydro,share_of_generation_pct,82.98,116,1,2023
+NOR,2030,Bioenergy,share_of_generation_pct,0.56,116,1,2023
+NOR,2030,Wind,share_of_generation_pct,11.81,116,1,2023
+NOR,2030,Solar,share_of_generation_pct,3.34,116,1,2023
+NOR,2030,Coal,capacity_total_gw,0.01,116,1,2023
+NOR,2030,Gas,capacity_total_gw,0.83,116,1,2023
+NOR,2030,Hydro,capacity_total_gw,34.69,116,1,2023
+NOR,2030,Bioenergy,capacity_total_gw,0.19,116,1,2023
+NOR,2030,Onshore Wind,capacity_total_gw,5.98,116,1,2023
+NOR,2030,Offshore Wind,capacity_total_gw,3.19,116,1,2023
+NOR,2030,Solar,capacity_total_gw,5.39,116,1,2023
+GBR,2030,Coal,capacity_total_gw,0,3,1,2023
+GBR,2030,Other Fossil,capacity_total_gw,1,3,1,2023
+GBR,2030,Gas,capacity_total_gw,39,3,1,2023
+GBR,2030,Nuclear,capacity_total_gw,4,3,1,2023
+GBR,2030,Offshore Wind,capacity_total_gw,50,1,1,2023
+GBR,2030,Rest of renewables,capacity_total_gw,69,3,1,2023
+GBR,2040,Coal,capacity_total_gw,0,3,1,2023
+GBR,2040,Other Fossil,capacity_total_gw,0,3,1,2023
+GBR,2040,Gas,capacity_total_gw,78,3,1,2023
+GBR,2040,Nuclear,capacity_total_gw,14,3,1,2023
+GBR,2040,Renewables,capacity_total_gw,205,3,1,2023
+GBR,2050,Coal,capacity_total_gw,0,3,1,2023
+GBR,2050,Other Fossil,capacity_total_gw,0,3,1,2023
+GBR,2050,Gas,capacity_total_gw,84,3,1,2023
+GBR,2050,Nuclear,capacity_total_gw,24,3,1,2023
+GBR,2050,Renewables,capacity_total_gw,242,3,1,2023
+GBR,2030,Demand,demand_twh,373,3,1,2023
+GBR,2040,Demand,demand_twh,578,3,1,2023
+GBR,2050,Demand,demand_twh,792,3,1,2023
+GBR,2030,Coal,generation_twh,0,3,1,2023
+GBR,2040,Coal,generation_twh,0,3,1,2023
+GBR,2050,Coal,generation_twh,0,3,1,2023
+GBR,2030,Other Fossil,generation_twh,0,3,1,2023
+GBR,2040,Other Fossil,generation_twh,0,3,1,2023
+GBR,2050,Other Fossil,generation_twh,0,3,1,2023
+GBR,2030,Gas,generation_twh,16,3,1,2023
+GBR,2040,Gas,generation_twh,5,3,1,2023
+GBR,2050,Gas,generation_twh,9,3,1,2023
+GBR,2030,Nuclear,generation_twh,38,3,1,2023
+GBR,2040,Nuclear,generation_twh,94,3,1,2023
+GBR,2050,Nuclear,generation_twh,180,3,1,2023
+GBR,2030,Renewables,generation_twh,307,3,1,2023
+GBR,2040,Renewables,generation_twh,494,3,1,2023
+GBR,2050,Renewables,generation_twh,591,3,1,2023
+GBR,2030,Coal,share_of_generation_pct,0,3,1,2023
+GBR,2040,Coal,share_of_generation_pct,0,3,1,2023
+GBR,2050,Coal,share_of_generation_pct,0,3,1,2023
+GBR,2030,Gas,share_of_generation_pct,4,3,1,2023
+GBR,2040,Gas,share_of_generation_pct,1,3,1,2023
+GBR,2050,Gas,share_of_generation_pct,1,3,1,2023
+GBR,2030,Nuclear,share_of_generation_pct,11,3,1,2023
+GBR,2040,Nuclear,share_of_generation_pct,16,3,1,2023
+GBR,2050,Nuclear,share_of_generation_pct,23,3,1,2023
+GBR,2030,Other Fossil,share_of_generation_pct,0,3,1,2023
+GBR,2040,Other Fossil,share_of_generation_pct,0,3,1,2023
+GBR,2050,Other Fossil,share_of_generation_pct,0,3,1,2023
+GBR,2030,Renewables,share_of_generation_pct,85,3,1,2023
+GBR,2040,Renewables,share_of_generation_pct,83,3,1,2023
+GBR,2050,Renewables,share_of_generation_pct,76,3,1,2023
+GBR,2040,Battery,capacity_total_gw,15,3,1,2023
+GBR,2050,Battery,capacity_total_gw,15,3,1,2023
+GBR,2030,Battery,capacity_total_gw,5,3,1,2023
+GBR,2030,Offshore Wind,capacity_total_gw,50,209,2,2025
+GBR,2030,Onshore Wind,capacity_total_gw,29,209,2,2025
+GBR,2030,Solar,capacity_total_gw,47,209,2,2025
+GBR,2030,Rest of renewables,capacity_total_gw,0,209,2,2025
+GBR,2030,Nuclear,capacity_total_gw,4,209,2,2025
+GBR,2030,Gas,capacity_total_gw,35,209,2,2025
+GBR,2030,Coal,capacity_total_gw,0,209,2,2025
+GBR,2030,Gas,generation_twh,14,209,2,2025
+GBR,2030,Nuclear,generation_twh,24,209,2,2025
+GBR,2030,Onshore Wind,generation_twh,58,209,2,2025
+GBR,2030,Offshore Wind,generation_twh,188,209,2,2025
+GBR,2030,Solar,generation_twh,45,209,2,2025
+GBR,2030,Other Fossil,generation_twh,,209,2,2025
+GBR,2030,Coal,generation_twh,,209,2,2025
+GBR,2030,Renewables,generation_twh,,209,2,2025
+GBR,2030,Renewables,share_of_generation_pct,,209,2,2025
+GBR,2032,Battery,capacity_total_gw,27,209,2,2025
+KOR,2030,Demand,demand_twh,572.8,19,1,2023
+KOR,2030,Nuclear,capacity_total_gw,28.9,19,1,2023
+KOR,2030,Nuclear,share_of_generation_pct,32.4,19,1,2023
+KOR,2030,Nuclear,generation_twh,201.7,19,1,2023
+KOR,2030,Solar,capacity_total_gw,52.976,19,1,2023
+KOR,2030,Wind,capacity_total_gw,19.3,19,1,2023
+KOR,2030,Hydro,capacity_total_gw,1.976,19,1,2023
+KOR,2030,Other Renewables,capacity_total_gw,0.256,19,1,2023
+KOR,2030,Bioenergy,capacity_total_gw,1.8,19,1,2023
+KOR,2030,Solar,generation_twh,58.921,19,1,2023
+KOR,2030,Wind,generation_twh,38.9,19,1,2023
+KOR,2030,Hydro,generation_twh,4.219,19,1,2023
+KOR,2030,Other Renewables,generation_twh,0.457,19,1,2023
+KOR,2030,Bioenergy,generation_twh,13.329,19,1,2023
+KOR,2030,Solar,share_of_generation_pct,10.29,19,1,2023
+KOR,2030,Wind,share_of_generation_pct,6.79,19,1,2023
+KOR,2030,Hydro,share_of_generation_pct,0.74,19,1,2023
+KOR,2030,Other Renewables,share_of_generation_pct,0.08,19,1,2023
+KOR,2030,Bioenergy,share_of_generation_pct,2.33,19,1,2023
+KOR,2030,Solar,capacity_total_gw,63.116,219,2,2025
+KOR,2030,Wind,capacity_total_gw,18.281,219,2,2025
+KOR,2030,Hydro,capacity_total_gw,1.909,219,2,2025
+KOR,2030,Other Renewables,capacity_total_gw,0.256,219,2,2025
+KOR,2030,Bioenergy,capacity_total_gw,1.852,219,2,2025
+KOR,2030,Solar,share_of_generation_pct,10.45,219,2,2025
+KOR,2030,Wind,share_of_generation_pct,6.04,219,2,2025
+KOR,2030,Hydro,share_of_generation_pct,0.58,219,2,2025
+KOR,2030,Other Renewables,share_of_generation_pct,0.07,219,2,2025
+KOR,2030,Bioenergy,share_of_generation_pct,1.68,219,2,2025
+BRA,2030,Bioenergy,capacity_total_gw,17.17,26,1,2023
+BRA,2030,Coal,capacity_total_gw,3.18,26,1,2023
+BRA,2030,Gas,capacity_total_gw,33.5,26,1,2023
+BRA,2030,Hydro,capacity_total_gw,116.81,26,1,2023
+BRA,2030,Nuclear,capacity_total_gw,1.99,26,1,2023
+BRA,2030,Other Fossil,capacity_total_gw,9.87,26,1,2023
+BRA,2030,Other Renewables,capacity_total_gw,5.03,26,1,2023
+BRA,2030,Solar,capacity_total_gw,47.08,26,1,2023
+BRA,2030,Wind,capacity_total_gw,31.16,26,1,2023
+BRA,2030,Coal,generation_twh,6.31,26,1,2023
+BRA,2030,Hydro,generation_twh,506.89,26,1,2023
+BRA,2030,Wind,generation_twh,107.78,26,1,2023
+BRA,2030,Gas,generation_twh,89.55,26,1,2023
+BRA,2030,Bioenergy,generation_twh,64.88,26,1,2023
+BRA,2030,Nuclear,generation_twh,25.05,26,1,2023
+BRA,2030,Other Fossil,generation_twh,23.32,26,1,2023
+BRA,2030,Other Renewables,generation_twh,33.6,26,1,2023
+BRA,2030,Solar,generation_twh,59.54,26,1,2023
+BRA,2030,Coal,share_of_generation_pct,0.69,26,1,2023
+BRA,2030,Hydro,share_of_generation_pct,55.28,26,1,2023
+BRA,2030,Wind,share_of_generation_pct,11.75,26,1,2023
+BRA,2030,Gas,share_of_generation_pct,9.77,26,1,2023
+BRA,2030,Bioenergy,share_of_generation_pct,7.08,26,1,2023
+BRA,2030,Nuclear,share_of_generation_pct,2.73,26,1,2023
+BRA,2030,Other Fossil,share_of_generation_pct,2.54,26,1,2023
+BRA,2030,Other Renewables,share_of_generation_pct,3.66,26,1,2023
+BRA,2030,Solar,share_of_generation_pct,6.49,26,1,2023
+BRA,2030,Wind,capacity_total_gw,38.1,213,2,2025
+BRA,2030,Hydro,capacity_total_gw,114.9,213,2,2025
+BRA,2030,Bioenergy,capacity_total_gw,18.8,213,2,2025
+BRA,2030,Other Renewables,capacity_total_gw,5.03,213,2,2025
+BRA,2030,Solar,capacity_total_gw,58.5,213,2,2025
+HRV,2030,Bioenergy,generation_twh,1.778,47,1,2023
+HRV,2030,Coal,generation_twh,1.1168,47,1,2023
+HRV,2030,Gas,generation_twh,3.446,47,1,2023
+HRV,2030,Hydro,generation_twh,6.695,47,1,2023
+HRV,2030,Nuclear,generation_twh,0,47,1,2023
+HRV,2030,Other Fossil,generation_twh,0.026,47,1,2023
+HRV,2030,Other Renewables,generation_twh,0.66,47,1,2023
+HRV,2030,Solar,generation_twh,1.01,47,1,2023
+HRV,2030,Wind,generation_twh,6.155,47,1,2023
+HRV,2030,Bioenergy,share_of_generation_pct,8.51,47,1,2023
+HRV,2030,Coal,share_of_generation_pct,5.35,47,1,2023
+HRV,2030,Gas,share_of_generation_pct,16.5,47,1,2023
+HRV,2030,Hydro,share_of_generation_pct,32.05,47,1,2023
+HRV,2030,Nuclear,share_of_generation_pct,0,47,1,2023
+HRV,2030,Other Fossil,share_of_generation_pct,0.12,47,1,2023
+HRV,2030,Other Renewables,share_of_generation_pct,3.16,47,1,2023
+HRV,2030,Solar,share_of_generation_pct,4.84,47,1,2023
+HRV,2030,Wind,share_of_generation_pct,29.47,47,1,2023
+HRV,2030,Demand,demand_twh,2.527777778,47,1,2023
+HRV,2040,Demand,demand_twh,3.25,47,1,2023
+HRV,2030,Bioenergy,capacity_total_gw,0.204,47,1,2023
+HRV,2030,Coal,capacity_total_gw,0.021,47,1,2023
+HRV,2030,Gas,capacity_total_gw,1.079,47,1,2023
+HRV,2030,Hydro,capacity_total_gw,2.393,47,1,2023
+HRV,2030,Nuclear,capacity_total_gw,0,47,1,2023
+HRV,2030,Other Fossil,capacity_total_gw,0,47,1,2023
+HRV,2030,Other Renewables,capacity_total_gw,0.068,47,1,2023
+HRV,2030,Solar,capacity_total_gw,0.96,47,1,2023
+HRV,2030,Wind,capacity_total_gw,2.562,47,1,2023
+AUT,2030,Bioenergy,generation_twh,6,131,1,2023
+AUT,2030,Hydro,generation_twh,47,131,1,2023
+AUT,2030,Solar,generation_twh,19,131,1,2023
+AUT,2030,Wind,generation_twh,19,131,1,2023
+AUT,2030,Gas,generation_twh,7,131,1,2023
+AUT,2030,Bioenergy,share_of_generation_pct,6.12,131,1,2023
+AUT,2030,Hydro,share_of_generation_pct,47.96,131,1,2023
+AUT,2030,Solar,share_of_generation_pct,19.39,131,1,2023
+AUT,2030,Wind,share_of_generation_pct,19.39,131,1,2023
+AUT,2030,Gas,share_of_generation_pct,7.14,131,1,2023
+AUT,2030,Bioenergy,capacity_total_gw,0.93,125,1,2023
+AUT,2030,Hydro,capacity_total_gw,14.97,125,1,2023
+AUT,2030,Solar,capacity_total_gw,12.5,125,1,2023
+AUT,2030,Wind,capacity_total_gw,7.3,125,1,2023
+AUT,2030,Fossil,generation_twh,6,193,2,2024
+AUT,2030,Hydro,generation_twh,47,193,2,2024
+AUT,2030,Bioenergy,generation_twh,6,193,2,2024
+AUT,2030,Solar,generation_twh,19,193,2,2024
+AUT,2030,Wind,generation_twh,19,193,2,2024
+AUT,2030,Gas,generation_twh,,193,2,2024
+AUT,2030,Fossil,share_of_generation_pct,6.2,193,2,2024
+AUT,2030,Hydro,share_of_generation_pct,48.5,193,2,2024
+AUT,2030,Bioenergy,share_of_generation_pct,6.2,193,2,2024
+AUT,2030,Solar,share_of_generation_pct,19.6,193,2,2024
+AUT,2030,Wind,share_of_generation_pct,19.6,193,2,2024
+AUT,2030,Gas,share_of_generation_pct,,193,2,2024
+AUT,2030,Fossil,generation_twh,6,222,3,2024
+AUT,2030,Hydro,generation_twh,47,222,3,2024
+AUT,2030,Bioenergy,generation_twh,6,222,3,2024
+AUT,2030,Solar,generation_twh,19,222,3,2024
+AUT,2030,Wind,generation_twh,19,222,3,2024
+AUT,2030,Gas,generation_twh,,222,3,2024
+AUT,2030,Fossil,share_of_generation_pct,6.2,222,3,2024
+AUT,2030,Hydro,share_of_generation_pct,48.5,222,3,2024
+AUT,2030,Bioenergy,share_of_generation_pct,6.2,222,3,2024
+AUT,2030,Solar,share_of_generation_pct,19.6,222,3,2024
+AUT,2030,Wind,share_of_generation_pct,19.6,222,3,2024
+TZA,2030,Coal,capacity_total_gw,0.3,179,1,2024
+TZA,2030,Gas,capacity_total_gw,1.6395,179,1,2024
+TZA,2030,Other Renewables,capacity_total_gw,0.395,179,1,2024
+TZA,2030,Hydro,capacity_total_gw,3.62473,179,1,2024
+TZA,2030,Solar,capacity_total_gw,0.355,179,1,2024
+TZA,2030,Wind,capacity_total_gw,0.1,179,1,2024
+TZA,2030,Coal,generation_twh,2.103,179,1,2024
+TZA,2030,Gas,generation_twh,11.02,179,1,2024
+TZA,2030,Other Renewables,generation_twh,3.1139,179,1,2024
+TZA,2030,Hydro,generation_twh,16.74117,179,1,2024
+TZA,2030,Solar,generation_twh,0.7026,179,1,2024
+TZA,2030,Wind,generation_twh,0.644,179,1,2024
+TZA,2030,Coal,share_of_generation_pct,6.127083223,179,1,2024
+TZA,2030,Gas,share_of_generation_pct,32.1019246,179,1,2024
+TZA,2030,Other Renewables,share_of_generation_pct,9.072336875,179,1,2024
+TZA,2030,Hydro,share_of_generation_pct,48.77534086,179,1,2024
+TZA,2030,Solar,share_of_generation_pct,2.047022669,179,1,2024
+TZA,2030,Wind,share_of_generation_pct,1.876291772,179,1,2024
+TZA,2030,Hydro,share_of_generation_pct,27.5,221,2,2025
+TZA,2030,Gas,share_of_generation_pct,51,221,2,2025
+TZA,2030,Other Fossil,share_of_generation_pct,3,221,2,2025
+TZA,2030,Rest of renewables,share_of_generation_pct,3.2,221,2,2025
+TZA,2030,Wind,share_of_generation_pct,11.9,221,2,2025
+TZA,2030,Solar,share_of_generation_pct,3.3,221,2,2025
+TZA,2030,Bioenergy,share_of_generation_pct,0.1,221,2,2025
+TZA,2030,Renewables,capacity_total_gw,7.49,221,2,2025
+TZA,2030,Coal,capacity_total_gw,,221,2,2025
+TZA,2030,Gas,capacity_total_gw,,221,2,2025
+TZA,2030,Other Renewables,capacity_total_gw,,221,2,2025
+TZA,2030,Hydro,capacity_total_gw,,221,2,2025
+TZA,2030,Solar,capacity_total_gw,,221,2,2025
+TZA,2030,Wind,capacity_total_gw,,221,2,2025
+BEL,2030,Solar,capacity_total_gw,11.6,128,1,2023
+BEL,2030,Hydro,capacity_total_gw,0.15,128,1,2023
+BEL,2030,Onshore Wind,capacity_total_gw,5.3,128,1,2023
+BEL,2030,Offshore Wind,capacity_total_gw,5.8,128,1,2023
+BEL,2030,Gas,capacity_total_gw,6.2,128,1,2023
+BEL,2030,Bioenergy,capacity_total_gw,0.9,128,1,2023
+BEL,2030,Wind,generation_twh,31.62,128,1,2023
+BEL,2030,Solar,generation_twh,11.17,128,1,2023
+BEL,2030,"Hydro, bio and other renewables",generation_twh,2.79,128,1,2023
+BEL,2030,Gas,generation_twh,24.65,128,1,2023
+BEL,2030,Wind,share_of_generation_pct,45.02349423,128,1,2023
+BEL,2030,Solar,share_of_generation_pct,15.90488395,128,1,2023
+BEL,2030,"Hydro, bio and other renewables",share_of_generation_pct,3.972661256,128,1,2023
+BEL,2030,Gas,share_of_generation_pct,35.09896056,128,1,2023
+BEL,2030,Pumped hydro,capacity_total_gw,1.305,128,1,2023
+BEL,2030,Storage,capacity_total_gw,2.748,128,1,2023
+BEL,2030,Solar,capacity_total_gw,,227,2,2026
+BEL,2030,Hydro,capacity_total_gw,,227,2,2026
+BEL,2030,Onshore Wind,capacity_total_gw,,227,2,2026
+BEL,2030,Offshore Wind,capacity_total_gw,,227,2,2026
+BEL,2030,Gas,capacity_total_gw,,227,2,2026
+BEL,2030,Renewables,share_of_generation_pct,51,227,2,2023
+KEN,2030,Bioenergy,capacity_total_gw,2,142,1,2024
+KEN,2030,Other Renewables,capacity_total_gw,1.67,142,1,2024
+KEN,2030,Hydro,capacity_total_gw,0.67,142,1,2024
+KEN,2030,Solar,capacity_total_gw,2.67,142,1,2024
+KEN,2030,Onshore Wind,capacity_total_gw,2,142,1,2024
+KEN,2030,Demand,generation_twh,28,142,1,2024
+KEN,2030,Bioenergy,generation_twh,3.67,142,1,2024
+KEN,2030,Other Renewables,generation_twh,11,142,1,2024
+KEN,2030,Hydro,generation_twh,8.07,142,1,2024
+KEN,2030,Solar,generation_twh,3.67,142,1,2024
+KEN,2030,Onshore Wind,generation_twh,6.6,142,1,2024
+KEN,2030,Bioenergy,share_of_generation_pct,11.11,142,1,2024
+KEN,2030,Other Renewables,share_of_generation_pct,33.33,142,1,2024
+KEN,2030,Hydro,share_of_generation_pct,24.44,142,1,2024
+KEN,2030,Solar,share_of_generation_pct,11.11,142,1,2024
+KEN,2030,Onshore Wind,share_of_generation_pct,20,142,1,2024
+NZL,2030,Hydro,generation_twh,24.7,154,1,2024
+NZL,2030,Wind,generation_twh,6.7,154,1,2024
+NZL,2030,Other Renewables,generation_twh,11.8,154,1,2024
+NZL,2030,Solar,generation_twh,1.7,154,1,2024
+NZL,2030,Gas,generation_twh,2.9,154,1,2024
+NZL,2030,Hydro,capacity_total_gw,5.3,154,1,2024
+NZL,2030,Wind,capacity_total_gw,2.1,154,1,2024
+NZL,2030,Other Renewables,capacity_total_gw,1.7,154,1,2024
+NZL,2030,Solar,capacity_total_gw,1.1,154,1,2024
+NZL,2030,Gas,capacity_total_gw,1.2,154,1,2024
+NZL,2030,Battery,capacity_total_gw,0.7,154,1,2024
+NZL,2030,Renewables,share_of_generation_pct,93,154,1,2024
+BGR,2030,Solar,capacity_total_gw,8.2,106,1,2023
+BGR,2030,Wind,capacity_total_gw,2.7,106,1,2023
+BGR,2030,Hydro,capacity_total_gw,4.1,106,1,2023
+BGR,2030,Nuclear,capacity_total_gw,2,106,1,2023
+BGR,2030,Other Fossil,capacity_total_gw,1.3,106,1,2023
+BGR,2030,Coal,capacity_total_gw,2.2,106,1,2023
+BGR,2030,Nuclear,capacity_total_gw,1.9,155,2,2024
+BGR,2030,Bioenergy,capacity_total_gw,0.3,155,2,2024
+BGR,2030,Hydro,capacity_total_gw,2.5,155,2,2024
+BGR,2030,Wind,capacity_total_gw,2.6,155,2,2024
+BGR,2030,Solar,capacity_total_gw,5.5,155,2,2024
+BGR,2030,Coal,capacity_total_gw,,155,2,2024
+BGR,2030,Other Fossil,capacity_total_gw,,155,2,2024
+BGR,2030,Renewables,generation_twh,19.154,155,2,2024
+BGR,2030,Fossil,generation_twh,7.064,155,2,2024
+BGR,2030,Nuclear,generation_twh,15.495,155,2,2024
+BGR,2030,Renewables,share_of_generation_pct,45.91853859,155,2,2024
+BGR,2030,Fossil,share_of_generation_pct,16.93476854,155,2,2024
+BGR,2030,Nuclear,share_of_generation_pct,37.14669288,155,2,2024
+BGR,2030,Nuclear,capacity_total_gw,1.98,228,3,2026
+BGR,2030,Bioenergy,capacity_total_gw,0.41,228,3,2026
+BGR,2030,Hydro,capacity_total_gw,2.57,228,3,2026
+BGR,2030,Onshore Wind,capacity_total_gw,1.99,228,3,2026
+BGR,2030,Solar,capacity_total_gw,6.75,228,3,2026
+BGR,2030,Coal,capacity_total_gw,1.93,228,3,2026
+BGR,2030,Other Fossil,capacity_total_gw,1.98,228,3,2026
+BGR,2030,Offshore Wind,capacity_total_gw,0.5,228,3,2026
+BGR,2030,Renewables,generation_twh,19.54,228,3,2026
+BGR,2030,Fossil,generation_twh,3.41,228,3,2026
+BGR,2030,Nuclear,generation_twh,17.03,228,3,2026
+BGR,2030,Renewables,share_of_generation_pct,0.4887443722,228,3,2026
+BGR,2030,Fossil,share_of_generation_pct,0.08529264632,228,3,2026
+BGR,2030,Nuclear,share_of_generation_pct,0.4259629815,228,3,2026
+KHM,2030,Demand,generation_twh,36,147,1,2024
+KHM,2030,Coal,capacity_total_gw,2.266,147,1,2024
+KHM,2030,Hydro,capacity_total_gw,1.558,147,1,2024
+KHM,2030,Other Fossil,capacity_total_gw,0.49,147,1,2024
+KHM,2030,Solar,capacity_total_gw,1.005,147,1,2024
+KHM,2030,Bioenergy,capacity_total_gw,0.098,147,1,2024
+KHM,2030,Imports,capacity_total_gw,4.095,147,1,2024
+KHM,2030,Battery,capacity_total_gw,0.2,147,1,2024
+CHN,2030,Wind,capacity_total_gw,800,14,1,2023
+CHN,2030,Solar,capacity_total_gw,1025,14,1,2023
+CHN,2030,Hydro,capacity_total_gw,554,14,1,2023
+CHN,2030,Coal,capacity_total_gw,1050,14,1,2023
+CHN,2030,Gas,capacity_total_gw,185,14,1,2023
+CHN,2030,Nuclear,capacity_total_gw,108,14,1,2023
+CHN,2030,Bioenergy,capacity_total_gw,82,14,1,2023
+CHN,2030,Clean,share_of_generation_pct,52.5,14,1,2023
+CHN,2030,Storage,capacity_total_gw,130,14,1,2023
+CHN,2030,Wind and solar,capacity_total_gw,2604,219,2,2025
+CHN,2030,Hydro,capacity_total_gw,554,219,2,2025
+CHN,2030,Bioenergy,capacity_total_gw,82,219,2,2025
+CHN,2030,Solar,capacity_total_gw,,219,2,2025
+CHN,2030,Wind,capacity_total_gw,,219,2,2025
+IDN,2030,Coal,generation_twh,208.3,126,1,2023
+IDN,2030,Gas,generation_twh,90.6,126,1,2023
+IDN,2030,Bioenergy,generation_twh,41.4,126,1,2023
+IDN,2030,Other Renewables,generation_twh,49.8,126,1,2023
+IDN,2030,Hydro,generation_twh,65.2,126,1,2023
+IDN,2030,Solar,generation_twh,43.1,126,1,2023
+IDN,2030,Wind,generation_twh,32.1,126,1,2023
+IDN,2030,Coal,share_of_generation_pct,39.26,126,1,2023
+IDN,2030,Gas,share_of_generation_pct,17.08,126,1,2023
+IDN,2030,Bioenergy,share_of_generation_pct,7.8,126,1,2023
+IDN,2030,Other Renewables,share_of_generation_pct,9.39,126,1,2023
+IDN,2030,Hydro,share_of_generation_pct,12.29,126,1,2023
+IDN,2030,Solar,share_of_generation_pct,8.12,126,1,2023
+IDN,2030,Wind,share_of_generation_pct,6.05,126,1,2023
+IDN,2030,Coal,capacity_total_gw,40.6,126,1,2023
+IDN,2030,Gas,capacity_total_gw,31.8,126,1,2023
+IDN,2030,Bioenergy,capacity_total_gw,3.5,126,1,2023
+IDN,2030,Other Renewables,capacity_total_gw,6.4,126,1,2023
+IDN,2030,Hydro,capacity_total_gw,14.6,126,1,2023
+IDN,2030,Solar,capacity_total_gw,29.3,126,1,2023
+IDN,2030,Wind,capacity_total_gw,8.6,126,1,2023
+IDN,2030,Storage,capacity_total_gw,4.3,126,1,2023
+IDN,2030,Bioenergy,capacity_total_gw,0.852,215,2,2025
+IDN,2030,Hydro,capacity_total_gw,5.03,215,2,2025
+IDN,2030,Solar,capacity_total_gw,7.562,215,2,2025
+IDN,2030,Wind,capacity_total_gw,2.765,215,2,2025
+ISL,2030,"Hydro, bio and other renewables",capacity_total_gw,2.716,115,1,2023
+ISL,2030,"Hydro, bio and other renewables",share_of_generation_pct,100,115,1,2023
+MYS,2030,Gas,generation_twh,67.34072289,46,1,2023
+MYS,2030,Coal,generation_twh,83.33414458,46,1,2023
+MYS,2030,Hydro,generation_twh,42.08795181,46,1,2023
+MYS,2030,Non-hydro renewables,generation_twh,19.36045783,46,1,2023
+MYS,2035,Gas,generation_twh,95.2,46,1,2023
+MYS,2035,Coal,generation_twh,56.8,46,1,2023
+MYS,2035,Hydro,generation_twh,39,46,1,2023
+MYS,2035,Non-hydro renewables,generation_twh,18.2,46,1,2023
+MYS,2035,Other Fossil,generation_twh,0.3,46,1,2023
+MYS,2030,Gas,share_of_generation_pct,31.75,46,1,2023
+MYS,2030,Coal,share_of_generation_pct,39.29,46,1,2023
+MYS,2030,Hydro,share_of_generation_pct,19.84,46,1,2023
+MYS,2030,Non-hydro renewables,share_of_generation_pct,9.13,46,1,2023
+MYS,2035,Gas,share_of_generation_pct,45,46,1,2023
+MYS,2035,Coal,share_of_generation_pct,27,46,1,2023
+MYS,2035,Hydro,share_of_generation_pct,19,46,1,2023
+MYS,2035,Non-hydro renewables,share_of_generation_pct,9,46,1,2023
+MYS,2035,Other Fossil,share_of_generation_pct,0.1,46,1,2023
+MYS,2030,Solar,capacity_total_gw,6.86,81,1,2023
+MYS,2030,Hydro,capacity_total_gw,7.84,81,1,2023
+MYS,2030,Bioenergy,capacity_total_gw,0.49,81,1,2023
+MYS,2030,Other Fossil,capacity_total_gw,0.98,81,1,2023
+MYS,2030,Gas,capacity_total_gw,21.07,81,1,2023
+MYS,2030,Coal,capacity_total_gw,11.27,81,1,2023
+MYS,2040,Solar,capacity_total_gw,26.52,81,1,2023
+MYS,2040,Hydro,capacity_total_gw,8.16,81,1,2023
+MYS,2040,Bioenergy,capacity_total_gw,0.68,81,1,2023
+MYS,2040,Other Fossil,capacity_total_gw,1.36,81,1,2023
+MYS,2040,Gas,capacity_total_gw,25.84,81,1,2023
+MYS,2040,Coal,capacity_total_gw,6.12,81,1,2023
+MYS,2050,Solar,capacity_total_gw,56.26,81,1,2023
+MYS,2050,Hydro,capacity_total_gw,10.67,81,1,2023
+MYS,2050,Bioenergy,capacity_total_gw,0.97,81,1,2023
+MYS,2050,Other Fossil,capacity_total_gw,0,81,1,2023
+MYS,2050,Gas,capacity_total_gw,28.13,81,1,2023
+MYS,2050,Coal,capacity_total_gw,0,81,1,2023
+MYS,2030,Bioenergy,generation_twh,2.58,192,2,2024
+MYS,2030,Coal,generation_twh,66.64,192,2,2024
+MYS,2030,Gas,generation_twh,111.32,192,2,2024
+MYS,2030,Hydro,generation_twh,41.21,192,2,2024
+MYS,2030,Other Fossil,generation_twh,0.93,192,2,2024
+MYS,2030,Solar,generation_twh,12.02,192,2,2024
+MYS,2030,Bioenergy,share_of_generation_pct,1.1,192,2,2024
+MYS,2030,Coal,share_of_generation_pct,28.4,192,2,2024
+MYS,2030,Gas,share_of_generation_pct,47.4,192,2,2024
+MYS,2030,Hydro,share_of_generation_pct,17.6,192,2,2024
+MYS,2030,Other Fossil,share_of_generation_pct,0.4,192,2,2024
+MYS,2030,Solar,share_of_generation_pct,5.1,192,2,2024
+MYS,2030,Non-hydro renewables,share_of_generation_pct,,192,2,2024
+MYS,2030,Battery,capacity_total_gw,0.22,202,3,2024
+UZB,2030,Gas,capacity_total_gw,13.4,167,1,2024
+UZB,2030,Coal,capacity_total_gw,1.7,167,1,2024
+UZB,2030,Hydro,capacity_total_gw,3.8,167,1,2024
+UZB,2030,Wind,capacity_total_gw,3,167,1,2024
+UZB,2030,Solar,capacity_total_gw,5,167,1,2024
+UZB,2030,Nuclear,capacity_total_gw,2.4,167,1,2024
+UZB,2030,Gas,generation_twh,60.6,167,1,2024
+UZB,2030,Nuclear,generation_twh,18,167,1,2024
+UZB,2030,Wind,generation_twh,8.6,167,1,2024
+UZB,2030,Solar,generation_twh,10.5,167,1,2024
+UZB,2030,Hydro,generation_twh,13.1,167,1,2024
+UZB,2030,Coal,generation_twh,10.1,167,1,2024
+UZB,2030,Gas,share_of_generation_pct,50.1,167,1,2024
+UZB,2030,Nuclear,share_of_generation_pct,14.9,167,1,2024
+UZB,2030,Wind,share_of_generation_pct,7.1,167,1,2024
+UZB,2030,Solar,share_of_generation_pct,8.7,167,1,2024
+UZB,2030,Hydro,share_of_generation_pct,10.8,167,1,2024
+UZB,2030,Coal,share_of_generation_pct,8.4,167,1,2024
+FIN,2030,Solar,capacity_total_gw,2.8,42,1,2023
+FIN,2030,Wind,capacity_total_gw,7.2,42,1,2023
+FIN,2030,Hydro,capacity_total_gw,3.2,42,1,2023
+FIN,2030,Bioenergy,capacity_total_gw,2.45,101,1,2023
+FIN,2030,Solar,capacity_total_gw,5.8,188,2,2024
+FIN,2030,Onshore Wind,capacity_total_gw,9,188,2,2024
+FIN,2030,Offshore Wind,capacity_total_gw,1,188,2,2024
+FIN,2030,Hydro,capacity_total_gw,3.2,188,2,2024
+FIN,2030,Wind,capacity_total_gw,,188,2,2024
+FIN,2030,Bioenergy,capacity_total_gw,,188,2,2024
+FIN,2030,Solar,generation_twh,5.51,188,2,2024
+FIN,2030,Wind,generation_twh,34.09,188,2,2024
+FIN,2030,Hydro,generation_twh,14.87,188,2,2024
+FIN,2030,Other Renewables,generation_twh,14.47,188,2,2024
+FIN,2030,Coal,generation_twh,0.85,188,2,2024
+FIN,2030,Gas,generation_twh,1.25,188,2,2024
+FIN,2030,Other Fossil,generation_twh,1.57,188,2,2024
+FIN,2030,Nuclear,generation_twh,36.31,188,2,2024
+FIN,2030,Solar,share_of_generation_pct,5.06,188,2,2024
+FIN,2030,Wind,share_of_generation_pct,31.3,188,2,2024
+FIN,2030,Hydro,share_of_generation_pct,13.65,188,2,2024
+FIN,2030,Other Renewables,share_of_generation_pct,13.29,188,2,2024
+FIN,2030,Coal,share_of_generation_pct,0.78,188,2,2024
+FIN,2030,Gas,share_of_generation_pct,1.15,188,2,2024
+FIN,2030,Other Fossil,share_of_generation_pct,1.44,188,2,2024
+FIN,2030,Nuclear,share_of_generation_pct,33.34,188,2,2024
+GRC,2030,Onshore Wind,generation_twh,19,129,1,2023
+GRC,2030,Offshore Wind,generation_twh,6,129,1,2023
+GRC,2030,Solar,generation_twh,19,129,1,2023
+GRC,2030,Other Renewables,generation_twh,2,129,1,2023
+GRC,2030,Hydro,generation_twh,7,129,1,2023
+GRC,2030,Gas,generation_twh,12,129,1,2023
+GRC,2030,Onshore Wind,capacity_total_gw,8,129,1,2023
+GRC,2030,Offshore Wind,capacity_total_gw,2,129,1,2023
+GRC,2030,Solar,capacity_total_gw,13,129,1,2023
+GRC,2030,Other Renewables,capacity_total_gw,1,129,1,2023
+GRC,2030,Hydro,capacity_total_gw,4,129,1,2023
+GRC,2030,Gas,capacity_total_gw,8,129,1,2023
+GRC,2030,Other Fossil,capacity_total_gw,1,129,1,2023
+GRC,2030,Onshore Wind,share_of_generation_pct,29.23,129,1,2023
+GRC,2030,Offshore Wind,share_of_generation_pct,9.23,129,1,2023
+GRC,2030,Solar,share_of_generation_pct,29.23,129,1,2023
+GRC,2030,Other Renewables,share_of_generation_pct,3.08,129,1,2023
+GRC,2030,Hydro,share_of_generation_pct,10.77,129,1,2023
+GRC,2030,Gas,share_of_generation_pct,18.46,129,1,2023
+GRC,2030,Pumped hydro,capacity_total_gw,3.1,129,1,2023
+GRC,2030,Battery,capacity_total_gw,2.2,129,1,2023
+KAZ,2030,Coal,generation_twh,33.5,164,1,2024
+KAZ,2030,Gas,generation_twh,39.8,164,1,2024
+KAZ,2030,Other Fossil,generation_twh,0.3,164,1,2024
+KAZ,2030,Hydro,generation_twh,23.2,164,1,2024
+KAZ,2030,Wind,generation_twh,21,164,1,2024
+KAZ,2030,Solar,generation_twh,12.6,164,1,2024
+KAZ,2030,Bioenergy,generation_twh,1.6,164,1,2024
+KAZ,2030,Coal,share_of_generation_pct,25.38,164,1,2024
+KAZ,2030,Gas,share_of_generation_pct,30.15,164,1,2024
+KAZ,2030,Other Fossil,share_of_generation_pct,0.23,164,1,2024
+KAZ,2030,Hydro,share_of_generation_pct,17.58,164,1,2024
+KAZ,2030,Wind,share_of_generation_pct,15.91,164,1,2024
+KAZ,2030,Solar,share_of_generation_pct,9.55,164,1,2024
+KAZ,2030,Bioenergy,share_of_generation_pct,1.21,164,1,2024
+ARG,2030,Demand,demand_twh,218.59,37,1,2023
+ARG,2030,Fossil,generation_twh,97.681,37,1,2023
+ARG,2030,Hydro,generation_twh,49.286,37,1,2023
+ARG,2030,Nuclear,generation_twh,21.785,37,1,2023
+ARG,2030,Rest of renewables,generation_twh,58.332,37,1,2023
+ARG,2030,Fossil,capacity_total_gw,31.585,37,1,2023
+ARG,2030,Hydro,capacity_total_gw,13.215,37,1,2023
+ARG,2030,Nuclear,capacity_total_gw,3.017,37,1,2023
+ARG,2030,Rest of renewables,capacity_total_gw,19.257,37,1,2023
+ARG,2030,Fossil,share_of_generation_pct,43.02,37,1,2023
+ARG,2030,Hydro,share_of_generation_pct,21.7,37,1,2023
+ARG,2030,Nuclear,share_of_generation_pct,9.59,37,1,2023
+ARG,2030,Rest of renewables,share_of_generation_pct,25.69,37,1,2023
+JOR,2030,Demand,demand_twh,0.019701,174,1,2024
+JOR,2030,Renewables,capacity_total_gw,3.2,174,1,2024
+JOR,2030,Gas,capacity_total_gw,5.47,174,1,2024
+JOR,2030,Other Fossil,capacity_total_gw,1.65,174,1,2024
+AUS,2030,Coal,capacity_total_gw,7.1,28,1,2023
+AUS,2030,Gas,capacity_total_gw,11.2,28,1,2023
+AUS,2030,Hydro,capacity_total_gw,7.2,28,1,2023
+AUS,2030,Offshore Wind,capacity_total_gw,0,28,1,2023
+AUS,2030,Solar,capacity_total_gw,50.8,28,1,2023
+AUS,2030,Wind,capacity_total_gw,34.4,28,1,2023
+AUS,2030,Coal,generation_twh,40.7,28,1,2023
+AUS,2030,Gas,generation_twh,5.5,28,1,2023
+AUS,2030,Hydro,generation_twh,15.3,28,1,2023
+AUS,2030,Offshore Wind,generation_twh,0,28,1,2023
+AUS,2030,Solar,generation_twh,77,28,1,2023
+AUS,2030,Wind,generation_twh,106.5,28,1,2023
+AUS,2030,Coal,share_of_generation_pct,16.6,28,1,2023
+AUS,2030,Gas,share_of_generation_pct,2.2,28,1,2023
+AUS,2030,Hydro,share_of_generation_pct,6.2,28,1,2023
+AUS,2030,Offshore Wind,share_of_generation_pct,0,28,1,2023
+AUS,2030,Solar,share_of_generation_pct,31.4,28,1,2023
+AUS,2030,Wind,share_of_generation_pct,43.5,28,1,2023
+AUS,2030,Storage,capacity_total_gw,18.6,28,1,2023
+AUS,2030,Storage,generation_twh,21.1,28,1,2023
+AUS,2030,Coal,capacity_total_gw,5.1,214,2,2025
+AUS,2030,Gas,capacity_total_gw,12.9,214,2,2025
+AUS,2030,Hydro,capacity_total_gw,6.8,214,2,2025
+AUS,2030,Offshore Wind,capacity_total_gw,1,214,2,2025
+AUS,2030,Solar,capacity_total_gw,62.7,214,2,2025
+AUS,2030,Wind,capacity_total_gw,39.9,214,2,2025
+AUS,2030,Storage,capacity_total_gw,29.7,214,2,2025
+AUS,2030,Coal,generation_twh,23.9,214,2,2025
+AUS,2030,Gas,generation_twh,16.1,214,2,2025
+AUS,2030,Hydro,generation_twh,14.8,214,2,2025
+AUS,2030,Offshore Wind,generation_twh,3.9,214,2,2025
+AUS,2030,Solar,generation_twh,93.4,214,2,2025
+AUS,2030,Wind,generation_twh,114,214,2,2025
+AUS,2030,Storage,generation_twh,31.3,214,2,2025
+AUS,2030,Coal,share_of_generation_pct,8.9,214,2,2025
+AUS,2030,Gas,share_of_generation_pct,6,214,2,2025
+AUS,2030,Hydro,share_of_generation_pct,5.5,214,2,2025
+AUS,2030,Offshore Wind,share_of_generation_pct,1.4,214,2,2025
+AUS,2030,Solar,share_of_generation_pct,34.7,214,2,2025
+AUS,2030,Wind,share_of_generation_pct,42.4,214,2,2025
+AUS,2030,Rest of renewables,share_of_generation_pct,1.1,214,2,2025
+CHL,2030,Coal,generation_twh,0.02717,58,1,2023
+CHL,2030,Other Renewables,generation_twh,0.57232,58,1,2023
+CHL,2030,Bioenergy,generation_twh,2.35305,58,1,2023
+CHL,2030,Hydro,generation_twh,21.52516,58,1,2023
+CHL,2030,Gas,generation_twh,6.59345,58,1,2023
+CHL,2030,Solar,generation_twh,43.43233,58,1,2023
+CHL,2030,Wind,generation_twh,25.79142,58,1,2023
+CHL,2030,Other Fossil,generation_twh,4.37385,58,1,2023
+CHL,2030,Coal,share_of_generation_pct,0.025958082,58,1,2023
+CHL,2030,Other Renewables,share_of_generation_pct,0.546791664,58,1,2023
+CHL,2030,Bioenergy,share_of_generation_pct,2.248092196,58,1,2023
+CHL,2030,Hydro,share_of_generation_pct,20.56503015,58,1,2023
+CHL,2030,Gas,share_of_generation_pct,6.299349137,58,1,2023
+CHL,2030,Solar,share_of_generation_pct,41.49503075,58,1,2023
+CHL,2030,Wind,share_of_generation_pct,24.64099361,58,1,2023
+CHL,2030,Other Fossil,share_of_generation_pct,4.178754404,58,1,2023
+CHL,2030,Coal,capacity_total_gw,0,58,1,2023
+CHL,2030,Other Renewables,capacity_total_gw,0.081,58,1,2023
+CHL,2030,Bioenergy,capacity_total_gw,0.80108,58,1,2023
+CHL,2030,Hydro,capacity_total_gw,7.935239,58,1,2023
+CHL,2030,Gas,capacity_total_gw,4.25953,58,1,2023
+CHL,2030,Solar,capacity_total_gw,14.25447763,58,1,2023
+CHL,2030,Wind,capacity_total_gw,15.3314522,58,1,2023
+CHL,2030,Other Fossil,capacity_total_gw,4.5595601,58,1,2023
+CHL,2030,Battery,capacity_total_gw,1.8935381,58,1,2023
+CHL,2030,Pumped hydro,capacity_total_gw,3.43,58,1,2023
+CHL,2030,Pumped hydro,generation_twh,6.9,58,1,2023
+CHL,2030,Battery,generation_twh,2.322096616,58,1,2023
+ECU,2030,Other Renewables,generation_twh,6.127,157,1,2024
+ECU,2030,Wind,generation_twh,0.5169,157,1,2024
+ECU,2030,Solar,generation_twh,0.275,157,1,2024
+ECU,2030,Hydro,generation_twh,16.80026,157,1,2024
+ECU,2030,Gas,generation_twh,4.2,157,1,2024
+ECU,2030,Other Renewables,capacity_total_gw,1.49,157,1,2024
+ECU,2030,Wind,capacity_total_gw,0.16,157,1,2024
+ECU,2030,Solar,capacity_total_gw,0.2,157,1,2024
+ECU,2030,Hydro,capacity_total_gw,2.43691,157,1,2024
+ECU,2030,Gas,capacity_total_gw,0.587,157,1,2024
+ECU,2030,Other Renewables,share_of_generation_pct,21.9455,157,1,2024
+ECU,2030,Wind,share_of_generation_pct,1.8514,157,1,2024
+ECU,2030,Solar,share_of_generation_pct,0.985,157,1,2024
+ECU,2030,Hydro,share_of_generation_pct,60.1747,157,1,2024
+ECU,2030,Gas,share_of_generation_pct,15.0434,157,1,2024
+LAO,2030,Hydro,capacity_total_gw,17.48,199,1,2024
+LAO,2030,Solar,capacity_total_gw,1.591,199,1,2024
+LAO,2030,Wind,capacity_total_gw,0.6,199,1,2024
+LAO,2030,Bioenergy,capacity_total_gw,0.112,199,1,2024
+SGP,2030,Solar,capacity_total_gw,2,160,1,2024
+UKR,2030,Hydro,capacity_total_gw,4.935,178,1,2024
+UKR,2030,Other Renewables,capacity_total_gw,0.02,178,1,2024
+UKR,2030,Solar,capacity_total_gw,11.788,178,1,2024
+UKR,2030,Onshore Wind,capacity_total_gw,5.12,178,1,2024
+UKR,2030,Offshore Wind,capacity_total_gw,0.3,178,1,2024
+UKR,2030,Bioenergy,capacity_total_gw,1.448,178,1,2024
+UKR,2030,Battery,capacity_total_gw,0.64,178,1,2024
+UKR,2030,Hydro,generation_twh,7.1,178,1,2024
+UKR,2030,Other Renewables,generation_twh,0.1,178,1,2024
+UKR,2030,Solar,generation_twh,14.7,178,1,2024
+UKR,2030,Onshore Wind,generation_twh,14.749,178,1,2024
+UKR,2030,Offshore Wind,generation_twh,1.051,178,1,2024
+UKR,2030,Bioenergy,generation_twh,6.53,178,1,2024
+UKR,2030,Renewables,share_of_generation_pct,25,178,1,2024
+HUN,2030,Bioenergy,generation_twh,0.093,79,1,2023
+HUN,2030,Coal,generation_twh,0.235,79,1,2023
+HUN,2030,Gas,generation_twh,3.375,79,1,2023
+HUN,2030,Hydro,generation_twh,0.244,79,1,2023
+HUN,2030,Nuclear,generation_twh,34.362,79,1,2023
+HUN,2030,Other Renewables,generation_twh,0.392,79,1,2023
+HUN,2030,Solar,generation_twh,13.201,79,1,2023
+HUN,2030,Wind,generation_twh,2.43,79,1,2023
+HUN,2040,Bioenergy,generation_twh,2.055,79,1,2023
+HUN,2040,Coal,generation_twh,0,79,1,2023
+HUN,2040,Gas,generation_twh,2.317,79,1,2023
+HUN,2040,Hydro,generation_twh,0.273,79,1,2023
+HUN,2040,Nuclear,generation_twh,33.731,79,1,2023
+HUN,2040,Other Renewables,generation_twh,1.285,79,1,2023
+HUN,2040,Solar,generation_twh,16.43,79,1,2023
+HUN,2040,Wind,generation_twh,4.5,79,1,2023
+HUN,2030,Bioenergy,share_of_generation_pct,0.1711698447,79,1,2023
+HUN,2030,Coal,share_of_generation_pct,0.4325259516,79,1,2023
+HUN,2030,Gas,share_of_generation_pct,6.211808879,79,1,2023
+HUN,2030,Hydro,share_of_generation_pct,0.4490907752,79,1,2023
+HUN,2030,Nuclear,share_of_generation_pct,63.2444968,79,1,2023
+HUN,2030,Other Renewables,share_of_generation_pct,0.7214900979,79,1,2023
+HUN,2030,Solar,share_of_generation_pct,24.29691526,79,1,2023
+HUN,2030,Wind,share_of_generation_pct,4.472502393,79,1,2023
+HUN,2040,Bioenergy,share_of_generation_pct,3.39,79,1,2023
+HUN,2040,Coal,share_of_generation_pct,0,79,1,2023
+HUN,2040,Gas,share_of_generation_pct,3.82,79,1,2023
+HUN,2040,Hydro,share_of_generation_pct,0.45,79,1,2023
+HUN,2040,Nuclear,share_of_generation_pct,55.67,79,1,2023
+HUN,2040,Other Renewables,share_of_generation_pct,2.12,79,1,2023
+HUN,2040,Solar,share_of_generation_pct,27.12,79,1,2023
+HUN,2040,Wind,share_of_generation_pct,7.43,79,1,2023
+HUN,2030,Bioenergy,capacity_total_gw,0.1,79,1,2023
+HUN,2030,Coal,capacity_total_gw,0,79,1,2023
+HUN,2030,Gas,capacity_total_gw,3.2,79,1,2023
+HUN,2030,Hydro,capacity_total_gw,0.1,79,1,2023
+HUN,2030,Nuclear,capacity_total_gw,4.4,79,1,2023
+HUN,2030,Other Renewables,capacity_total_gw,0.1,79,1,2023
+HUN,2030,Solar,capacity_total_gw,12,79,1,2023
+HUN,2030,Wind,capacity_total_gw,1.1,79,1,2023
+HUN,2040,Bioenergy,capacity_total_gw,0.3,79,1,2023
+HUN,2040,Coal,capacity_total_gw,0,79,1,2023
+HUN,2040,Gas,capacity_total_gw,1.9,79,1,2023
+HUN,2040,Hydro,capacity_total_gw,0.057,79,1,2023
+HUN,2040,Nuclear,capacity_total_gw,4.426,79,1,2023
+HUN,2040,Other Renewables,capacity_total_gw,0.178,79,1,2023
+HUN,2040,Solar,capacity_total_gw,14.935,79,1,2023
+HUN,2040,Wind,capacity_total_gw,2,79,1,2023
+HUN,2030,Nuclear,capacity_total_gw,2,205,2,2024
+HUN,2030,Other Fossil,capacity_total_gw,0.4,205,2,2024
+HUN,2030,Gas,capacity_total_gw,3.2,205,2,2024
+HUN,2030,Other Renewables,capacity_total_gw,0.1,205,2,2024
+HUN,2030,Hydro,capacity_total_gw,0.1,205,2,2024
+HUN,2030,Bioenergy,capacity_total_gw,0.3,205,2,2024
+HUN,2030,Wind,capacity_total_gw,1.1,205,2,2024
+HUN,2030,Solar,capacity_total_gw,12,205,2,2024
+HUN,2030,Coal,capacity_total_gw,,205,2,2024
+HUN,2030,Nuclear,generation_twh,15.97,205,2,2024
+HUN,2030,Other Fossil,generation_twh,0.05,205,2,2024
+HUN,2030,Gas,generation_twh,8.89,205,2,2024
+HUN,2030,Other Renewables,generation_twh,0,205,2,2024
+HUN,2030,Hydro,generation_twh,0.24,205,2,2024
+HUN,2030,Bioenergy,generation_twh,2.14,205,2,2024
+HUN,2030,Wind,generation_twh,2.43,205,2,2024
+HUN,2030,Solar,generation_twh,13.2,205,2,2024
+HUN,2030,Coal,generation_twh,0.07,205,2,2024
+HUN,2030,Nuclear,share_of_generation_pct,37.14,205,2,2024
+HUN,2030,Other Fossil,share_of_generation_pct,0.13,205,2,2024
+HUN,2030,Gas,share_of_generation_pct,20.68,205,2,2024
+HUN,2030,Other Renewables,share_of_generation_pct,0,205,2,2024
+HUN,2030,Hydro,share_of_generation_pct,0.56,205,2,2024
+HUN,2030,Bioenergy,share_of_generation_pct,4.98,205,2,2024
+HUN,2030,Wind,share_of_generation_pct,5.65,205,2,2024
+HUN,2030,Solar,share_of_generation_pct,30.7,205,2,2024
+HUN,2030,Coal,share_of_generation_pct,0.17,205,2,2024
+HUN,2030,Storage,capacity_total_gw,0.5,205,2,2024
+HUN,2030,Pumped hydro,capacity_total_gw,0.5,205,2,2024
+HUN,2030,Renewables,share_of_generation_pct,0.42,205,2,2024
+LTU,2030,Hydro,generation_twh,0.0297,78,1,2023
+LTU,2030,Other Renewables,generation_twh,0.0965,78,1,2023
+LTU,2030,Solar,generation_twh,0.4536,78,1,2023
+LTU,2030,Wind,generation_twh,1.8273,78,1,2023
+LTU,2030,Hydro,share_of_generation_pct,1.23,78,1,2023
+LTU,2030,Other Renewables,share_of_generation_pct,4.01,78,1,2023
+LTU,2030,Solar,share_of_generation_pct,18.84,78,1,2023
+LTU,2030,Wind,share_of_generation_pct,75.91,78,1,2023
+LTU,2030,Hydro,capacity_total_gw,0.877,78,1,2023
+LTU,2030,Solar,capacity_total_gw,5.37,78,1,2023
+LTU,2030,Wind,capacity_total_gw,6.859,78,1,2023
+LTU,2030,Solar,capacity_total_gw,5.095,78,1,2023
+LTU,2030,Onshore Wind,capacity_total_gw,5.029,78,1,2023
+LTU,2030,Offshore Wind,capacity_total_gw,1.4,78,1,2023
+LTU,2030,Hydro,capacity_total_gw,,200,2,2024
+LTU,2030,Solar,capacity_total_gw,4.1,200,2,2024
+LTU,2030,Bioenergy,capacity_total_gw,0.22,200,2,2024
+LTU,2030,Onshore Wind,capacity_total_gw,4.52,200,2,2024
+LTU,2030,Offshore Wind,capacity_total_gw,1.4,200,2,2024
+LTU,2030,Other Renewables,capacity_total_gw,0.29,200,2,2024
+LTU,2030,Renewables,share_of_generation_pct,0.95,200,2,2024
+LTU,2030,Hydro,generation_twh,,200,2,2024
+LTU,2030,Other Renewables,generation_twh,,200,2,2024
+LTU,2030,Solar,generation_twh,,200,2,2024
+LTU,2030,Wind,generation_twh,,200,2,2024
+LTU,2030,Hydro,share_of_generation_pct,,200,2,2024
+LTU,2030,Other Renewables,share_of_generation_pct,,200,2,2024
+LTU,2030,Solar,share_of_generation_pct,,200,2,2024
+LTU,2030,Wind,share_of_generation_pct,,200,2,2024
+ZAF,2030,Demand,demand_twh,300,22,1,2023
+ZAF,2030,Coal,capacity_total_gw,333.64,22,1,2023
+ZAF,2030,Nuclear,capacity_total_gw,1.86,22,1,2023
+ZAF,2030,Hydro,capacity_total_gw,4.6,22,1,2023
+ZAF,2030,Solar,capacity_total_gw,8.288,22,1,2023
+ZAF,2030,Wind,capacity_total_gw,17.742,22,1,2023
+ZAF,2030,Other Fossil,capacity_total_gw,6.38,22,1,2023
+ZAF,2030,Coal,share_of_generation_pct,58.8,22,1,2023
+ZAF,2030,Nuclear,share_of_generation_pct,4.5,22,1,2023
+ZAF,2030,Hydro,share_of_generation_pct,8.4,22,1,2023
+ZAF,2030,Solar,share_of_generation_pct,6.3,22,1,2023
+ZAF,2030,Wind,share_of_generation_pct,17.8,22,1,2023
+ZAF,2030,Other Fossil,share_of_generation_pct,1.3,22,1,2023
+BIH,2030,Wind,capacity_total_gw,0.6,140,1,2024
+BIH,2030,Solar,capacity_total_gw,1.492,140,1,2024
+BIH,2030,Hydro,capacity_total_gw,2.527,140,1,2024
+BIH,2030,Bioenergy,capacity_total_gw,0.025,140,1,2024
+BIH,2030,Hydro,generation_twh,6.563,140,1,2024
+BIH,2030,Bioenergy,generation_twh,0.043,140,1,2024
+BIH,2030,Wind,generation_twh,1.261,140,1,2024
+BIH,2030,Solar,generation_twh,1.639,140,1,2024
+BIH,2030,Renewables,share_of_consumption_pct,70.1,140,1,2024
+RUS,2030,Wind,capacity_total_gw,3,82,1,2023
+RUS,2030,Hydro,capacity_total_gw,54,82,1,2023
+RUS,2030,Solar,capacity_total_gw,2,82,1,2023
+RUS,2030,Other Renewables,capacity_total_gw,3,82,1,2023
+RUS,2030,Pumped hydro,capacity_total_gw,1,82,1,2023
+GEO,2030,Coal,generation_twh,0,159,1,2024
+GEO,2030,Gas,generation_twh,2.44367,159,1,2024
+GEO,2030,Hydro,generation_twh,10.22152,159,1,2024
+GEO,2030,Solar,generation_twh,0.80709,159,1,2024
+GEO,2030,Wind,generation_twh,2.5491,159,1,2024
+GEO,2030,Coal,capacity_total_gw,0.013,159,1,2024
+GEO,2030,Gas,capacity_total_gw,1.171,159,1,2024
+GEO,2030,Hydro,capacity_total_gw,3.992,159,1,2024
+GEO,2030,Solar,capacity_total_gw,0.547,159,1,2024
+GEO,2030,Wind,capacity_total_gw,0.75,159,1,2024
+GEO,2030,Coal,share_of_generation_pct,0,159,1,2024
+GEO,2030,Gas,share_of_generation_pct,15.0388947,159,1,2024
+GEO,2030,Hydro,share_of_generation_pct,62.90553265,159,1,2024
+GEO,2030,Solar,share_of_generation_pct,4.967013355,159,1,2024
+GEO,2030,Wind,share_of_generation_pct,15.68773463,159,1,2024
+ISR,2030,Renewables,share_of_generation_pct,30,100,1,2023
+ISR,2030,Solar,capacity_total_gw,17,99,1,2023
+ISR,2030,Wind,capacity_total_gw,0.7,99,1,2023
+ISR,2030,Storage,capacity_total_gw,3.5,99,1,2023
+VNM,2030,Demand,demand_twh,567,24,1,2023
+VNM,2030,Renewables,share_of_generation_pct,47,24,1,2023
+VNM,2030,Onshore Wind,capacity_total_gw,21.88,24,1,2023
+VNM,2030,Offshore Wind,capacity_total_gw,6,24,1,2023
+VNM,2030,Solar,capacity_total_gw,22.58,24,1,2023
+VNM,2030,Bioenergy,capacity_total_gw,2.27,24,1,2023
+VNM,2030,Hydro,capacity_total_gw,29.346,24,1,2023
+VNM,2030,Imports,import_twh,18.8,24,1,2023
+VNM,2030,Coal,capacity_total_gw,30.127,24,1,2023
+VNM,2030,Gas,capacity_total_gw,37.33,24,1,2023
+VNM,2030,Battery,capacity_total_gw,0.3,24,1,2023
+VNM,2030,Pumped hydro,capacity_total_gw,2.4,24,1,2023
+VNM,2030,Onshore Wind,capacity_total_gw,38.029,211,2,2025
+VNM,2030,Offshore Wind,capacity_total_gw,17.032,211,2,2025
+VNM,2030,Solar,capacity_total_gw,73.416,211,2,2025
+VNM,2030,Bioenergy,capacity_total_gw,4.881,211,2,2025
+VNM,2030,Hydro,capacity_total_gw,34.667,211,2,2025
+VNM,2030,Battery,capacity_total_gw,16.3,211,2,2025
+VNM,2030,Pumped hydro,capacity_total_gw,6,211,2,2025
+ITA,2030,Solar,generation_twh,99.1,48,1,2023
+ITA,2030,Wind,generation_twh,64.1,48,1,2023
+ITA,2030,Bioenergy,generation_twh,9.6,48,1,2023
+ITA,2030,Hydro,generation_twh,46.9,48,1,2023
+ITA,2030,Other Renewables,generation_twh,8,48,1,2023
+ITA,2030,Renewables,share_of_generation_pct,72,48,1,2023
+ITA,2030,Solar,capacity_total_gw,79.92,48,1,2023
+ITA,2030,Onshore Wind,capacity_total_gw,26.04,48,1,2023
+ITA,2030,Offshore Wind,capacity_total_gw,2.1,48,1,2023
+ITA,2030,Bioenergy,capacity_total_gw,3.05,48,1,2023
+ITA,2030,Hydro,capacity_total_gw,19.17,48,1,2023
+ITA,2030,Other Renewables,capacity_total_gw,1,48,1,2023
+ITA,2030,Solar,capacity_total_gw,79.17,181,2,2024
+ITA,2030,Onshore Wind,capacity_total_gw,26.04,181,2,2024
+ITA,2030,Offshore Wind,capacity_total_gw,2.1,181,2,2024
+ITA,2030,Bioenergy,capacity_total_gw,3.24,181,2,2024
+ITA,2030,Hydro,capacity_total_gw,19.41,181,2,2024
+ITA,2030,Other Renewables,capacity_total_gw,1,181,2,2024
+ITA,2030,Solar,generation_twh,97.6,181,2,2024
+ITA,2030,Wind,generation_twh,64.8,181,2,2024
+ITA,2030,Bioenergy,generation_twh,10.9,181,2,2024
+ITA,2030,Hydro,generation_twh,46.9,181,2,2024
+ITA,2030,Other Renewables,generation_twh,7.5,181,2,2024
+ITA,2030,Fossil,generation_twh,104,181,2,2024
+ITA,2030,Solar,share_of_generation_pct,29.42,181,2,2024
+ITA,2030,Wind,share_of_generation_pct,19.54,181,2,2024
+ITA,2030,Bioenergy,share_of_generation_pct,3.29,181,2,2024
+ITA,2030,Hydro,share_of_generation_pct,14.14,181,2,2024
+ITA,2030,Other Renewables,share_of_generation_pct,2.26,181,2,2024
+ITA,2030,Fossil,share_of_generation_pct,31.35,181,2,2024
+ITA,2030,Renewables,share_of_generation_pct,,181,2,2024
+ITA,2030,Battery,capacity_total_gw,15,181,2,2024
+ITA,2030,Pumped hydro,capacity_total_gw,7.5,181,2,2024
+EST,2030,Bioenergy,generation_twh,1.54,80,1,2023
+EST,2030,Hydro,generation_twh,0.025,80,1,2023
+EST,2030,Offshore Wind,generation_twh,3.715,80,1,2023
+EST,2030,Onshore Wind,generation_twh,3.124,80,1,2023
+EST,2030,Solar,generation_twh,1,80,1,2023
+EST,2030,Bioenergy,share_of_generation_pct,16.376,80,1,2023
+EST,2030,Hydro,share_of_generation_pct,0.266,80,1,2023
+EST,2030,Offshore Wind,share_of_generation_pct,39.504,80,1,2023
+EST,2030,Onshore Wind,share_of_generation_pct,33.22,80,1,2023
+EST,2030,Solar,share_of_generation_pct,10.634,80,1,2023
+EST,2030,Bioenergy,capacity_total_gw,0.367,80,1,2023
+EST,2030,Hydro,capacity_total_gw,0.008,80,1,2023
+EST,2030,Offshore Wind,capacity_total_gw,1,80,1,2023
+EST,2030,Onshore Wind,capacity_total_gw,1.31,80,1,2023
+EST,2030,Solar,capacity_total_gw,1.2,80,1,2023
+EST,2030,Bioenergy,capacity_total_gw,0.15,230,2,2026
+EST,2030,Hydro,capacity_total_gw,,230,2,2026
+EST,2030,Offshore Wind,capacity_total_gw,,230,2,2026
+EST,2030,Onshore Wind,capacity_total_gw,2.85,230,2,2026
+EST,2030,Solar,capacity_total_gw,1.5,230,2,2026
+EST,2030,Bioenergy,generation_twh,1.2,230,2,2026
+EST,2030,Hydro,generation_twh,0.03,230,2,2026
+EST,2030,Wind,generation_twh,8.66,230,2,2026
+EST,2030,Solar,generation_twh,1.67,230,2,2026
+EST,2030,Renewables,share_of_generation_pct,0.9,230,2,2026
+MEX,2030,Gas,generation_twh,234.15,86,1,2023
+MEX,2030,Coal,generation_twh,14.45,86,1,2023
+MEX,2030,Solar,generation_twh,67.45,86,1,2023
+MEX,2030,Hydro,generation_twh,38.54,86,1,2023
+MEX,2030,Wind,generation_twh,37.58,86,1,2023
+MEX,2030,Other Fossil,generation_twh,20.24,86,1,2023
+MEX,2030,Nuclear,generation_twh,10.6,86,1,2023
+MEX,2030,Other Renewables,generation_twh,4.82,86,1,2023
+MEX,2030,Gas,share_of_generation_pct,54.73,86,1,2023
+MEX,2030,Coal,share_of_generation_pct,3.38,86,1,2023
+MEX,2030,Other Fossil,share_of_generation_pct,4.73,86,1,2023
+MEX,2030,Solar,share_of_generation_pct,15.76,86,1,2023
+MEX,2030,Hydro,share_of_generation_pct,9.01,86,1,2023
+MEX,2030,Wind,share_of_generation_pct,8.78,86,1,2023
+MEX,2030,Nuclear,share_of_generation_pct,2.48,86,1,2023
+MEX,2030,Other Renewables,share_of_generation_pct,1.13,86,1,2023
+MEX,2030,Wind,capacity_total_gw,12.7,50,1,2023
+MEX,2030,Solar,capacity_total_gw,22.8,50,1,2023
+MEX,2030,Hydro,capacity_total_gw,15.7,50,1,2023
+MEX,2030,Other Renewables,capacity_total_gw,1,50,1,2023
+MEX,2030,Nuclear,capacity_total_gw,1.6,50,1,2023
+MEX,2030,Fossil,capacity_total_gw,66,50,1,2023
+MEX,2030,Demand,generation_twh,416,86,1,2023
+MEX,2030,Battery,capacity_total_gw,5.39,86,1,2023
+MEX,2030,Wind,capacity_total_gw,18.396,216,2,2025
+MEX,2030,Solar,capacity_total_gw,14.247,216,2,2025
+MEX,2030,Hydro,capacity_total_gw,15.305,216,2,2025
+MEX,2030,Other Renewables,capacity_total_gw,1.036,216,2,2025
+MEX,2030,Nuclear,capacity_total_gw,1.608,216,2,2025
+MEX,2030,Fossil,capacity_total_gw,64.001,216,2,2025
+LVA,2030,Gas,capacity_total_gw,1,91,1,2023
+LVA,2030,Wind,capacity_total_gw,1,91,1,2023
+LVA,2030,Hydro,capacity_total_gw,2,91,1,2023
+LVA,2030,Gas,generation_twh,1.91,91,1,2023
+LVA,2030,Other Fossil,generation_twh,0.04,91,1,2023
+LVA,2030,Bioenergy,generation_twh,0.74,91,1,2023
+LVA,2030,Solar,generation_twh,0.02,91,1,2023
+LVA,2030,Wind,generation_twh,2.21,91,1,2023
+LVA,2030,Hydro,generation_twh,3.11,91,1,2023
+LVA,2030,Gas,share_of_generation_pct,23.76,91,1,2023
+LVA,2030,Other Fossil,share_of_generation_pct,0.55,91,1,2023
+LVA,2030,Bioenergy,share_of_generation_pct,9.25,91,1,2023
+LVA,2030,Solar,share_of_generation_pct,0.26,91,1,2023
+LVA,2030,Wind,share_of_generation_pct,27.52,91,1,2023
+LVA,2030,Hydro,share_of_generation_pct,38.66,91,1,2023
+LVA,2030,Solar,capacity_total_gw,1.6,189,2,2024
+LVA,2030,Wind,capacity_total_gw,1.31,189,2,2024
+LVA,2030,Bioenergy,capacity_total_gw,0.14,189,2,2024
+LVA,2030,Hydro,capacity_total_gw,1.66,189,2,2024
+LVA,2030,Gas,capacity_total_gw,1.07,189,2,2024
+LVA,2030,Other Fossil,capacity_total_gw,0.03,189,2,2024
+LVA,2030,Solar,generation_twh,1.98,189,2,2024
+LVA,2030,Wind,generation_twh,4.28,189,2,2024
+LVA,2030,Bioenergy,generation_twh,0.67,189,2,2024
+LVA,2030,Hydro,generation_twh,3.17,189,2,2024
+LVA,2030,Gas,generation_twh,0.45,189,2,2024
+LVA,2030,Other Fossil,generation_twh,0.02,189,2,2024
+LVA,2030,Solar,share_of_generation_pct,18.72,189,2,2024
+LVA,2030,Wind,share_of_generation_pct,40.49,189,2,2024
+LVA,2030,Bioenergy,share_of_generation_pct,6.31,189,2,2024
+LVA,2030,Hydro,share_of_generation_pct,29.98,189,2,2024
+LVA,2030,Gas,share_of_generation_pct,4.28,189,2,2024
+LVA,2030,Other Fossil,share_of_generation_pct,0.22,189,2,2024
+LVA,2030,Storage,capacity_total_gw,0.06,189,2,2024
+PRT,2030,Bioenergy,generation_twh,6.24,43,1,2023
+PRT,2030,Coal,generation_twh,0,43,1,2023
+PRT,2030,Gas,generation_twh,7.01,43,1,2023
+PRT,2030,Hydro,generation_twh,9.75,43,1,2023
+PRT,2030,Nuclear,generation_twh,0,43,1,2023
+PRT,2030,Other Fossil,generation_twh,0.88,43,1,2023
+PRT,2030,Solar,generation_twh,36.69,43,1,2023
+PRT,2030,Wind,generation_twh,34.28,43,1,2023
+PRT,2030,Bioenergy,share_of_generation_pct,6.58,43,1,2023
+PRT,2030,Coal,share_of_generation_pct,0,43,1,2023
+PRT,2030,Gas,share_of_generation_pct,7.39,43,1,2023
+PRT,2030,Hydro,share_of_generation_pct,10.28,43,1,2023
+PRT,2030,Nuclear,share_of_generation_pct,0,43,1,2023
+PRT,2030,Other Fossil,share_of_generation_pct,0.92,43,1,2023
+PRT,2030,Solar,share_of_generation_pct,38.68,43,1,2023
+PRT,2030,Wind,share_of_generation_pct,36.14,43,1,2023
+PRT,2030,Solar,capacity_total_gw,20.4,43,1,2023
+PRT,2030,Onshore Wind,capacity_total_gw,10.4,43,1,2023
+PRT,2030,Offshore Wind,capacity_total_gw,2,43,1,2023
+PRT,2030,Bioenergy,capacity_total_gw,1.4,43,1,2023
+PRT,2030,Hydro,capacity_total_gw,4.2,43,1,2023
+PRT,2030,Other Renewables,capacity_total_gw,0.9,43,1,2023
+PRT,2030,Coal,capacity_total_gw,0,43,1,2023
+PRT,2030,Gas,capacity_total_gw,3.8,43,1,2023
+PRT,2030,Other Fossil,capacity_total_gw,0.4,43,1,2023
+PRT,2030,Pumped hydro,capacity_total_gw,3.9,43,1,2023
+PRT,2030,Battery,capacity_total_gw,1,43,1,2023
+PRT,2030,Solar,capacity_total_gw,20.8,231,2,2026
+PRT,2030,Onshore Wind,capacity_total_gw,10.4,231,2,2026
+PRT,2030,Offshore Wind,capacity_total_gw,2,231,2,2026
+PRT,2030,Bioenergy,capacity_total_gw,1.3,231,2,2026
+PRT,2030,Hydro,capacity_total_gw,4.2,231,2,2026
+PRT,2030,Other Renewables,capacity_total_gw,0.3,231,2,2026
+PRT,2030,Coal,capacity_total_gw,,231,2,2026
+PRT,2030,Gas,capacity_total_gw,3.5,231,2,2026
+PRT,2030,Other Fossil,capacity_total_gw,0.5,231,2,2026
+PRT,2030,Pumped hydro,capacity_total_gw,3.9,231,2,2026
+PRT,2030,Battery,capacity_total_gw,2,231,2,2026
+PRT,2030,Bioenergy,generation_twh,3.97,231,2,2026
+PRT,2030,Coal,generation_twh,,231,2,2026
+PRT,2030,Gas,generation_twh,2.51,231,2,2026
+PRT,2030,Hydro,generation_twh,9.86,231,2,2026
+PRT,2030,Nuclear,generation_twh,,231,2,2026
+PRT,2030,Other Fossil,generation_twh,0.39,231,2,2026
+PRT,2030,Solar,generation_twh,24.47,231,2,2026
+PRT,2030,Wind,generation_twh,25.15,231,2,2026
+PRT,2030,Other Renewables,generation_twh,0.77,231,2,2026
+PRT,2030,Bioenergy,share_of_generation_pct,0.05914779499,231,2,2026
+PRT,2030,Coal,share_of_generation_pct,,231,2,2026
+PRT,2030,Gas,share_of_generation_pct,0.03739570918,231,2,2026
+PRT,2030,Hydro,share_of_generation_pct,0.1469010727,231,2,2026
+PRT,2030,Nuclear,share_of_generation_pct,,231,2,2026
+PRT,2030,Other Fossil,share_of_generation_pct,0.005810488677,231,2,2026
+PRT,2030,Solar,share_of_generation_pct,0.3645709178,231,2,2026
+PRT,2030,Wind,share_of_generation_pct,0.3747020262,231,2,2026
+PRT,2030,Other Renewables,share_of_generation_pct,0.01147199046,231,2,2026
+CYP,2030,Bioenergy,generation_twh,0.1562,33,1,2023
+CYP,2030,Coal,generation_twh,0,33,1,2023
+CYP,2030,Gas,generation_twh,4.124,33,1,2023
+CYP,2030,Hydro,generation_twh,0,33,1,2023
+CYP,2030,Nuclear,generation_twh,0,33,1,2023
+CYP,2030,Other Renewables,generation_twh,0,33,1,2023
+CYP,2030,Solar,generation_twh,1.441,33,1,2023
+CYP,2030,Wind,generation_twh,0.2641,33,1,2023
+CYP,2040,Bioenergy,generation_twh,0.2682,33,1,2023
+CYP,2040,Coal,generation_twh,0,33,1,2023
+CYP,2040,Gas,generation_twh,3.304,33,1,2023
+CYP,2040,Hydro,generation_twh,0,33,1,2023
+CYP,2040,Nuclear,generation_twh,0,33,1,2023
+CYP,2040,Other Renewables,generation_twh,0,33,1,2023
+CYP,2040,Solar,generation_twh,5.198,33,1,2023
+CYP,2040,Wind,generation_twh,0.2519,33,1,2023
+CYP,2030,Bioenergy,share_of_generation_pct,2.61,33,1,2023
+CYP,2030,Coal,share_of_generation_pct,0,33,1,2023
+CYP,2030,Gas,share_of_generation_pct,68.9,33,1,2023
+CYP,2030,Hydro,share_of_generation_pct,0,33,1,2023
+CYP,2030,Nuclear,share_of_generation_pct,0,33,1,2023
+CYP,2030,Other Renewables,share_of_generation_pct,0,33,1,2023
+CYP,2030,Solar,share_of_generation_pct,24.08,33,1,2023
+CYP,2030,Wind,share_of_generation_pct,4.41,33,1,2023
+CYP,2040,Bioenergy,share_of_generation_pct,2.97,33,1,2023
+CYP,2040,Coal,share_of_generation_pct,0,33,1,2023
+CYP,2040,Gas,share_of_generation_pct,36.62,33,1,2023
+CYP,2040,Hydro,share_of_generation_pct,0,33,1,2023
+CYP,2040,Nuclear,share_of_generation_pct,0,33,1,2023
+CYP,2040,Other Renewables,share_of_generation_pct,0,33,1,2023
+CYP,2040,Solar,share_of_generation_pct,57.61,33,1,2023
+CYP,2040,Wind,share_of_generation_pct,2.79,33,1,2023
+CYP,2030,Bioenergy,capacity_total_gw,0.027,33,1,2023
+CYP,2030,Coal,capacity_total_gw,0,33,1,2023
+CYP,2030,Gas,capacity_total_gw,1.223,33,1,2023
+CYP,2030,Hydro,capacity_total_gw,0,33,1,2023
+CYP,2030,Nuclear,capacity_total_gw,0,33,1,2023
+CYP,2030,Other Renewables,capacity_total_gw,0,33,1,2023
+CYP,2030,Solar,capacity_total_gw,0.889,33,1,2023
+CYP,2030,Wind,capacity_total_gw,0.17,33,1,2023
+CYP,2040,Bioenergy,capacity_total_gw,0.05,33,1,2023
+CYP,2040,Coal,capacity_total_gw,0,33,1,2023
+CYP,2040,Gas,capacity_total_gw,0.617,33,1,2023
+CYP,2040,Hydro,capacity_total_gw,0,33,1,2023
+CYP,2040,Nuclear,capacity_total_gw,0,33,1,2023
+CYP,2040,Other Renewables,capacity_total_gw,0,33,1,2023
+CYP,2040,Solar,capacity_total_gw,2.959,33,1,2023
+CYP,2040,Wind,capacity_total_gw,0.17,33,1,2023
+CYP,2030,Pumped hydro,capacity_total_gw,0.08,33,1,2023
+CYP,2030,Battery,capacity_total_gw,0.05,33,1,2023
+CYP,2030,Bioenergy,capacity_total_gw,0.03,226,2,2026
+CYP,2030,Coal,capacity_total_gw,0,226,2,2026
+CYP,2030,Gas,capacity_total_gw,0.29,226,2,2026
+CYP,2030,Hydro,capacity_total_gw,0,226,2,2026
+CYP,2030,Nuclear,capacity_total_gw,0,226,2,2026
+CYP,2030,Other Renewables,capacity_total_gw,0,226,2,2026
+CYP,2030,Solar,capacity_total_gw,1.08,226,2,2026
+CYP,2030,Onshore Wind,capacity_total_gw,0.17,226,2,2026
+CYP,2030,Battery,capacity_total_gw,0.16,226,2,2026
+CYP,2030,Bioenergy,generation_twh,0.12,226,2,2026
+CYP,2030,Coal,generation_twh,0,226,2,2026
+CYP,2030,Gas,generation_twh,3.44,226,2,2026
+CYP,2030,Hydro,generation_twh,0,226,2,2026
+CYP,2030,Nuclear,generation_twh,0,226,2,2026
+CYP,2030,Other Renewables,generation_twh,0,226,2,2026
+CYP,2030,Solar,generation_twh,1.73,226,2,2026
+CYP,2030,Onshore Wind,generation_twh,0.26,226,2,2026
+SVK,2030,Bioenergy,generation_twh,2.54,73,1,2023
+SVK,2030,Hydro,generation_twh,4.822,73,1,2023
+SVK,2030,Other Renewables,generation_twh,0.03,73,1,2023
+SVK,2030,Solar,generation_twh,1.47,73,1,2023
+SVK,2030,Wind,generation_twh,1.5,73,1,2023
+SVK,2030,Bioenergy,capacity_total_gw,0.4,73,1,2023
+SVK,2030,Hydro,capacity_total_gw,1.755,73,1,2023
+SVK,2030,Other Renewables,capacity_total_gw,0.004,73,1,2023
+SVK,2030,Solar,capacity_total_gw,1.4,73,1,2023
+SVK,2030,Wind,capacity_total_gw,0.75,73,1,2023
+TGO,2030,Renewables,share_of_generation_pct,50,172,1,2023
+ROU,2030,Solar,generation_twh,10.9,132,1,2023
+ROU,2030,Wind,generation_twh,17.4,132,1,2023
+ROU,2030,Bioenergy,generation_twh,1.9,132,1,2023
+ROU,2030,Hydro,generation_twh,16.3,132,1,2023
+ROU,2030,Nuclear,generation_twh,15.6,132,1,2023
+ROU,2030,Gas,generation_twh,19.3,132,1,2023
+ROU,2030,Solar,share_of_generation_pct,13.39,132,1,2023
+ROU,2030,Wind,share_of_generation_pct,21.38,132,1,2023
+ROU,2030,Bioenergy,share_of_generation_pct,2.33,132,1,2023
+ROU,2030,Hydro,share_of_generation_pct,20.02,132,1,2023
+ROU,2030,Nuclear,share_of_generation_pct,19.16,132,1,2023
+ROU,2030,Gas,share_of_generation_pct,23.71,132,1,2023
+ROU,2030,Solar,capacity_total_gw,8.3,132,1,2023
+ROU,2030,Wind,capacity_total_gw,7.6,132,1,2023
+ROU,2030,Gas,capacity_total_gw,5.3,132,1,2023
+ROU,2030,Bioenergy,capacity_total_gw,0.4,132,1,2023
+ROU,2030,Hydro,capacity_total_gw,6.9,132,1,2023
+ROU,2030,Nuclear,capacity_total_gw,1.9,132,1,2023
+ROU,2030,Solar,capacity_total_gw,8.2,204,2,2024
+ROU,2030,Wind,capacity_total_gw,7.3,204,2,2024
+ROU,2030,Bioenergy,capacity_total_gw,0.3,204,2,2024
+ROU,2030,Hydro,capacity_total_gw,6.9,204,2,2024
+ROU,2030,Gas,capacity_total_gw,5.8,204,2,2024
+ROU,2030,Nuclear,capacity_total_gw,1.8,204,2,2024
+ROU,2030,Coal,capacity_total_gw,0,204,2,2024
+ROU,2030,Solar,generation_twh,10.8,204,2,2024
+ROU,2030,Wind,generation_twh,16.6,204,2,2024
+ROU,2030,Bioenergy,generation_twh,1.7,204,2,2024
+ROU,2030,Hydro,generation_twh,16.3,204,2,2024
+ROU,2030,Coal,generation_twh,0,204,2,2024
+ROU,2030,Gas,generation_twh,19.4,204,2,2024
+ROU,2030,Nuclear,generation_twh,15.4,204,2,2024
+ROU,2030,Solar,share_of_generation_pct,13.47,204,2,2024
+ROU,2030,Wind,share_of_generation_pct,20.7,204,2,2024
+ROU,2030,Bioenergy,share_of_generation_pct,2.12,204,2,2024
+ROU,2030,Hydro,share_of_generation_pct,20.32,204,2,2024
+ROU,2030,Coal,share_of_generation_pct,0,204,2,2024
+ROU,2030,Gas,share_of_generation_pct,24.19,204,2,2024
+ROU,2030,Nuclear,share_of_generation_pct,19.2,204,2,2024
+ROU,2030,Battery,capacity_total_gw,1.2,204,2,2024
+ROU,2030,Pumped hydro,capacity_total_gw,0.8,204,2,2024
+ROU,2050,Hydrogen,capacity_total_gw,0.2,204,2,2024
+NGA,2030,Hydro,capacity_total_gw,5.9,153,1,2024
+NGA,2030,Solar,capacity_total_gw,6,153,1,2024
+NGA,2030,Wind,capacity_total_gw,0.8,153,1,2024
+NGA,2030,Bioenergy,capacity_total_gw,1.1,153,1,2024
+NGA,2030,Other Renewables,capacity_total_gw,5.374,153,1,2024
+NGA,2030,Renewables,share_of_generation_pct,31,153,1,2024
+MAR,2030,Coal,capacity_total_gw,4.08,62,1,2023
+MAR,2030,Gas,capacity_total_gw,3.31,62,1,2023
+MAR,2030,Other Fossil,capacity_total_gw,2.06,62,1,2023
+MAR,2030,Hydro,capacity_total_gw,1.58,62,1,2023
+MAR,2030,Solar,capacity_total_gw,3.55,62,1,2023
+MAR,2030,Wind,capacity_total_gw,3.74,62,1,2023
+MAR,2030,Pumped hydro,capacity_total_gw,1.32,62,1,2023
+MLT,2030,Gas,capacity_total_gw,0.3,108,1,2023
+MLT,2030,Other Fossil,capacity_total_gw,0.06,108,1,2023
+MLT,2030,Solar,capacity_total_gw,0.27,108,1,2023
+JPN,2030,Demand,demand_twh,934,16,1,2023
+JPN,2030,Solar,generation_twh,146,16,1,2023
+JPN,2030,Wind,generation_twh,51,16,1,2023
+JPN,2030,Other Renewables,generation_twh,11,16,1,2023
+JPN,2030,Hydro,generation_twh,98,16,1,2023
+JPN,2030,Bioenergy,generation_twh,47,16,1,2023
+JPN,2030,Solar,capacity_total_gw,117.6,16,1,2023
+JPN,2030,Onshore Wind,capacity_total_gw,17.9,16,1,2023
+JPN,2030,Offshore Wind,capacity_total_gw,5.7,16,1,2023
+JPN,2030,Other Renewables,capacity_total_gw,1.5,16,1,2023
+JPN,2030,Hydro,capacity_total_gw,50.7,16,1,2023
+JPN,2030,Bioenergy,capacity_total_gw,8,16,1,2023
+JPN,2030,Solar,share_of_generation_pct,16,17,1,2023
+JPN,2030,Wind,share_of_generation_pct,5,17,1,2023
+JPN,2030,Other Renewables,share_of_generation_pct,1,17,1,2023
+JPN,2030,Hydro,share_of_generation_pct,11,17,1,2023
+JPN,2030,Bioenergy,share_of_generation_pct,5,17,1,2023
+JPN,2030,Battery,generation_twh,0.024,16,1,2023
+JPN,2030,Solar,capacity_total_gw,117.6,218,2,2025
+JPN,2030,Onshore Wind,capacity_total_gw,17.9,218,2,2025
+JPN,2030,Offshore Wind,capacity_total_gw,5.7,218,2,2025
+JPN,2030,Other Renewables,capacity_total_gw,1.5,218,2,2025
+JPN,2030,Hydro,capacity_total_gw,50.7,218,2,2025
+JPN,2030,Bioenergy,capacity_total_gw,8,218,2,2025
+CZE,2030,Bioenergy,capacity_total_gw,1.6,127,1,2023
+CZE,2030,Solar,capacity_total_gw,10.1,127,1,2023
+CZE,2030,Wind,capacity_total_gw,1.5,127,1,2023
+CZE,2030,Hydro,capacity_total_gw,1.11,127,1,2023
+CZE,2030,Bioenergy,capacity_total_gw,1.04,229,2,2026
+CZE,2030,Solar,capacity_total_gw,10.1,229,2,2026
+CZE,2030,Wind,capacity_total_gw,1.5,229,2,2026
+CZE,2030,Hydro,capacity_total_gw,1.12,229,2,2026
+CZE,2030,Coal,capacity_total_gw,3.8,229,2,2026
+CZE,2030,Gas,capacity_total_gw,4.06,229,2,2026
+CZE,2030,Nuclear,capacity_total_gw,4.32,229,2,2026
+CZE,2030,Bioenergy,generation_twh,5.61,229,2,2026
+CZE,2030,Solar,generation_twh,9.91,229,2,2026
+CZE,2030,Wind,generation_twh,3.93,229,2,2026
+CZE,2030,Hydro,generation_twh,2.06,229,2,2026
+CZE,2030,Coal,generation_twh,6.17,229,2,2026
+CZE,2030,Gas,generation_twh,10.65,229,2,2026
+CZE,2030,Nuclear,generation_twh,30.65,229,2,2026
+CZE,2030,Other Fossil,generation_twh,0.56,229,2,2026
+SVN,2030,Bioenergy,generation_twh,0.169,74,1,2023
+SVN,2030,Hydro,generation_twh,4.707,74,1,2023
+SVN,2030,Solar,generation_twh,3.757,74,1,2023
+SVN,2030,Wind,generation_twh,0.357,74,1,2023
+SVN,2030,Nuclear,generation_twh,5.9,74,1,2023
+SVN,2030,Fossil,generation_twh,4.5,74,1,2023
+SVN,2040,Hydro,generation_twh,5.086,74,1,2023
+SVN,2040,Solar,generation_twh,8.96,74,1,2023
+SVN,2040,Wind,generation_twh,1.255,74,1,2023
+SVN,2030,Solar,capacity_total_gw,3.45,74,1,2023
+SVN,2030,Wind,capacity_total_gw,0.153,74,1,2023
+SVN,2030,Hydro,capacity_total_gw,1.77,74,1,2023
+SVN,2030,Bioenergy,capacity_total_gw,0.03,74,1,2023
+SVN,2030,Bioenergy,share_of_generation_pct,0.872,74,1,2023
+SVN,2030,Hydro,share_of_generation_pct,24.275,74,1,2023
+SVN,2030,Solar,share_of_generation_pct,19.376,74,1,2023
+SVN,2030,Wind,share_of_generation_pct,1.841,74,1,2023
+SVN,2030,Nuclear,share_of_generation_pct,30.428,74,1,2023
+SVN,2030,Fossil,share_of_generation_pct,23.208,74,1,2023
+SVN,2030,Solar,capacity_total_gw,3.45,232,2,2026
+SVN,2030,Wind,capacity_total_gw,0.15,232,2,2026
+SVN,2030,Hydro,capacity_total_gw,,232,2,2026
+SVN,2030,Bioenergy,capacity_total_gw,0.21,232,2,2026
+SVN,2030,Bioenergy,generation_twh,0.54,232,2,2026
+SVN,2030,Hydro,generation_twh,4.72,232,2,2026
+SVN,2030,Solar,generation_twh,,232,2,2026
+SVN,2030,Wind,generation_twh,,232,2,2026
+SVN,2030,Nuclear,generation_twh,5.55,232,2,2026
+SVN,2030,Coal,generation_twh,3.42,232,2,2026
+SVN,2030,Gas,generation_twh,1.02,232,2,2026
+SVN,2030,Other Fossil,generation_twh,0.03,232,2,2026
+SVN,2030,Renewables,generation_twh,4.2,232,2,2026
+SVN,2030,Bioenergy,share_of_generation_pct,0.028,232,2,2026
+SVN,2030,Hydro,share_of_generation_pct,0.242,232,2,2026
+SVN,2030,Solar,share_of_generation_pct,,232,2,2026
+SVN,2030,Wind,share_of_generation_pct,,232,2,2026
+SVN,2030,Nuclear,share_of_generation_pct,0.285,232,2,2026
+SVN,2030,Fossil,share_of_generation_pct,0.229,232,2,2026
+SVN,2030,Renewables,share_of_generation_pct,0.486,232,2,2026
+GHA,2030,Solar,capacity_total_gw,0.7533,170,1,2024
+GHA,2030,Wind,capacity_total_gw,0.327,170,1,2024
+GHA,2030,Bioenergy,capacity_total_gw,0.1221,170,1,2024
+GHA,2030,Hydro,capacity_total_gw,0.15003,170,1,2024
+GHA,2030,Other Renewables,capacity_total_gw,0.05,170,1,2024
+SAU,2030,Renewables,share_of_generation_pct,50,25,1,2023
+SAU,2030,Solar,capacity_total_gw,42.7,51,1,2023
+SAU,2030,Wind,capacity_total_gw,16,51,1,2023
+ESP,2030,Bioenergy,generation_twh,9.07,31,1,2023
+ESP,2030,Coal,generation_twh,0.1101,31,1,2023
+ESP,2030,Gas,generation_twh,32.29617,31,1,2023
+ESP,2030,Hydro,generation_twh,31.13951,31,1,2023
+ESP,2030,Nuclear,generation_twh,39.11637,31,1,2023
+ESP,2030,Other Renewables,generation_twh,12.34381,31,1,2023
+ESP,2030,Solar,generation_twh,104.818,31,1,2023
+ESP,2030,Other Fossil,generation_twh,4.57088,31,1,2023
+ESP,2030,Wind,generation_twh,110.89963,31,1,2023
+ESP,2030,Bioenergy,share_of_generation_pct,2.6338,31,1,2023
+ESP,2030,Coal,share_of_generation_pct,0.032,31,1,2023
+ESP,2030,Gas,share_of_generation_pct,9.3785,31,1,2023
+ESP,2030,Hydro,share_of_generation_pct,9.0426,31,1,2023
+ESP,2030,Nuclear,share_of_generation_pct,11.359,31,1,2023
+ESP,2030,Other Renewables,share_of_generation_pct,3.5845,31,1,2023
+ESP,2030,Solar,share_of_generation_pct,30.4381,31,1,2023
+ESP,2030,Other Fossil,share_of_generation_pct,1.3273,31,1,2023
+ESP,2030,Wind,share_of_generation_pct,32.2041,31,1,2023
+ESP,2030,Bioenergy,capacity_total_gw,1.85,31,1,2023
+ESP,2030,Coal,capacity_total_gw,0.02,31,1,2023
+ESP,2030,Gas,capacity_total_gw,30.06,31,1,2023
+ESP,2030,Hydro,capacity_total_gw,14.51,31,1,2023
+ESP,2030,Nuclear,capacity_total_gw,3.18,31,1,2023
+ESP,2030,Other Renewables,capacity_total_gw,0.52,31,1,2023
+ESP,2030,Solar,capacity_total_gw,81.19,31,1,2023
+ESP,2030,Onshore Wind,capacity_total_gw,59.04,31,1,2023
+ESP,2030,Offshore Wind,capacity_total_gw,3,31,1,2023
+ESP,2030,Storage,capacity_total_gw,18.91,31,1,2023
+ESP,2030,Solar,capacity_total_gw,95.35,197,2,2024
+ESP,2030,Wind,capacity_total_gw,62.05,197,2,2024
+ESP,2030,Onshore Wind,capacity_total_gw,,197,2,2024
+ESP,2030,Offshore Wind,capacity_total_gw,3,197,2,2024
+ESP,2030,Bioenergy,capacity_total_gw,1.85,197,2,2024
+ESP,2030,Hydro,capacity_total_gw,14.51,197,2,2024
+ESP,2030,Other Renewables,capacity_total_gw,4.81,197,2,2024
+ESP,2030,Gas,capacity_total_gw,30.4,197,2,2024
+ESP,2030,Other Fossil,capacity_total_gw,0.34,197,2,2024
+ESP,2030,Nuclear,capacity_total_gw,3.18,197,2,2024
+ESP,2030,Coal,capacity_total_gw,,197,2,2024
+ESP,2030,Solar,generation_twh,138.31,197,2,2024
+ESP,2030,Wind,generation_twh,130.1,197,2,2024
+ESP,2030,Bioenergy,generation_twh,10.67,197,2,2024
+ESP,2030,Hydro,generation_twh,28.76,197,2,2024
+ESP,2030,Other Renewables,generation_twh,14.16,197,2,2024
+ESP,2030,Gas,generation_twh,33.63,197,2,2024
+ESP,2030,Other Fossil,generation_twh,6.52,197,2,2024
+ESP,2030,Nuclear,generation_twh,35.17,197,2,2024
+ESP,2030,Coal,generation_twh,,197,2,2024
+ESP,2030,Solar,share_of_generation_pct,34.81,197,2,2024
+ESP,2030,Wind,share_of_generation_pct,32.75,197,2,2024
+ESP,2030,Bioenergy,share_of_generation_pct,2.69,197,2,2024
+ESP,2030,Hydro,share_of_generation_pct,7.24,197,2,2024
+ESP,2030,Other Renewables,share_of_generation_pct,3.56,197,2,2024
+ESP,2030,Gas,share_of_generation_pct,8.46,197,2,2024
+ESP,2030,Other Fossil,share_of_generation_pct,1.64,197,2,2024
+ESP,2030,Nuclear,share_of_generation_pct,8.85,197,2,2024
+ESP,2030,Coal,share_of_generation_pct,,197,2,2024
+DNK,2030,Bioenergy,generation_twh,4.303,32,1,2023
+DNK,2030,Coal,generation_twh,0,32,1,2023
+DNK,2030,Gas,generation_twh,0.492,32,1,2023
+DNK,2030,Hydro,generation_twh,0.016,32,1,2023
+DNK,2030,Nuclear,generation_twh,0,32,1,2023
+DNK,2030,Other Renewables,generation_twh,0.571,32,1,2023
+DNK,2030,Solar,generation_twh,16.3,32,1,2023
+DNK,2030,Wind,generation_twh,50.511,32,1,2023
+DNK,2040,Bioenergy,generation_twh,2.72,32,1,2023
+DNK,2040,Coal,generation_twh,0,32,1,2023
+DNK,2040,Gas,generation_twh,0.472,32,1,2023
+DNK,2040,Hydro,generation_twh,0.016,32,1,2023
+DNK,2040,Nuclear,generation_twh,0,32,1,2023
+DNK,2040,Other Renewables,generation_twh,0.176,32,1,2023
+DNK,2040,Solar,generation_twh,35.923,32,1,2023
+DNK,2040,Wind,generation_twh,47.889,32,1,2023
+DNK,2030,Bioenergy,share_of_generation_pct,5.96,32,1,2023
+DNK,2030,Coal,share_of_generation_pct,0,32,1,2023
+DNK,2030,Gas,share_of_generation_pct,0.68,32,1,2023
+DNK,2030,Hydro,share_of_generation_pct,0.02,32,1,2023
+DNK,2030,Nuclear,share_of_generation_pct,0,32,1,2023
+DNK,2030,Other Renewables,share_of_generation_pct,0.79,32,1,2023
+DNK,2030,Solar,share_of_generation_pct,22.58,32,1,2023
+DNK,2030,Wind,share_of_generation_pct,69.97,32,1,2023
+DNK,2040,Bioenergy,share_of_generation_pct,3.12,32,1,2023
+DNK,2040,Coal,share_of_generation_pct,0,32,1,2023
+DNK,2040,Gas,share_of_generation_pct,0.54,32,1,2023
+DNK,2040,Hydro,share_of_generation_pct,0.02,32,1,2023
+DNK,2040,Nuclear,share_of_generation_pct,0,32,1,2023
+DNK,2040,Other Renewables,share_of_generation_pct,0.2,32,1,2023
+DNK,2040,Solar,share_of_generation_pct,41.2,32,1,2023
+DNK,2040,Wind,share_of_generation_pct,54.92,32,1,2023
+DNK,2030,Solar,capacity_total_gw,11.7,32,1,2023
+DNK,2030,Onshore Wind,capacity_total_gw,5.9,32,1,2023
+DNK,2030,Offshore Wind,capacity_total_gw,11.3,32,1,2023
+DNK,2030,Solar,capacity_total_gw,17.79,187,2,2024
+DNK,2030,Onshore Wind,capacity_total_gw,5.7,187,2,2024
+DNK,2030,Offshore Wind,capacity_total_gw,7.71,187,2,2024
+DNK,2030,Bioenergy,capacity_total_gw,1.77,187,2,2024
+DNK,2030,Hydro,capacity_total_gw,0.01,187,2,2024
+DNK,2030,Other Renewables,capacity_total_gw,0.1,187,2,2024
+DNK,2030,Gas,capacity_total_gw,1,187,2,2024
+DNK,2030,Other Fossil,capacity_total_gw,1,187,2,2024
+DNK,2030,Solar,generation_twh,24.64,187,2,2024
+DNK,2030,Wind,generation_twh,38.96,187,2,2024
+DNK,2030,Hydro,generation_twh,0.01,187,2,2024
+DNK,2030,Other Renewables,generation_twh,6.7,187,2,2024
+DNK,2030,Gas,generation_twh,0.39,187,2,2024
+DNK,2030,Other Fossil,generation_twh,0.18,187,2,2024
+DNK,2030,Solar,share_of_generation_pct,34.76,187,2,2024
+DNK,2030,Wind,share_of_generation_pct,54.97,187,2,2024
+DNK,2030,Hydro,share_of_generation_pct,0.02,187,2,2024
+DNK,2030,Other Renewables,share_of_generation_pct,9.45,187,2,2024
+DNK,2030,Gas,share_of_generation_pct,0.55,187,2,2024
+DNK,2030,Other Fossil,share_of_generation_pct,0.25,187,2,2024
+DNK,2030,Bioenergy,share_of_generation_pct,,187,2,2024
+DNK,2030,Coal,share_of_generation_pct,,187,2,2024
+DNK,2030,Nuclear,share_of_generation_pct,,187,2,2024
+DNK,2030,Bioenergy,generation_twh,,187,2,2024
+DNK,2030,Coal,generation_twh,,187,2,2024
+DNK,2030,Nuclear,generation_twh,,187,2,2024
+LKA,2030,Battery,capacity_total_gw,1.125,175,1,2024
+LKA,2030,Renewables,share_of_generation_pct,70,175,1,2024
+LKA,2030,Hydro,capacity_total_gw,2.181,175,1,2024
+LKA,2030,Pumped hydro,capacity_total_gw,0.7,175,1,2024
+LKA,2030,Bioenergy,capacity_total_gw,0.22,175,1,2024
+LKA,2030,Wind,capacity_total_gw,1.723,175,1,2024
+LKA,2030,Solar,capacity_total_gw,4.659,175,1,2024
+LKA,2030,Renewables,generation_twh,19.303,175,1,2024
+LKA,2030,Demand,demand_twh,25.253,175,1,2024
+EGY,2030,Wind,share_of_generation_pct,8,65,1,2023
+EGY,2030,Solar,share_of_generation_pct,5,65,1,2023
+EGY,2030,Nuclear,share_of_generation_pct,7,65,1,2023
+EGY,2030,Gas,share_of_generation_pct,79,65,1,2023
+EGY,2030,Renewables,share_of_generation_pct,42,210,2,2025
+EGY,2030,Wind,share_of_generation_pct,,210,2,2025
+EGY,2030,Solar,share_of_generation_pct,,210,2,2025
+EGY,2030,Nuclear,share_of_generation_pct,,210,2,2025
+EGY,2030,Gas,share_of_generation_pct,,210,2,2025
+EGY,2030,Wind,capacity_total_gw,7,65,1,2023
+EGY,2030,Solar,capacity_total_gw,7,65,1,2023
+EGY,2030,Nuclear,capacity_total_gw,2,65,1,2023
+EGY,2030,Gas,capacity_total_gw,44,65,1,2023
+EGY,2035,Renewables,share_of_generation_pct,42,65,1,2023
+EGY,2050,Battery,capacity_total_gw,9,65,1,2023
+ETH,2030,Hydro,capacity_total_gw,16.8644,177,1,2024
+ETH,2030,Wind,capacity_total_gw,2.4092,177,1,2024
+ETH,2030,Solar,capacity_total_gw,2.4092,177,1,2024
+ETH,2030,Other Renewables,capacity_total_gw,2.4092,177,1,2024
+CHE,2030,Hydro,generation_twh,41.7,94,1,2023
+CHE,2030,Nuclear,generation_twh,8.8,94,1,2023
+CHE,2030,Other Fossil,generation_twh,1.6,94,1,2023
+CHE,2030,Solar,generation_twh,8.7,94,1,2023
+CHE,2030,Wind,generation_twh,0.6,94,1,2023
+CHE,2030,Bioenergy,generation_twh,0.6,94,1,2023
+CHE,2030,Other Renewables,generation_twh,1,94,1,2023
+CHE,2030,Hydro,share_of_generation_pct,66.19,94,1,2023
+CHE,2030,Nuclear,share_of_generation_pct,13.97,94,1,2023
+CHE,2030,Other Fossil,share_of_generation_pct,2.54,94,1,2023
+CHE,2030,Solar,share_of_generation_pct,13.81,94,1,2023
+CHE,2030,Wind,share_of_generation_pct,0.95,94,1,2023
+CHE,2030,Bioenergy,share_of_generation_pct,0.95,94,1,2023
+CHE,2030,Other Renewables,share_of_generation_pct,1.59,94,1,2023
+CHE,2030,Hydro,capacity_total_gw,17.1,94,1,2023
+CHE,2030,Nuclear,capacity_total_gw,1.2,94,1,2023
+CHE,2030,Other Fossil,capacity_total_gw,0.6,94,1,2023
+CHE,2030,Solar,capacity_total_gw,9.8,94,1,2023
+CHE,2030,Wind,capacity_total_gw,0.3,94,1,2023
+CHE,2030,Other Renewables,capacity_total_gw,0.4,94,1,2023
+CRI,2030,Bioenergy,capacity_total_gw,0.082,96,1,2023
+CRI,2030,Hydro,capacity_total_gw,2.33,96,1,2023
+CRI,2030,Other Renewables,capacity_total_gw,0.32,96,1,2023
+CRI,2030,Solar,capacity_total_gw,0.73,96,1,2023
+CRI,2030,Wind,capacity_total_gw,0.571,96,1,2023
+CRI,2030,Other Fossil,capacity_total_gw,0.38,96,1,2023
+CRI,2030,Battery,capacity_total_gw,0.03,96,1,2023
+MDA,2030,Bioenergy,capacity_total_gw,0.078,166,1,2024
+MDA,2030,Other Renewables,capacity_total_gw,0.02,166,1,2024
+MDA,2030,Hydro,capacity_total_gw,0.022,166,1,2024
+MDA,2030,Battery,capacity_total_gw,0,166,1,2024
+MDA,2030,Wind,capacity_total_gw,0.6,166,1,2024
+MDA,2030,Solar,capacity_total_gw,0.215,166,1,2024
+MDA,2030,Renewables,share_of_generation_pct,34.1,166,1,2024
+EU,2030,Renewables,share_of_generation_pct,72,56,1,2023
+EU,2030,"Hydro, bio and other renewables",capacity_total_gw,134,54,1,2023
+EU,2030,Solar,capacity_total_gw,592,55,1,2023
+EU,2030,Wind,capacity_total_gw,510,55,1,2023
+XKX,2030,Coal,capacity_total_gw,0.94239,163,1,2024
+XKX,2030,Battery,capacity_total_gw,0.15282,163,1,2024
+XKX,2030,Wind,capacity_total_gw,0.68769,163,1,2024
+XKX,2030,Solar,capacity_total_gw,0.63675,163,1,2024
+XKX,2030,Hydro,capacity_total_gw,0.10188,163,1,2024
+XKX,2030,Bioenergy,capacity_total_gw,0.02547,163,1,2024
+XKX,2030,Wind,share_of_generation_pct,25,163,1,2024
+XKX,2030,Solar,share_of_generation_pct,13,163,1,2024
+XKX,2030,Hydro,share_of_generation_pct,5,163,1,2024
+XKX,2030,Coal,share_of_generation_pct,57,163,1,2024
+THA,2030,Solar,capacity_total_gw,10.077,35,1,2023
+THA,2030,Wind,capacity_total_gw,4.01,35,1,2023
+THA,2030,Bioenergy,capacity_total_gw,4.6665,35,1,2023
+THA,2030,Hydro,capacity_total_gw,3.1618,35,1,2023
+MNE,2030,Hydro,generation_twh,3.046,165,1,2024
+MNE,2030,Wind,generation_twh,0.436,165,1,2024
+MNE,2030,Solar,generation_twh,0.052,165,1,2024
+MNE,2030,Bioenergy,generation_twh,0.188,165,1,2024
+MNE,2030,Coal,generation_twh,1.36,165,1,2024
+MNE,2030,Hydro,capacity_total_gw,1.232,165,1,2024
+MNE,2030,Wind,capacity_total_gw,0.19,165,1,2024
+MNE,2030,Solar,capacity_total_gw,0.315,165,1,2024
+MNE,2030,Bioenergy,capacity_total_gw,0.039,165,1,2024
+MNE,2030,Hydro,share_of_generation_pct,59.93703266,165,1,2024
+MNE,2030,Wind,share_of_generation_pct,8.579299488,165,1,2024
+MNE,2030,Solar,share_of_generation_pct,1.023219205,165,1,2024
+MNE,2030,Bioenergy,share_of_generation_pct,3.699330972,165,1,2024
+MNE,2030,Coal,share_of_generation_pct,26.76111767,165,1,2024
+BGD,2030,Coal,share_of_generation_pct,19,145,1,2024
+BGD,2030,Other Fossil,share_of_generation_pct,4,145,1,2024
+BGD,2030,Gas,share_of_generation_pct,52,145,1,2024
+BGD,2030,Nuclear,share_of_generation_pct,8,145,1,2024
+BGD,2030,Imports,share_of_generation_pct,10,145,1,2024
+BGD,2030,Solar,share_of_generation_pct,5,145,1,2024
+BGD,2030,Onshore Wind,share_of_generation_pct,1,145,1,2024
+BGD,2030,Coal,capacity_total_gw,10.6,145,1,2024
+BGD,2030,Other Fossil,capacity_total_gw,5.8,145,1,2024
+BGD,2030,Gas,capacity_total_gw,25.4,145,1,2024
+BGD,2030,Nuclear,capacity_total_gw,1.9,145,1,2024
+BGD,2030,Wind,capacity_total_gw,1.1,145,1,2024
+BGD,2030,Solar,capacity_total_gw,3,145,1,2024
+BGD,2030,Imports,capacity_total_gw,4.16,145,1,2024
+BGD,2030,Hydro,capacity_total_gw,0.4,145,1,2024
+BGD,2030,Hydrogen,share_of_generation_pct,0.5,145,1,2024
+BGD,2030,Ammonia,share_of_generation_pct,0.5,145,1,2024
+BGD,2030,Ammonia,capacity_total_gw,0.2,145,1,2024
+USA,2030,Nuclear,capacity_total_gw,95,49,1,2023
+USA,2030,Coal,capacity_total_gw,129,49,1,2023
+USA,2030,Gas,capacity_total_gw,400,49,1,2023
+USA,2030,Other Fossil,capacity_total_gw,41,49,1,2023
+USA,2030,Bioenergy,capacity_total_gw,13,49,1,2023
+USA,2030,Hydro,capacity_total_gw,75,49,1,2023
+USA,2030,Other Renewables,capacity_total_gw,13,49,1,2023
+USA,2030,Onshore Wind,capacity_total_gw,334,49,1,2023
+USA,2030,Offshore Wind,capacity_total_gw,35,49,1,2023
+USA,2030,Solar,capacity_total_gw,468,49,1,2023
+USA,2030,Nuclear,generation_twh,756,49,1,2023
+USA,2030,Coal,generation_twh,310,49,1,2023
+USA,2030,Gas,generation_twh,708,49,1,2023
+USA,2030,Other Fossil,generation_twh,34,49,1,2023
+USA,2030,Bioenergy,generation_twh,18,49,1,2023
+USA,2030,Hydro,generation_twh,293,49,1,2023
+USA,2030,Other Renewables,generation_twh,17,49,1,2023
+USA,2030,Wind,generation_twh,1294,49,1,2023
+USA,2030,Solar,generation_twh,984,49,1,2023
+USA,2030,Nuclear,share_of_generation_pct,17.13,49,1,2023
+USA,2030,Coal,share_of_generation_pct,7.02,49,1,2023
+USA,2030,Gas,share_of_generation_pct,16.04,49,1,2023
+USA,2030,Other Fossil,share_of_generation_pct,0.77,49,1,2023
+USA,2030,Bioenergy,share_of_generation_pct,0.41,49,1,2023
+USA,2030,Hydro,share_of_generation_pct,6.64,49,1,2023
+USA,2030,Other Renewables,share_of_generation_pct,0.39,49,1,2023
+USA,2030,Wind,share_of_generation_pct,29.32,49,1,2023
+USA,2030,Solar,share_of_generation_pct,22.29,49,1,2023
+USA,2030,Solar,capacity_total_gw,428.3,220,2,2025
+USA,2030,Onshore Wind,capacity_total_gw,187.8,220,2,2025
+USA,2030,Offshore Wind,capacity_total_gw,6.2,220,2,2025
+USA,2030,Hydro,capacity_total_gw,103.4,220,2,2025
+USA,2030,Bioenergy,capacity_total_gw,10.2,220,2,2025
+USA,2030,Other Renewables,capacity_total_gw,5,220,2,2025
+USA,2030,Solar,generation_twh,578.2,220,2,2025
+USA,2030,Onshore Wind,generation_twh,559.8,220,2,2025
+USA,2030,Offshore Wind,generation_twh,16.5,220,2,2025
+USA,2030,Hydro,generation_twh,258.5,220,2,2025
+USA,2030,Bioenergy,generation_twh,53,220,2,2025
+USA,2030,Other Renewables,generation_twh,24.9,220,2,2025
+USA,2030,Renewables,share_of_generation_pct,30,220,2,2025
+USA,2030,Bioenergy,share_of_generation_pct,,220,2,2025
+USA,2030,Hydro,share_of_generation_pct,,220,2,2025
+USA,2030,Other Renewables,share_of_generation_pct,,220,2,2025
+USA,2030,Wind,share_of_generation_pct,,220,2,2025
+USA,2030,Solar,share_of_generation_pct,,220,2,2025
+RWA,2030,Hydro,capacity_total_gw,0.27,184,1,2024
+RWA,2030,Solar,capacity_total_gw,0.01,184,1,2024
+RWA,2030,Bioenergy,capacity_total_gw,0.01,184,1,2024
+RWA,2030,Gas,capacity_total_gw,0.08,184,1,2024
+RWA,2030,Coal,capacity_total_gw,0.03,184,1,2024
+RWA,2030,Pumped hydro,capacity_total_gw,0.03,184,1,2024
+RWA,2030,Renewables,share_of_generation_pct,60,184,1,2024
+RWA,2030,Hydro,generation_twh,1.83004,184,1,2024
+RWA,2030,Solar,generation_twh,0.01929,184,1,2024
+RWA,2030,Bioenergy,generation_twh,0.09445,184,1,2024
+RWA,2030,Gas,generation_twh,0.60908,184,1,2024
+RWA,2030,Other Fossil,generation_twh,0.18601,184,1,2024
+RWA,2030,Pumped hydro,generation_twh,0.03275,184,1,2024
+MKD,2030,Wind,capacity_total_gw,0.30228,161,1,2024
+MKD,2030,Solar,capacity_total_gw,0.83127,161,1,2024
+MKD,2030,Hydro,capacity_total_gw,1.36026,161,1,2024
+MKD,2030,Bioenergy,capacity_total_gw,0.02519,161,1,2024
+MKD,2030,Renewables,share_of_generation_pct,66,161,1,2024
+IND,2030,Hydro,capacity_total_gw,65.5,10,1,2023
+IND,2030,Solar,capacity_total_gw,318.51,10,1,2023
+IND,2030,Wind,capacity_total_gw,109.98,10,1,2023
+IND,2030,Bioenergy,capacity_total_gw,14.96,10,1,2023
+IND,2030,Nuclear,capacity_total_gw,18.14,10,1,2023
+IND,2030,Coal,capacity_total_gw,254.54,10,1,2023
+IND,2030,Gas,capacity_total_gw,24.82,10,1,2023
+IND,2030,Renewables,share_of_generation_pct,42.3,10,1,2023
+IND,2030,Battery,generation_twh,0.14,10,1,2023
+IND,2030,Battery,capacity_total_gw,30.93,10,1,2023
+COL,2030,Hydro,capacity_total_gw,15,98,1,2023
+COL,2030,Gas,capacity_total_gw,3,98,1,2023
+COL,2030,Coal,capacity_total_gw,2,98,1,2023
+COL,2030,Other Fossil,capacity_total_gw,1,98,1,2023
+COL,2030,Onshore Wind,capacity_total_gw,3,98,1,2023
+COL,2030,Solar,capacity_total_gw,1,98,1,2023
+BWA,2030,Solar,capacity_total_gw,0.4,182,1,2024
+BWA,2030,Wind,capacity_total_gw,0.05,182,1,2024
+BWA,2032,Battery,capacity_total_gw,0.02,182,1,2024
+BWA,2040,Battery,capacity_total_gw,0.14,182,1,2024
+LUX,2030,Bioenergy,generation_twh,0.724,77,1,2023
+LUX,2030,Hydro,generation_twh,0.1,77,1,2023
+LUX,2030,Other Renewables,generation_twh,0.05,77,1,2023
+LUX,2030,Solar,generation_twh,1.112,77,1,2023
+LUX,2030,Wind,generation_twh,1.043,77,1,2023
+LUX,2030,Solar,capacity_total_gw,0.984,123,1,2023
+LUX,2030,Wind,capacity_total_gw,0.4,123,1,2023
+LUX,2030,Hydro,capacity_total_gw,0.037,123,1,2023
+LUX,2030,Bioenergy,capacity_total_gw,0.125,123,1,2023
+LUX,2030,Solar,capacity_total_gw,1.24,191,2,2024
+LUX,2030,Wind,capacity_total_gw,0.45,191,2,2024
+LUX,2030,Bioenergy,capacity_total_gw,0.1,191,2,2024
+LUX,2030,Hydro,capacity_total_gw,0.04,191,2,2024
+LUX,2030,Other Renewables,capacity_total_gw,0.02,191,2,2024
+LUX,2030,Solar,generation_twh,1.11,191,2,2024
+LUX,2030,Wind,generation_twh,1.04,191,2,2024
+LUX,2030,Bioenergy,generation_twh,0.72,191,2,2024
+LUX,2030,Hydro,generation_twh,0.1,191,2,2024
+LUX,2030,Other Renewables,generation_twh,0.05,191,2,2024
+CAN,2030,Coal,capacity_total_gw,2.065,9,1,2023
+CAN,2030,Gas,capacity_total_gw,42.60674412,9,1,2023
+CAN,2030,"Hydro, bio and other renewables",capacity_total_gw,91.91046836,9,1,2023
+CAN,2030,Nuclear,capacity_total_gw,11.065,9,1,2023
+CAN,2030,Other Fossil,capacity_total_gw,3.493015,9,1,2023
+CAN,2030,Solar,capacity_total_gw,6.025363217,9,1,2023
+CAN,2030,Wind,capacity_total_gw,26.70771611,9,1,2023
+CAN,2035,Coal,capacity_total_gw,0,9,1,2023
+CAN,2035,Gas,capacity_total_gw,38.45954647,9,1,2023
+CAN,2035,"Hydro, bio and other renewables",capacity_total_gw,96.19615318,9,1,2023
+CAN,2035,Nuclear,capacity_total_gw,24.97783373,9,1,2023
+CAN,2035,Other Fossil,capacity_total_gw,2.990015,9,1,2023
+CAN,2035,Solar,capacity_total_gw,20.89465073,9,1,2023
+CAN,2035,Wind,capacity_total_gw,56.69567644,9,1,2023
+CAN,2040,Coal,capacity_total_gw,0,9,1,2023
+CAN,2040,Gas,capacity_total_gw,41.05443913,9,1,2023
+CAN,2040,"Hydro, bio and other renewables",capacity_total_gw,97.75561235,9,1,2023
+CAN,2040,Nuclear,capacity_total_gw,35.06073443,9,1,2023
+CAN,2040,Other Fossil,capacity_total_gw,1.865015,9,1,2023
+CAN,2040,Solar,capacity_total_gw,22.62826389,9,1,2023
+CAN,2040,Wind,capacity_total_gw,73.13220262,9,1,2023
+CAN,2050,Coal,capacity_total_gw,0,9,1,2023
+CAN,2050,Gas,capacity_total_gw,46.34798586,9,1,2023
+CAN,2050,"Hydro, bio and other renewables",capacity_total_gw,105.6997805,9,1,2023
+CAN,2050,Nuclear,capacity_total_gw,36.89164071,9,1,2023
+CAN,2050,Other Fossil,capacity_total_gw,1.810015,9,1,2023
+CAN,2050,Solar,capacity_total_gw,34.8847271,9,1,2023
+CAN,2050,Wind,capacity_total_gw,111.0309276,9,1,2023
+CAN,2030,Demand,demand_twh,831.7643156,9,1,2023
+CAN,2035,Demand,demand_twh,982.9398338,9,1,2023
+CAN,2040,Demand,demand_twh,1142.331089,9,1,2023
+CAN,2050,Demand,demand_twh,1404.193423,9,1,2023
+CAN,2030,Coal,generation_twh,0.6561433042,9,1,2023
+CAN,2030,Gas,generation_twh,127.3536567,9,1,2023
+CAN,2030,"Hydro, bio and other renewables",generation_twh,456.7484526,9,1,2023
+CAN,2030,Nuclear,generation_twh,87.49012027,9,1,2023
+CAN,2030,Other Fossil,generation_twh,0.8132089661,9,1,2023
+CAN,2030,Solar,generation_twh,16.27846931,9,1,2023
+CAN,2030,Wind,generation_twh,94.24494412,9,1,2023
+CAN,2035,Coal,generation_twh,0,9,1,2023
+CAN,2035,Gas,generation_twh,32.85061412,9,1,2023
+CAN,2035,"Hydro, bio and other renewables",generation_twh,486.2122974,9,1,2023
+CAN,2035,Nuclear,generation_twh,164.4778873,9,1,2023
+CAN,2035,Other Fossil,generation_twh,0.670146548,9,1,2023
+CAN,2035,Solar,generation_twh,44.91370416,9,1,2023
+CAN,2035,Wind,generation_twh,207.4755938,9,1,2023
+CAN,2040,Coal,generation_twh,0,9,1,2023
+CAN,2040,Gas,generation_twh,34.81880285,9,1,2023
+CAN,2040,"Hydro, bio and other renewables",generation_twh,502.507788,9,1,2023
+CAN,2040,Nuclear,generation_twh,231.3958411,9,1,2023
+CAN,2040,Other Fossil,generation_twh,0.694812847,9,1,2023
+CAN,2040,Solar,generation_twh,49.50238063,9,1,2023
+CAN,2040,Wind,generation_twh,276.3885226,9,1,2023
+CAN,2050,Coal,generation_twh,0,9,1,2023
+CAN,2050,Gas,generation_twh,62.77157891,9,1,2023
+CAN,2050,"Hydro, bio and other renewables",generation_twh,546.2051831,9,1,2023
+CAN,2050,Nuclear,generation_twh,249.9722134,9,1,2023
+CAN,2050,Other Fossil,generation_twh,1.003790023,9,1,2023
+CAN,2050,Solar,generation_twh,74.6994221,9,1,2023
+CAN,2050,Wind,generation_twh,425.0638853,9,1,2023
+CAN,2030,Coal,share_of_generation_pct,0.08,9,1,2023
+CAN,2030,Gas,share_of_generation_pct,16.25,9,1,2023
+CAN,2030,"Hydro, bio and other renewables",share_of_generation_pct,58.29,9,1,2023
+CAN,2030,Nuclear,share_of_generation_pct,11.17,9,1,2023
+CAN,2030,Other Fossil,share_of_generation_pct,0.1,9,1,2023
+CAN,2030,Solar,share_of_generation_pct,2.08,9,1,2023
+CAN,2030,Wind,share_of_generation_pct,12.03,9,1,2023
+CAN,2035,Coal,share_of_generation_pct,0,9,1,2023
+CAN,2035,Gas,share_of_generation_pct,3.51,9,1,2023
+CAN,2035,"Hydro, bio and other renewables",share_of_generation_pct,51.91,9,1,2023
+CAN,2035,Nuclear,share_of_generation_pct,17.56,9,1,2023
+CAN,2035,Other Fossil,share_of_generation_pct,0.07,9,1,2023
+CAN,2035,Solar,share_of_generation_pct,4.8,9,1,2023
+CAN,2035,Wind,share_of_generation_pct,22.15,9,1,2023
+CAN,2040,Coal,share_of_generation_pct,0,9,1,2023
+CAN,2040,Gas,share_of_generation_pct,3.18,9,1,2023
+CAN,2040,"Hydro, bio and other renewables",share_of_generation_pct,45.88,9,1,2023
+CAN,2040,Nuclear,share_of_generation_pct,21.13,9,1,2023
+CAN,2040,Other Fossil,share_of_generation_pct,0.06,9,1,2023
+CAN,2040,Solar,share_of_generation_pct,4.52,9,1,2023
+CAN,2040,Wind,share_of_generation_pct,25.23,9,1,2023
+CAN,2050,Coal,share_of_generation_pct,0,9,1,2023
+CAN,2050,Gas,share_of_generation_pct,4.62,9,1,2023
+CAN,2050,"Hydro, bio and other renewables",share_of_generation_pct,40.17,9,1,2023
+CAN,2050,Nuclear,share_of_generation_pct,18.38,9,1,2023
+CAN,2050,Other Fossil,share_of_generation_pct,0.07,9,1,2023
+CAN,2050,Solar,share_of_generation_pct,5.49,9,1,2023
+CAN,2050,Wind,share_of_generation_pct,31.26,9,1,2023
+CAN,2030,Battery,capacity_total_gw,1.5,9,1,2023
+CAN,2050,Battery,capacity_total_gw,9,9,1,2023
+ARE,2030,Renewables,capacity_total_gw,9.2,59,1,2023
+ARE,2030,Clean,share_of_generation_pct,32,59,1,2023
+PAK,2031,Hydro,capacity_total_gw,22.56,168,1,2024
+PAK,2031,Solar,capacity_total_gw,13.67,168,1,2024
+PAK,2031,Bioenergy,capacity_total_gw,0.394,168,1,2024
+PAK,2031,Nuclear,capacity_total_gw,3.62,168,1,2024
+PAK,2031,Gas,capacity_total_gw,10.643,168,1,2024
+PAK,2031,Coal,capacity_total_gw,9.27,168,1,2024
+PAK,2031,Other Fossil,capacity_total_gw,1.347,168,1,2024
+PAK,2031,Wind,capacity_total_gw,6.868,168,1,2024
+PAK,2031,Imports,capacity_total_gw,1,168,1,2024
+PAK,2031,Hydro,generation_twh,88.699,168,1,2024
+PAK,2031,Solar,generation_twh,24.093,168,1,2024
+PAK,2031,Bioenergy,generation_twh,1.161,168,1,2024
+PAK,2031,Nuclear,generation_twh,24.58,168,1,2024
+PAK,2031,Gas,generation_twh,14.79,168,1,2024
+PAK,2031,Coal,generation_twh,47.793,168,1,2024
+PAK,2031,Other Fossil,generation_twh,0,168,1,2024
+PAK,2031,Wind,generation_twh,23.713,168,1,2024
+PAK,2031,Imports,generation_twh,3.672,168,1,2024
+PAK,2031,Hydro,share_of_generation_pct,39.45176112,168,1,2024
+PAK,2031,Solar,share_of_generation_pct,10.71614427,168,1,2024
+PAK,2031,Bioenergy,share_of_generation_pct,0.5163924583,168,1,2024
+PAK,2031,Nuclear,share_of_generation_pct,10.93275334,168,1,2024
+PAK,2031,Gas,share_of_generation_pct,6.578332866,168,1,2024
+PAK,2031,Coal,share_of_generation_pct,21.25748902,168,1,2024
+PAK,2031,Other Fossil,share_of_generation_pct,0,168,1,2024
+PAK,2031,Wind,share_of_generation_pct,10.54712693,168,1,2024
+PAK,2027,Hydro,capacity_total_gw,16.647,168,1,2024
+PAK,2027,Solar,capacity_total_gw,11.15,168,1,2024
+PAK,2027,Bioenergy,capacity_total_gw,0.394,168,1,2024
+PAK,2027,Nuclear,capacity_total_gw,3.62,168,1,2024
+PAK,2027,Gas,capacity_total_gw,11.851,168,1,2024
+PAK,2027,Coal,capacity_total_gw,9.27,168,1,2024
+PAK,2027,Other Fossil,capacity_total_gw,2.21,168,1,2024
+PAK,2027,Wind,capacity_total_gw,3.09,168,1,2024
+PAK,2027,Imports,capacity_total_gw,1,168,1,2024
+PAK,2027,Hydro,generation_twh,59.48,168,1,2024
+PAK,2027,Solar,generation_twh,20.061,168,1,2024
+PAK,2027,Bioenergy,generation_twh,1.164,168,1,2024
+PAK,2027,Nuclear,generation_twh,24.581,168,1,2024
+PAK,2027,Gas,generation_twh,20.881,168,1,2024
+PAK,2027,Coal,generation_twh,48.759,168,1,2024
+PAK,2027,Other Fossil,generation_twh,0,168,1,2024
+PAK,2027,Wind,generation_twh,10.053,168,1,2024
+PAK,2027,Imports,generation_twh,3.672,168,1,2024
+PAK,2030,Hydro,capacity_total_gw,20.90924331,168,1,2024
+PAK,2030,Solar,capacity_total_gw,12.99107538,168,1,2024
+PAK,2030,Bioenergy,capacity_total_gw,0.394,168,1,2024
+PAK,2030,Nuclear,capacity_total_gw,3.62,168,1,2024
+PAK,2030,Gas,capacity_total_gw,10.93293576,168,1,2024
+PAK,2030,Coal,capacity_total_gw,9.27,168,1,2024
+PAK,2030,Other Fossil,capacity_total_gw,1.52448714,168,1,2024
+PAK,2030,Wind,capacity_total_gw,5.624867994,168,1,2024
+PAK,2030,Imports,capacity_total_gw,1,168,1,2024
+PAK,2030,Hydro,generation_twh,80.26602992,168,1,2024
+PAK,2030,Solar,generation_twh,23.01475229,168,1,2024
+PAK,2030,Bioenergy,generation_twh,1.161749274,168,1,2024
+PAK,2030,Nuclear,generation_twh,24.58,168,1,2024
+PAK,2030,Gas,generation_twh,16.12181576,168,1,2024
+PAK,2030,Coal,generation_twh,48.03269082,168,1,2024
+PAK,2030,Other Fossil,generation_twh,0,168,1,2024
+PAK,2030,Wind,generation_twh,19.13435365,168,1,2024
+PAK,2030,Imports,generation_twh,3.672,168,1,2024
+PAK,2030,Hydro,share_of_generation_pct,37.8058,168,1,2024
+PAK,2030,Solar,share_of_generation_pct,10.8401,168,1,2024
+PAK,2030,Bioenergy,share_of_generation_pct,0.5472,168,1,2024
+PAK,2030,Nuclear,share_of_generation_pct,11.5773,168,1,2024
+PAK,2030,Gas,share_of_generation_pct,7.5935,168,1,2024
+PAK,2030,Coal,share_of_generation_pct,22.6237,168,1,2024
+PAK,2030,Other Fossil,share_of_generation_pct,0,168,1,2024
+PAK,2030,Wind,share_of_generation_pct,9.0124,168,1,2024
+PAK,2030,Hydro,capacity_total_gw,16.889,225,2,2025
+PAK,2030,Solar,capacity_total_gw,10.051,225,2,2025
+PAK,2030,Bioenergy,capacity_total_gw,0.4,225,2,2025
+PAK,2030,Nuclear,capacity_total_gw,3.53,225,2,2025
+PAK,2030,Gas,capacity_total_gw,10.864,225,2,2025
+PAK,2030,Coal,capacity_total_gw,7.98,225,2,2025
+PAK,2030,Other Fossil,capacity_total_gw,0.979,225,2,2025
+PAK,2030,Wind,capacity_total_gw,2.681,225,2,2025
+PAK,2030,Imports,capacity_total_gw,1,225,2,2025
+PAK,2030,Hydro,generation_twh,64.568,225,2,2025
+PAK,2030,Solar,generation_twh,16.214,225,2,2025
+PAK,2030,Bioenergy,generation_twh,0.906,225,2,2025
+PAK,2030,Nuclear,generation_twh,24.804,225,2,2025
+PAK,2030,Gas,generation_twh,20.86,225,2,2025
+PAK,2030,Coal,generation_twh,16.661,225,2,2025
+PAK,2030,Other Fossil,generation_twh,0,225,2,2025
+PAK,2030,Wind,generation_twh,8.644,225,2,2025
+PAK,2030,Imports,generation_twh,3.669,225,2,2025
+PAK,2030,Hydro,share_of_generation_pct,41,225,2,2025
+PAK,2030,Solar,share_of_generation_pct,10,225,2,2025
+PAK,2030,Bioenergy,share_of_generation_pct,1,225,2,2025
+PAK,2030,Nuclear,share_of_generation_pct,16,225,2,2025
+PAK,2030,Gas,share_of_generation_pct,14,225,2,2025
+PAK,2030,Coal,share_of_generation_pct,11,225,2,2025
+PAK,2030,Other Fossil,share_of_generation_pct,0,225,2,2025
+PAK,2030,Wind,share_of_generation_pct,5,225,2,2025
+PAK,2030,Imports,share_of_generation_pct,2,225,2,2025
+TUR,2030,Demand,demand_twh,455.3,23,1,2023
+TUR,2030,Solar,capacity_total_gw,32.9,23,1,2023
+TUR,2030,Wind,capacity_total_gw,18.1,23,1,2023
+TUR,2030,Other Renewables,capacity_total_gw,5.1,23,1,2023
+TUR,2030,Nuclear,capacity_total_gw,4.8,23,1,2023
+TUR,2030,Hydro,capacity_total_gw,35.1,23,1,2023
+TUR,2030,Solar,generation_twh,52.2,23,1,2023
+TUR,2030,Wind,generation_twh,53.7,23,1,2023
+TUR,2030,Other Renewables,generation_twh,20.5,23,1,2023
+TUR,2030,Hydro,generation_twh,87.9,23,1,2023
+TUR,2030,Nuclear,generation_twh,37.2,23,1,2023
+TUR,2030,Solar,share_of_generation_pct,11.5,23,1,2023
+TUR,2030,Wind,share_of_generation_pct,11.9,23,1,2023
+TUR,2030,Other Renewables,share_of_generation_pct,4.5,23,1,2023
+TUR,2030,Hydro,share_of_generation_pct,19.4,23,1,2023
+TUR,2030,Nuclear,share_of_generation_pct,8.2,23,1,2023
+TUR,2030,Coal,capacity_total_gw,22.8,23,1,2023
+TUR,2030,Gas,capacity_total_gw,30.3,23,1,2023
+TUR,2030,Fossil,generation_twh,201.2,23,1,2023
+TUR,2030,Battery,capacity_total_gw,2.1,23,1,2023
+TUR,2030,Hydrogen,capacity_total_gw,1.9,23,1,2023
+TUR,2035,Renewables,capacity_total_gw,120,203,2,2024
+DEU,2030,Renewables,generation_twh,600,18,1,2023
+DEU,2030,Onshore Wind,capacity_total_gw,115,18,1,2023
+DEU,2030,Offshore Wind,capacity_total_gw,30.5,18,1,2023
+DEU,2030,Solar,capacity_total_gw,215,18,1,2023
+DEU,2040,Onshore Wind,capacity_total_gw,160,104,1,2023
+DEU,2040,Offshore Wind,capacity_total_gw,70,104,1,2023
+DEU,2040,Solar,capacity_total_gw,400,104,1,2023
+DEU,2045,Onshore Wind,capacity_total_gw,160,104,1,2023
+DEU,2045,Offshore Wind,capacity_total_gw,70,104,1,2023
+DEU,2045,Solar,capacity_total_gw,428.2,104,1,2023
+DEU,2030,Renewables,share_of_consumption_pct,80,18,1,2023
+DEU,2030,Bioenergy,capacity_total_gw,8.2,104,1,2023
+DEU,2030,Hydro,capacity_total_gw,5.2,104,1,2023
+DEU,2040,Bioenergy,capacity_total_gw,4.4,104,1,2023
+DEU,2040,Hydro,capacity_total_gw,5.2,104,1,2023
+DEU,2045,Bioenergy,capacity_total_gw,2.43,104,1,2023
+DEU,2045,Hydro,capacity_total_gw,5.2,104,1,2023
+DEU,2030,Renewables,share_of_generation_pct,75,92,1,2023
+DEU,2030,Solar,capacity_total_gw,215,194,2,2024
+DEU,2030,Onshore Wind,capacity_total_gw,115,194,2,2024
+DEU,2030,Offshore Wind,capacity_total_gw,30,194,2,2024
+DEU,2030,Renewables,generation_twh,600,194,2,2024
+DEU,2030,Renewables,share_of_consumption_pct,80,194,2,2024
+DEU,2030,Bioenergy,capacity_total_gw,,194,2,2024
+DEU,2030,Hydro,capacity_total_gw,,194,2,2024
+ALB,2030,Solar,capacity_total_gw,0.49,162,1,2024
+ALB,2030,Wind,capacity_total_gw,0.3,162,1,2024
+ALB,2030,Hydro,capacity_total_gw,2.51,166,1,2024
+ALB,2030,Renewables,share_of_generation_pct,100,162,1,2024
+POL,2030,Coal,generation_twh,69.36,118,1,2023
+POL,2030,Other Fossil,generation_twh,4.43,118,1,2023
+POL,2030,Gas,generation_twh,29.45,118,1,2023
+POL,2030,Solar,generation_twh,25.12,118,1,2023
+POL,2030,Offshore Wind,generation_twh,21.57,118,1,2023
+POL,2030,Onshore Wind,generation_twh,34.37,118,1,2023
+POL,2030,Hydro,generation_twh,2,118,1,2023
+POL,2030,Bioenergy,generation_twh,10.12,118,1,2023
+POL,2030,Nuclear,generation_twh,1.05,118,1,2023
+POL,2030,Coal,share_of_generation_pct,35.12,118,1,2023
+POL,2030,Other Fossil,share_of_generation_pct,2.24,118,1,2023
+POL,2030,Gas,share_of_generation_pct,14.92,118,1,2023
+POL,2030,Solar,share_of_generation_pct,12.72,118,1,2023
+POL,2030,Offshore Wind,share_of_generation_pct,10.92,118,1,2023
+POL,2030,Onshore Wind,share_of_generation_pct,17.4,118,1,2023
+POL,2030,Hydro,share_of_generation_pct,1.01,118,1,2023
+POL,2030,Bioenergy,share_of_generation_pct,5.12,118,1,2023
+POL,2030,Nuclear,share_of_generation_pct,0.53,118,1,2023
+POL,2030,Coal,capacity_total_gw,19.49,118,1,2023
+POL,2030,Other Fossil,capacity_total_gw,0.95,118,1,2023
+POL,2030,Gas,capacity_total_gw,13.01,118,1,2023
+POL,2030,Solar,capacity_total_gw,27,118,1,2023
+POL,2030,Offshore Wind,capacity_total_gw,5.9,118,1,2023
+POL,2030,Onshore Wind,capacity_total_gw,13.94,118,1,2023
+POL,2030,Hydro,capacity_total_gw,1.13,118,1,2023
+POL,2030,Bioenergy,capacity_total_gw,2.47,118,1,2023
+POL,2030,Nuclear,capacity_total_gw,0.3,118,1,2023
+POL,2030,Onshore Wind,capacity_total_gw,15.842,156,2,2024
+POL,2030,Solar,capacity_total_gw,36.59,156,2,2024
+POL,2030,Offshore Wind,capacity_total_gw,5.927,156,2,2024
+POL,2030,Hydro,capacity_total_gw,1.118,156,2,2024
+POL,2030,Bioenergy,capacity_total_gw,1.737,156,2,2024
+POL,2030,Bioenergy,generation_twh,11.5,156,2,2024
+POL,2030,Hydro,generation_twh,2.9,156,2,2024
+POL,2030,Onshore Wind,generation_twh,38.1,156,2,2024
+POL,2030,Offshore Wind,generation_twh,21.7,156,2,2024
+POL,2030,Solar,generation_twh,24.8,156,2,2024
+POL,2030,Coal,generation_twh,57.6,156,2,2024
+POL,2030,Gas,generation_twh,31.9,156,2,2024
+POL,2030,Other Fossil,generation_twh,4.1,156,2,2024
+POL,2030,Bioenergy,share_of_generation_pct,6,156,2,2024
+POL,2030,Hydro,share_of_generation_pct,1.5,156,2,2024
+POL,2030,Onshore Wind,share_of_generation_pct,19.8,156,2,2024
+POL,2030,Offshore Wind,share_of_generation_pct,11.3,156,2,2024
+POL,2030,Solar,share_of_generation_pct,12.9,156,2,2024
+POL,2030,Coal,share_of_generation_pct,29.9,156,2,2024
+POL,2030,Gas,share_of_generation_pct,16.6,156,2,2024
+POL,2030,Other Fossil,share_of_generation_pct,2.1,156,2,2024
+POL,2030,Coal,capacity_total_gw,22.699,156,2,2024
+POL,2030,Gas,capacity_total_gw,11.034,156,2,2024
+POL,2030,Other Fossil,capacity_total_gw,0,156,2,2024
+POL,2030,Nuclear,share_of_generation_pct,,156,2,2024
+POL,2030,Nuclear,capacity_total_gw,,156,2,2024
+POL,2030,Nuclear,generation_twh,,156,2,2024
+SWE,2030,Gas,capacity_total_gw,6.446886447,75,1,2023
+SWE,2030,Hydro,capacity_total_gw,16.996337,75,1,2023
+SWE,2030,Nuclear,capacity_total_gw,7.032967033,75,1,2023
+SWE,2030,Solar,capacity_total_gw,6.446886447,75,1,2023
+SWE,2030,Wind,capacity_total_gw,24.90842491,75,1,2023
+SWE,2030,Solar,capacity_total_gw,9.2,186,2,2024
+SWE,2030,Wind,capacity_total_gw,23.44,186,2,2024
+SWE,2030,Hydro,capacity_total_gw,17.13,186,2,2024
+SWE,2030,Gas,capacity_total_gw,5.35,186,2,2024
+SWE,2030,Nuclear,capacity_total_gw,7,186,2,2024
+SWE,2030,Solar,generation_twh,8.8,186,2,2024
+SWE,2030,Wind,generation_twh,74.47,186,2,2024
+SWE,2030,Bioenergy,generation_twh,15.57,186,2,2024
+SWE,2030,Hydro,generation_twh,66.34,186,2,2024
+SWE,2030,Other Renewables,generation_twh,2.03,186,2,2024
+SWE,2030,Nuclear,generation_twh,52,186,2,2024
+FRA,2028,Hydro,capacity_total_gw,26.4,34,1,2023
+FRA,2028,Onshore Wind,capacity_total_gw,33.2,34,1,2023
+FRA,2028,Solar,capacity_total_gw,35.1,34,1,2023
+FRA,2028,Bioenergy,capacity_total_gw,1.18,34,1,2023
+FRA,2028,Offshore Wind,capacity_total_gw,5.2,34,1,2023
+FRA,2028,Other Renewables,capacity_total_gw,0.024,34,1,2023
+FRA,2030,Nuclear,generation_twh,361,38,1,2023
+FRA,2030,Hydro,generation_twh,58,38,1,2023
+FRA,2030,Onshore Wind,generation_twh,65,38,1,2023
+FRA,2030,Offshore Wind,generation_twh,18,38,1,2023
+FRA,2030,Solar,generation_twh,53,38,1,2023
+FRA,2030,Other Renewables,generation_twh,10,38,1,2023
+FRA,2030,Gas,generation_twh,27,38,1,2023
+FRA,2030,Nuclear,share_of_generation_pct,60.98,38,1,2023
+FRA,2030,Hydro,share_of_generation_pct,9.8,38,1,2023
+FRA,2030,Onshore Wind,share_of_generation_pct,10.98,38,1,2023
+FRA,2030,Offshore Wind,share_of_generation_pct,3.04,38,1,2023
+FRA,2030,Solar,share_of_generation_pct,8.95,38,1,2023
+FRA,2030,Other Renewables,share_of_generation_pct,1.69,38,1,2023
+FRA,2030,Gas,share_of_generation_pct,4.56,38,1,2023
+FRA,2030,Solar,capacity_total_gw,52,69,1,2023
+FRA,2030,Onshore Wind,capacity_total_gw,30,69,1,2023
+FRA,2030,Offshore Wind,capacity_total_gw,3.6,69,1,2023
+FRA,2030,Hydro,capacity_total_gw,27,103,1,2023
+FRA,2030,Bioenergy,capacity_total_gw,2,103,1,2023
+FRA,2030,Solar,capacity_total_gw,54,2,2,2024
+FRA,2030,Onshore Wind,capacity_total_gw,33,2,2,2024
+FRA,2030,Bioenergy,capacity_total_gw,0,2,2,2024
+FRA,2030,Offshore Wind,capacity_total_gw,3.6,2,2,2024
+FRA,2030,Hydro,capacity_total_gw,26.3,2,2,2024
+FRA,2030,Solar,generation_twh,65,2,2,2024
+FRA,2030,Onshore Wind,generation_twh,64,2,2,2024
+FRA,2030,Offshore Wind,generation_twh,54,2,2,2024
+FRA,2030,Hydro,generation_twh,14,2,2,2024
+FRA,2030,Other Renewables,generation_twh,,2,2,2024
+FRA,2030,Gas,generation_twh,,2,2,2024
+FRA,2030,Solar,capacity_total_gw,54,185,3,2024
+FRA,2030,Onshore Wind,capacity_total_gw,33,185,3,2024
+FRA,2030,Offshore Wind,capacity_total_gw,3.6,185,3,2024
+FRA,2030,Hydro,capacity_total_gw,0,185,3,2024
+FRA,2030,Solar,generation_twh,65,185,3,2024
+FRA,2030,Onshore Wind,generation_twh,64,185,3,2024
+FRA,2030,Offshore Wind,generation_twh,14,185,3,2024
+FRA,2030,Hydro,generation_twh,54,185,3,2024
+FRA,2030,Nuclear,generation_twh,343.34,185,3,2024
+FRA,2030,Fossil,generation_twh,22.51,185,3,2024
+FRA,2030,Solar,share_of_generation_pct,11.5,185,3,2024
+FRA,2030,Onshore Wind,share_of_generation_pct,11.4,185,3,2024
+FRA,2030,Offshore Wind,share_of_generation_pct,2.5,185,3,2024
+FRA,2030,Hydro,share_of_generation_pct,9.6,185,3,2024
+FRA,2030,Nuclear,share_of_generation_pct,61,185,3,2024
+FRA,2030,Fossil,share_of_generation_pct,4,185,3,2024
+FRA,2030,Other Renewables,share_of_generation_pct,,185,3,2024
+FRA,2030,Gas,share_of_generation_pct,,185,3,2024
