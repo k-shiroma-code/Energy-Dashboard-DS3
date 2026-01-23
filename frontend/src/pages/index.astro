@@ -1,0 +1,645 @@
+---
+// Energy Dashboard - Landing Page
+import CapacityChart from '../components/CapacityChart.jsx';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Energy Dashboard | 2030 Renewable Targets</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav-brand">
+        <span class="brand-icon">⚡</span>
+        <span class="brand-text">ENERGY<span class="brand-accent">DS3</span></span>
+      </div>
+      <div class="nav-links">
+        <a href="#overview">Overview</a>
+        <a href="#explorer">Data Explorer</a>
+        <a href="#regions">Regions</a>
+        <a href="#about">About</a>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <p class="hero-label">Center for Energy Research</p>
+          <h1 class="hero-title">
+            Global Renewable
+            <span class="title-highlight">Energy Targets</span>
+            <span class="title-year">2030</span>
+          </h1>
+          <p class="hero-description">
+            Tracking national commitments to renewable energy capacity and share targets across 88 countries worldwide.
+          </p>
+          <div class="hero-actions">
+            <a href="#explorer" class="btn btn-primary">Explore Data</a>
+            <a href="#methodology" class="btn btn-secondary">Methodology</a>
+          </div>
+        </div>
+        
+        <div class="hero-stats">
+          <div class="stat-card stat-featured">
+            <span class="stat-number">88</span>
+            <span class="stat-label">Countries Tracked</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">86</span>
+            <span class="stat-label">Capacity Targets (GW)</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">66</span>
+            <span class="stat-label">Share Targets (%)</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">7</span>
+            <span class="stat-label">Global Regions</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="hero-visual">
+        <div class="visual-bar" style="--height: 85%; --delay: 0s;"><span>EUR</span></div>
+        <div class="visual-bar" style="--height: 65%; --delay: 0.1s;"><span>ASIA</span></div>
+        <div class="visual-bar" style="--height: 45%; --delay: 0.2s;"><span>AFR</span></div>
+        <div class="visual-bar" style="--height: 35%; --delay: 0.3s;"><span>LAC</span></div>
+        <div class="visual-bar" style="--height: 25%; --delay: 0.4s;"><span>MEA</span></div>
+        <div class="visual-bar" style="--height: 20%; --delay: 0.5s;"><span>OCE</span></div>
+        <div class="visual-bar" style="--height: 18%; --delay: 0.6s;"><span>NAM</span></div>
+      </div>
+    </header>
+
+    <section id="overview" class="section section-dark">
+      <div class="section-header">
+        <span class="section-number">01</span>
+        <h2>Key Insights</h2>
+      </div>
+      
+      <div class="insights-grid">
+        <article class="insight-card">
+          <div class="insight-icon">🌍</div>
+          <h3>Europe Leads</h3>
+          <p>41 European countries have set renewable targets, representing the highest regional commitment globally.</p>
+          <span class="insight-stat">47% of tracked nations</span>
+        </article>
+        
+        <article class="insight-card">
+          <div class="insight-icon">☀️</div>
+          <h3>Solar Dominance</h3>
+          <p>Solar capacity targets exceed wind in the majority of national commitments for 2030.</p>
+          <span class="insight-stat">Leading technology</span>
+        </article>
+        
+        <article class="insight-card">
+          <div class="insight-icon">📊</div>
+          <h3>Dual Targets</h3>
+          <p>64 countries have committed to both absolute capacity (GW) and relative share (%) targets.</p>
+          <span class="insight-stat">73% overlap</span>
+        </article>
+      </div>
+    </section>
+
+    <section id="explorer" class="section">
+      <div class="section-header">
+        <span class="section-number">02</span>
+        <h2>Data Explorer</h2>
+      </div>
+      
+      <div class="explorer-preview">
+  		<CapacityChart client:load />
+      </div>
+    </section>
+
+    <section id="regions" class="section section-alt">
+      <div class="section-header">
+        <span class="section-number">03</span>
+        <h2>Regional Breakdown</h2>
+      </div>
+      
+      <div class="regions-grid">
+        <div class="region-card">
+          <span class="region-count">41</span>
+          <span class="region-name">Europe</span>
+          <div class="region-bar" style="--width: 100%;"></div>
+        </div>
+        <div class="region-card">
+          <span class="region-count">19</span>
+          <span class="region-name">Asia</span>
+          <div class="region-bar" style="--width: 46%;"></div>
+        </div>
+        <div class="region-card">
+          <span class="region-count">12</span>
+          <span class="region-name">Africa</span>
+          <div class="region-bar" style="--width: 29%;"></div>
+        </div>
+        <div class="region-card">
+          <span class="region-count">7</span>
+          <span class="region-name">Latin America & Caribbean</span>
+          <div class="region-bar" style="--width: 17%;"></div>
+        </div>
+        <div class="region-card">
+          <span class="region-count">4</span>
+          <span class="region-name">Middle East</span>
+          <div class="region-bar" style="--width: 10%;"></div>
+        </div>
+        <div class="region-card">
+          <span class="region-count">2</span>
+          <span class="region-name">Oceania</span>
+          <div class="region-bar" style="--width: 5%;"></div>
+        </div>
+        <div class="region-card">
+          <span class="region-count">2</span>
+          <span class="region-name">North America</span>
+          <div class="region-bar" style="--width: 5%;"></div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <span class="brand-icon">⚡</span>
+          <span>ENERGY DS3</span>
+        </div>
+        <p>Center for Energy Research · Data Science Project</p>
+        <p class="footer-source">Data source: Ember Climate · 2030 Targets Dataset</p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  :root {
+    --color-bg: #0a0f0d;
+    --color-bg-alt: #0f1512;
+    --color-surface: #141c18;
+    --color-primary: #22c55e;
+    --color-primary-dim: #16a34a;
+    --color-accent: #86efac;
+    --color-text: #f0fdf4;
+    --color-text-muted: #9ca3af;
+    --color-border: #1e3a2f;
+    --font-sans: 'DM Sans', system-ui, sans-serif;
+    --font-mono: 'Space Mono', monospace;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+  }
+
+  /* Navbar */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 3rem;
+    background: rgba(10, 15, 13, 0.9);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-border);
+    z-index: 100;
+  }
+
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+
+  .brand-icon {
+    font-size: 1.5rem;
+  }
+
+  .brand-accent {
+    color: var(--color-primary);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+  }
+
+  .nav-links a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover {
+    color: var(--color-primary);
+  }
+
+  /* Hero */
+  .hero {
+    min-height: 100vh;
+    padding: 8rem 3rem 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    background: 
+      radial-gradient(ellipse at 20% 80%, rgba(34, 197, 94, 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, rgba(134, 239, 172, 0.05) 0%, transparent 50%),
+      var(--color-bg);
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .hero-label {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 1rem;
+  }
+
+  .hero-title {
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+
+  .title-highlight {
+    display: block;
+    color: var(--color-primary);
+  }
+
+  .title-year {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 5rem;
+    color: var(--color-accent);
+    opacity: 0.3;
+    margin-top: -0.5rem;
+  }
+
+  .hero-description {
+    font-size: 1.2rem;
+    color: var(--color-text-muted);
+    max-width: 500px;
+    margin-bottom: 2rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .btn {
+    padding: 0.875rem 1.75rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.2s;
+  }
+
+  .btn-primary {
+    background: var(--color-primary);
+    color: var(--color-bg);
+  }
+
+  .btn-primary:hover {
+    background: var(--color-accent);
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .stat-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .stat-featured {
+    grid-column: span 2;
+    background: linear-gradient(135deg, var(--color-primary-dim), var(--color-bg));
+    border-color: var(--color-primary);
+  }
+
+  .stat-number {
+    font-family: var(--font-mono);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-accent);
+  }
+
+  .stat-featured .stat-number {
+    font-size: 3.5rem;
+  }
+
+  .stat-label {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+  }
+
+  /* Hero Visual - Animated Bars */
+  .hero-visual {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 1rem;
+    height: 200px;
+    padding: 1rem 2rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+  }
+
+  .visual-bar {
+    width: 50px;
+    height: var(--height);
+    background: linear-gradient(to top, var(--color-primary-dim), var(--color-primary));
+    border-radius: 6px 6px 0 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 0.5rem;
+    animation: growUp 0.8s ease-out backwards;
+    animation-delay: var(--delay);
+  }
+
+  .visual-bar span {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--color-bg);
+    font-weight: 700;
+  }
+
+  @keyframes growUp {
+    from {
+      height: 0;
+      opacity: 0;
+    }
+    to {
+      height: var(--height);
+      opacity: 1;
+    }
+  }
+
+  /* Sections */
+  .section {
+    padding: 5rem 3rem;
+  }
+
+  .section-dark {
+    background: var(--color-bg-alt);
+  }
+
+  .section-alt {
+    background: var(--color-surface);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .section-number {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-primary);
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--color-primary);
+    border-radius: 4px;
+  }
+
+  .section-header h2 {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  /* Insights Grid */
+  .insights-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .insight-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: transform 0.2s, border-color 0.2s;
+  }
+
+  .insight-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-primary);
+  }
+
+  .insight-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .insight-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .insight-card p {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+
+  .insight-stat {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+
+  /* Explorer */
+  .explorer-preview {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .explorer-placeholder {
+    text-align: center;
+    color: var(--color-text-muted);
+  }
+
+  .explorer-placeholder span {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-primary);
+    margin-top: 0.5rem;
+  }
+
+  /* Regions */
+  .regions-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .region-card {
+    display: grid;
+    grid-template-columns: 60px 250px 1fr;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem 1.5rem;
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+  }
+
+  .region-count {
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-accent);
+  }
+
+  .region-name {
+    font-weight: 500;
+  }
+
+  .region-bar {
+    height: 8px;
+    background: linear-gradient(to right, var(--color-primary), var(--color-accent));
+    border-radius: 4px;
+    width: var(--width);
+    transition: width 0.6s ease-out;
+  }
+
+  /* Footer */
+  .footer {
+    padding: 3rem;
+    border-top: 1px solid var(--color-border);
+    text-align: center;
+  }
+
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .footer-content p {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+  }
+
+  .footer-source {
+    font-family: var(--font-mono);
+    font-size: 0.8rem !important;
+    margin-top: 0.5rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .hero-title {
+      font-size: 3rem;
+    }
+    
+    .title-year {
+      font-size: 3.5rem;
+    }
+    
+    .insights-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .region-card {
+      grid-template-columns: 50px 1fr;
+    }
+    
+    .region-bar {
+      display: none;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .navbar {
+      padding: 1rem 1.5rem;
+    }
+    
+    .nav-links {
+      display: none;
+    }
+    
+    .hero {
+      padding: 6rem 1.5rem 3rem;
+    }
+    
+    .section {
+      padding: 3rem 1.5rem;
+    }
+  }
+</style>
