@@ -1,6 +1,6 @@
 # ⚡ Energy Dashboard DS3
 
-An interactive dashboard tracking national renewable energy commitments and 2030 targets across 88 countries worldwide.
+An interactive dashboard tracking energy information
 
 ## 🌍 Overview
 
@@ -145,13 +145,6 @@ Energy-Dashboard-DS3/
 | Middle East | 4 |
 | Oceania | 2 |
 | North America | 2 |
-
----
-
-## 👥 Team
-
-- Kyle Shiroma
-- Essie Cheng
 
 ---
 
