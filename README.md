@@ -1,6 +1,6 @@
 # ⚡ Energy Dashboard DS3
 
-An interactive dashboard tracking energy information
+An interactive dashboard tracking efforts to improve energy security, energy access, and energy affordability across different countries can accelerate decarbonization and reduce greenhouse gas emissions. 
 
 ## 🌍 Overview
 
