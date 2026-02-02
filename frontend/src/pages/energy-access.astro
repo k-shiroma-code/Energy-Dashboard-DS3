@@ -1,8 +1,6 @@
 ---
 // Energy Access - US State Analysis
-import EnergyBurdenChart from '../components/EnergyBurdenChart.jsx';
 import ReliabilityChart from '../components/ReliabilityChart.jsx';
-import BurdenVsPriceChart from '../components/BurdenVsPriceChart.jsx';
 ---
 <html lang="en">
   <head>
@@ -20,11 +18,10 @@ import BurdenVsPriceChart from '../components/BurdenVsPriceChart.jsx';
         <span class="brand-text">ENERGY<span class="brand-accent">DS3</span></span>
       </div>
       <div class="nav-links">
-        <a href="/">Global Targets</a>
+        <a href="/">Home</a>
+        <a href="/global-targets">Global Targets</a>
         <a href="/energy-access" class="active">Energy Access</a>
-        <a href="#affordability">Affordability</a>
-        <a href="#reliability">Reliability</a>
-        <a href="#methodology">Methodology</a>
+        <a href="/affordability">Affordability</a>
       </div>
     </nav>
 
@@ -41,7 +38,7 @@ import BurdenVsPriceChart from '../components/BurdenVsPriceChart.jsx';
             Measuring electricity affordability, reliability, and consumption equity across all 50 US states and DC.
           </p>
           <div class="hero-actions">
-            <a href="#affordability" class="btn btn-primary">Explore Data</a>
+            <a href="/affordability" class="btn btn-primary">Affordability</a>
             <a href="#methodology" class="btn btn-secondary">Methodology</a>
           </div>
         </div>
@@ -116,54 +113,9 @@ import BurdenVsPriceChart from '../components/BurdenVsPriceChart.jsx';
       </div>
     </section>
 
-    <section id="affordability" class="section">
+    <section id="reliability" class="section">
       <div class="section-header">
         <span class="section-number">02</span>
-        <h2>Energy Affordability</h2>
-      </div>
-      
-      <p class="section-description">
-        Energy burden measures electricity costs as a percentage of household income. 
-        The national average is <strong>2.06%</strong>, but disparities across states reveal 
-        significant equity challenges.
-      </p>
-      
-      <div class="chart-container">
-        <EnergyBurdenChart client:load />
-      </div>
-      
-      <div class="data-table-wrapper">
-        <h3>Top 10 Highest Energy Burden States</h3>
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>Rank</th>
-              <th>State</th>
-              <th>Burden</th>
-              <th>Median Income</th>
-              <th>Avg Price</th>
-              <th>Annual Bill</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>1</td><td>Mississippi</td><td class="highlight-red">3.17%</td><td>$59,127</td><td>13.5¢</td><td>$1,874</td></tr>
-            <tr><td>2</td><td>Alabama</td><td class="highlight-red">3.14%</td><td>$66,659</td><td>15.3¢</td><td>$2,092</td></tr>
-            <tr><td>3</td><td>West Virginia</td><td class="highlight-red">3.09%</td><td>$60,798</td><td>15.2¢</td><td>$1,877</td></tr>
-            <tr><td>4</td><td>Louisiana</td><td class="highlight-orange">2.78%</td><td>$60,986</td><td>11.8¢</td><td>$1,698</td></tr>
-            <tr><td>5</td><td>Hawaii</td><td class="highlight-orange">2.53%</td><td>$100,745</td><td>43.0¢</td><td>$2,552</td></tr>
-            <tr><td>6</td><td>Connecticut</td><td class="highlight-orange">2.51%</td><td>$96,049</td><td>28.9¢</td><td>$2,407</td></tr>
-            <tr><td>7</td><td>Arkansas</td><td class="highlight-orange">2.51%</td><td>$62,106</td><td>12.4¢</td><td>$1,556</td></tr>
-            <tr><td>8</td><td>Kentucky</td><td class="highlight-orange">2.50%</td><td>$64,526</td><td>12.8¢</td><td>$1,613</td></tr>
-            <tr><td>9</td><td>South Carolina</td><td class="highlight-orange">2.50%</td><td>$72,350</td><td>14.3¢</td><td>$1,806</td></tr>
-            <tr><td>10</td><td>Texas</td><td class="highlight-orange">2.47%</td><td>$79,721</td><td>15.0¢</td><td>$1,970</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <section id="reliability" class="section section-alt">
-      <div class="section-header">
-        <span class="section-number">03</span>
         <h2>Grid Reliability</h2>
       </div>
       
@@ -204,26 +156,9 @@ import BurdenVsPriceChart from '../components/BurdenVsPriceChart.jsx';
       </div>
     </section>
 
-    <section id="analysis" class="section">
-      <div class="section-header">
-        <span class="section-number">04</span>
-        <h2>Price vs. Burden Analysis</h2>
-      </div>
-      
-      <p class="section-description">
-        High electricity prices don't always translate to high energy burden. 
-        States with high incomes can absorb higher prices, while low-income states 
-        struggle even with lower rates.
-      </p>
-      
-      <div class="chart-container">
-        <BurdenVsPriceChart client:load />
-      </div>
-    </section>
-
     <section id="methodology" class="section section-dark">
       <div class="section-header">
-        <span class="section-number">05</span>
+        <span class="section-number">03</span>
         <h2>Methodology</h2>
       </div>
       
@@ -290,570 +225,95 @@ import BurdenVsPriceChart from '../components/BurdenVsPriceChart.jsx';
     --color-text: #1a1a1a;
     --color-text-muted: #6b7280;
     --color-border: #e5e7eb;
-    --color-red: #dc2626;
-    --color-orange: #ea580c;
     --font-sans: 'DM Sans', system-ui, sans-serif;
     --font-mono: 'Space Mono', monospace;
   }
 
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-sans); background: var(--color-bg); color: var(--color-text); line-height: 1.6; }
+
+  .navbar { position: fixed; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 3rem; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--color-border); z-index: 100; }
+  .nav-brand { display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-weight: 700; font-size: 1.1rem; color: var(--color-text); }
+  .brand-icon { font-size: 1.5rem; }
+  .brand-accent { color: var(--color-primary); }
+  .nav-links { display: flex; gap: 2.5rem; }
+  .nav-links a { color: var(--color-text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--color-primary); }
+
+  .hero { min-height: 100vh; padding: 8rem 3rem 4rem; display: flex; flex-direction: column; gap: 3rem; background: radial-gradient(ellipse at 20% 80%, rgba(22,163,74,0.06) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(34,197,94,0.04) 0%, transparent 50%), var(--color-bg); }
+  .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 4rem; align-items: center; }
+  .hero-label { font-family: var(--font-mono); font-size: 0.85rem; color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 1rem; }
+  .hero-title { font-size: 4rem; font-weight: 700; line-height: 1.1; margin-bottom: 1.5rem; color: var(--color-text); }
+  .title-highlight { display: block; color: var(--color-primary); }
+  .title-year { display: block; font-family: var(--font-mono); font-size: 5rem; color: var(--color-primary-dim); opacity: 0.25; margin-top: -0.5rem; }
+  .hero-description { font-size: 1.2rem; color: var(--color-text-muted); max-width: 500px; margin-bottom: 2rem; }
+  .hero-actions { display: flex; gap: 1rem; }
+  .btn { padding: 0.875rem 1.75rem; font-size: 0.95rem; font-weight: 600; text-decoration: none; border-radius: 6px; transition: all 0.2s; }
+  .btn-primary { background: var(--color-primary); color: #fff; }
+  .btn-primary:hover { background: var(--color-accent); transform: translateY(-2px); }
+  .btn-secondary { background: transparent; color: var(--color-text); border: 1px solid var(--color-border); }
+  .btn-secondary:hover { border-color: var(--color-primary); color: var(--color-primary); }
+  .hero-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .stat-card { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 12px; padding: 1.5rem; display: flex; flex-direction: column; gap: 0.25rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .stat-featured { grid-column: span 2; background: linear-gradient(135deg, #ecfdf5, #fff); border-color: var(--color-primary); }
+  .stat-number { font-family: var(--font-mono); font-size: 2.5rem; font-weight: 700; color: var(--color-primary); }
+  .stat-featured .stat-number { font-size: 3.5rem; }
+  .stat-label { font-size: 0.85rem; color: var(--color-text-muted); }
+
+  .hero-visual { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+  .metric-pill { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; padding: 1rem 1.5rem; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 12px; min-width: 140px; }
+  .pill-label { font-size: 0.75rem; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .pill-value { font-family: var(--font-mono); font-size: 1.1rem; font-weight: 700; color: var(--color-primary); }
+
+  .section { padding: 5rem 3rem; }
+  .section-dark { background: var(--color-bg-alt); }
+  .section-header { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem; }
+  .section-number { font-family: var(--font-mono); font-size: 0.85rem; color: var(--color-primary); padding: 0.5rem 1rem; border: 1px solid var(--color-primary); border-radius: 4px; }
+  .section-header h2 { font-size: 2rem; font-weight: 700; color: var(--color-text); }
+  .section-description { font-size: 1.1rem; color: var(--color-text-muted); max-width: 800px; margin-bottom: 2rem; }
+
+  .insights-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .insight-card { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 12px; padding: 2rem; transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .insight-card:hover { transform: translateY(-4px); border-color: var(--color-primary); box-shadow: 0 8px 20px rgba(22,163,74,0.1); }
+  .insight-icon { font-size: 2rem; margin-bottom: 1rem; }
+  .insight-card h3 { font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--color-text); }
+  .insight-card p { color: var(--color-text-muted); font-size: 0.95rem; margin-bottom: 1rem; }
+  .insight-stat { font-family: var(--font-mono); font-size: 0.8rem; color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .chart-container { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 16px; padding: 2rem; margin-bottom: 2rem; display: flex; align-items: center; justify-content: center; min-height: 500px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+
+  .metric-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+  .metric-card { display: flex; align-items: flex-start; gap: 1rem; padding: 1.5rem; background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 12px; }
+  .metric-icon { font-size: 2rem; }
+  .metric-content { display: flex; flex-direction: column; gap: 0.25rem; }
+  .metric-title { font-size: 0.85rem; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .metric-value { font-family: var(--font-mono); font-size: 1.25rem; font-weight: 700; color: var(--color-primary); }
+  .metric-desc { font-size: 0.85rem; color: var(--color-text-muted); }
+
+  .methodology-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  .method-card { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 12px; padding: 1.5rem; }
+  .method-card h3 { font-size: 1rem; margin-bottom: 1rem; color: var(--color-primary); }
+  .method-card ul { list-style: none; }
+  .method-card li { font-size: 0.9rem; color: var(--color-text-muted); padding: 0.5rem 0; border-bottom: 1px solid var(--color-border); }
+  .method-card li:last-child { border-bottom: none; }
+  .method-card li strong { color: var(--color-text); }
+
+  .footer { padding: 3rem; border-top: 1px solid var(--color-border); text-align: center; background: var(--color-bg); }
+  .footer-brand { display: flex; align-items: center; justify-content: center; gap: 0.5rem; font-family: var(--font-mono); font-weight: 700; margin-bottom: 1rem; color: var(--color-text); }
+  .footer-content p { color: var(--color-text-muted); font-size: 0.9rem; }
+  .footer-source { font-family: var(--font-mono); font-size: 0.8rem !important; margin-top: 0.5rem; }
 
-  html {
-    scroll-behavior: smooth;
-  }
-
-  body {
-    font-family: var(--font-sans);
-    background: var(--color-bg);
-    color: var(--color-text);
-    line-height: 1.6;
-  }
-
-  /* Navbar */
-  .navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.25rem 3rem;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--color-border);
-    z-index: 100;
-  }
-
-  .nav-brand {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: var(--font-mono);
-    font-weight: 700;
-    font-size: 1.1rem;
-    color: var(--color-text);
-  }
-
-  .brand-icon {
-    font-size: 1.5rem;
-  }
-
-  .brand-accent {
-    color: var(--color-primary);
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 2.5rem;
-  }
-
-  .nav-links a {
-    color: var(--color-text-muted);
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: color 0.2s;
-  }
-
-  .nav-links a:hover,
-  .nav-links a.active {
-    color: var(--color-primary);
-  }
-
-  /* Hero */
-  .hero {
-    min-height: 100vh;
-    padding: 8rem 3rem 4rem;
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-    background: 
-      radial-gradient(ellipse at 20% 80%, rgba(22, 163, 74, 0.06) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 20%, rgba(34, 197, 94, 0.04) 0%, transparent 50%),
-      var(--color-bg);
-  }
-
-  .hero-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 4rem;
-    align-items: center;
-  }
-
-  .hero-label {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    color: var(--color-primary);
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    margin-bottom: 1rem;
-  }
-
-  .hero-title {
-    font-size: 4rem;
-    font-weight: 700;
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
-    color: var(--color-text);
-  }
-
-  .title-highlight {
-    display: block;
-    color: var(--color-primary);
-  }
-
-  .title-year {
-    display: block;
-    font-family: var(--font-mono);
-    font-size: 5rem;
-    color: var(--color-primary-dim);
-    opacity: 0.25;
-    margin-top: -0.5rem;
-  }
-
-  .hero-description {
-    font-size: 1.2rem;
-    color: var(--color-text-muted);
-    max-width: 500px;
-    margin-bottom: 2rem;
-  }
-
-  .hero-actions {
-    display: flex;
-    gap: 1rem;
-  }
-
-  .btn {
-    padding: 0.875rem 1.75rem;
-    font-size: 0.95rem;
-    font-weight: 600;
-    text-decoration: none;
-    border-radius: 6px;
-    transition: all 0.2s;
-  }
-
-  .btn-primary {
-    background: var(--color-primary);
-    color: #ffffff;
-  }
-
-  .btn-primary:hover {
-    background: var(--color-accent);
-    transform: translateY(-2px);
-  }
-
-  .btn-secondary {
-    background: transparent;
-    color: var(--color-text);
-    border: 1px solid var(--color-border);
-  }
-
-  .btn-secondary:hover {
-    border-color: var(--color-primary);
-    color: var(--color-primary);
-  }
-
-  .hero-stats {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-  }
-
-  .stat-card {
-    background: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: 12px;
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  }
-
-  .stat-featured {
-    grid-column: span 2;
-    background: linear-gradient(135deg, #ecfdf5, #ffffff);
-    border-color: var(--color-primary);
-  }
-
-  .stat-number {
-    font-family: var(--font-mono);
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--color-primary);
-  }
-
-  .stat-featured .stat-number {
-    font-size: 3.5rem;
-  }
-
-  .stat-label {
-    font-size: 0.85rem;
-    color: var(--color-text-muted);
-  }
-
-  /* Hero Visual - Metric Pills */
-  .hero-visual {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center;
-  }
-
-  .metric-pill {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.25rem;
-    padding: 1rem 1.5rem;
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: 12px;
-    min-width: 140px;
-  }
-
-  .pill-label {
-    font-size: 0.75rem;
-    color: var(--color-text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  .pill-value {
-    font-family: var(--font-mono);
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--color-primary);
-  }
-
-  /* Sections */
-  .section {
-    padding: 5rem 3rem;
-  }
-
-  .section-dark {
-    background: var(--color-bg-alt);
-  }
-
-  .section-alt {
-    background: var(--color-surface);
-  }
-
-  .section-header {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-  }
-
-  .section-number {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    color: var(--color-primary);
-    padding: 0.5rem 1rem;
-    border: 1px solid var(--color-primary);
-    border-radius: 4px;
-  }
-
-  .section-header h2 {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--color-text);
-  }
-
-  .section-description {
-    font-size: 1.1rem;
-    color: var(--color-text-muted);
-    max-width: 800px;
-    margin-bottom: 2rem;
-  }
-
-  /* Insights Grid */
-  .insights-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-  }
-
-  .insight-card {
-    background: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: 12px;
-    padding: 2rem;
-    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  }
-
-  .insight-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--color-primary);
-    box-shadow: 0 8px 20px rgba(22, 163, 74, 0.1);
-  }
-
-  .insight-icon {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-
-  .insight-card h3 {
-    font-size: 1.25rem;
-    margin-bottom: 0.75rem;
-    color: var(--color-text);
-  }
-
-  .insight-card p {
-    color: var(--color-text-muted);
-    font-size: 0.95rem;
-    margin-bottom: 1rem;
-  }
-
-  .insight-stat {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    color: var(--color-primary);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  /* Chart Container */
-  .chart-container {
-    background: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: 16px;
-    padding: 2rem;
-    margin-bottom: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 500px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  }
-
-  /* Data Table */
-  .data-table-wrapper {
-    margin-top: 2rem;
-  }
-
-  .data-table-wrapper h3 {
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
-    color: var(--color-text);
-  }
-
-  .data-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: 12px;
-    overflow: hidden;
-  }
-
-  .data-table th,
-  .data-table td {
-    padding: 1rem 1.25rem;
-    text-align: left;
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .data-table th {
-    background: var(--color-surface);
-    font-size: 0.8rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--color-text-muted);
-  }
-
-  .data-table td {
-    font-family: var(--font-mono);
-    font-size: 0.9rem;
-  }
-
-  .data-table tr:last-child td {
-    border-bottom: none;
-  }
-
-  .data-table tr:hover {
-    background: var(--color-bg-alt);
-  }
-
-  .highlight-red {
-    color: var(--color-red);
-    font-weight: 700;
-  }
-
-  .highlight-orange {
-    color: var(--color-orange);
-    font-weight: 700;
-  }
-
-  /* Metric Cards */
-  .metric-cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    margin-top: 2rem;
-  }
-
-  .metric-card {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    padding: 1.5rem;
-    background: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: 12px;
-  }
-
-  .metric-icon {
-    font-size: 2rem;
-  }
-
-  .metric-content {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-
-  .metric-title {
-    font-size: 0.85rem;
-    color: var(--color-text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  .metric-value {
-    font-family: var(--font-mono);
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--color-primary);
-  }
-
-  .metric-desc {
-    font-size: 0.85rem;
-    color: var(--color-text-muted);
-  }
-
-  /* Methodology */
-  .methodology-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-  }
-
-  .method-card {
-    background: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: 12px;
-    padding: 1.5rem;
-  }
-
-  .method-card h3 {
-    font-size: 1rem;
-    margin-bottom: 1rem;
-    color: var(--color-primary);
-  }
-
-  .method-card ul {
-    list-style: none;
-  }
-
-  .method-card li {
-    font-size: 0.9rem;
-    color: var(--color-text-muted);
-    padding: 0.5rem 0;
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .method-card li:last-child {
-    border-bottom: none;
-  }
-
-  .method-card li strong {
-    color: var(--color-text);
-  }
-
-  /* Footer */
-  .footer {
-    padding: 3rem;
-    border-top: 1px solid var(--color-border);
-    text-align: center;
-    background: var(--color-bg);
-  }
-
-  .footer-brand {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    font-family: var(--font-mono);
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: var(--color-text);
-  }
-
-  .footer-content p {
-    color: var(--color-text-muted);
-    font-size: 0.9rem;
-  }
-
-  .footer-source {
-    font-family: var(--font-mono);
-    font-size: 0.8rem !important;
-    margin-top: 0.5rem;
-  }
-
-  /* Responsive */
   @media (max-width: 1024px) {
-    .hero-grid {
-      grid-template-columns: 1fr;
-    }
-    
-    .hero-title {
-      font-size: 3rem;
-    }
-    
-    .title-year {
-      font-size: 3.5rem;
-    }
-    
-    .insights-grid,
-    .metric-cards,
-    .methodology-grid {
-      grid-template-columns: 1fr;
-    }
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-title { font-size: 3rem; }
+    .title-year { font-size: 3.5rem; }
+    .insights-grid, .metric-cards, .methodology-grid { grid-template-columns: 1fr; }
   }
-
   @media (max-width: 768px) {
-    .navbar {
-      padding: 1rem 1.5rem;
-    }
-    
-    .nav-links {
-      display: none;
-    }
-    
-    .hero {
-      padding: 6rem 1.5rem 3rem;
-    }
-    
-    .section {
-      padding: 3rem 1.5rem;
-    }
-    
-    .data-table {
-      font-size: 0.8rem;
-    }
-    
-    .data-table th,
-    .data-table td {
-      padding: 0.75rem;
-    }
+    .navbar { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 6rem 1.5rem 3rem; }
+    .section { padding: 3rem 1.5rem; }
   }
 </style>

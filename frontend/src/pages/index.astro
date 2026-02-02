@@ -21,7 +21,7 @@
         <a href="/" class="active">Home</a>
         <a href="/global-targets">Global Targets</a>
         <a href="/energy-access">Energy Access</a>
-        <a href="#about">About</a>
+        <a href="/affordability">Affordability</a>
       </div>
     </nav>
 
@@ -36,16 +36,6 @@
           Comprehensive analysis of global renewable energy targets and US state-level 
           energy access, affordability, and reliability metrics.
         </p>
-        <div class="hero-actions">
-          <a href="/global-targets" class="btn btn-primary">
-            <span class="btn-icon">🌍</span>
-            <span>Global Targets</span>
-          </a>
-          <a href="/energy-access" class="btn btn-secondary">
-            <span class="btn-icon">⚡</span>
-            <span>US Energy Access</span>
-          </a>
-        </div>
       </div>
       
       <div class="hero-visual">
@@ -105,6 +95,24 @@
             </span>
           </div>
           <span class="feature-link">Explore US Data →</span>
+        </a>
+        
+        <a href="/affordability" class="feature-card">
+          <div class="feature-icon">💰</div>
+          <h3>Energy Affordability</h3>
+          <p>
+            Analyze energy burden—the share of household income spent on electricity—across 
+            all US states. Discover how income levels impact affordability more than prices.
+          </p>
+          <div class="feature-stats">
+            <span class="stat-item">
+              <strong>2.06%</strong> Avg Burden
+            </span>
+            <span class="stat-item">
+              <strong>2.7x</strong> Disparity
+            </span>
+          </div>
+          <span class="feature-link">Explore Affordability →</span>
         </a>
       </div>
     </section>
@@ -439,7 +447,7 @@
     max-width: 1200px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
   }
 
@@ -486,6 +494,7 @@
     margin-bottom: 1.5rem;
     padding-top: 1.5rem;
     border-top: 1px solid var(--color-border);
+    flex-wrap: wrap;
   }
 
   .stat-item {

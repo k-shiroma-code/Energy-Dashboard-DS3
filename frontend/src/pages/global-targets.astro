@@ -1,5 +1,5 @@
 ---
-// Energy Dashboard - Landing Page
+// Energy Dashboard - Global Targets Page
 import CapacityChart from '../components/CapacityChart.jsx';
 ---
 
@@ -7,7 +7,7 @@ import CapacityChart from '../components/CapacityChart.jsx';
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>Energy Dashboard | 2030 Renewable Targets</title>
+    <title>Global Targets | 2030 Renewable Targets</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -19,11 +19,10 @@ import CapacityChart from '../components/CapacityChart.jsx';
         <span class="brand-text">ENERGY<span class="brand-accent">DS3</span></span>
       </div>
       <div class="nav-links">
-        <a href="/" class="active">Global Targets</a>
+        <a href="/">Home</a>
+        <a href="/global-targets" class="active">Global Targets</a>
         <a href="/energy-access">Energy Access</a>
-        <a href="#overview">Overview</a>
-        <a href="#explorer">Data Explorer</a>
-        <a href="#regions">Regions</a>
+        <a href="/affordability">Affordability</a>
       </div>
     </nav>
 
@@ -113,7 +112,7 @@ import CapacityChart from '../components/CapacityChart.jsx';
       </div>
       
       <div class="explorer-preview">
-  		<CapacityChart client:load />
+        <CapacityChart client:load />
       </div>
     </section>
 
@@ -162,6 +161,51 @@ import CapacityChart from '../components/CapacityChart.jsx';
       </div>
     </section>
 
+    <section id="methodology" class="section section-dark">
+      <div class="section-header">
+        <span class="section-number">04</span>
+        <h2>Methodology</h2>
+      </div>
+      
+      <div class="methodology-grid">
+        <div class="method-card">
+          <h3>Data Sources</h3>
+          <ul>
+            <li><strong>Ember Climate</strong> — 2030 Targets Dataset</li>
+            <li><strong>IRENA</strong> — Renewable capacity statistics</li>
+            <li><strong>National NDCs</strong> — Country commitments</li>
+          </ul>
+        </div>
+        
+        <div class="method-card">
+          <h3>Key Calculations</h3>
+          <ul>
+            <li><strong>Capacity Target</strong> — Absolute GW of renewable capacity</li>
+            <li><strong>Share Target</strong> — % of electricity from renewables</li>
+            <li><strong>Regional Totals</strong> — Sum of country targets</li>
+          </ul>
+        </div>
+        
+        <div class="method-card">
+          <h3>Coverage</h3>
+          <ul>
+            <li><strong>88 Countries</strong> — With official 2030 targets</li>
+            <li><strong>7 Regions</strong> — Global geographic breakdown</li>
+            <li><strong>64 Countries</strong> — With dual targets</li>
+          </ul>
+        </div>
+        
+        <div class="method-card">
+          <h3>Limitations</h3>
+          <ul>
+            <li>Targets are self-reported by countries</li>
+            <li>Some targets may be conditional on funding</li>
+            <li>Not all countries have set 2030 targets</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
     <footer class="footer">
       <div class="footer-content">
         <div class="footer-brand">
@@ -190,468 +234,102 @@ import CapacityChart from '../components/CapacityChart.jsx';
     --font-mono: 'Space Mono', monospace;
   }
 
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
-  body {
-    font-family: var(--font-sans);
-    background: var(--color-bg);
-    color: var(--color-text);
-    line-height: 1.6;
-  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-sans); background: var(--color-bg); color: var(--color-text); line-height: 1.6; }
 
   /* Navbar */
-  .navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.25rem 3rem;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--color-border);
-    z-index: 100;
-  }
-
-  .nav-brand {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: var(--font-mono);
-    font-weight: 700;
-    font-size: 1.1rem;
-  }
-
-  .brand-icon {
-    font-size: 1.5rem;
-  }
-
-  .brand-accent {
-    color: var(--color-primary);
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 2.5rem;
-  }
-
-  .nav-links a {
-    color: var(--color-text-muted);
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: color 0.2s;
-  }
-
-  .nav-links a:hover,
-  .nav-links a.active {
-    color: var(--color-primary);
-  }
+  .navbar { position: fixed; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 3rem; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--color-border); z-index: 100; }
+  .nav-brand { display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-weight: 700; font-size: 1.1rem; color: var(--color-text); }
+  .brand-icon { font-size: 1.5rem; }
+  .brand-accent { color: var(--color-primary); }
+  .nav-links { display: flex; gap: 2.5rem; }
+  .nav-links a { color: var(--color-text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--color-primary); }
 
   /* Hero */
-  .hero {
-    min-height: 100vh;
-    padding: 8rem 3rem 4rem;
-    display: flex;
-    flex-direction: column;
-    gap: 4rem;
-    background: 
-      radial-gradient(ellipse at 20% 80%, rgba(22, 163, 74, 0.06) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 20%, rgba(34, 197, 94, 0.04) 0%, transparent 50%),
-      var(--color-bg);
-  }
-
-  .hero-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 4rem;
-    align-items: center;
-  }
-
-  .hero-label {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    color: var(--color-primary);
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    margin-bottom: 1rem;
-  }
-
-  .hero-title {
-    font-size: 4rem;
-    font-weight: 700;
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
-  }
-
-  .title-highlight {
-    display: block;
-    color: var(--color-primary);
-  }
-
-  .title-year {
-    display: block;
-    font-family: var(--font-mono);
-    font-size: 5rem;
-    color: var(--color-primary-dim);
-    opacity: 0.25;
-    margin-top: -0.5rem;
-  }
-
-  .hero-description {
-    font-size: 1.2rem;
-    color: var(--color-text-muted);
-    max-width: 500px;
-    margin-bottom: 2rem;
-  }
-
-  .hero-actions {
-    display: flex;
-    gap: 1rem;
-  }
-
-  .btn {
-    padding: 0.875rem 1.75rem;
-    font-size: 0.95rem;
-    font-weight: 600;
-    text-decoration: none;
-    border-radius: 6px;
-    transition: all 0.2s;
-  }
-
-  .btn-primary {
-    background: var(--color-primary);
-    color: #ffffff;
-  }
-
-  .btn-primary:hover {
-    background: var(--color-accent);
-    transform: translateY(-2px);
-  }
-
-  .btn-secondary {
-    background: transparent;
-    color: var(--color-text);
-    border: 1px solid var(--color-border);
-  }
-
-  .btn-secondary:hover {
-    border-color: var(--color-primary);
-    color: var(--color-primary);
-  }
-
-  .hero-stats {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-  }
-
-  .stat-card {
-    background: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: 12px;
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  }
-
-  .stat-featured {
-    grid-column: span 2;
-    background: linear-gradient(135deg, #ecfdf5, #ffffff);
-    border-color: var(--color-primary);
-  }
-
-  .stat-number {
-    font-family: var(--font-mono);
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--color-primary);
-  }
-
-  .stat-featured .stat-number {
-    font-size: 3.5rem;
-  }
-
-  .stat-label {
-    font-size: 0.85rem;
-    color: var(--color-text-muted);
-  }
+  .hero { min-height: 100vh; padding: 8rem 3rem 4rem; display: flex; flex-direction: column; gap: 4rem; background: radial-gradient(ellipse at 20% 80%, rgba(22,163,74,0.06) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(34,197,94,0.04) 0%, transparent 50%), var(--color-bg); }
+  .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 4rem; align-items: center; }
+  .hero-label { font-family: var(--font-mono); font-size: 0.85rem; color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 1rem; }
+  .hero-title { font-size: 4rem; font-weight: 700; line-height: 1.1; margin-bottom: 1.5rem; color: var(--color-text); }
+  .title-highlight { display: block; color: var(--color-primary); }
+  .title-year { display: block; font-family: var(--font-mono); font-size: 5rem; color: var(--color-primary-dim); opacity: 0.25; margin-top: -0.5rem; }
+  .hero-description { font-size: 1.2rem; color: var(--color-text-muted); max-width: 500px; margin-bottom: 2rem; }
+  .hero-actions { display: flex; gap: 1rem; }
+  .btn { padding: 0.875rem 1.75rem; font-size: 0.95rem; font-weight: 600; text-decoration: none; border-radius: 6px; transition: all 0.2s; }
+  .btn-primary { background: var(--color-primary); color: #fff; }
+  .btn-primary:hover { background: var(--color-accent); transform: translateY(-2px); }
+  .btn-secondary { background: transparent; color: var(--color-text); border: 1px solid var(--color-border); }
+  .btn-secondary:hover { border-color: var(--color-primary); color: var(--color-primary); }
+  .hero-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .stat-card { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 12px; padding: 1.5rem; display: flex; flex-direction: column; gap: 0.25rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .stat-featured { grid-column: span 2; background: linear-gradient(135deg, #ecfdf5, #fff); border-color: var(--color-primary); }
+  .stat-number { font-family: var(--font-mono); font-size: 2.5rem; font-weight: 700; color: var(--color-primary); }
+  .stat-featured .stat-number { font-size: 3.5rem; }
+  .stat-label { font-size: 0.85rem; color: var(--color-text-muted); }
 
   /* Hero Visual - Animated Bars */
-  .hero-visual {
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    gap: 1rem;
-    height: 200px;
-    padding: 1rem 2rem;
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: 16px;
-  }
-
-  .visual-bar {
-    width: 50px;
-    height: var(--height);
-    background: linear-gradient(to top, var(--color-primary-dim), var(--color-primary));
-    border-radius: 6px 6px 0 0;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    padding-bottom: 0.5rem;
-    animation: growUp 0.8s ease-out backwards;
-    animation-delay: var(--delay);
-  }
-
-  .visual-bar span {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    color: #ffffff;
-    font-weight: 700;
-  }
-
-  @keyframes growUp {
-    from {
-      height: 0;
-      opacity: 0;
-    }
-    to {
-      height: var(--height);
-      opacity: 1;
-    }
-  }
+  .hero-visual { display: flex; align-items: flex-end; justify-content: center; gap: 1rem; height: 200px; padding: 1rem 2rem; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 16px; }
+  .visual-bar { width: 50px; height: var(--height); background: linear-gradient(to top, var(--color-primary), var(--color-primary-dim)); border-radius: 6px 6px 0 0; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 0.5rem; animation: growUp 0.8s ease-out backwards; animation-delay: var(--delay); }
+  .visual-bar span { font-family: var(--font-mono); font-size: 0.65rem; color: #fff; font-weight: 700; }
+  @keyframes growUp { from { height: 0; opacity: 0; } to { height: var(--height); opacity: 1; } }
 
   /* Sections */
-  .section {
-    padding: 5rem 3rem;
-  }
-
-  .section-dark {
-    background: var(--color-bg-alt);
-  }
-
-  .section-alt {
-    background: var(--color-surface);
-  }
-
-  .section-header {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    margin-bottom: 3rem;
-  }
-
-  .section-number {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    color: var(--color-primary);
-    padding: 0.5rem 1rem;
-    border: 1px solid var(--color-primary);
-    border-radius: 4px;
-  }
-
-  .section-header h2 {
-    font-size: 2rem;
-    font-weight: 700;
-  }
+  .section { padding: 5rem 3rem; }
+  .section-dark { background: var(--color-bg-alt); }
+  .section-alt { background: var(--color-surface); }
+  .section-header { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 3rem; }
+  .section-number { font-family: var(--font-mono); font-size: 0.85rem; color: var(--color-primary); padding: 0.5rem 1rem; border: 1px solid var(--color-primary); border-radius: 4px; }
+  .section-header h2 { font-size: 2rem; font-weight: 700; color: var(--color-text); }
 
   /* Insights Grid */
-  .insights-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-  }
-
-  .insight-card {
-    background: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: 12px;
-    padding: 2rem;
-    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  }
-
-  .insight-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--color-primary);
-    box-shadow: 0 8px 20px rgba(22, 163, 74, 0.1);
-  }
-
-  .insight-icon {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-
-  .insight-card h3 {
-    font-size: 1.25rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .insight-card p {
-    color: var(--color-text-muted);
-    font-size: 0.95rem;
-    margin-bottom: 1rem;
-  }
-
-  .insight-stat {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    color: var(--color-primary);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
+  .insights-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .insight-card { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 12px; padding: 2rem; transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .insight-card:hover { transform: translateY(-4px); border-color: var(--color-primary); box-shadow: 0 8px 20px rgba(22,163,74,0.1); }
+  .insight-icon { font-size: 2rem; margin-bottom: 1rem; }
+  .insight-card h3 { font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--color-text); }
+  .insight-card p { color: var(--color-text-muted); font-size: 0.95rem; margin-bottom: 1rem; }
+  .insight-stat { font-family: var(--font-mono); font-size: 0.8rem; color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.05em; }
 
   /* Explorer */
-  .explorer-preview {
-    background: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: 16px;
-    padding: 2rem;
-    min-height: 500px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  }
-
-  .explorer-placeholder {
-    text-align: center;
-    color: var(--color-text-muted);
-  }
-
-  .explorer-placeholder span {
-    display: block;
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    color: var(--color-primary);
-    margin-top: 0.5rem;
-  }
+  .explorer-preview { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 16px; min-height: 400px; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
 
   /* Regions */
-  .regions-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
+  .regions-grid { display: flex; flex-direction: column; gap: 1rem; }
+  .region-card { display: grid; grid-template-columns: 60px 250px 1fr; align-items: center; gap: 1.5rem; padding: 1rem 1.5rem; background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .region-count { font-family: var(--font-mono); font-size: 1.5rem; font-weight: 700; color: var(--color-primary); }
+  .region-name { font-weight: 500; color: var(--color-text); }
+  .region-bar { height: 8px; background: linear-gradient(to right, var(--color-primary), var(--color-primary-dim)); border-radius: 4px; width: var(--width); transition: width 0.6s ease-out; }
 
-  .region-card {
-    display: grid;
-    grid-template-columns: 60px 250px 1fr;
-    align-items: center;
-    gap: 1.5rem;
-    padding: 1rem 1.5rem;
-    background: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: 8px;
-    transition: border-color 0.2s;
-  }
-
-  .region-card:hover {
-    border-color: var(--color-primary);
-  }
-
-  .region-count {
-    font-family: var(--font-mono);
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--color-primary);
-  }
-
-  .region-name {
-    font-weight: 500;
-  }
-
-  .region-bar {
-    height: 8px;
-    background: linear-gradient(to right, var(--color-primary-dim), var(--color-primary));
-    border-radius: 4px;
-    width: var(--width);
-    transition: width 0.6s ease-out;
-  }
+  /* Methodology */
+  .methodology-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  .method-card { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 12px; padding: 1.5rem; }
+  .method-card h3 { font-size: 1rem; margin-bottom: 1rem; color: var(--color-primary); }
+  .method-card ul { list-style: none; }
+  .method-card li { font-size: 0.9rem; color: var(--color-text-muted); padding: 0.5rem 0; border-bottom: 1px solid var(--color-border); }
+  .method-card li:last-child { border-bottom: none; }
+  .method-card li strong { color: var(--color-text); }
 
   /* Footer */
-  .footer {
-    padding: 3rem;
-    border-top: 1px solid var(--color-border);
-    text-align: center;
-  }
-
-  .footer-brand {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    font-family: var(--font-mono);
-    font-weight: 700;
-    margin-bottom: 1rem;
-  }
-
-  .footer-content p {
-    color: var(--color-text-muted);
-    font-size: 0.9rem;
-  }
-
-  .footer-source {
-    font-family: var(--font-mono);
-    font-size: 0.8rem !important;
-    margin-top: 0.5rem;
-  }
+  .footer { padding: 3rem; border-top: 1px solid var(--color-border); text-align: center; background: var(--color-bg); }
+  .footer-brand { display: flex; align-items: center; justify-content: center; gap: 0.5rem; font-family: var(--font-mono); font-weight: 700; margin-bottom: 1rem; color: var(--color-text); }
+  .footer-content p { color: var(--color-text-muted); font-size: 0.9rem; }
+  .footer-source { font-family: var(--font-mono); font-size: 0.8rem !important; margin-top: 0.5rem; }
 
   /* Responsive */
   @media (max-width: 1024px) {
-    .hero-grid {
-      grid-template-columns: 1fr;
-    }
-    
-    .hero-title {
-      font-size: 3rem;
-    }
-    
-    .title-year {
-      font-size: 3.5rem;
-    }
-    
-    .insights-grid {
-      grid-template-columns: 1fr;
-    }
-    
-    .region-card {
-      grid-template-columns: 50px 1fr;
-    }
-    
-    .region-bar {
-      display: none;
-    }
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-title { font-size: 3rem; }
+    .title-year { font-size: 3.5rem; }
+    .insights-grid, .methodology-grid { grid-template-columns: 1fr; }
+    .region-card { grid-template-columns: 50px 1fr; }
+    .region-bar { display: none; }
   }
 
   @media (max-width: 768px) {
-    .navbar {
-      padding: 1rem 1.5rem;
-    }
-    
-    .nav-links {
-      display: none;
-    }
-    
-    .hero {
-      padding: 6rem 1.5rem 3rem;
-    }
-    
-    .section {
-      padding: 3rem 1.5rem;
-    }
+    .navbar { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 6rem 1.5rem 3rem; }
+    .section { padding: 3rem 1.5rem; }
   }
 </style>
