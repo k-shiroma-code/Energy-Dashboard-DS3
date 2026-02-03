@@ -1,0 +1,319 @@
+---
+// Energy Access - US State Analysis
+import ReliabilityChart from '../components/ReliabilityChart.jsx';
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Energy Access | US State Analysis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav-brand">
+        <span class="brand-icon">⚡</span>
+        <span class="brand-text">ENERGY<span class="brand-accent">DS3</span></span>
+      </div>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/global-targets">Global Targets</a>
+        <a href="/energy-access" class="active">Energy Access</a>
+        <a href="/affordability">Affordability</a>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <p class="hero-label">US Energy Analysis</p>
+          <h1 class="hero-title">
+            Energy Access
+            <span class="title-highlight">Indicators</span>
+            <span class="title-year">2024</span>
+          </h1>
+          <p class="hero-description">
+            Measuring electricity affordability, reliability, and consumption equity across all 50 US states and DC.
+          </p>
+          <div class="hero-actions">
+            <a href="/affordability" class="btn btn-primary">Affordability</a>
+            <a href="#methodology" class="btn btn-secondary">Methodology</a>
+          </div>
+        </div>
+        
+        <div class="hero-stats">
+          <div class="stat-card stat-featured">
+            <span class="stat-number">51</span>
+            <span class="stat-label">States & DC Analyzed</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">2.06%</span>
+            <span class="stat-label">Avg Energy Burden</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">139</span>
+            <span class="stat-label">Avg SAIDI (min/yr)</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">24</span>
+            <span class="stat-label">Years of Data</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="hero-visual">
+        <div class="metric-pill">
+          <span class="pill-label">Highest Burden</span>
+          <span class="pill-value">MS 3.17%</span>
+        </div>
+        <div class="metric-pill">
+          <span class="pill-label">Lowest Burden</span>
+          <span class="pill-value">UT 1.17%</span>
+        </div>
+        <div class="metric-pill">
+          <span class="pill-label">Best Reliability</span>
+          <span class="pill-value">DC 26 min</span>
+        </div>
+        <div class="metric-pill">
+          <span class="pill-label">Worst Reliability</span>
+          <span class="pill-value">WV 486 min</span>
+        </div>
+      </div>
+    </header>
+
+    <section id="overview" class="section section-dark">
+      <div class="section-header">
+        <span class="section-number">01</span>
+        <h2>Key Findings</h2>
+      </div>
+      
+      <div class="insights-grid">
+        <article class="insight-card">
+          <div class="insight-icon">💰</div>
+          <h3>Affordability Gap</h3>
+          <p>Southern states face the highest energy burden, with Mississippi households spending 3.17% of income on electricity—nearly 3x Utah's rate.</p>
+          <span class="insight-stat">2.7x disparity</span>
+        </article>
+        
+        <article class="insight-card">
+          <div class="insight-icon">⚠️</div>
+          <h3>Reliability Divide</h3>
+          <p>West Virginia experiences 486 minutes of outages annually—18x more than DC's 26 minutes. Rural states face greater grid instability.</p>
+          <span class="insight-stat">18x difference</span>
+        </article>
+        
+        <article class="insight-card">
+          <div class="insight-icon">🔌</div>
+          <h3>Price ≠ Burden</h3>
+          <p>Hawaii has the highest prices (43¢/kWh) but moderate burden due to high incomes. Low-income states suffer more despite lower rates.</p>
+          <span class="insight-stat">Income matters</span>
+        </article>
+      </div>
+    </section>
+
+    <section id="reliability" class="section">
+      <div class="section-header">
+        <span class="section-number">02</span>
+        <h2>Grid Reliability</h2>
+      </div>
+      
+      <p class="section-description">
+        SAIDI (System Average Interruption Duration Index) measures the average outage duration 
+        per customer annually. Lower values indicate more reliable electricity service.
+      </p>
+      
+      <div class="chart-container">
+        <ReliabilityChart client:load />
+      </div>
+      
+      <div class="metric-cards">
+        <div class="metric-card">
+          <span class="metric-icon">🏆</span>
+          <div class="metric-content">
+            <span class="metric-title">Most Reliable</span>
+            <span class="metric-value">DC — 26 min/yr</span>
+            <span class="metric-desc">Dense urban grid with high redundancy</span>
+          </div>
+        </div>
+        <div class="metric-card">
+          <span class="metric-icon">⚡</span>
+          <div class="metric-content">
+            <span class="metric-title">Least Reliable</span>
+            <span class="metric-value">WV — 486 min/yr</span>
+            <span class="metric-desc">Rural terrain, aging infrastructure</span>
+          </div>
+        </div>
+        <div class="metric-card">
+          <span class="metric-icon">📊</span>
+          <div class="metric-content">
+            <span class="metric-title">National Average</span>
+            <span class="metric-value">139 min/yr</span>
+            <span class="metric-desc">~2.3 hours of outages per customer</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="methodology" class="section section-dark">
+      <div class="section-header">
+        <span class="section-number">03</span>
+        <h2>Methodology</h2>
+      </div>
+      
+      <div class="methodology-grid">
+        <div class="method-card">
+          <h3>Data Sources</h3>
+          <ul>
+            <li><strong>EIA Electricity Data</strong> — Sales, prices, customers (2001-2025)</li>
+            <li><strong>EIA Form 861</strong> — SAIDI/SAIFI reliability metrics (2024)</li>
+            <li><strong>Census ACS 2024</strong> — Median household income by state</li>
+          </ul>
+        </div>
+        
+        <div class="method-card">
+          <h3>Key Calculations</h3>
+          <ul>
+            <li><strong>Energy Burden</strong> = Annual Bill ÷ Median Income × 100</li>
+            <li><strong>Annual Bill</strong> = Avg Price × kWh per Customer</li>
+            <li><strong>SAIDI</strong> = Customer-Minutes Interrupted ÷ Total Customers</li>
+          </ul>
+        </div>
+        
+        <div class="method-card">
+          <h3>Thresholds</h3>
+          <ul>
+            <li><strong>&gt;6%</strong> — Energy Burdened household</li>
+            <li><strong>&gt;10%</strong> — Severely Energy Burdened</li>
+            <li><strong>&gt;200 min</strong> — Poor grid reliability</li>
+          </ul>
+        </div>
+        
+        <div class="method-card">
+          <h3>Limitations</h3>
+          <ul>
+            <li>Electricity only (excludes gas, heating oil)</li>
+            <li>State averages mask local disparities</li>
+            <li>Reliability data is utility-reported</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <span class="brand-icon">⚡</span>
+          <span>ENERGY DS3</span>
+        </div>
+        <p>Center for Energy Research · Data Science Project</p>
+        <p class="footer-source">Data: EIA, Census Bureau ACS 2024</p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  :root {
+    --color-bg: #ffffff;
+    --color-bg-alt: #f8faf9;
+    --color-surface: #f1f5f3;
+    --color-primary: #16a34a;
+    --color-primary-dim: #22c55e;
+    --color-accent: #15803d;
+    --color-text: #1a1a1a;
+    --color-text-muted: #6b7280;
+    --color-border: #e5e7eb;
+    --font-sans: 'DM Sans', system-ui, sans-serif;
+    --font-mono: 'Space Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-sans); background: var(--color-bg); color: var(--color-text); line-height: 1.6; }
+
+  .navbar { position: fixed; top: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 3rem; background: rgba(255,255,255,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--color-border); z-index: 100; }
+  .nav-brand { display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-weight: 700; font-size: 1.1rem; color: var(--color-text); }
+  .brand-icon { font-size: 1.5rem; }
+  .brand-accent { color: var(--color-primary); }
+  .nav-links { display: flex; gap: 2.5rem; }
+  .nav-links a { color: var(--color-text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--color-primary); }
+
+  .hero { min-height: 100vh; padding: 8rem 3rem 4rem; display: flex; flex-direction: column; gap: 3rem; background: radial-gradient(ellipse at 20% 80%, rgba(22,163,74,0.06) 0%, transparent 50%), radial-gradient(ellipse at 80% 20%, rgba(34,197,94,0.04) 0%, transparent 50%), var(--color-bg); }
+  .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 4rem; align-items: center; }
+  .hero-label { font-family: var(--font-mono); font-size: 0.85rem; color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 1rem; }
+  .hero-title { font-size: 4rem; font-weight: 700; line-height: 1.1; margin-bottom: 1.5rem; color: var(--color-text); }
+  .title-highlight { display: block; color: var(--color-primary); }
+  .title-year { display: block; font-family: var(--font-mono); font-size: 5rem; color: var(--color-primary-dim); opacity: 0.25; margin-top: -0.5rem; }
+  .hero-description { font-size: 1.2rem; color: var(--color-text-muted); max-width: 500px; margin-bottom: 2rem; }
+  .hero-actions { display: flex; gap: 1rem; }
+  .btn { padding: 0.875rem 1.75rem; font-size: 0.95rem; font-weight: 600; text-decoration: none; border-radius: 6px; transition: all 0.2s; }
+  .btn-primary { background: var(--color-primary); color: #fff; }
+  .btn-primary:hover { background: var(--color-accent); transform: translateY(-2px); }
+  .btn-secondary { background: transparent; color: var(--color-text); border: 1px solid var(--color-border); }
+  .btn-secondary:hover { border-color: var(--color-primary); color: var(--color-primary); }
+  .hero-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .stat-card { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 12px; padding: 1.5rem; display: flex; flex-direction: column; gap: 0.25rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .stat-featured { grid-column: span 2; background: linear-gradient(135deg, #ecfdf5, #fff); border-color: var(--color-primary); }
+  .stat-number { font-family: var(--font-mono); font-size: 2.5rem; font-weight: 700; color: var(--color-primary); }
+  .stat-featured .stat-number { font-size: 3.5rem; }
+  .stat-label { font-size: 0.85rem; color: var(--color-text-muted); }
+
+  .hero-visual { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+  .metric-pill { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; padding: 1rem 1.5rem; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 12px; min-width: 140px; }
+  .pill-label { font-size: 0.75rem; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .pill-value { font-family: var(--font-mono); font-size: 1.1rem; font-weight: 700; color: var(--color-primary); }
+
+  .section { padding: 5rem 3rem; }
+  .section-dark { background: var(--color-bg-alt); }
+  .section-header { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem; }
+  .section-number { font-family: var(--font-mono); font-size: 0.85rem; color: var(--color-primary); padding: 0.5rem 1rem; border: 1px solid var(--color-primary); border-radius: 4px; }
+  .section-header h2 { font-size: 2rem; font-weight: 700; color: var(--color-text); }
+  .section-description { font-size: 1.1rem; color: var(--color-text-muted); max-width: 800px; margin-bottom: 2rem; }
+
+  .insights-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .insight-card { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 12px; padding: 2rem; transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+  .insight-card:hover { transform: translateY(-4px); border-color: var(--color-primary); box-shadow: 0 8px 20px rgba(22,163,74,0.1); }
+  .insight-icon { font-size: 2rem; margin-bottom: 1rem; }
+  .insight-card h3 { font-size: 1.25rem; margin-bottom: 0.75rem; color: var(--color-text); }
+  .insight-card p { color: var(--color-text-muted); font-size: 0.95rem; margin-bottom: 1rem; }
+  .insight-stat { font-family: var(--font-mono); font-size: 0.8rem; color: var(--color-primary); text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .chart-container { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 16px; padding: 2rem; margin-bottom: 2rem; display: flex; align-items: center; justify-content: center; min-height: 500px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+
+  .metric-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+  .metric-card { display: flex; align-items: flex-start; gap: 1rem; padding: 1.5rem; background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 12px; }
+  .metric-icon { font-size: 2rem; }
+  .metric-content { display: flex; flex-direction: column; gap: 0.25rem; }
+  .metric-title { font-size: 0.85rem; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .metric-value { font-family: var(--font-mono); font-size: 1.25rem; font-weight: 700; color: var(--color-primary); }
+  .metric-desc { font-size: 0.85rem; color: var(--color-text-muted); }
+
+  .methodology-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  .method-card { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 12px; padding: 1.5rem; }
+  .method-card h3 { font-size: 1rem; margin-bottom: 1rem; color: var(--color-primary); }
+  .method-card ul { list-style: none; }
+  .method-card li { font-size: 0.9rem; color: var(--color-text-muted); padding: 0.5rem 0; border-bottom: 1px solid var(--color-border); }
+  .method-card li:last-child { border-bottom: none; }
+  .method-card li strong { color: var(--color-text); }
+
+  .footer { padding: 3rem; border-top: 1px solid var(--color-border); text-align: center; background: var(--color-bg); }
+  .footer-brand { display: flex; align-items: center; justify-content: center; gap: 0.5rem; font-family: var(--font-mono); font-weight: 700; margin-bottom: 1rem; color: var(--color-text); }
+  .footer-content p { color: var(--color-text-muted); font-size: 0.9rem; }
+  .footer-source { font-family: var(--font-mono); font-size: 0.8rem !important; margin-top: 0.5rem; }
+
+  @media (max-width: 1024px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-title { font-size: 3rem; }
+    .title-year { font-size: 3.5rem; }
+    .insights-grid, .metric-cards, .methodology-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 768px) {
+    .navbar { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 6rem 1.5rem 3rem; }
+    .section { padding: 3rem 1.5rem; }
+  }
+</style>
