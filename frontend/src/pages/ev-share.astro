@@ -1,0 +1,203 @@
+---
+---
+
+<style>
+  :global(body) {
+    margin: 0;
+    background: #0b1020;
+    color: #e8eefc;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  }
+
+  .wrap {
+    padding: 24px;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+    color: #e8eefc;
+  }
+
+  .subtitle {
+    margin-top: 6px;
+    margin-bottom: 18px;
+    font-size: 14px;
+    color: rgba(232, 238, 252, 0.7);
+  }
+
+  #chart {
+    background: #0f1730;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+  }
+
+  #selected {
+    margin-top: 10px;
+    font-size: 14px;
+    color: rgba(232, 238, 252, 0.85);
+  }
+
+  #tooltip {
+    position: fixed;
+    pointer-events: none;
+    background: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 8px 10px;
+    border-radius: 10px;
+    font-size: 12px;
+    opacity: 0;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+  }
+</style>
+
+<div class="wrap">
+  <h1>Top 20 Countries: Average EV Sales Share</h1>
+  <p class="subtitle">Based on historical data (years prior to 2025)</p>
+
+  <svg id="chart" width="900" height="520"></svg>
+
+  <div id="selected">
+    Selected: <span id="selectedValue">None</span>
+  </div>
+
+  <div id="tooltip"></div>
+</div>
+
+<!-- Keep D3 CDN script in final HTML -->
+<script is:inline src="https://d3js.org/d3.v7.min.js"></script>
+
+<!-- Keep chart code inline so it can access global `d3` -->
+<script is:inline>
+  const margin = { top: 40, right: 20, bottom: 140, left: 70 };
+  const width = 900;
+  const height = 520;
+
+  const axisColor = "rgba(232, 238, 252, 0.75)";
+  const gridColor = "rgba(232, 238, 252, 0.10)";
+  const barColor = "#ff7f0e";
+  const selectedColor = "#22c55e";
+
+  const svg = d3.select("#chart").attr("width", width).attr("height", height);
+  const tooltip = d3.select("#tooltip");
+  const selectedValueEl = document.getElementById("selectedValue");
+
+  let selectedCountry = null;
+
+  d3.csv("/data/top_ev_sales_share_countries.csv", d => ({
+    country: d.country,
+    value: +d.value
+  }))
+  .then(data => {
+    // Scales
+    const x = d3.scaleBand()
+      .domain(data.map(d => d.country))
+      .range([margin.left, width - margin.right])
+      .padding(0.2);
+
+    const y = d3.scaleLinear()
+      .domain([0, d3.max(data, d => d.value) || 0])
+      .nice()
+      .range([height - margin.bottom, margin.top]);
+
+    // Gridlines (y)
+    svg.append("g")
+      .attr("transform", `translate(${margin.left},0)`)
+      .call(d3.axisLeft(y).ticks(6).tickSize(-(width - margin.left - margin.right)).tickFormat(""))
+      .call(g => g.selectAll("line").attr("stroke", gridColor))
+      .call(g => g.selectAll("path").attr("stroke", "none"));
+
+    // X axis
+    svg.append("g")
+      .attr("transform", `translate(0,${height - margin.bottom})`)
+      .call(d3.axisBottom(x))
+      .call(g => g.selectAll("path,line").attr("stroke", axisColor))
+      .call(g => g.selectAll("text").attr("fill", axisColor))
+      .selectAll("text")
+      .attr("transform", "rotate(-45)")
+      .style("text-anchor", "end");
+
+    // Y axis
+    svg.append("g")
+      .attr("transform", `translate(${margin.left},0)`)
+      .call(d3.axisLeft(y).ticks(6).tickFormat(d => `${d}%`))
+      .call(g => g.selectAll("path,line").attr("stroke", axisColor))
+      .call(g => g.selectAll("text").attr("fill", axisColor));
+
+    // Y label
+    svg.append("text")
+      .attr("x", -(height / 2))
+      .attr("y", 18)
+      .attr("transform", "rotate(-90)")
+      .style("text-anchor", "middle")
+      .style("font-size", "12px")
+      .style("fill", axisColor)
+      .text("Average EV Sales Share (%)");
+
+    // Footnote inside chart
+    svg.append("text")
+      .attr("x", width - margin.right)
+      .attr("y", height - 10)
+      .attr("text-anchor", "end")
+      .style("font-size", "11px")
+      .style("fill", "rgba(232, 238, 252, 0.5)")
+      .text("Note: Data includes observations prior to 2025 only.");
+
+    // Helper to update selection styles
+    function applySelection() {
+      svg.selectAll("rect.bar")
+        .attr("fill", d => (d.country === selectedCountry ? selectedColor : barColor))
+        .attr("opacity", d => (selectedCountry && d.country !== selectedCountry ? 0.35 : 1));
+
+      selectedValueEl.textContent = selectedCountry ? selectedCountry : "None";
+    }
+
+    // Bars (start from zero for animation)
+    const bars = svg.selectAll("rect.bar")
+      .data(data, d => d.country)
+      .enter()
+      .append("rect")
+      .attr("class", "bar")
+      .attr("x", d => x(d.country))
+      .attr("width", x.bandwidth())
+      .attr("y", y(0))
+      .attr("height", 0)
+      .attr("fill", barColor)
+      .attr("rx", 4);
+
+    // Animate on load
+    bars.transition()
+      .duration(900)
+      .delay((_, i) => i * 25)
+      .ease(d3.easeCubicOut)
+      .attr("y", d => y(d.value))
+      .attr("height", d => (height - margin.bottom) - y(d.value));
+
+    // Interactions: tooltip + hover + click select
+    bars
+      .on("mouseenter", function () {
+        d3.select(this).attr("opacity", 0.85);
+      })
+      .on("mousemove", (event, d) => {
+        tooltip
+          .style("opacity", 1)
+          .html(`<b>${d.country}</b><br/>${d.value.toFixed(2)}%`)
+          .style("left", (event.clientX + 12) + "px")
+          .style("top", (event.clientY - 28) + "px");
+      })
+      .on("mouseleave", function () {
+        tooltip.style("opacity", 0);
+        applySelection();
+      })
+      .on("click", (_, d) => {
+        selectedCountry = (selectedCountry === d.country) ? null : d.country;
+        applySelection();
+      });
+
+    // Initial selection state
+    applySelection();
+  })
+  .catch(err => console.error("Failed to load CSV:", err));
+</script>

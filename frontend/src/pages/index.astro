@@ -1,13 +1,12 @@
 ---
-// Energy Dashboard - Landing Page
-import CapacityChart from '../components/CapacityChart.jsx';
+// Energy Dashboard DS3 - Home Page
 ---
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>Energy Dashboard | 2030 Renewable Targets</title>
+    <title>Energy Dashboard DS3 | Center for Energy Research</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -19,144 +18,177 @@ import CapacityChart from '../components/CapacityChart.jsx';
         <span class="brand-text">ENERGY<span class="brand-accent">DS3</span></span>
       </div>
       <div class="nav-links">
-        <a href="#overview">Overview</a>
-        <a href="#explorer">Data Explorer</a>
-        <a href="#regions">Regions</a>
-        <a href="#about">About</a>
+        <a href="/" class="active">Home</a>
+        <a href="/global-targets">Global Targets</a>
+        <a href="/energy-access">Energy Access</a>
+        <a href="/affordability">Affordability</a>
       </div>
     </nav>
 
     <header class="hero">
-      <div class="hero-grid">
-        <div class="hero-content">
-          <p class="hero-label">Center for Energy Research</p>
-          <h1 class="hero-title">
-            Global Renewable
-            <span class="title-highlight">Energy Targets</span>
-            <span class="title-year">2030</span>
-          </h1>
-          <p class="hero-description">
-            Tracking national commitments to renewable energy capacity and share targets across 88 countries worldwide.
-          </p>
-          <div class="hero-actions">
-            <a href="#explorer" class="btn btn-primary">Explore Data</a>
-            <a href="#methodology" class="btn btn-secondary">Methodology</a>
-          </div>
-        </div>
-        
-        <div class="hero-stats">
-          <div class="stat-card stat-featured">
-            <span class="stat-number">88</span>
-            <span class="stat-label">Countries Tracked</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-number">86</span>
-            <span class="stat-label">Capacity Targets (GW)</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-number">66</span>
-            <span class="stat-label">Share Targets (%)</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-number">7</span>
-            <span class="stat-label">Global Regions</span>
-          </div>
-        </div>
+      <div class="hero-content">
+        <p class="hero-label">Welcome to</p>
+        <h1 class="hero-title">
+          Energy Dashboard
+          <span class="title-highlight">DS3</span>
+        </h1>
+        <p class="hero-description">
+          Comprehensive analysis of global renewable energy targets and US state-level 
+          energy access, affordability, and reliability metrics.
+        </p>
       </div>
       
       <div class="hero-visual">
-        <div class="visual-bar" style="--height: 85%; --delay: 0s;"><span>EUR</span></div>
-        <div class="visual-bar" style="--height: 65%; --delay: 0.1s;"><span>ASIA</span></div>
-        <div class="visual-bar" style="--height: 45%; --delay: 0.2s;"><span>AFR</span></div>
-        <div class="visual-bar" style="--height: 35%; --delay: 0.3s;"><span>LAC</span></div>
-        <div class="visual-bar" style="--height: 25%; --delay: 0.4s;"><span>MEA</span></div>
-        <div class="visual-bar" style="--height: 20%; --delay: 0.5s;"><span>OCE</span></div>
-        <div class="visual-bar" style="--height: 18%; --delay: 0.6s;"><span>NAM</span></div>
+        <div class="visual-card">
+          <div class="visual-number">88</div>
+          <div class="visual-label">Countries Tracked</div>
+        </div>
+        <div class="visual-card">
+          <div class="visual-number">51</div>
+          <div class="visual-label">US States & DC</div>
+        </div>
+        <div class="visual-card">
+          <div class="visual-number">2030</div>
+          <div class="visual-label">Target Year</div>
+        </div>
       </div>
     </header>
 
-    <section id="overview" class="section section-dark">
+    <section id="features" class="section">
       <div class="section-header">
-        <span class="section-number">01</span>
+        <h2>Explore Our Dashboards</h2>
+        <p>Dive into comprehensive energy data and insights</p>
+      </div>
+      
+      <div class="features-grid">
+        <a href="/global-targets" class="feature-card">
+          <div class="feature-icon">🌍</div>
+          <h3>Global Renewable Targets</h3>
+          <p>
+            Track national commitments to renewable energy capacity across 88 countries. 
+            Analyze 2030 targets, regional breakdowns, and technology mix.
+          </p>
+          <div class="feature-stats">
+            <span class="stat-item">
+              <strong>86</strong> Capacity Targets
+            </span>
+            <span class="stat-item">
+              <strong>66</strong> Share Targets
+            </span>
+          </div>
+          <span class="feature-link">Explore Global Data →</span>
+        </a>
+        
+        <a href="/energy-access" class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>US Energy Access</h3>
+          <p>
+            Examine electricity affordability, grid reliability, and energy burden across 
+            all 50 US states and Washington DC.
+          </p>
+          <div class="feature-stats">
+            <span class="stat-item">
+              <strong>51</strong> States Analyzed
+            </span>
+            <span class="stat-item">
+              <strong>24</strong> Years of Data
+            </span>
+          </div>
+          <span class="feature-link">Explore US Data →</span>
+        </a>
+        
+        <a href="/affordability" class="feature-card">
+          <div class="feature-icon">💰</div>
+          <h3>Energy Affordability</h3>
+          <p>
+            Analyze energy burden—the share of household income spent on electricity—across 
+            all US states. Discover how income levels impact affordability more than prices.
+          </p>
+          <div class="feature-stats">
+            <span class="stat-item">
+              <strong>2.06%</strong> Avg Burden
+            </span>
+            <span class="stat-item">
+              <strong>2.7x</strong> Disparity
+            </span>
+          </div>
+          <span class="feature-link">Explore Affordability →</span>
+        </a>
+      </div>
+    </section>
+
+    <section id="highlights" class="section section-alt">
+      <div class="section-header">
         <h2>Key Insights</h2>
+        <p>Notable findings from our analysis</p>
       </div>
       
-      <div class="insights-grid">
-        <article class="insight-card">
-          <div class="insight-icon">🌍</div>
-          <h3>Europe Leads</h3>
-          <p>41 European countries have set renewable targets, representing the highest regional commitment globally.</p>
-          <span class="insight-stat">47% of tracked nations</span>
-        </article>
+      <div class="highlights-grid">
+        <div class="highlight-card">
+          <div class="highlight-icon">🌍</div>
+          <h4>Europe Leads Global Commitments</h4>
+          <p>41 European countries have set renewable energy targets, representing 47% of all tracked nations.</p>
+        </div>
         
-        <article class="insight-card">
-          <div class="insight-icon">☀️</div>
-          <h3>Solar Dominance</h3>
-          <p>Solar capacity targets exceed wind in the majority of national commitments for 2030.</p>
-          <span class="insight-stat">Leading technology</span>
-        </article>
+        <div class="highlight-card">
+          <div class="highlight-icon">💰</div>
+          <h4>Energy Burden Disparities</h4>
+          <p>Mississippi households spend 3.17% of income on electricity—nearly 3x Utah's 1.17% rate.</p>
+        </div>
         
-        <article class="insight-card">
-          <div class="insight-icon">📊</div>
-          <h3>Dual Targets</h3>
-          <p>64 countries have committed to both absolute capacity (GW) and relative share (%) targets.</p>
-          <span class="insight-stat">73% overlap</span>
-        </article>
+        <div class="highlight-card">
+          <div class="highlight-icon">⚡</div>
+          <h4>Grid Reliability Gap</h4>
+          <p>West Virginia experiences 486 minutes of outages annually—18x more than DC's 26 minutes.</p>
+        </div>
+        
+        <div class="highlight-card">
+          <div class="highlight-icon">☀️</div>
+          <h4>Solar Dominance</h4>
+          <p>Solar capacity targets exceed wind in the majority of 2030 national commitments worldwide.</p>
+        </div>
       </div>
     </section>
 
-    <section id="explorer" class="section">
-      <div class="section-header">
-        <span class="section-number">02</span>
-        <h2>Data Explorer</h2>
-      </div>
-      
-      <div class="explorer-preview">
-  		<CapacityChart client:load />
-      </div>
-    </section>
-
-    <section id="regions" class="section section-alt">
-      <div class="section-header">
-        <span class="section-number">03</span>
-        <h2>Regional Breakdown</h2>
-      </div>
-      
-      <div class="regions-grid">
-        <div class="region-card">
-          <span class="region-count">41</span>
-          <span class="region-name">Europe</span>
-          <div class="region-bar" style="--width: 100%;"></div>
-        </div>
-        <div class="region-card">
-          <span class="region-count">19</span>
-          <span class="region-name">Asia</span>
-          <div class="region-bar" style="--width: 46%;"></div>
-        </div>
-        <div class="region-card">
-          <span class="region-count">12</span>
-          <span class="region-name">Africa</span>
-          <div class="region-bar" style="--width: 29%;"></div>
-        </div>
-        <div class="region-card">
-          <span class="region-count">7</span>
-          <span class="region-name">Latin America & Caribbean</span>
-          <div class="region-bar" style="--width: 17%;"></div>
-        </div>
-        <div class="region-card">
-          <span class="region-count">4</span>
-          <span class="region-name">Middle East</span>
-          <div class="region-bar" style="--width: 10%;"></div>
-        </div>
-        <div class="region-card">
-          <span class="region-count">2</span>
-          <span class="region-name">Oceania</span>
-          <div class="region-bar" style="--width: 5%;"></div>
-        </div>
-        <div class="region-card">
-          <span class="region-count">2</span>
-          <span class="region-name">North America</span>
-          <div class="region-bar" style="--width: 5%;"></div>
+    <section id="about" class="section">
+      <div class="section-content-wide">
+        <h2>About This Project</h2>
+        <p class="about-intro">
+          Energy Dashboard DS3 is a comprehensive data visualization platform developed by the 
+          Center for Energy Research to track and analyze global renewable energy commitments 
+          and US energy access metrics.
+        </p>
+        
+        <div class="about-grid">
+          <div class="about-card">
+            <h3>Data Sources</h3>
+            <ul>
+              <li>Ember Climate - Global 2030 Targets Dataset</li>
+              <li>EIA (Energy Information Administration)</li>
+              <li>US Census Bureau ACS 2024</li>
+              <li>IRENA (International Renewable Energy Agency)</li>
+            </ul>
+          </div>
+          
+          <div class="about-card">
+            <h3>Project Goals</h3>
+            <ul>
+              <li>Track progress toward SDG 7 (Affordable & Clean Energy)</li>
+              <li>Identify energy equity challenges in the United States</li>
+              <li>Provide accessible, interactive data visualizations</li>
+              <li>Support evidence-based energy policy decisions</li>
+            </ul>
+          </div>
+          
+          <div class="about-card">
+            <h3>Technologies</h3>
+            <ul>
+              <li>Astro - Static site framework</li>
+              <li>React - Interactive components</li>
+              <li>D3.js - Data visualization library</li>
+              <li>Python - Data processing & analysis</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
@@ -168,7 +200,7 @@ import CapacityChart from '../components/CapacityChart.jsx';
           <span>ENERGY DS3</span>
         </div>
         <p>Center for Energy Research · Data Science Project</p>
-        <p class="footer-source">Data source: Ember Climate · 2030 Targets Dataset</p>
+        <p class="footer-source">Data: Ember Climate, EIA, Census Bureau ACS 2024</p>
       </div>
     </footer>
   </body>
@@ -176,15 +208,15 @@ import CapacityChart from '../components/CapacityChart.jsx';
 
 <style>
   :root {
-    --color-bg: #0a0f0d;
-    --color-bg-alt: #0f1512;
-    --color-surface: #141c18;
-    --color-primary: #22c55e;
-    --color-primary-dim: #16a34a;
-    --color-accent: #86efac;
-    --color-text: #f0fdf4;
-    --color-text-muted: #9ca3af;
-    --color-border: #1e3a2f;
+    --color-bg: #ffffff;
+    --color-bg-alt: #f8faf9;
+    --color-surface: #f1f5f3;
+    --color-primary: #16a34a;
+    --color-primary-dim: #22c55e;
+    --color-accent: #15803d;
+    --color-text: #1a1a1a;
+    --color-text-muted: #6b7280;
+    --color-border: #e5e7eb;
     --font-sans: 'DM Sans', system-ui, sans-serif;
     --font-mono: 'Space Mono', monospace;
   }
@@ -216,7 +248,7 @@ import CapacityChart from '../components/CapacityChart.jsx';
     justify-content: space-between;
     align-items: center;
     padding: 1.25rem 3rem;
-    background: rgba(10, 15, 13, 0.9);
+    background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--color-border);
     z-index: 100;
@@ -229,6 +261,7 @@ import CapacityChart from '../components/CapacityChart.jsx';
     font-family: var(--font-mono);
     font-weight: 700;
     font-size: 1.1rem;
+    color: var(--color-text);
   }
 
   .brand-icon {
@@ -252,28 +285,28 @@ import CapacityChart from '../components/CapacityChart.jsx';
     transition: color 0.2s;
   }
 
-  .nav-links a:hover {
+  .nav-links a:hover,
+  .nav-links a.active {
     color: var(--color-primary);
   }
 
   /* Hero */
   .hero {
     min-height: 100vh;
-    padding: 8rem 3rem 4rem;
     display: flex;
     flex-direction: column;
-    gap: 4rem;
+    align-items: center;
+    justify-content: center;
+    padding: 8rem 3rem 4rem;
+    text-align: center;
     background: 
-      radial-gradient(ellipse at 20% 80%, rgba(34, 197, 94, 0.08) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 20%, rgba(134, 239, 172, 0.05) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba(22, 163, 74, 0.08) 0%, transparent 60%),
       var(--color-bg);
   }
 
-  .hero-grid {
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 4rem;
-    align-items: center;
+  .hero-content {
+    max-width: 800px;
+    margin-bottom: 4rem;
   }
 
   .hero-label {
@@ -286,148 +319,101 @@ import CapacityChart from '../components/CapacityChart.jsx';
   }
 
   .hero-title {
-    font-size: 4rem;
+    font-size: 5rem;
     font-weight: 700;
     line-height: 1.1;
     margin-bottom: 1.5rem;
+    color: var(--color-text);
   }
 
   .title-highlight {
     display: block;
     color: var(--color-primary);
-  }
-
-  .title-year {
-    display: block;
     font-family: var(--font-mono);
-    font-size: 5rem;
-    color: var(--color-accent);
-    opacity: 0.3;
-    margin-top: -0.5rem;
   }
 
   .hero-description {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     color: var(--color-text-muted);
-    max-width: 500px;
-    margin-bottom: 2rem;
+    max-width: 650px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.7;
   }
 
   .hero-actions {
     display: flex;
     gap: 1rem;
+    justify-content: center;
   }
 
   .btn {
-    padding: 0.875rem 1.75rem;
-    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    font-size: 1rem;
     font-weight: 600;
     text-decoration: none;
-    border-radius: 6px;
+    border-radius: 8px;
     transition: all 0.2s;
+    font-family: var(--font-sans);
+  }
+
+  .btn-icon {
+    font-size: 1.3rem;
   }
 
   .btn-primary {
     background: var(--color-primary);
-    color: var(--color-bg);
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(22, 163, 74, 0.2);
   }
 
   .btn-primary:hover {
     background: var(--color-accent);
     transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(22, 163, 74, 0.3);
   }
 
   .btn-secondary {
     background: transparent;
     color: var(--color-text);
-    border: 1px solid var(--color-border);
+    border: 2px solid var(--color-border);
   }
 
   .btn-secondary:hover {
     border-color: var(--color-primary);
     color: var(--color-primary);
+    transform: translateY(-2px);
   }
 
-  .hero-stats {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-  }
-
-  .stat-card {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: 12px;
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-
-  .stat-featured {
-    grid-column: span 2;
-    background: linear-gradient(135deg, var(--color-primary-dim), var(--color-bg));
-    border-color: var(--color-primary);
-  }
-
-  .stat-number {
-    font-family: var(--font-mono);
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--color-accent);
-  }
-
-  .stat-featured .stat-number {
-    font-size: 3.5rem;
-  }
-
-  .stat-label {
-    font-size: 0.85rem;
-    color: var(--color-text-muted);
-  }
-
-  /* Hero Visual - Animated Bars */
+  /* Hero Visual */
   .hero-visual {
     display: flex;
-    align-items: flex-end;
+    gap: 2rem;
     justify-content: center;
-    gap: 1rem;
-    height: 200px;
-    padding: 1rem 2rem;
+  }
+
+  .visual-card {
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: 16px;
+    padding: 2rem 2.5rem;
+    min-width: 160px;
+    text-align: center;
   }
 
-  .visual-bar {
-    width: 50px;
-    height: var(--height);
-    background: linear-gradient(to top, var(--color-primary-dim), var(--color-primary));
-    border-radius: 6px 6px 0 0;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    padding-bottom: 0.5rem;
-    animation: growUp 0.8s ease-out backwards;
-    animation-delay: var(--delay);
-  }
-
-  .visual-bar span {
+  .visual-number {
     font-family: var(--font-mono);
-    font-size: 0.65rem;
-    color: var(--color-bg);
+    font-size: 3rem;
     font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
   }
 
-  @keyframes growUp {
-    from {
-      height: 0;
-      opacity: 0;
-    }
-    to {
-      height: var(--height);
-      opacity: 1;
-    }
+  .visual-label {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
   }
 
   /* Sections */
@@ -435,139 +421,190 @@ import CapacityChart from '../components/CapacityChart.jsx';
     padding: 5rem 3rem;
   }
 
-  .section-dark {
+  .section-alt {
     background: var(--color-bg-alt);
   }
 
-  .section-alt {
-    background: var(--color-surface);
-  }
-
   .section-header {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
+    text-align: center;
     margin-bottom: 3rem;
   }
 
-  .section-number {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    color: var(--color-primary);
-    padding: 0.5rem 1rem;
-    border: 1px solid var(--color-primary);
-    border-radius: 4px;
-  }
-
   .section-header h2 {
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: 700;
+    margin-bottom: 0.75rem;
+    color: var(--color-text);
   }
 
-  /* Insights Grid */
-  .insights-grid {
+  .section-header p {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+  }
+
+  /* Features Grid */
+  .features-grid {
+    max-width: 1200px;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .feature-card {
+    background: var(--color-bg);
+    border: 2px solid var(--color-border);
+    border-radius: 16px;
+    padding: 2.5rem;
+    text-decoration: none;
+    color: var(--color-text);
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .feature-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(22, 163, 74, 0.15);
+  }
+
+  .feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .feature-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+  }
+
+  .feature-card p {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    flex-grow: 1;
+  }
+
+  .feature-stats {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
+    flex-wrap: wrap;
+  }
+
+  .stat-item {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+  }
+
+  .stat-item strong {
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    color: var(--color-primary);
+    margin-right: 0.25rem;
+  }
+
+  .feature-link {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  .feature-card:hover .feature-link {
+    color: var(--color-accent);
+  }
+
+  /* Highlights Grid */
+  .highlights-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: 1.5rem;
   }
 
-  .insight-card {
+  .highlight-card {
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .highlight-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .highlight-card h4 {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+    color: var(--color-text);
+  }
+
+  .highlight-card p {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+
+  /* About Section */
+  .section-content-wide {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .about-intro {
+    font-size: 1.2rem;
+    color: var(--color-text-muted);
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    line-height: 1.7;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .about-card {
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: 12px;
     padding: 2rem;
-    transition: transform 0.2s, border-color 0.2s;
   }
 
-  .insight-card:hover {
-    transform: translateY(-4px);
-    border-color: var(--color-primary);
-  }
-
-  .insight-icon {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-
-  .insight-card h3 {
+  .about-card h3 {
     font-size: 1.25rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .insight-card p {
-    color: var(--color-text-muted);
-    font-size: 0.95rem;
     margin-bottom: 1rem;
-  }
-
-  .insight-stat {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
     color: var(--color-primary);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
   }
 
-
-  /* Explorer */
-  .explorer-preview {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: 16px;
-    min-height: 400px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .about-card ul {
+    list-style: none;
   }
 
-  .explorer-placeholder {
-    text-align: center;
+  .about-card li {
+    font-size: 0.95rem;
     color: var(--color-text-muted);
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
   }
 
-  .explorer-placeholder span {
-    display: block;
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
+  .about-card li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
     color: var(--color-primary);
-    margin-top: 0.5rem;
-  }
-
-  /* Regions */
-  .regions-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .region-card {
-    display: grid;
-    grid-template-columns: 60px 250px 1fr;
-    align-items: center;
-    gap: 1.5rem;
-    padding: 1rem 1.5rem;
-    background: var(--color-bg);
-    border: 1px solid var(--color-border);
-    border-radius: 8px;
-  }
-
-  .region-count {
-    font-family: var(--font-mono);
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--color-accent);
-  }
-
-  .region-name {
-    font-weight: 500;
-  }
-
-  .region-bar {
-    height: 8px;
-    background: linear-gradient(to right, var(--color-primary), var(--color-accent));
-    border-radius: 4px;
-    width: var(--width);
-    transition: width 0.6s ease-out;
   }
 
   /* Footer */
@@ -575,6 +612,7 @@ import CapacityChart from '../components/CapacityChart.jsx';
     padding: 3rem;
     border-top: 1px solid var(--color-border);
     text-align: center;
+    background: var(--color-bg);
   }
 
   .footer-brand {
@@ -585,6 +623,7 @@ import CapacityChart from '../components/CapacityChart.jsx';
     font-family: var(--font-mono);
     font-weight: 700;
     margin-bottom: 1rem;
+    color: var(--color-text);
   }
 
   .footer-content p {
@@ -600,28 +639,20 @@ import CapacityChart from '../components/CapacityChart.jsx';
 
   /* Responsive */
   @media (max-width: 1024px) {
-    .hero-grid {
-      grid-template-columns: 1fr;
-    }
-    
     .hero-title {
-      font-size: 3rem;
-    }
-    
-    .title-year {
       font-size: 3.5rem;
     }
     
-    .insights-grid {
+    .features-grid {
       grid-template-columns: 1fr;
     }
     
-    .region-card {
-      grid-template-columns: 50px 1fr;
+    .highlights-grid {
+      grid-template-columns: repeat(2, 1fr);
     }
     
-    .region-bar {
-      display: none;
+    .about-grid {
+      grid-template-columns: 1fr;
     }
   }
 
@@ -638,8 +669,34 @@ import CapacityChart from '../components/CapacityChart.jsx';
       padding: 6rem 1.5rem 3rem;
     }
     
+    .hero-title {
+      font-size: 2.5rem;
+    }
+    
+    .hero-actions {
+      flex-direction: column;
+    }
+    
+    .btn {
+      width: 100%;
+      justify-content: center;
+    }
+    
+    .hero-visual {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .visual-card {
+      width: 100%;
+    }
+    
     .section {
       padding: 3rem 1.5rem;
+    }
+    
+    .highlights-grid {
+      grid-template-columns: 1fr;
     }
   }
 </style>
