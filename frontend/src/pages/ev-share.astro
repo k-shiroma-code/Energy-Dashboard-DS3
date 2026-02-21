@@ -1,4 +1,6 @@
 ---
+/* ev-share.astro */
+import { renderEvSalesTop20 } from "../components/EvSalesTop20.js";
 ---
 
 <style>
@@ -9,28 +11,40 @@
     font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   }
 
-  .wrap {
-    padding: 24px;
-  }
+  .wrap { padding: 24px; display: grid; gap: 24px; }
+  h1 { margin: 0; font-size: 28px; font-weight: 700; }
+  h2 { margin: 0; font-size: 18px; font-weight: 700; }
+  .subtitle { margin-top: 6px; margin-bottom: 18px; font-size: 14px; color: rgba(232, 238, 252, 0.7); }
 
-  h1 {
-    margin: 0;
-    font-size: 28px;
-    font-weight: 700;
-    color: #e8eefc;
-  }
-
-  .subtitle {
-    margin-top: 6px;
-    margin-bottom: 18px;
-    font-size: 14px;
-    color: rgba(232, 238, 252, 0.7);
-  }
-
-  #chart {
+  .card {
     background: #0f1730;
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 10px;
+    padding: 16px;
+  }
+
+  /* Old chart svg container */
+  #chart-share {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* New chart container (module injects slider + svg inside) */
+  #chart-sales {
+    padding: 12px;
+    border-radius: 10px;
+  }
+
+  /* make slider row look nice */
+  #chart-sales .controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  #chart-sales input[type="range"] {
+    width: 420px;
   }
 
   #selected {
@@ -54,22 +68,40 @@
 </style>
 
 <div class="wrap">
-  <h1>Top 20 Countries: Average EV Sales Share</h1>
-  <p class="subtitle">Based on historical data (years prior to 2025)</p>
-
-  <svg id="chart" width="900" height="520"></svg>
-
-  <div id="selected">
-    Selected: <span id="selectedValue">None</span>
+  <div class="card">
+    <h1>EV Dashboard</h1>
+    <p class="subtitle">
+      Two charts: (1) EV sales share avg pre-2025, (2) EV sales top-20 by year.
+    </p>
   </div>
 
-  <div id="tooltip"></div>
+  <!-- ====== OLD CHART (share, pre-2025) ====== -->
+  <div class="card">
+    <h2>Top 20 Countries: Average EV Sales Share (Pre-2025)</h2>
+    <p class="subtitle">Static chart based on your CSV export.</p>
+
+    <svg id="chart-share" width="900" height="520"></svg>
+
+    <div id="selected">
+      Selected: <span id="selectedValue">None</span>
+    </div>
+
+    <div id="tooltip"></div>
+  </div>
+
+  <!-- ====== NEW CHART (EV sales, selectable year) ====== -->
+  <div class="card">
+    <h2>Top 20 Countries: EV Sales (Select Year)</h2>
+    <p class="subtitle">Interactive chart using JSON (up to 2035).</p>
+
+    <div id="chart-sales"></div>
+  </div>
 </div>
 
-<!-- Keep D3 CDN script in final HTML -->
+<!-- D3 CDN for OLD inline chart only -->
 <script is:inline src="https://d3js.org/d3.v7.min.js"></script>
 
-<!-- Keep chart code inline so it can access global `d3` -->
+<!-- OLD chart code (uses #chart-share) -->
 <script is:inline>
   const margin = { top: 40, right: 20, bottom: 140, left: 70 };
   const width = 900;
@@ -80,7 +112,7 @@
   const barColor = "#ff7f0e";
   const selectedColor = "#22c55e";
 
-  const svg = d3.select("#chart").attr("width", width).attr("height", height);
+  const svg = d3.select("#chart-share").attr("width", width).attr("height", height);
   const tooltip = d3.select("#tooltip");
   const selectedValueEl = document.getElementById("selectedValue");
 
@@ -90,114 +122,95 @@
     country: d.country,
     value: +d.value
   }))
-  .then(data => {
-    // Scales
-    const x = d3.scaleBand()
-      .domain(data.map(d => d.country))
-      .range([margin.left, width - margin.right])
-      .padding(0.2);
+    .then(data => {
+      const x = d3.scaleBand()
+        .domain(data.map(d => d.country))
+        .range([margin.left, width - margin.right])
+        .padding(0.2);
 
-    const y = d3.scaleLinear()
-      .domain([0, d3.max(data, d => d.value) || 0])
-      .nice()
-      .range([height - margin.bottom, margin.top]);
+      const y = d3.scaleLinear()
+        .domain([0, d3.max(data, d => d.value) || 0])
+        .nice()
+        .range([height - margin.bottom, margin.top]);
 
-    // Gridlines (y)
-    svg.append("g")
-      .attr("transform", `translate(${margin.left},0)`)
-      .call(d3.axisLeft(y).ticks(6).tickSize(-(width - margin.left - margin.right)).tickFormat(""))
-      .call(g => g.selectAll("line").attr("stroke", gridColor))
-      .call(g => g.selectAll("path").attr("stroke", "none"));
+      // Gridlines
+      svg.append("g")
+        .attr("transform", `translate(${margin.left},0)`)
+        .call(d3.axisLeft(y).ticks(6).tickSize(-(width - margin.left - margin.right)).tickFormat(""))
+        .call(g => g.selectAll("line").attr("stroke", gridColor))
+        .call(g => g.selectAll("path").attr("stroke", "none"));
 
-    // X axis
-    svg.append("g")
-      .attr("transform", `translate(0,${height - margin.bottom})`)
-      .call(d3.axisBottom(x))
-      .call(g => g.selectAll("path,line").attr("stroke", axisColor))
-      .call(g => g.selectAll("text").attr("fill", axisColor))
-      .selectAll("text")
-      .attr("transform", "rotate(-45)")
-      .style("text-anchor", "end");
+      // X axis
+      svg.append("g")
+        .attr("transform", `translate(0,${height - margin.bottom})`)
+        .call(d3.axisBottom(x))
+        .call(g => g.selectAll("path,line").attr("stroke", axisColor))
+        .call(g => g.selectAll("text").attr("fill", axisColor))
+        .selectAll("text")
+        .attr("transform", "rotate(-45)")
+        .style("text-anchor", "end");
 
-    // Y axis
-    svg.append("g")
-      .attr("transform", `translate(${margin.left},0)`)
-      .call(d3.axisLeft(y).ticks(6).tickFormat(d => `${d}%`))
-      .call(g => g.selectAll("path,line").attr("stroke", axisColor))
-      .call(g => g.selectAll("text").attr("fill", axisColor));
+      // Y axis
+      svg.append("g")
+        .attr("transform", `translate(${margin.left},0)`)
+        .call(d3.axisLeft(y).ticks(6).tickFormat(d => `${d}%`))
+        .call(g => g.selectAll("path,line").attr("stroke", axisColor))
+        .call(g => g.selectAll("text").attr("fill", axisColor));
 
-    // Y label
-    svg.append("text")
-      .attr("x", -(height / 2))
-      .attr("y", 18)
-      .attr("transform", "rotate(-90)")
-      .style("text-anchor", "middle")
-      .style("font-size", "12px")
-      .style("fill", axisColor)
-      .text("Average EV Sales Share (%)");
+      function applySelection() {
+        svg.selectAll("rect.bar")
+          .attr("fill", d => (d.country === selectedCountry ? selectedColor : barColor))
+          .attr("opacity", d => (selectedCountry && d.country !== selectedCountry ? 0.35 : 1));
 
-    // Footnote inside chart
-    svg.append("text")
-      .attr("x", width - margin.right)
-      .attr("y", height - 10)
-      .attr("text-anchor", "end")
-      .style("font-size", "11px")
-      .style("fill", "rgba(232, 238, 252, 0.5)")
-      .text("Note: Data includes observations prior to 2025 only.");
+        selectedValueEl.textContent = selectedCountry ? selectedCountry : "None";
+      }
 
-    // Helper to update selection styles
-    function applySelection() {
-      svg.selectAll("rect.bar")
-        .attr("fill", d => (d.country === selectedCountry ? selectedColor : barColor))
-        .attr("opacity", d => (selectedCountry && d.country !== selectedCountry ? 0.35 : 1));
+      const bars = svg.selectAll("rect.bar")
+        .data(data, d => d.country)
+        .enter()
+        .append("rect")
+        .attr("class", "bar")
+        .attr("x", d => x(d.country))
+        .attr("width", x.bandwidth())
+        .attr("y", y(0))
+        .attr("height", 0)
+        .attr("fill", barColor)
+        .attr("rx", 4);
 
-      selectedValueEl.textContent = selectedCountry ? selectedCountry : "None";
-    }
+      bars.transition()
+        .duration(900)
+        .delay((_, i) => i * 25)
+        .ease(d3.easeCubicOut)
+        .attr("y", d => y(d.value))
+        .attr("height", d => (height - margin.bottom) - y(d.value));
 
-    // Bars (start from zero for animation)
-    const bars = svg.selectAll("rect.bar")
-      .data(data, d => d.country)
-      .enter()
-      .append("rect")
-      .attr("class", "bar")
-      .attr("x", d => x(d.country))
-      .attr("width", x.bandwidth())
-      .attr("y", y(0))
-      .attr("height", 0)
-      .attr("fill", barColor)
-      .attr("rx", 4);
+      bars
+        .on("mousemove", (event, d) => {
+          tooltip
+            .style("opacity", 1)
+            .html(`<b>${d.country}</b><br/>${d.value.toFixed(2)}%`)
+            .style("left", (event.clientX + 12) + "px")
+            .style("top", (event.clientY - 28) + "px");
+        })
+        .on("mouseleave", () => {
+          tooltip.style("opacity", 0);
+          applySelection();
+        })
+        .on("click", (_, d) => {
+          selectedCountry = (selectedCountry === d.country) ? null : d.country;
+          applySelection();
+        });
 
-    // Animate on load
-    bars.transition()
-      .duration(900)
-      .delay((_, i) => i * 25)
-      .ease(d3.easeCubicOut)
-      .attr("y", d => y(d.value))
-      .attr("height", d => (height - margin.bottom) - y(d.value));
+      applySelection();
+    })
+    .catch(err => console.error("Failed to load share CSV:", err));
+</script>
 
-    // Interactions: tooltip + hover + click select
-    bars
-      .on("mouseenter", function () {
-        d3.select(this).attr("opacity", 0.85);
-      })
-      .on("mousemove", (event, d) => {
-        tooltip
-          .style("opacity", 1)
-          .html(`<b>${d.country}</b><br/>${d.value.toFixed(2)}%`)
-          .style("left", (event.clientX + 12) + "px")
-          .style("top", (event.clientY - 28) + "px");
-      })
-      .on("mouseleave", function () {
-        tooltip.style("opacity", 0);
-        applySelection();
-      })
-      .on("click", (_, d) => {
-        selectedCountry = (selectedCountry === d.country) ? null : d.country;
-        applySelection();
-      });
-
-    // Initial selection state
-    applySelection();
-  })
-  .catch(err => console.error("Failed to load CSV:", err));
+<!-- NEW chart call (Astro-bundled function, no module import in browser) -->
+<script is:inline>
+  renderEvSalesTop20({
+    container: "#chart-sales",
+    dataUrl: "/data/ev_sales_by_country_year.json",
+    initialYear: 2030
+  }).catch((err) => console.error("EV sales chart failed:", err));
 </script>
