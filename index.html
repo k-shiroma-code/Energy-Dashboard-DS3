@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Energy Dashboard</title>
+  <meta name="description" content="Energy Dashboard: interactive EV and energy insights." />
+
+  <link rel="stylesheet" href="./css/styles.css">
+  <script type="module" src="./index.js"></script>
+
+</head>
+
+<body>
+  <!-- ===== HEADER / NAV (keep stable) ===== -->
+  <header class="site-header">
+    <div class="container header-row">
+      <div class="brand">
+        <h1 class="brand-title">Energy Dashboard</h1>
+        <p class="brand-subtitle">A base web shell ready for D3 charts + team datasets</p>
+      </div>
+
+      <nav class="nav" aria-label="Primary navigation">
+      <a href="./index.html" aria-current="page">Dashboard</a>
+      <a href="./htmlfile/ev-share.html">EV Share Explorer</a>
+      <a href="./htmlfile/ev-sales.html">EV Sales Explorer</a>
+      <a href="./htmlfile/oil-info.html">Oil Import/Export Explorer</a>
+      <a href="./htmlfile/data.html">Data Set Explorer</a>
+      <a href="./index.html#about">About</a>
+    </nav>
+
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- ===== CONTROLS (IDs are stable; JS will wire them later) ===== -->
+    <section class="card" aria-label="Dashboard controls">
+      <div class="controls">
+        <div class="control">
+          <label for="yearSelect">Year</label>
+          <select id="yearSelect">
+            <!-- JS populates options -->
+          </select>
+        </div>
+
+        <div class="control">
+          <label for="metricSelect">Metric</label>
+          <select id="metricSelect">
+            <!-- Keep generic; update when dataset final -->
+            <option value="metric_a">Metric A</option>
+            <option value="metric_b">Metric B</option>
+          </select>
+        </div>
+
+        <div class="control">
+          <label for="topNSelect">Top N</label>
+          <select id="topNSelect">
+            <option value="10">10</option>
+            <option value="20" selected>20</option>
+            <option value="30">30</option>
+          </select>
+        </div>
+
+        <div class="control">
+          <button id="resetBtn" type="button">Reset</button>
+        </div>
+      </div>
+
+      <!-- Status / errors go here -->
+      <div class="status-row">
+        <div id="statusText" class="status">Waiting for data…</div>
+        <div id="lastUpdated" class="status-muted"></div>
+      </div>
+    </section>
+
+    <!-- ===== CHART AREA A (team can mount chart here) ===== -->
+    <section class="card" aria-label="Chart A">
+      <div class="card-header">
+        <h2 class="card-title" id="chartATitle">Chart A</h2>
+        <p class="card-subtitle" id="chartASubtitle">Placeholder (will be a D3 chart)</p>
+      </div>
+
+      <!-- Mount point: D3 renders into this div -->
+      <div id="chart-a" class="chart" role="img" aria-label="Chart A"></div>
+
+      <!-- Empty state (toggle with JS) -->
+      <div id="chart-a-empty" class="empty" hidden>No data available.</div>
+    </section>
+
+    <!-- ===== CHART AREA B (optional / future) ===== -->
+    <section class="card" aria-label="Chart B">
+      <div class="card-header">
+        <h2 class="card-title" id="chartBTitle">Chart B</h2>
+        <p class="card-subtitle" id="chartBSubtitle">Placeholder (optional)</p>
+      </div>
+
+      <div id="chart-b" class="chart" role="img" aria-label="Chart B"></div>
+      <div id="chart-b-empty" class="empty" hidden>Select something to view chart.</div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="card" id="about" aria-label="About this project">
+      <h2 class="card-title">About</h2>
+      <p>
+        This is a base dashboard shell designed for easy integration of datasets and D3 charts.
+        The HTML layout and IDs are stable so teammates can plug in charts without restructuring the site.
+      </p>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <div>© <span id="year"></span> Energy Dashboard</div>
+      <div class="footer-links">
+        <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+        <a href="mailto:your@email.com">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- D3 optional: you can leave this even before charts exist -->
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+
+  <!-- Your wiring layer: when team finalizes charts/data, they mostly edit main.js -->
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

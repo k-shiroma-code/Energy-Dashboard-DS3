@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Set Explorer</title>
+
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <!-- HERO -->
+  <section class="hero section">
+    <div class="hero-content container">
+      <div>
+        <h1>Data Set Explorer</h1>
+        <p class="subtitle">Sources, methodology, and dataset notes for the Energy Dashboard</p>
+
+        <nav class="nav" aria-label="Primary navigation">
+          <a href="../index.html">Dashboard</a>
+          <a href="./ev-share.html">EV Share Explorer</a>
+          <a href="./ev-sales.html">EV Sales Explorer</a>
+          <a href="./oil-info.html">Oil Import/Export Explorer</a>
+          <a href="./data.html" aria-current="page">Data Set Explorer</a>
+          <a href="../index.html#about">About</a>
+        </nav>
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+    <section class="card" aria-label="Data overview">
+      <h2>Data Overview</h2>
+      <p>
+        This page documents the datasets used in the Energy Dashboard, including sources, update cadence,
+        cleaning steps, and key assumptions.
+      </p>
+    </section>
+
+    <section class="card" aria-label="Sources">
+      <h2>Sources</h2>
+      <ul>
+        <li><strong>EV dataset:</strong> (to be finalized by team)</li>
+        <li><strong>Oil dataset:</strong> (to be finalized by team)</li>
+        <li><strong>Forecasting:</strong> (model + assumptions to be finalized by team)</li>
+      </ul>
+    </section>
+
+    <section class="card" aria-label="Methodology">
+      <h2>Methodology</h2>
+      <p>
+        Add notes about transformations (units, inflation adjustments, missing values handling, aggregation level),
+        and any limitations.
+      </p>
+    </section>
+
+    <section class="card" aria-label="Dataset preview">
+      <h2>Dataset Preview (Optional)</h2>
+      <p class="hint">
+        Later, you can render a small table preview here (or link to CSVs) once the dataset is finalized.
+      </p>
+      <div id="table" class="chart" aria-label="Dataset preview table area"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p class="copyright-text">&copy; <span id="year"></span> Energy Dashboard</p>
+  </footer>
+
+  <script type="module">
+    document.querySelector("#year").textContent = String(new Date().getFullYear());
+  </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EV Sales Share Explorer</title>
+
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <!-- HERO -->
+  <section class="hero section">
+    <div class="hero-content container">
+      <div>
+        <h1>EV Sales Share Explorer</h1>
+        <p class="subtitle">Select a year to see the top 20 EV sales countries</p>
+
+        <nav class="nav" aria-label="Primary navigation">
+          <a href="../index.html">Dashboard</a>
+          <a href="./ev-share.html" aria-current="page">EV Share Explorer</a>
+          <a href="./ev-sales.html">EV Sales Explorer</a>
+          <a href="./oil-info.html">Oil Import/Export Explorer</a>
+          <a href="./data.html">Data Set Explorer</a>
+          <a href="../index.html#about">About</a>
+        </nav>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTROLS + CHART -->
+  <main class="container">
+    <section id="chart-card" class="card">
+      <div class="toolbar">
+        <div class="toolbar-left">
+          <label for="yearSelect" class="label">Year</label>
+          <select id="yearSelect" class="select"></select>
+        </div>
+
+        <div class="toolbar-right">
+          <div class="meta">
+            <div class="meta-title" id="metaTitle">Top 20 Countries</div>
+            <div class="meta-sub" id="metaSub">EV sales</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="chart" class="chart" role="img" aria-label="Top 20 EV sales by country bar chart"></div>
+      <p class="hint" id="dataHint"></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p class="copyright-text">&copy; <span id="year"></span> Energy Dashboard</p>
+  </footer>
+
+  <!-- Scripts (ONLY ONCE, at the bottom) -->
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script type="module" src="../js/ev-share.js"></script>
+</body>
+</html>

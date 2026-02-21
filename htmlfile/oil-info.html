@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oil Import/Export Explorer</title>
+
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <!-- HERO -->
+  <section class="hero section">
+    <div class="hero-content container">
+      <div>
+        <h1>Oil Import/Export Explorer</h1>
+        <p class="subtitle">Explore oil trade flows, volumes, and trends by year and region</p>
+
+        <nav class="nav" aria-label="Primary navigation">
+          <a href="../index.html">Dashboard</a>
+          <a href="./ev-share.html">EV Share Explorer</a>
+          <a href="./ev-sales.html">EV Sales Explorer</a>
+          <a href="./oil-info.html" aria-current="page">Oil Import/Export Explorer</a>
+          <a href="./data.html">Data Set Explorer</a>
+          <a href="../index.html#about">About</a>
+        </nav>
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+    <!-- Controls -->
+    <section class="card" aria-label="Oil controls">
+      <div class="toolbar">
+        <div class="toolbar-left">
+          <label for="yearSelect" class="label">Year</label>
+          <select id="yearSelect" class="select"></select>
+        </div>
+
+        <div class="toolbar-left">
+          <label for="viewSelect" class="label">View</label>
+          <select id="viewSelect" class="select">
+            <option value="imports" selected>Imports</option>
+            <option value="exports">Exports</option>
+            <option value="net">Net (Exports - Imports)</option>
+          </select>
+        </div>
+
+        <div class="toolbar-right">
+          <div class="meta">
+            <div class="meta-title" id="metaTitle">Oil Trade</div>
+            <div class="meta-sub" id="metaSub">Choose a year to begin</div>
+          </div>
+        </div>
+      </div>
+
+      <p class="hint" id="dataHint"></p>
+    </section>
+
+    <!-- Chart / map placeholder -->
+    <section class="card" aria-label="Oil trade visualization">
+      <div id="chart" class="chart" role="img" aria-label="Oil trade chart"></div>
+      <div id="emptyState" class="empty" hidden>No data available for this selection.</div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p class="copyright-text">&copy; <span id="year"></span> Energy Dashboard</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script type="module" src="../js/oil-info.js"></script>
+</body>
+</html>
