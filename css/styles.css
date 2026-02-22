@@ -28,6 +28,102 @@
   --maxw: 1200px;
   --gap: 16px;
 }
+/* ===== Hero + pill nav (match teammate style) ===== */
+:root{
+  --bg0:#070b14;
+  --bg1:#0b1020;
+  --text:#e8eefc;
+  --muted: rgba(232,238,252,.68);
+  --border: rgba(255,255,255,.12);
+  --pill: rgba(255,255,255,.06);
+  --pill2: rgba(255,255,255,.08);
+  --accent:#3b82f6; /* blue */
+  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --sans: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+body{
+  margin:0;
+  color:var(--text);
+  font-family: var(--sans);
+  background:
+    radial-gradient(900px 420px at 12% 15%, rgba(59,130,246,.22), transparent 55%),
+    radial-gradient(800px 420px at 78% 5%, rgba(16,185,129,.14), transparent 55%),
+    radial-gradient(1200px 700px at 50% -10%, rgba(255,255,255,.06), transparent 60%),
+    linear-gradient(180deg, var(--bg0), var(--bg1));
+}
+
+.hero{
+  padding: 34px 28px 18px;
+}
+
+.hero__inner{
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.hero__title{
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 56px;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  line-height: 1.05;
+}
+
+.hero__title .accent{
+  color: var(--accent);
+}
+
+.hero__subtitle{
+  margin: 14px 0 18px;
+  font-size: 22px;
+  color: var(--muted);
+  max-width: 900px;
+}
+
+.pillnav{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  align-items:center;
+  padding: 6px 0 0;
+}
+
+.pillnav__link{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: var(--pill);
+  border: 1px solid var(--border);
+  color: rgba(232,238,252,.78);
+  text-decoration:none;
+  font-size: 18px;
+  font-weight: 650;
+  transition: background .15s ease, border-color .15s ease, color .15s ease;
+}
+
+.pillnav__link:hover{
+  background: var(--pill2);
+  color: rgba(232,238,252,.92);
+  border-color: rgba(255,255,255,.18);
+}
+
+.pillnav__link.is-active{
+  background: rgba(59,130,246,.14);
+  border-color: rgba(59,130,246,.65);
+  color: var(--accent);
+  box-shadow: 0 0 0 1px rgba(59,130,246,.25) inset;
+}
+
+/* Optional: keep rest of page aligned under hero */
+.page{
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 28px 48px;
+}
 
 /* ---- Reset / base ---- */
 *{ box-sizing:border-box; }
