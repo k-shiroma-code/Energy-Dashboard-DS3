@@ -345,6 +345,151 @@
       line-height: 1.6;
     }
 
+    /* ── Info Button & Modal ─────────────────────────── */
+    .info-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border-light);
+      background: var(--surface-2);
+      color: var(--text-muted);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-left: 8px;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .info-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-glow);
+      box-shadow: 0 0 12px var(--accent-glow);
+    }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal-overlay.open .modal-panel {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-panel {
+      background: var(--surface);
+      border: 1px solid var(--border-light);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 560px;
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 32px;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+      transform: translateY(12px) scale(0.97);
+      transition: transform 0.3s ease;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+    }
+    .modal-close:hover { color: var(--text); border-color: var(--border-light); }
+
+    .modal-panel h3 {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .modal-panel .modal-subtitle {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      margin-bottom: 24px;
+    }
+
+    .term-card {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 16px 18px;
+      margin-bottom: 12px;
+    }
+    .term-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .term-badge {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 6px;
+      letter-spacing: 0.02em;
+    }
+    .term-badge-p { background: rgba(59,130,246,0.15); color: var(--accent); }
+    .term-badge-d { background: rgba(34,197,94,0.15); color: var(--green); }
+    .term-badge-q { background: rgba(168,85,247,0.15); color: #a855f7; }
+    .term-badge-mape { background: rgba(245,158,11,0.15); color: var(--amber); }
+    .term-badge-aic { background: rgba(236,72,153,0.15); color: #ec4899; }
+    .term-badge-ci { background: rgba(6,182,212,0.15); color: #06b6d4; }
+    .term-badge-kbd { background: rgba(99,102,241,0.15); color: #6366f1; }
+    .term-name {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .term-body {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+    .term-example {
+      display: inline-block;
+      margin-top: 8px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 4px 12px;
+      color: var(--text-dim);
+    }
+
     /* ── Empty state ─────────────────────────────────── */
     .empty-notice {
       padding: 40px;
@@ -439,9 +584,96 @@
 
     <!-- ═══ TABLE ═══ -->
     <section class="card" aria-label="Forecast summary table">
-      <p class="section-label" id="tableLabel">Forecast Summary</p>
+      <p class="section-label" id="tableLabel">Forecast Summary <button class="info-btn" id="infoBtn" title="What do these terms mean?">?</button></p>
       <div id="summaryTable" style="overflow-x:auto"></div>
     </section>
+
+    <!-- ═══ INFO MODAL ═══ -->
+    <div class="modal-overlay" id="infoModal">
+      <div class="modal-panel" style="position:relative">
+        <button class="modal-close" id="modalClose">✕</button>
+        <h3>Understanding the Forecast</h3>
+        <p class="modal-subtitle">Key terms used in the ARIMA model and this dashboard</p>
+
+        <div class="term-card">
+          <div class="term-header">
+            <span class="term-badge term-badge-p">p</span>
+            <span class="term-name">Auto-Regressive Order</span>
+          </div>
+          <p class="term-body">
+            The number of past values (lags) the model uses to predict the next value. A higher <strong style="color:var(--accent)">p</strong> means the model looks further back in history. Think of it as "memory length."
+          </p>
+          <span class="term-example">p=2 → uses the last 2 years to predict</span>
+        </div>
+
+        <div class="term-card">
+          <div class="term-header">
+            <span class="term-badge term-badge-d">d</span>
+            <span class="term-name">Differencing Order</span>
+          </div>
+          <p class="term-body">
+            How many times the data is differenced to make it stationary (removing trends). A value of <strong style="color:var(--green)">d=1</strong> means we look at year-over-year changes instead of raw values.
+          </p>
+          <span class="term-example">d=1 → model uses changes, not levels</span>
+        </div>
+
+        <div class="term-card">
+          <div class="term-header">
+            <span class="term-badge term-badge-q">q</span>
+            <span class="term-name">Moving Average Order</span>
+          </div>
+          <p class="term-body">
+            The number of past forecast errors the model incorporates. This helps smooth out noise and capture shock effects that ripple through the data.
+          </p>
+          <span class="term-example">q=1 → corrects using 1 past error</span>
+        </div>
+
+        <div class="term-card">
+          <div class="term-header">
+            <span class="term-badge term-badge-mape">MAPE</span>
+            <span class="term-name">Mean Absolute Percentage Error</span>
+          </div>
+          <p class="term-body">
+            Measures forecast accuracy as a percentage. Lower is better. Under 5% is excellent, 5–10% is good, and above 10% suggests the model may struggle with that country's volatility.
+          </p>
+          <span class="term-example">MAPE 3.2% → avg error of 3.2% per year</span>
+        </div>
+
+        <div class="term-card">
+          <div class="term-header">
+            <span class="term-badge term-badge-aic">AIC</span>
+            <span class="term-name">Akaike Information Criterion</span>
+          </div>
+          <p class="term-body">
+            A score used to select the best (p, d, q) combination. It balances model fit against complexity — lower AIC means a better trade-off. The grid search tests many combinations and picks the lowest AIC.
+          </p>
+          <span class="term-example">Best model = lowest AIC across grid</span>
+        </div>
+
+        <div class="term-card">
+          <div class="term-header">
+            <span class="term-badge term-badge-ci">95% CI</span>
+            <span class="term-name">Confidence Interval</span>
+          </div>
+          <p class="term-body">
+            The shaded band around forecast lines. There's a 95% probability the true value falls within this range. Wider bands = more uncertainty, which naturally grows the further out you forecast.
+          </p>
+          <span class="term-example">Wider band in 2030 vs 2025 = more uncertainty</span>
+        </div>
+
+        <div class="term-card">
+          <div class="term-header">
+            <span class="term-badge term-badge-kbd">KBD</span>
+            <span class="term-name">Thousand Barrels per Day</span>
+          </div>
+          <p class="term-body">
+            The standard unit for measuring oil trade volume. 1 KBD = 1,000 barrels of oil flowing per day. This is the unit used across all values in this dashboard.
+          </p>
+          <span class="term-example">5,000 KBD = 5 million barrels/day</span>
+        </div>
+
+      </div>
+    </div>
 
     <p class="footnote">Source: JODI Oil World Database · Log-ARIMA models selected via AIC grid search · Forecast horizon 2024–2030</p>
   </main>
@@ -543,6 +775,17 @@
     const statGrid   = document.getElementById("statGrid");
 
     document.getElementById("footYear").textContent = new Date().getFullYear();
+
+    // ── Info Modal ──────────────────────────────────────────────────────────
+    const infoModal = document.getElementById("infoModal");
+    document.getElementById("infoBtn").onclick = () => infoModal.classList.add("open");
+    document.getElementById("modalClose").onclick = () => infoModal.classList.remove("open");
+    infoModal.addEventListener("click", (e) => {
+      if (e.target === infoModal) infoModal.classList.remove("open");
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") infoModal.classList.remove("open");
+    });
 
     let svg, gMain, xScale, yScale, tooltip;
 
@@ -830,7 +1073,7 @@
         <table class="oil-table">
           <thead><tr>
             <th>Country</th><th>2023 Actual</th><th>2030 Forecast</th><th>Change</th>
-            ${hasMape ? "<th>MAPE</th>" : ""}${hasOrder ? "<th>ARIMA</th>" : ""}
+            ${hasMape ? `<th>MAPE</th>` : ""}${hasOrder ? `<th>ARIMA <button class="info-btn" style="width:18px;height:18px;font-size:0.6rem" title="What is ARIMA?" onclick="document.getElementById('infoModal').classList.add('open')">?</button></th>` : ""}
           </tr></thead>
           <tbody>${rows}</tbody>
         </table>`;
