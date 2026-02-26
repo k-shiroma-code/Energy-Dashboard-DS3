@@ -675,10 +675,10 @@
         <div class="term-card">
           <div class="term-header">
             <span class="term-badge term-badge-aic">Orders</span>
-            <span class="term-name">Why Each Country Got a Different Model</span>
+            <span class="term-name">Why Each Export Country Got a Different Model</span>
           </div>
           <p class="term-body">
-            Not every country exports oil the same way — some are steady, some are driven by politics, some had sudden booms. We looked at how "jumpy" each country's data was year-to-year and picked the model that best matches that behaviour.
+            These orders apply to the <strong style="color:var(--accent)">Exports</strong> page only — not imports. Not every country exports oil the same way — some are steady, some are driven by politics, some had sudden booms. We looked at how "jumpy" each country's export data was year-to-year and picked the model that best matches that behaviour.
           </p>
           <div style="margin-top:0.75rem;display:flex;flex-direction:column;gap:0.6rem;font-size:0.78rem;line-height:1.6;">
             <div>
@@ -2014,7 +2014,11 @@
 
     // ── Info Modal ──────────────────────────────────────────────────────────
     const infoModal = document.getElementById("infoModal");
-    document.getElementById("infoBtn").onclick = () => infoModal.classList.add("open");
+    document.getElementById("infoBtn").onclick = () => {
+      infoModal.classList.add("open");
+      const exportCard = document.getElementById("exportOrdersCard");
+      if (exportCard) exportCard.style.display = view === "exports" ? "" : "none";
+    };
     document.getElementById("modalClose").onclick = () => infoModal.classList.remove("open");
     infoModal.addEventListener("click", (e) => {
       if (e.target === infoModal) infoModal.classList.remove("open");
