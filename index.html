@@ -3,131 +3,1115 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Energy Dashboard</title>
-  <meta name="description" content="Energy Dashboard: interactive EV and energy insights." />
-    <!-- Link CSS HERE -->
+  <title>Energy Dashboard — EV Adoption & Oil Imports</title>
+  <meta name="description" content="Explore whether EV adoption reduces oil imports and how those savings could fund infrastructure investment." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+  <!-- Link CSS HERE -->
   <link rel="stylesheet" href="./css/styles.css" />
   <!-- Load D3 HERE -->
-  <script type="module" src="./index.js"></script>
+  <script type="module" src="./jsfile/index.js"></script>
 
+  <style>
+    /* ─── CSS Variables ─────────────────────────────────────── */
+    :root {
+      --bg:          #0d1117;
+      --bg-card:     #161b24;
+      --bg-card-alt: #1c2333;
+      --border:      #2a3347;
+      --border-glow: #3b5278;
+
+      --text-primary:   #e8edf5;
+      --text-secondary: #8a9ab8;
+      --text-muted:     #4e5e7a;
+
+      --accent-amber: #f5a623;
+      --accent-teal:  #2dd4bf;
+      --accent-blue:  #5b8dee;
+      --accent-red:   #ff6b6b;
+
+      --font-display: 'Syne', sans-serif;
+      --font-body:    'Source Serif 4', Georgia, serif;
+      --font-mono:    'IBM Plex Mono', monospace;
+
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 14px;
+
+      --shadow-card: 0 2px 20px rgba(0,0,0,.45);
+      --shadow-glow: 0 0 24px rgba(91,141,238,.15);
+    }
+
+    /* ─── Reset ──────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text-primary);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--accent-teal); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    img, svg { display: block; max-width: 100%; }
+
+    /* ─── Layout Helpers ─────────────────────────────────────── */
+    .wrap {
+      max-width: 1280px;
+      margin-inline: auto;
+      padding-inline: clamp(1.25rem, 4vw, 3rem);
+    }
+
+    /* ─── Header ─────────────────────────────────────────────── */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13,17,23,.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .site-header .wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding-block: .9rem;
+    }
+
+    .brand { display: flex; align-items: baseline; gap: .6rem; }
+
+    .brand-wordmark {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: -.01em;
+      line-height: 1;
+    }
+
+    .brand-wordmark .energy    { color: var(--accent-amber); }
+    .brand-wordmark .dashboard { color: var(--text-primary); }
+
+    .brand-tag {
+      font-family: var(--font-mono);
+      font-size: .65rem;
+      color: var(--text-muted);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      display: none;
+    }
+
+    /* ─── Pill Nav ────────────────────────────────────────────── */
+    .pillnav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .35rem;
+    }
+
+    .pillnav__link {
+      font-family: var(--font-display);
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .03em;
+      color: var(--text-secondary);
+      padding: .3rem .85rem;
+      border-radius: 99px;
+      border: 1px solid transparent;
+      transition: color .18s, border-color .18s, background .18s;
+    }
+
+    .pillnav__link:hover {
+      color: var(--text-primary);
+      border-color: var(--border);
+      text-decoration: none;
+    }
+
+    .pillnav__link.is-active {
+      color: var(--accent-amber);
+      border-color: rgba(245,166,35,.35);
+      background: rgba(245,166,35,.07);
+    }
+
+    /* ─── Hero ───────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding-block: clamp(4rem, 10vw, 7rem);
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Decorative grid lines */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      opacity: .25;
+      pointer-events: none;
+    }
+
+    /* Glow blob */
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 500px;
+      background: radial-gradient(ellipse at center,
+        rgba(91,141,238,.18) 0%,
+        rgba(45,212,191,.06) 50%,
+        transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: .72rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent-teal);
+      margin-bottom: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 28px;
+      height: 1px;
+      background: var(--accent-teal);
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -.03em;
+      color: var(--text-primary);
+      max-width: 16ch;
+    }
+
+    .hero-headline em {
+      font-style: normal;
+      color: var(--accent-amber);
+    }
+
+    .hero-body {
+      font-size: clamp(.95rem, 1.6vw, 1.1rem);
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 56ch;
+      margin-top: 1.25rem;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+      margin-top: 2rem;
+    }
+
+    .btn {
+      font-family: var(--font-display);
+      font-size: .82rem;
+      font-weight: 700;
+      letter-spacing: .04em;
+      padding: .65rem 1.4rem;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid transparent;
+      cursor: pointer;
+      transition: all .18s;
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--accent-amber);
+      color: #0d1117;
+      border-color: var(--accent-amber);
+    }
+
+    .btn-primary:hover {
+      background: #ffc04d;
+      border-color: #ffc04d;
+      text-decoration: none;
+      color: #0d1117;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-secondary);
+      border-color: var(--border);
+    }
+
+    .btn-ghost:hover {
+      color: var(--text-primary);
+      border-color: var(--border-glow);
+      text-decoration: none;
+    }
+
+    /* Hero stat pills */
+    .hero-stats {
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+      min-width: 180px;
+    }
+
+    .stat-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: .8rem 1rem;
+      text-align: right;
+      animation: fadeUp .6s ease both;
+    }
+
+    .stat-pill:nth-child(2) { animation-delay: .1s; }
+    .stat-pill:nth-child(3) { animation-delay: .2s; }
+
+    .stat-value {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .stat-value.amber { color: var(--accent-amber); }
+    .stat-value.teal  { color: var(--accent-teal); }
+    .stat-value.blue  { color: var(--accent-blue); }
+
+    .stat-label {
+      font-family: var(--font-mono);
+      font-size: .65rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: .2rem;
+    }
+
+    /* ─── Animations ─────────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-hero > * {
+      animation: fadeUp .55s ease both;
+    }
+
+    .animate-hero > *:nth-child(1) { animation-delay: .05s; }
+    .animate-hero > *:nth-child(2) { animation-delay: .15s; }
+    .animate-hero > *:nth-child(3) { animation-delay: .25s; }
+    .animate-hero > *:nth-child(4) { animation-delay: .32s; }
+
+    /* ─── Section Label ───────────────────────────────────────── */
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: .4rem;
+    }
+
+    /* ─── Main Grid ───────────────────────────────────────────── */
+    .main-content {
+      padding-block: 3rem 5rem;
+    }
+
+    /* ─── Dashboard Controls ─────────────────────────────────── */
+    .controls-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-card);
+    }
+
+    .controls-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      gap: 1rem;
+    }
+
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: .3rem;
+    }
+
+    .control-group label {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .control-group select,
+    .control-group input {
+      font-family: var(--font-display);
+      font-size: .84rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: .45rem .75rem;
+      min-width: 110px;
+      cursor: pointer;
+      transition: border-color .15s;
+    }
+
+    .control-group select:focus,
+    .control-group input:focus {
+      outline: none;
+      border-color: var(--accent-blue);
+    }
+
+    .status-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: .9rem;
+      padding-top: .9rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent-teal);
+      box-shadow: 0 0 8px var(--accent-teal);
+      flex-shrink: 0;
+    }
+
+    #statusText {
+      font-family: var(--font-mono);
+      font-size: .72rem;
+      color: var(--text-secondary);
+    }
+
+    #lastUpdated {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      color: var(--text-muted);
+      margin-left: auto;
+    }
+
+    /* ─── Chart Grid ──────────────────────────────────────────── */
+    .chart-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .chart-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-card);
+      transition: border-color .2s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chart-card:hover { border-color: var(--border-glow); }
+
+    .chart-card--wide  { grid-column: span 8; }
+    .chart-card--side  { grid-column: span 4; }
+    .chart-card--half  { grid-column: span 6; }
+    .chart-card--full  { grid-column: span 12; }
+
+    .chart-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+      gap: 1rem;
+    }
+
+    .chart-card-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+
+    .chart-card-subtitle {
+      font-family: var(--font-body);
+      font-size: .82rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      margin-top: .2rem;
+    }
+
+    .chart-badge {
+      font-family: var(--font-mono);
+      font-size: .62rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: .2rem .55rem;
+      border-radius: 3px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .chart-badge--ev     { background: rgba(45,212,191,.12); color: var(--accent-teal); }
+    .chart-badge--oil    { background: rgba(245,166,35,.12); color: var(--accent-amber); }
+    .chart-badge--invest { background: rgba(91,141,238,.12); color: var(--accent-blue); }
+
+    /* ─── Chart Mount Area ────────────────────────────────────── */
+    /* D3 chart containers — style sizes here, JS fills them */
+    .chart-mount {
+      flex: 1;
+      min-height: 260px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Placeholder skeleton shown before D3 renders */
+    .chart-placeholder {
+      position: absolute;
+      inset: 0;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      gap: .3rem;
+      padding: .5rem;
+    }
+
+    .chart-placeholder--bar .ph-bar {
+      flex: 1;
+      background: linear-gradient(180deg, var(--border) 0%, transparent 100%);
+      border-radius: 2px 2px 0 0;
+      opacity: .5;
+    }
+
+    .chart-placeholder--line::after {
+      content: '';
+      position: absolute;
+      inset: 20% 5% 15%;
+      border-bottom: 2px dashed var(--border);
+      border-left: 2px dashed var(--border);
+    }
+
+    .chart-placeholder--scatter .ph-dot {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border);
+      opacity: .5;
+    }
+
+    .chart-placeholder-label {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: .4rem;
+      pointer-events: none;
+    }
+
+    .chart-placeholder-label svg {
+      width: 24px;
+      height: 24px;
+      opacity: .25;
+    }
+
+    .chart-placeholder-label span {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .empty-state {
+      font-family: var(--font-mono);
+      font-size: .72rem;
+      color: var(--text-muted);
+    }
+
+    /* ─── Insight Card ────────────────────────────────────────── */
+    .insight-card {
+      background: linear-gradient(135deg, rgba(45,212,191,.06) 0%, rgba(91,141,238,.06) 100%);
+      border: 1px solid rgba(45,212,191,.2);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+    }
+
+    .insight-card-header {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      margin-bottom: .75rem;
+    }
+
+    .insight-icon {
+      font-size: 1.3rem;
+      line-height: 1;
+    }
+
+    .insight-card-title {
+      font-family: var(--font-display);
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--accent-teal);
+    }
+
+    .insight-card p {
+      font-size: .9rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    /* ─── About / Methods Section ─────────────────────────────── */
+    .about-section {
+      border-top: 1px solid var(--border);
+      padding-top: 3rem;
+      margin-top: 1rem;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .about-block {
+      background: var(--bg-card-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+    }
+
+    .about-block-icon {
+      font-size: 1.5rem;
+      margin-bottom: .6rem;
+    }
+
+    .about-block h3 {
+      font-family: var(--font-display);
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: .6rem;
+    }
+
+    .about-block p {
+      font-size: .87rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .about-block a { color: var(--accent-teal); }
+
+    .section-heading {
+      font-family: var(--font-display);
+      font-size: clamp(1.35rem, 3vw, 1.8rem);
+      font-weight: 800;
+      letter-spacing: -.02em;
+      color: var(--text-primary);
+    }
+
+    .section-lead {
+      font-size: .95rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 62ch;
+      margin-top: .6rem;
+    }
+
+    /* ─── Footer ──────────────────────────────────────────────── */
+    .site-footer {
+      border-top: 1px solid var(--border);
+      padding-block: 1.5rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      color: var(--text-muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.25rem;
+    }
+
+    .footer-links a {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      color: var(--text-muted);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      transition: color .15s;
+    }
+
+    .footer-links a:hover {
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    /* ─── Responsive ──────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .hero-inner        { grid-template-columns: 1fr; }
+      .hero-stats        { flex-direction: row; flex-wrap: wrap; }
+      .stat-pill         { flex: 1; min-width: 130px; text-align: left; }
+      .chart-card--wide,
+      .chart-card--side,
+      .chart-card--half  { grid-column: span 12; }
+      .brand-tag         { display: none; }
+    }
+
+    @media (max-width: 600px) {
+      .pillnav { gap: .2rem; }
+      .pillnav__link { font-size: .72rem; padding: .25rem .65rem; }
+      .site-header .wrap { flex-direction: column; align-items: flex-start; gap: .75rem; }
+      .controls-row { flex-direction: column; align-items: stretch; }
+      .control-group select { min-width: 100%; }
+      .hero-cta-row { flex-direction: column; }
+      .btn { justify-content: center; }
+    }
+
+    /* ─── Focus visible ───────────────────────────────────────── */
+    :focus-visible {
+      outline: 2px solid var(--accent-teal);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    /* ─── Selection ───────────────────────────────────────────── */
+    ::selection {
+      background: rgba(45,212,191,.25);
+      color: var(--text-primary);
+    }
+
+    /* ─── Scrollbar ───────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--border-glow); }
+  </style>
 </head>
 
 <body>
-  <!-- ===== HEADER / NAV (keep stable) ===== -->
-  <header class="site-header">
-    <div class="wrap__inner">
-      <div class="brand">
-        <h1 class="wrap-title">
-            <span class="energy">Energy</span>
-            <span class="dashboard">Dashboard</span>
+
+  <!-- ===== HEADER / NAV ===== -->
+  <header class="site-header" role="banner">
+    <div class="wrap">
+      <div class="brand" aria-label="Site brand">
+        <h1 class="brand-wordmark">
+          <span class="energy">Energy</span><span class="dashboard">Dashboard</span>
         </h1>
-        <p class="brand-subtitle">A base web shell ready for D3 charts + team datasets</p>
+        <p class="brand-tag">IEA Data · EV &amp; Oil</p>
       </div>
 
       <nav class="pillnav" aria-label="Primary navigation">
-        <a class="pillnav__link is-active" href="./index.html">Dashboard</a>
-        <a class="pillnav__link" href="./htmlfile/ev-share.html">EV Share</a>
-        <a class="pillnav__link" href="./htmlfile/ev-sales.html">EV Sales</a>
-        <a class="pillnav__link" href="./htmlfile/oil-info.html">Oil Explorer</a>
-        <a class="pillnav__link" href="./htmlfile/data.html">Datasets</a>
-        <a class="pillnav__link" href="./index.html#about">About</a>
+        <a class="pillnav__link is-active" href="./index.html"      aria-current="page">Dashboard</a>
+        <a class="pillnav__link"           href="./htmlfile/ev-share.html">EV Share</a>
+        <a class="pillnav__link"           href="./htmlfile/ev-sales.html">EV Sales</a>
+        <a class="pillnav__link"           href="./htmlfile/oil-info.html">Oil Explorer</a>
+        <a class="pillnav__link"           href="./htmlfile/data.html">Datasets</a>
+        <a class="pillnav__link"           href="#about">About</a>
       </nav>
     </div>
-  </div>
-</header>
+  </header>
 
 
-  <main class="container">
-    <!-- ===== CONTROLS (IDs are stable; JS will wire them later) ===== -->
-    <section class="card" aria-label="Dashboard controls">
-      <div class="controls">
-        <div class="control">
-          <label for="yearSelect">Year</label>
-          <select id="yearSelect">
-            <!-- JS populates options -->
-          </select>
+  <!-- ===== HERO ===== -->
+  <section class="hero" aria-label="Project overview">
+    <div class="wrap">
+      <div class="hero-inner">
+
+        <!-- Copy -->
+        <div class="animate-hero">
+          <p class="hero-eyebrow">IEA Data · 2000–2023</p>
+          <h2 class="hero-headline">
+            Does <em>EV adoption</em> cut oil dependency?
+          </h2>
+          <p class="hero-body">
+            We combine IEA oil import/export data with global EV sales figures to examine whether
+            rising electric vehicle adoption measurably reduces oil imports in non-producing countries —
+            and how the resulting savings could fund clean energy infrastructure.
+          </p>
+          <div class="hero-cta-row">
+            <a class="btn btn-primary" href="#charts">Explore charts ↓</a>
+            <a class="btn btn-ghost"   href="#about">Methods &amp; data</a>
+          </div>
         </div>
 
-        <div class="control">
+        <!-- Context stats (static / replaced by JS when data loads) -->
+        <aside class="hero-stats" aria-label="Key statistics">
+          <div class="stat-pill">
+            <div class="stat-value amber" id="stat-ev-share">~18%</div>
+            <div class="stat-label">Global new-car EV share 2023</div>
+          </div>
+          <div class="stat-pill">
+            <div class="stat-value teal" id="stat-oil-delta">↓ 2.4Mb/d</div>
+            <div class="stat-label">Est. oil displaced by EVs (2023)</div>
+          </div>
+          <div class="stat-pill">
+            <div class="stat-value blue" id="stat-countries">50+</div>
+            <div class="stat-label">Countries in dataset</div>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="main-content wrap" id="charts" aria-label="Dashboard content">
+
+    <!-- ── Dashboard Controls ──────────────────────────────────── -->
+    <section class="controls-card" aria-label="Dashboard controls">
+      <div class="controls-row">
+
+        <div class="control-group">
+          <label for="yearSelect">Year</label>
+          <!-- JS populates options -->
+          <select id="yearSelect" aria-label="Select year"></select>
+        </div>
+
+        <div class="control-group">
           <label for="metricSelect">Metric</label>
-          <select id="metricSelect">
-            <!-- Keep generic; update when dataset final -->
+          <select id="metricSelect" aria-label="Select metric">
             <option value="metric_a">Metric A</option>
             <option value="metric_b">Metric B</option>
           </select>
         </div>
 
-        <div class="control">
-          <label for="topNSelect">Top N</label>
-          <select id="topNSelect">
+        <div class="control-group">
+          <label for="topNSelect">Top N countries</label>
+          <select id="topNSelect" aria-label="Select number of countries">
             <option value="10">10</option>
             <option value="20" selected>20</option>
             <option value="30">30</option>
           </select>
         </div>
 
-        <div class="control">
-          <button id="resetBtn" type="button">Reset</button>
+        <div class="control-group" style="margin-left:auto;">
+          <label>&nbsp;</label>
+          <button id="resetBtn" class="btn btn-ghost" type="button" aria-label="Reset all filters">
+            ↺ Reset
+          </button>
         </div>
       </div>
 
-      <!-- Status / errors go here -->
-      <div class="status-row">
-        <div id="statusText" class="status">Waiting for data…</div>
-        <div id="lastUpdated" class="status-muted"></div>
+      <div class="status-row" role="status" aria-live="polite">
+        <div class="status-dot" aria-hidden="true"></div>
+        <div id="statusText">Waiting for data…</div>
+        <div id="lastUpdated" aria-label="Last updated"></div>
       </div>
     </section>
 
-    <!-- ===== CHART AREA A (team can mount chart here) ===== -->
-    <section class="card" aria-label="Chart A">
-      <div class="card-header">
-        <h2 class="card-title" id="chartATitle">Chart A</h2>
-        <p class="card-subtitle" id="chartASubtitle">Placeholder (will be a D3 chart)</p>
-      </div>
 
-      <!-- Mount point: D3 renders into this div -->
-      <div id="chart-a" class="chart" role="img" aria-label="Chart A"></div>
+    <!-- ── Row 1: EV growth (wide) + Key insight (side) ──────── -->
+    <div class="chart-grid">
 
-      <!-- Empty state (toggle with JS) -->
-      <div id="chart-a-empty" class="empty" hidden>No data available.</div>
-    </section>
+      <!-- CHART A: EV Sales / Growth over Time -->
+      <!-- ↓↓↓ D3 TARGET: id="chart-ev-growth" — replace placeholder content ↓↓↓ -->
+      <section class="chart-card chart-card--wide" aria-labelledby="chartATitle" id="chart-ev">
+        <div class="chart-card-header">
+          <div>
+            <p class="section-label">Chart A</p>
+            <h2 class="chart-card-title" id="chartATitle">EV Sales &amp; Market Growth</h2>
+            <p class="chart-card-subtitle" id="chartASubtitle">Annual EV sales by country/region — IEA Global EV Outlook</p>
+          </div>
+          <span class="chart-badge chart-badge--ev">EV</span>
+        </div>
 
-    <!-- ===== CHART AREA B (optional / future) ===== -->
-    <section class="card" aria-label="Chart B">
-      <div class="card-header">
-        <h2 class="card-title" id="chartBTitle">Chart B</h2>
-        <p class="card-subtitle" id="chartBSubtitle">Placeholder (optional)</p>
-      </div>
+        <!-- D3 mounts into this div; remove placeholder once data loads -->
+        <div id="chart-a" class="chart-mount" role="img" aria-label="EV sales and growth chart — loading">
+          <!-- Placeholder bar chart skeleton -->
+          <div class="chart-placeholder chart-placeholder--bar" aria-hidden="true">
+            <div class="ph-bar" style="height:35%"></div>
+            <div class="ph-bar" style="height:55%"></div>
+            <div class="ph-bar" style="height:42%"></div>
+            <div class="ph-bar" style="height:68%"></div>
+            <div class="ph-bar" style="height:75%"></div>
+            <div class="ph-bar" style="height:60%"></div>
+            <div class="ph-bar" style="height:88%"></div>
+            <div class="ph-bar" style="height:100%"></div>
+            <div class="chart-placeholder-label">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.5l5-5 4 4 5.5-6 3.5 4" /></svg>
+              <span>D3 chart renders here</span>
+            </div>
+          </div>
+        </div>
 
-      <div id="chart-b" class="chart" role="img" aria-label="Chart B"></div>
-      <div id="chart-b-empty" class="empty" hidden>Select something to view chart.</div>
-    </section>
+        <div id="chart-a-empty" class="empty-state" hidden>No data available for this selection.</div>
+      </section>
 
-    <!-- ===== ABOUT ===== -->
-    <section class="card" id="about" aria-label="About this project">
-      <h2 class="card-title">About</h2>
-      <p>
-        This is a base dashboard shell designed for easy integration of datasets and D3 charts.
-        The HTML layout and IDs are stable so teammates can plug in charts without restructuring the site.
+      <!-- Insight panel beside Chart A -->
+      <aside class="chart-card chart-card--side" aria-label="Key insight">
+        <p class="section-label">Key insight</p>
+        <div class="insight-card" style="margin-top:.75rem;">
+          <div class="insight-card-header">
+            <span class="insight-icon" aria-hidden="true">⚡</span>
+            <span class="insight-card-title">Why EV adoption matters</span>
+          </div>
+          <p>
+            In countries with high oil import dependency, every percentage-point gain in EV
+            market share translates directly to reduced crude imports — freeing foreign-exchange
+            reserves that can be redirected toward electricity grid and infrastructure investment.
+          </p>
+        </div>
+        <div class="insight-card" style="margin-top:1rem; background: linear-gradient(135deg, rgba(245,166,35,.06), rgba(255,107,107,.06)); border-color: rgba(245,166,35,.2);">
+          <div class="insight-card-header">
+            <span class="insight-icon" aria-hidden="true">🛢️</span>
+            <span class="insight-card-title" style="color:var(--accent-amber)">Oil import dependency</span>
+          </div>
+          <p>
+            Non-oil-producing nations spend a significant share of GDP on oil imports. This dashboard
+            tracks whether that burden is easing as EV fleets grow.
+          </p>
+        </div>
+      </aside>
+
+    </div><!-- /chart-grid row 1 -->
+
+
+    <!-- ── Row 2: Oil imports + Scatter correlation ───────────── -->
+    <div class="chart-grid">
+
+      <!-- CHART B: Oil Imports Over Time -->
+      <!-- ↓↓↓ D3 TARGET: id="chart-oil-imports" — line chart ↓↓↓ -->
+      <section class="chart-card chart-card--half" aria-labelledby="chartBTitle" id="chart-oil">
+        <div class="chart-card-header">
+          <div>
+            <p class="section-label">Chart B</p>
+            <h2 class="chart-card-title" id="chartBTitle">Oil Imports by Country</h2>
+            <p class="chart-card-subtitle" id="chartBSubtitle">Import volumes (kb/d) — IEA Oil Trade Data</p>
+          </div>
+          <span class="chart-badge chart-badge--oil">Oil</span>
+        </div>
+
+        <!-- D3 mounts into this div -->
+        <div id="chart-b" class="chart-mount" role="img" aria-label="Oil imports line chart — loading">
+          <div class="chart-placeholder chart-placeholder--line" aria-hidden="true">
+            <div class="chart-placeholder-label">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" /></svg>
+              <span>D3 chart renders here</span>
+            </div>
+          </div>
+        </div>
+
+        <div id="chart-b-empty" class="empty-state" hidden>Select a country to view imports.</div>
+      </section>
+
+      <!-- CHART C: EV vs Oil import scatter / correlation -->
+      <!-- ↓↓↓ D3 TARGET: id="chart-correlation" — scatter plot ↓↓↓ -->
+      <section class="chart-card chart-card--half" aria-labelledby="chartCTitle" id="chart-correlation">
+        <div class="chart-card-header">
+          <div>
+            <p class="section-label">Chart C</p>
+            <h2 class="chart-card-title" id="chartCTitle">EV Share vs. Oil Import Δ</h2>
+            <p class="chart-card-subtitle" id="chartCSubtitle">Scatter: EV market share vs. change in oil imports per country</p>
+          </div>
+          <span class="chart-badge chart-badge--invest">Correlation</span>
+        </div>
+
+        <!-- D3 mounts into this div -->
+        <div id="chart-c" class="chart-mount" role="img" aria-label="Correlation scatter plot — loading">
+          <div class="chart-placeholder chart-placeholder--scatter" aria-hidden="true">
+            <!-- Dots scattered for visual -->
+            <div class="ph-dot" style="top:30%;left:20%"></div>
+            <div class="ph-dot" style="top:55%;left:40%"></div>
+            <div class="ph-dot" style="top:20%;left:60%"></div>
+            <div class="ph-dot" style="top:70%;left:75%"></div>
+            <div class="ph-dot" style="top:40%;left:85%"></div>
+            <div class="ph-dot" style="top:65%;left:15%"></div>
+            <div class="ph-dot" style="top:25%;left:50%"></div>
+            <div class="chart-placeholder-label">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="17" r="2"/><circle cx="17" cy="7" r="2"/><circle cx="12" cy="12" r="2"/><path stroke-linecap="round" d="M7 17L17 7"/></svg>
+              <span>D3 chart renders here</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div><!-- /chart-grid row 2 -->
+
+
+    <!-- ── Row 3: Investment redirect (full-width) ────────────── -->
+    <!-- ↓↓↓ D3 TARGET: id="chart-investment" — bar/area chart ↓↓↓ -->
+    <div class="chart-grid">
+      <section class="chart-card chart-card--full" aria-labelledby="chartDTitle" id="chart-investment">
+        <div class="chart-card-header">
+          <div>
+            <p class="section-label">Chart D</p>
+            <h2 class="chart-card-title" id="chartDTitle">Potential Infrastructure Investment from Oil Savings</h2>
+            <p class="chart-card-subtitle" id="chartDSubtitle">
+              Estimated financial value of reduced oil imports reinvested in electricity infrastructure
+            </p>
+          </div>
+          <span class="chart-badge chart-badge--invest">Investment</span>
+        </div>
+
+        <!-- D3 mounts into this div -->
+        <div id="chart-d" class="chart-mount" style="min-height:200px;" role="img" aria-label="Investment potential chart — loading">
+          <div class="chart-placeholder chart-placeholder--bar" aria-hidden="true" style="padding:.5rem 1rem;">
+            <div class="ph-bar" style="height:30%; background: linear-gradient(180deg, rgba(91,141,238,.35) 0%, transparent 100%)"></div>
+            <div class="ph-bar" style="height:45%; background: linear-gradient(180deg, rgba(91,141,238,.35) 0%, transparent 100%)"></div>
+            <div class="ph-bar" style="height:40%; background: linear-gradient(180deg, rgba(91,141,238,.35) 0%, transparent 100%)"></div>
+            <div class="ph-bar" style="height:62%; background: linear-gradient(180deg, rgba(91,141,238,.35) 0%, transparent 100%)"></div>
+            <div class="ph-bar" style="height:58%; background: linear-gradient(180deg, rgba(91,141,238,.35) 0%, transparent 100%)"></div>
+            <div class="ph-bar" style="height:74%; background: linear-gradient(180deg, rgba(91,141,238,.35) 0%, transparent 100%)"></div>
+            <div class="ph-bar" style="height:90%; background: linear-gradient(180deg, rgba(91,141,238,.35) 0%, transparent 100%)"></div>
+            <div class="ph-bar" style="height:100%; background: linear-gradient(180deg, rgba(91,141,238,.35) 0%, transparent 100%)"></div>
+            <div class="ph-bar" style="height:95%; background: linear-gradient(180deg, rgba(91,141,238,.35) 0%, transparent 100%)"></div>
+            <div class="chart-placeholder-label">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-8-6h16"/></svg>
+              <span>D3 chart renders here</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div><!-- /chart-grid row 3 -->
+
+
+    <!-- ── About / Methods / Data Sources ────────────────────── -->
+    <section class="about-section" id="about" aria-labelledby="aboutHeading">
+      <p class="section-label">About this project</p>
+      <h2 class="section-heading" id="aboutHeading">Methods &amp; Data Sources</h2>
+      <p class="section-lead">
+        This dashboard uses freely available IEA datasets to investigate one question: does growing
+        EV adoption demonstrably reduce oil imports in non-oil-producing nations, and how large could
+        the fiscal dividend be?
       </p>
+
+      <div class="about-grid">
+
+        <div class="about-block">
+          <div class="about-block-icon" aria-hidden="true">📊</div>
+          <h3>Data Sources</h3>
+          <p>
+            Oil import/export figures are drawn from the
+            <a href="https://www.iea.org/data-and-statistics" target="_blank" rel="noopener">
+              IEA Oil Information database</a>.
+            EV sales and market-share data come from the
+            <a href="https://www.iea.org/reports/global-ev-outlook-2023" target="_blank" rel="noopener">
+              IEA Global EV Outlook</a>.
+            Coverage: 50+ countries, 2000–2023.
+          </p>
+        </div>
+
+        <div class="about-block">
+          <div class="about-block-icon" aria-hidden="true">🔬</div>
+          <h3>Methodology</h3>
+          <p>
+            We compare country-level annual EV market share to year-over-year changes in oil import
+            volumes, controlling for GDP growth. The investment-redirect estimate applies a conservative
+            average oil price to the barrels displaced and scales to per-capita grid investment benchmarks.
+          </p>
+        </div>
+
+        <div class="about-block">
+          <div class="about-block-icon" aria-hidden="true">⚠️</div>
+          <h3>Caveats</h3>
+          <p>
+            Oil demand is influenced by many factors beyond EV adoption (industrial demand, heating,
+            shipping). This analysis focuses on light-vehicle transport fuel only and should be read as
+            indicative, not causal.
+          </p>
+        </div>
+
+        <div class="about-block">
+          <div class="about-block-icon" aria-hidden="true">🤝</div>
+          <h3>Contributing</h3>
+          <p>
+            This is an open project. Chart implementations live in <code>./jsfile/</code> and datasets
+            in <code>./data/</code>. Pull requests welcome on
+            <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>.
+          </p>
+        </div>
+
+      </div>
     </section>
-  </main>
+
+  </main><!-- /main -->
+
 
   <!-- ===== FOOTER ===== -->
-  <footer class="site-footer">
-    <div class="container footer-row">
-      <div>© <span id="year"></span> Energy Dashboard</div>
-      <div class="footer-links">
-        <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
-        <a href="mailto:your@email.com">Email</a>
+  <footer class="site-footer" role="contentinfo">
+    <div class="wrap footer-inner">
+      <div class="footer-copy">
+        © <span id="year"></span> Energy Dashboard &nbsp;·&nbsp; Data: IEA
       </div>
+      <nav class="footer-links" aria-label="Footer links">
+        <a href="https://github.com"       target="_blank" rel="noopener">GitHub</a>
+        <a href="./htmlfile/data.html">Datasets</a>
+        <a href="mailto:your@email.com">Contact</a>
+      </nav>
     </div>
   </footer>
 
-  <!-- D3 optional: you can leave this even before charts exist -->
+
+  <!-- D3 (keep; charts load from JS modules) -->
   <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 
-  <!-- Your wiring layer: when team finalizes charts/data, they mostly edit main.js -->
+  <!-- Your wiring layer -->
   <script type="module" src="./main.js"></script>
+
+  <!-- Footer year -->
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
 </body>
 </html>
