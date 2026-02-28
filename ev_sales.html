@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        .line { fill: none; stroke-width: 2px; }
+        .dot { stroke: #fff; }
+        #controls { margin-bottom: 20px; font-family: sans-serif; }
+    </style>
+</head>
+<body>
+
+    <div id="controls">
+        <label>Select Region: </label>
+        <select id="selectButton"></select>
+    </div>
+    <div id="viz"></div>
+
+<script>
+// 1. Setup Static Dimensions (Safe to do outside)
+const margin = {top: 50, right: 150, bottom: 50, left: 70},
+      width = 800 - margin.left - margin.right,
+      height = 500 - margin.top - margin.bottom;
+
+const svg = d3.select("#viz")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", `translate(${margin.left},${margin.top})`);
+
+// 2. Load the data and build the chart INSIDE the promise
+d3.json("ev_sales.json").then(function(data) {
+    
+    // Clean data
+    data.forEach(d => {
+        d.year = +d.year;
+        d.ev_sales = +d.ev_sales;
+    });
+
+    // 3. Process Data for the Menu
+    const allCountries = [...new Set(data.map(d => d.region_country))];
+    const options = ["Show All", ...allCountries];
+
+    d3.select("#selectButton")
+      .selectAll('option')
+      .data(options)
+      .enter()
+      .append('option')
+      .text(d => d)
+      .attr("value", d => d);
+
+    // 4. Set Scales based on the loaded data
+    const x = d3.scaleLinear()
+        .domain(d3.extent(data, d => d.year))
+        .range([0, width]);
+
+    const y = d3.scaleLinear()
+        .domain([0, d3.max(data, d => d.ev_sales)])
+        .range([height, 0]);
+
+    const color = d3.scaleOrdinal()
+        .domain(allCountries)
+        .range(d3.schemeCategory10);
+
+    // 5. Add Axes
+    svg.append("g")
+        .attr("transform", `translate(0,${height})`)
+        .call(d3.axisBottom(x).tickFormat(d3.format("d")));
+
+    svg.append("g")
+        .call(d3.axisLeft(y));
+
+    // 6. Line Generator
+    const line = d3.line()
+        .x(d => x(d.year))
+        .y(d => y(d.ev_sales));
+
+    
+    function update(selectedGroup) {
+    let filteredData;
+    let flatData; // We need this to calculate the new max
+
+    if (selectedGroup === "Show All") {
+        filteredData = d3.groups(data, d => d.region_country);
+        flatData = data;
+    } else {
+        flatData = data.filter(d => d.region_country === selectedGroup);
+        filteredData = d3.groups(flatData, d => d.region_country);
+    }
+
+    // 1. UPDATE THE Y SCALE DOMAIN
+    const newMax = d3.max(flatData, d => d.ev_sales);
+    y.domain([0, newMax]);
+
+    // 2. REDRAW THE Y-AXIS (with a smooth transition)
+    svg.select(".y-axis")
+        .transition()
+        .duration(1000)
+        .call(d3.axisLeft(y));
+
+    // 3. BIND DATA TO LINES
+    const lines = svg.selectAll(".line-group")
+        .data(filteredData, d => d[0]);
+
+    lines.exit().remove();
+
+    const enterGroups = lines.enter()
+        .append("g")
+        .attr("class", "line-group");
+
+    // Update lines with transition
+    enterGroups.append("path")
+        .attr("class", "line")
+        .merge(lines.select(".line"))
+        .transition() // Makes the line "shrink" or "grow" smoothly
+        .duration(1000)
+        .attr("d", d => line(d[1]))
+        .attr("stroke", d => color(d[0]));
+
+    // Update dots with transition
+    const dots = enterGroups.selectAll(".dot")
+        .data(d => d[1]);
+
+    dots.exit().remove();
+
+    dots.enter()
+        .append("circle")
+        .attr("class", "dot")
+        .merge(dots)
+        .transition()
+        .duration(1000)
+        .attr("cx", d => x(d.year))
+        .attr("cy", d => y(d.ev_sales))
+        .attr("r", 4)
+        .attr("fill", d => color(d.region_country));
+}
+
+    // 8. Initial Draw
+    update("Show All");
+
+    // 9. Event Listener
+    d3.select("#selectButton").on("change", function() {
+        update(this.value);
+    });
+
+}).catch(function(error) {
+    console.error("Error loading the JSON file:", error);
+});
+</script>
+</body>
+</html>
