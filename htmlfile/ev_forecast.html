@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>EV Sales Forecast</title>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+body { font-family: sans-serif; }
+.tooltip {
+    position: absolute;
+    background: white;
+    padding: 10px;
+    border: 1px solid #ccc;
+    font-size: 13px;
+    pointer-events: none;
+    opacity: 0;
+}
+</style>
+</head>
+<body>
+
+<h2 id="title">EV Sales Forecast (Logistic S-Curve) — All Countries</h2>
+
+<label>Select Region: </label>
+<select id="dropdown"></select>
+
+<svg width="1000" height="550"></svg>
+
+<div class="tooltip" id="tooltip"></div>
+
+<script src="ev_forecast.js"></script>
+
+</body>
+</html>
