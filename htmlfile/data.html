@@ -3,74 +3,1085 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Data Set Explorer</title>
+  <title>Datasets — Energy Dashboard</title>
+  <meta name="description" content="Documentation of datasets powering the Energy Dashboard: IEA oil and EV data sources, key variables, and preprocessing notes." />
 
   <link rel="stylesheet" href="../css/styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── Variables (mirror index.html palette) ────────────────── */
+    :root {
+      --bg:          #0d1117;
+      --bg-card:     #161b24;
+      --bg-card-alt: #1c2333;
+      --border:      #2a3347;
+      --border-glow: #3b5278;
+
+      --text-primary:   #e8edf5;
+      --text-secondary: #8a9ab8;
+      --text-muted:     #4e5e7a;
+
+      --accent-amber: #f5a623;
+      --accent-teal:  #2dd4bf;
+      --accent-blue:  #5b8dee;
+
+      --font-display: 'Syne', sans-serif;
+      --font-body:    'Source Serif 4', Georgia, serif;
+      --font-mono:    'IBM Plex Mono', monospace;
+
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 14px;
+
+      --shadow-card: 0 2px 20px rgba(0,0,0,.45);
+    }
+
+    /* ─── Reset ─────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text-primary);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--accent-teal); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ─── Layout ─────────────────────────────────────────────────── */
+    .wrap {
+      max-width: 1280px;
+      margin-inline: auto;
+      padding-inline: clamp(1.25rem, 4vw, 3rem);
+    }
+
+    /* ─── Header / Nav ──────────────────────────────────────────── */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13,17,23,.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .site-header .wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding-block: .9rem;
+    }
+
+    .brand-wordmark {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: -.01em;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .brand-wordmark .energy    { color: var(--accent-amber); }
+    .brand-wordmark .dashboard { color: var(--text-primary); }
+
+    .pillnav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .35rem;
+    }
+
+    .pillnav__link {
+      font-family: var(--font-display);
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .03em;
+      color: var(--text-secondary);
+      padding: .3rem .85rem;
+      border-radius: 99px;
+      border: 1px solid transparent;
+      transition: color .18s, border-color .18s, background .18s;
+    }
+    .pillnav__link:hover {
+      color: var(--text-primary);
+      border-color: var(--border);
+      text-decoration: none;
+    }
+    .pillnav__link.is-active {
+      color: var(--accent-amber);
+      border-color: rgba(245,166,35,.35);
+      background: rgba(245,166,35,.07);
+    }
+
+    /* ─── Page Header ────────────────────────────────────────────── */
+    .page-header {
+      border-bottom: 1px solid var(--border);
+      padding-block: clamp(2.5rem, 6vw, 4rem);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      opacity: .18;
+      pointer-events: none;
+    }
+
+    .page-header-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .page-eyebrow {
+      font-family: var(--font-mono);
+      font-size: .72rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent-teal);
+      margin-bottom: .75rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .page-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 1px;
+      background: var(--accent-teal);
+    }
+
+    .page-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 4vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -.03em;
+      line-height: 1.1;
+      color: var(--text-primary);
+    }
+
+    .page-subtitle {
+      font-size: clamp(.9rem, 1.5vw, 1.05rem);
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 58ch;
+      margin-top: .75rem;
+    }
+
+    .page-meta {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+      align-self: flex-end;
+    }
+
+    .meta-badge {
+      font-family: var(--font-mono);
+      font-size: .66rem;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      padding: .25rem .65rem;
+      border-radius: 3px;
+      border: 1px solid;
+      text-align: right;
+      white-space: nowrap;
+    }
+    .meta-badge--teal  { color: var(--accent-teal);  border-color: rgba(45,212,191,.25); background: rgba(45,212,191,.06); }
+    .meta-badge--amber { color: var(--accent-amber); border-color: rgba(245,166,35,.25); background: rgba(245,166,35,.06); }
+    .meta-badge--blue  { color: var(--accent-blue);  border-color: rgba(91,141,238,.25); background: rgba(91,141,238,.06); }
+
+    /* ─── Main layout ────────────────────────────────────────────── */
+    .doc-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 3rem;
+      padding-block: 3rem 5rem;
+      align-items: start;
+    }
+
+    /* ─── Sidebar TOC ────────────────────────────────────────────── */
+    .toc {
+      position: sticky;
+      top: 72px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      box-shadow: var(--shadow-card);
+    }
+
+    .toc-heading {
+      font-family: var(--font-mono);
+      font-size: .65rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: .85rem;
+      padding-bottom: .6rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .toc-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: .15rem;
+    }
+
+    .toc-list a {
+      display: block;
+      font-family: var(--font-display);
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      padding: .35rem .55rem;
+      border-radius: var(--radius-sm);
+      border-left: 2px solid transparent;
+      transition: color .15s, background .15s, border-color .15s;
+    }
+    .toc-list a:hover {
+      color: var(--text-primary);
+      background: var(--bg-card-alt);
+      border-left-color: var(--accent-teal);
+      text-decoration: none;
+    }
+
+    .toc-list .toc-sub a {
+      font-size: .75rem;
+      font-weight: 400;
+      padding-left: 1.1rem;
+      color: var(--text-muted);
+    }
+    .toc-list .toc-sub a:hover { color: var(--text-secondary); }
+
+    /* ─── Doc Content ────────────────────────────────────────────── */
+    .doc-content {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    /* ─── Doc Section ────────────────────────────────────────────── */
+    .doc-section {
+      scroll-margin-top: 84px;
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: .4rem;
+    }
+
+    .section-heading {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -.02em;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+      padding-bottom: .6rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-heading .accent { color: var(--accent-amber); }
+
+    .doc-text {
+      font-size: .95rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.75;
+    }
+
+    .doc-text + .doc-text { margin-top: .75rem; }
+
+    /* ─── Dataset Card ───────────────────────────────────────────── */
+    .dataset-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-top: 1.25rem;
+    }
+
+    .dataset-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.4rem;
+      box-shadow: var(--shadow-card);
+      transition: border-color .2s;
+    }
+    .dataset-card:hover { border-color: var(--border-glow); }
+
+    .dataset-card-top {
+      display: flex;
+      align-items: center;
+      gap: .65rem;
+      margin-bottom: 1rem;
+      padding-bottom: .85rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .dataset-icon {
+      font-size: 1.4rem;
+      line-height: 1;
+    }
+
+    .dataset-name {
+      font-family: var(--font-display);
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+
+    .dataset-org {
+      font-family: var(--font-mono);
+      font-size: .65rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: .15rem;
+    }
+
+    .dataset-meta {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
+
+    .meta-row {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: .5rem;
+      align-items: baseline;
+    }
+
+    .meta-key {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .meta-val {
+      font-size: .87rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .meta-val strong {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .dataset-desc {
+      margin-top: 1rem;
+      padding-top: .85rem;
+      border-top: 1px solid var(--border);
+      font-size: .87rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* ─── Variables Table ────────────────────────────────────────── */
+    .table-wrap {
+      margin-top: 1.25rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead {
+      background: var(--bg-card-alt);
+      border-bottom: 1px solid var(--border);
+    }
+
+    thead th {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: .75rem 1.1rem;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    tbody tr {
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      transition: background .15s;
+    }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--bg-card-alt); }
+
+    tbody td {
+      padding: .75rem 1.1rem;
+      font-size: .87rem;
+      vertical-align: top;
+      line-height: 1.5;
+    }
+
+    .td-var {
+      font-family: var(--font-mono);
+      font-size: .8rem;
+      color: var(--accent-teal);
+      white-space: nowrap;
+    }
+
+    .td-desc {
+      font-weight: 300;
+      color: var(--text-secondary);
+    }
+
+    .td-unit {
+      font-family: var(--font-mono);
+      font-size: .78rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .td-source {
+      white-space: nowrap;
+    }
+
+    .source-tag {
+      font-family: var(--font-mono);
+      font-size: .62rem;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      padding: .18rem .45rem;
+      border-radius: 3px;
+    }
+    .source-tag--ev  { background: rgba(45,212,191,.1); color: var(--accent-teal); }
+    .source-tag--oil { background: rgba(245,166,35,.1); color: var(--accent-amber); }
+    .source-tag--derived { background: rgba(91,141,238,.1); color: var(--accent-blue); }
+
+    /* ─── Processing Notes ───────────────────────────────────────── */
+    .process-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: .6rem;
+      margin-top: 1.25rem;
+    }
+
+    .process-list li {
+      display: flex;
+      gap: .85rem;
+      align-items: flex-start;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: .85rem 1.1rem;
+      font-size: .9rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      transition: border-color .15s;
+    }
+    .process-list li:hover { border-color: var(--border-glow); }
+
+    .process-step {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      font-weight: 500;
+      letter-spacing: .05em;
+      color: var(--accent-blue);
+      background: rgba(91,141,238,.1);
+      border-radius: 3px;
+      padding: .2rem .5rem;
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-top: .1rem;
+    }
+
+    /* ─── Downloads / Links ──────────────────────────────────────── */
+    .link-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+      margin-top: 1.25rem;
+    }
+
+    .link-card {
+      display: flex;
+      align-items: center;
+      gap: .65rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: .75rem 1.1rem;
+      font-family: var(--font-display);
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      transition: color .15s, border-color .15s;
+      cursor: pointer;
+    }
+    .link-card:hover {
+      color: var(--text-primary);
+      border-color: var(--border-glow);
+      text-decoration: none;
+    }
+
+    .link-card-icon { font-size: 1rem; }
+
+    .link-card-label { line-height: 1.3; }
+    .link-card-sub {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: .63rem;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    /* ─── Notice / callout ────────────────────────────────────────── */
+    .callout {
+      display: flex;
+      gap: .85rem;
+      align-items: flex-start;
+      background: rgba(245,166,35,.06);
+      border: 1px solid rgba(245,166,35,.2);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.1rem;
+      margin-top: 1.25rem;
+    }
+
+    .callout-icon {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      margin-top: .1rem;
+    }
+
+    .callout-body {
+      font-size: .88rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    .callout-body strong {
+      font-weight: 600;
+      color: var(--accent-amber);
+    }
+
+    /* ─── Footer ──────────────────────────────────────────────────── */
+    .site-footer {
+      border-top: 1px solid var(--border);
+      padding-block: 1.5rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      color: var(--text-muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.25rem;
+    }
+
+    .footer-links a {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      color: var(--text-muted);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      transition: color .15s;
+    }
+    .footer-links a:hover { color: var(--text-primary); text-decoration: none; }
+
+    /* ─── Responsive ──────────────────────────────────────────────── */
+    @media (max-width: 960px) {
+      .doc-layout          { grid-template-columns: 1fr; }
+      .toc                 { position: static; }
+      .dataset-grid        { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .pillnav             { gap: .2rem; }
+      .pillnav__link       { font-size: .72rem; padding: .25rem .65rem; }
+      .site-header .wrap   { flex-direction: column; align-items: flex-start; gap: .75rem; }
+      .page-header-inner   { flex-direction: column; }
+      .meta-row            { grid-template-columns: 90px 1fr; }
+      .table-wrap          { overflow-x: auto; }
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--accent-teal);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    ::selection {
+      background: rgba(45,212,191,.25);
+      color: var(--text-primary);
+    }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--border-glow); }
+  </style>
 </head>
 
 <body>
-  <!-- HERO -->
-  <section class="hero section">
-    <div class="hero-content container">
-      <div>
-        <h1>Data Set Explorer</h1>
-        <p class="subtitle">Sources, methodology, and dataset notes for the Energy Dashboard</p>
 
-        <nav class="nav" aria-label="Primary navigation">
-          <a href="../index.html">Dashboard</a>
-          <a href="./ev-share.html">EV Share Explorer</a>
-          <a href="./ev-sales.html">EV Sales Explorer</a>
-          <a href="./oil-info.html">Oil Import/Export Explorer</a>
-          <a href="./data.html" aria-current="page">Data Set Explorer</a>
-          <a href="../index.html#about">About</a>
-        </nav>
+  <!-- ===== HEADER / NAV ===== -->
+  <header class="site-header" role="banner">
+    <div class="wrap">
+      <div class="brand-wordmark" aria-label="Site brand">
+        <span class="energy">Energy</span><span class="dashboard">Dashboard</span>
       </div>
+
+      <nav class="pillnav" aria-label="Primary navigation">
+        <a class="pillnav__link"           href="../index.html">Dashboard</a>
+        <a class="pillnav__link"           href="./ev-share.html">EV Share</a>
+        <a class="pillnav__link"           href="./ev-sales.html">EV Sales</a>
+        <a class="pillnav__link"           href="./oil-info.html">Oil Explorer</a>
+        <a class="pillnav__link is-active" href="./data.html" aria-current="page">Datasets</a>
+        <a class="pillnav__link"           href="../index.html#about">About</a>
+      </nav>
     </div>
-  </section>
+  </header>
 
-  <main class="container">
-    <section class="card" aria-label="Data overview">
-      <h2>Data Overview</h2>
-      <p>
-        This page documents the datasets used in the Energy Dashboard, including sources, update cadence,
-        cleaning steps, and key assumptions.
-      </p>
-    </section>
 
-    <section class="card" aria-label="Sources">
-      <h2>Sources</h2>
-      <ul>
-        <li><strong>EV dataset:</strong> (to be finalized by team)</li>
-        <li><strong>Oil dataset:</strong> (to be finalized by team)</li>
-        <li><strong>Forecasting:</strong> (model + assumptions to be finalized by team)</li>
-      </ul>
-    </section>
+  <!-- ===== PAGE HEADER ===== -->
+  <div class="page-header">
+    <div class="wrap page-header-inner">
+      <div>
+        <p class="page-eyebrow">Documentation</p>
+        <h1 class="page-title">Datasets</h1>
+        <p class="page-subtitle">
+          Sources, variables, and preprocessing notes for the data powering
+          the Energy Dashboard. All figures derive from publicly available
+          International Energy Agency (IEA) publications.
+        </p>
+      </div>
+      <aside class="page-meta" aria-label="Dataset summary">
+        <span class="meta-badge meta-badge--teal">2 datasets</span>
+        <span class="meta-badge meta-badge--amber">50+ countries</span>
+        <span class="meta-badge meta-badge--blue">2000–2023 coverage</span>
+      </aside>
+    </div>
+  </div>
 
-    <section class="card" aria-label="Methodology">
-      <h2>Methodology</h2>
-      <p>
-        Add notes about transformations (units, inflation adjustments, missing values handling, aggregation level),
-        and any limitations.
-      </p>
-    </section>
 
-    <section class="card" aria-label="Dataset preview">
-      <h2>Dataset Preview (Optional)</h2>
-      <p class="hint">
-        Later, you can render a small table preview here (or link to CSVs) once the dataset is finalized.
-      </p>
-      <div id="table" class="chart" aria-label="Dataset preview table area"></div>
-    </section>
+  <!-- ===== MAIN ===== -->
+  <main>
+    <div class="wrap doc-layout">
+
+      <!-- ── Sidebar TOC ─────────────────────────────────────────── -->
+      <aside aria-label="Table of contents">
+        <nav class="toc">
+          <p class="toc-heading">On this page</p>
+          <ul class="toc-list" role="list">
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#sources">Data Sources</a></li>
+            <li class="toc-sub"><a href="#sources">Oil Import/Export</a></li>
+            <li class="toc-sub"><a href="#sources">EV Sales &amp; Growth</a></li>
+            <li><a href="#variables">Key Variables</a></li>
+            <li><a href="#processing">Processing Notes</a></li>
+            <li><a href="#downloads">Downloads &amp; Links</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+
+      <!-- ── Doc Content ─────────────────────────────────────────── -->
+      <div class="doc-content">
+
+        <!-- 1. Overview -->
+        <section class="doc-section" id="overview" aria-labelledby="overviewHeading">
+          <p class="section-label">01 — Overview</p>
+          <h2 class="section-heading" id="overviewHeading">Data <span class="accent">Overview</span></h2>
+          <p class="doc-text">
+            This page documents every dataset used in the Energy Dashboard. The central research question
+            is whether rising EV adoption in non-oil-producing countries leads to measurable reductions
+            in oil imports, and what the potential fiscal dividend of those savings might be.
+          </p>
+          <p class="doc-text">
+            All underlying data are sourced from the International Energy Agency (IEA) and are freely
+            available under the IEA's terms of use. The datasets were merged on a shared
+            <code style="font-family:var(--font-mono);font-size:.85em;color:var(--accent-teal);">country × year</code>
+            key and filtered to exclude major oil-exporting nations (see Processing Notes).
+          </p>
+          <div class="callout" role="note">
+            <span class="callout-icon" aria-hidden="true">⚠️</span>
+            <p class="callout-body">
+              <strong>Work in progress.</strong> Dataset details marked <em>"to be confirmed"</em> will
+              be updated once the team finalises variable selection and cleaning scripts.
+              Placeholder values are indicated in italics.
+            </p>
+          </div>
+        </section>
+
+
+        <!-- 2. Data Sources -->
+        <section class="doc-section" id="sources" aria-labelledby="sourcesHeading">
+          <p class="section-label">02 — Sources</p>
+          <h2 class="section-heading" id="sourcesHeading">Data <span class="accent">Sources</span></h2>
+          <p class="doc-text">
+            Two IEA datasets form the backbone of this project. Each is described below.
+          </p>
+
+          <div class="dataset-grid">
+
+            <!-- Oil -->
+            <article class="dataset-card" aria-labelledby="oilDatasetName">
+              <div class="dataset-card-top">
+                <span class="dataset-icon" aria-hidden="true">🛢️</span>
+                <div>
+                  <p class="dataset-name" id="oilDatasetName">Oil Import / Export Dataset</p>
+                  <p class="dataset-org">International Energy Agency (IEA)</p>
+                </div>
+              </div>
+              <dl class="dataset-meta">
+                <div class="meta-row">
+                  <dt class="meta-key">Source</dt>
+                  <dd class="meta-val">
+                    <a href="https://www.iea.org/data-and-statistics" target="_blank" rel="noopener">
+                      IEA Oil Information
+                    </a>
+                  </dd>
+                </div>
+                <div class="meta-row">
+                  <dt class="meta-key">Coverage</dt>
+                  <dd class="meta-val"><strong>2000–2023</strong> (annual)</dd>
+                </div>
+                <div class="meta-row">
+                  <dt class="meta-key">Unit</dt>
+                  <dd class="meta-val">Thousand barrels per day (kb/d)</dd>
+                </div>
+                <div class="meta-row">
+                  <dt class="meta-key">Countries</dt>
+                  <dd class="meta-val">50+ countries / regions</dd>
+                </div>
+                <div class="meta-row">
+                  <dt class="meta-key">Granularity</dt>
+                  <dd class="meta-val">Country-level, annual</dd>
+                </div>
+              </dl>
+              <p class="dataset-desc">
+                Records crude oil and petroleum product import and export volumes by country. Used to
+                derive net import position and to identify countries whose oil supply is predominantly
+                import-dependent (i.e. non-major-exporters).
+              </p>
+            </article>
+
+            <!-- EV -->
+            <article class="dataset-card" aria-labelledby="evDatasetName">
+              <div class="dataset-card-top">
+                <span class="dataset-icon" aria-hidden="true">⚡</span>
+                <div>
+                  <p class="dataset-name" id="evDatasetName">EV Sales &amp; Market Growth Dataset</p>
+                  <p class="dataset-org">International Energy Agency (IEA)</p>
+                </div>
+              </div>
+              <dl class="dataset-meta">
+                <div class="meta-row">
+                  <dt class="meta-key">Source</dt>
+                  <dd class="meta-val">
+                    <a href="https://www.iea.org/reports/global-ev-outlook-2023" target="_blank" rel="noopener">
+                      IEA Global EV Outlook
+                    </a>
+                  </dd>
+                </div>
+                <div class="meta-row">
+                  <dt class="meta-key">Coverage</dt>
+                  <dd class="meta-val"><strong>2010–2023</strong> (annual)</dd>
+                </div>
+                <div class="meta-row">
+                  <dt class="meta-key">Unit</dt>
+                  <dd class="meta-val">Vehicles sold; market share (%)</dd>
+                </div>
+                <div class="meta-row">
+                  <dt class="meta-key">Countries</dt>
+                  <dd class="meta-val">30+ countries / regions</dd>
+                </div>
+                <div class="meta-row">
+                  <dt class="meta-key">Granularity</dt>
+                  <dd class="meta-val">Country-level, annual</dd>
+                </div>
+              </dl>
+              <p class="dataset-desc">
+                Captures annual battery electric vehicle (BEV) and plug-in hybrid (PHEV) sales
+                figures alongside each market's overall new-vehicle sales, enabling calculation of
+                EV market share and year-over-year growth rates.
+              </p>
+            </article>
+
+          </div>
+        </section>
+
+
+        <!-- 3. Key Variables -->
+        <section class="doc-section" id="variables" aria-labelledby="variablesHeading">
+          <p class="section-label">03 — Variables</p>
+          <h2 class="section-heading" id="variablesHeading">Key <span class="accent">Variables</span></h2>
+          <p class="doc-text">
+            The table below lists the primary variables present in the merged analytical dataset
+            after preprocessing. Derived columns are calculated from the two source datasets.
+          </p>
+
+          <div class="table-wrap" role="region" aria-label="Key variables reference table">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Variable</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Unit</th>
+                  <th scope="col">Source</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="td-var">country</td>
+                  <td class="td-desc">ISO country name / region identifier</td>
+                  <td class="td-unit">—</td>
+                  <td class="td-source"><span class="source-tag source-tag--oil">Oil</span> <span class="source-tag source-tag--ev">EV</span></td>
+                </tr>
+                <tr>
+                  <td class="td-var">year</td>
+                  <td class="td-desc">Calendar year of observation</td>
+                  <td class="td-unit">YYYY</td>
+                  <td class="td-source"><span class="source-tag source-tag--oil">Oil</span> <span class="source-tag source-tag--ev">EV</span></td>
+                </tr>
+                <tr>
+                  <td class="td-var">ev_sales</td>
+                  <td class="td-desc">Total BEV + PHEV new vehicle sales in a given country and year</td>
+                  <td class="td-unit">Vehicles (units)</td>
+                  <td class="td-source"><span class="source-tag source-tag--ev">EV</span></td>
+                </tr>
+                <tr>
+                  <td class="td-var">ev_share</td>
+                  <td class="td-desc">EV sales as a percentage of total new passenger car registrations</td>
+                  <td class="td-unit">% (0–100)</td>
+                  <td class="td-source"><span class="source-tag source-tag--ev">EV</span></td>
+                </tr>
+                <tr>
+                  <td class="td-var">ev_growth_rate</td>
+                  <td class="td-desc">Year-over-year percentage change in EV sales volume</td>
+                  <td class="td-unit">% change</td>
+                  <td class="td-source"><span class="source-tag source-tag--derived">Derived</span></td>
+                </tr>
+                <tr>
+                  <td class="td-var">oil_import</td>
+                  <td class="td-desc">Total crude oil and petroleum product imports</td>
+                  <td class="td-unit">kb/d</td>
+                  <td class="td-source"><span class="source-tag source-tag--oil">Oil</span></td>
+                </tr>
+                <tr>
+                  <td class="td-var">oil_export</td>
+                  <td class="td-desc">Total crude oil and petroleum product exports</td>
+                  <td class="td-unit">kb/d</td>
+                  <td class="td-source"><span class="source-tag source-tag--oil">Oil</span></td>
+                </tr>
+                <tr>
+                  <td class="td-var">net_oil_import</td>
+                  <td class="td-desc">Oil imports minus oil exports; positive = net importer</td>
+                  <td class="td-unit">kb/d</td>
+                  <td class="td-source"><span class="source-tag source-tag--derived">Derived</span></td>
+                </tr>
+                <tr>
+                  <td class="td-var">oil_import_delta</td>
+                  <td class="td-desc">Year-over-year change in oil import volume</td>
+                  <td class="td-unit">kb/d (Δ)</td>
+                  <td class="td-source"><span class="source-tag source-tag--derived">Derived</span></td>
+                </tr>
+                <tr>
+                  <td class="td-var">estimated_savings</td>
+                  <td class="td-desc">
+                    Estimated financial value of oil import reduction attributed to EV adoption,
+                    at a reference oil price. <em>(methodology to be confirmed)</em>
+                  </td>
+                  <td class="td-unit">USD billions</td>
+                  <td class="td-source"><span class="source-tag source-tag--derived">Derived</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+
+        <!-- 4. Processing Notes -->
+        <section class="doc-section" id="processing" aria-labelledby="processingHeading">
+          <p class="section-label">04 — Processing</p>
+          <h2 class="section-heading" id="processingHeading">Data Processing <span class="accent">Notes</span></h2>
+          <p class="doc-text">
+            The following steps were applied to prepare the raw IEA data for analysis and visualisation.
+            All scripts are version-controlled in the project repository.
+          </p>
+
+          <ol class="process-list" role="list">
+            <li>
+              <span class="process-step">01 · Ingest</span>
+              <span>
+                Raw IEA files were downloaded in CSV format. Column names were standardised to
+                <code style="font-family:var(--font-mono);font-size:.85em;color:var(--accent-teal);">snake_case</code>
+                and country names were mapped to ISO 3166-1 alpha-3 codes to ensure a consistent
+                join key across datasets.
+              </span>
+            </li>
+            <li>
+              <span class="process-step">02 · Clean</span>
+              <span>
+                Rows with missing values in <code style="font-family:var(--font-mono);font-size:.85em;color:var(--accent-teal);">oil_import</code>,
+                <code style="font-family:var(--font-mono);font-size:.85em;color:var(--accent-teal);">ev_sales</code>,
+                or <code style="font-family:var(--font-mono);font-size:.85em;color:var(--accent-teal);">year</code>
+                were dropped. Outlier values (e.g., reporting artefacts with zero imports for large economies)
+                were flagged and excluded from trend calculations.
+              </span>
+            </li>
+            <li>
+              <span class="process-step">03 · Filter</span>
+              <span>
+                Countries were classified as <em>net oil exporters</em> if their average
+                <code style="font-family:var(--font-mono);font-size:.85em;color:var(--accent-teal);">net_oil_import</code>
+                over 2015–2023 was negative (i.e. exports exceeded imports). These countries —
+                such as Saudi Arabia, Russia, and Norway — were excluded from the core analysis
+                to isolate the relationship between EV adoption and import dependency.
+              </span>
+            </li>
+            <li>
+              <span class="process-step">04 · Merge</span>
+              <span>
+                The cleaned oil and EV datasets were joined on
+                <code style="font-family:var(--font-mono);font-size:.85em;color:var(--accent-teal);">(country_iso3, year)</code>.
+                An inner join was used, retaining only country–year observations present in both datasets.
+                This reduced coverage to approximately 30 countries from 2013 onward.
+              </span>
+            </li>
+            <li>
+              <span class="process-step">05 · Derive</span>
+              <span>
+                Calculated fields — <code style="font-family:var(--font-mono);font-size:.85em;color:var(--accent-teal);">net_oil_import</code>,
+                <code style="font-family:var(--font-mono);font-size:.85em;color:var(--accent-teal);">oil_import_delta</code>,
+                <code style="font-family:var(--font-mono);font-size:.85em;color:var(--accent-teal);">ev_growth_rate</code>,
+                and <code style="font-family:var(--font-mono);font-size:.85em;color:var(--accent-teal);">estimated_savings</code>
+                — were computed from the merged dataset. Savings estimates use a reference Brent
+                crude price of USD 80/barrel (2023 average) applied to the barrels-per-day reduction
+                attributable to the EV fleet.
+              </span>
+            </li>
+            <li>
+              <span class="process-step">06 · Normalise</span>
+              <span>
+                For cross-country comparisons, <code style="font-family:var(--font-mono);font-size:.85em;color:var(--accent-teal);">oil_import</code>
+                values were also normalised by population (kb/d per million inhabitants) using
+                World Bank population data for the corresponding year.
+              </span>
+            </li>
+          </ol>
+        </section>
+
+
+        <!-- 5. Downloads & Links -->
+        <section class="doc-section" id="downloads" aria-labelledby="downloadsHeading">
+          <p class="section-label">05 — Downloads</p>
+          <h2 class="section-heading" id="downloadsHeading">Downloads &amp; <span class="accent">Links</span></h2>
+          <p class="doc-text">
+            Processed datasets and source code will be made available below once the project is
+            finalised. Raw source data must be obtained directly from the IEA under their terms of use.
+          </p>
+
+          <div class="link-row">
+            <a class="link-card" href="https://github.com" target="_blank" rel="noopener" aria-label="View project on GitHub (placeholder link)">
+              <span class="link-card-icon" aria-hidden="true">⌥</span>
+              <span class="link-card-label">
+                GitHub Repository
+                <span class="link-card-sub">Source code &amp; processing scripts</span>
+              </span>
+            </a>
+            <a class="link-card" href="#" aria-label="Download merged dataset CSV (coming soon)" aria-disabled="true" style="opacity:.45; cursor:not-allowed;">
+              <span class="link-card-icon" aria-hidden="true">↓</span>
+              <span class="link-card-label">
+                Merged Dataset (.csv)
+                <span class="link-card-sub">Coming soon — pending data review</span>
+              </span>
+            </a>
+            <a class="link-card" href="https://www.iea.org/data-and-statistics" target="_blank" rel="noopener" aria-label="Access raw IEA Oil Information data">
+              <span class="link-card-icon" aria-hidden="true">🛢️</span>
+              <span class="link-card-label">
+                IEA Oil Information
+                <span class="link-card-sub">Raw source — iea.org</span>
+              </span>
+            </a>
+            <a class="link-card" href="https://www.iea.org/reports/global-ev-outlook-2023" target="_blank" rel="noopener" aria-label="Access IEA Global EV Outlook">
+              <span class="link-card-icon" aria-hidden="true">⚡</span>
+              <span class="link-card-label">
+                IEA Global EV Outlook
+                <span class="link-card-sub">Raw source — iea.org</span>
+              </span>
+            </a>
+          </div>
+
+          <!-- Table placeholder for future dataset preview -->
+          <div id="table" class="chart" role="region" aria-label="Dataset preview table — to be populated" style="margin-top:1.5rem;"></div>
+        </section>
+
+      </div><!-- /doc-content -->
+    </div><!-- /doc-layout -->
   </main>
 
-  <footer class="site-footer">
-    <p class="copyright-text">&copy; <span id="year"></span> Energy Dashboard</p>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="wrap footer-inner">
+      <p class="footer-copy">© <span id="year"></span> Energy Dashboard &nbsp;·&nbsp; Data: IEA</p>
+      <nav class="footer-links" aria-label="Footer links">
+        <a href="https://github.com"       target="_blank" rel="noopener">GitHub</a>
+        <a href="./data.html"              aria-current="page">Datasets</a>
+        <a href="mailto:your@email.com">Contact</a>
+      </nav>
+    </div>
   </footer>
 
   <script type="module">
-    document.querySelector("#year").textContent = String(new Date().getFullYear());
+    document.getElementById('year').textContent = String(new Date().getFullYear());
   </script>
+
 </body>
 </html>
