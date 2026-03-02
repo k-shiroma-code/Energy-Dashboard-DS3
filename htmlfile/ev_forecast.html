@@ -1,34 +1,696 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<title>EV Sales Forecast</title>
-<script src="https://d3js.org/d3.v7.min.js"></script>
-<style>
-body { font-family: sans-serif; }
-.tooltip {
-    position: absolute;
-    background: white;
-    padding: 10px;
-    border: 1px solid #ccc;
-    font-size: 13px;
-    pointer-events: none;
-    opacity: 0;
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EV Sales Forecast — Energy Dashboard</title>
+  <meta name="description" content="EV sales forecast using a logistic S-curve model, by region." />
+
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── Design tokens (mirror index.html) ─────────────────── */
+    :root {
+      --bg:          #0d1117;
+      --bg-card:     #161b24;
+      --bg-card-alt: #1c2333;
+      --border:      #2a3347;
+      --border-glow: #3b5278;
+
+      --text-primary:   #e8edf5;
+      --text-secondary: #8a9ab8;
+      --text-muted:     #4e5e7a;
+
+      --accent-amber: #f5a623;
+      --accent-teal:  #2dd4bf;
+      --accent-blue:  #5b8dee;
+
+      --font-display: 'Syne', sans-serif;
+      --font-body:    'Source Serif 4', Georgia, serif;
+      --font-mono:    'IBM Plex Mono', monospace;
+
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 14px;
+      --shadow-card: 0 2px 20px rgba(0,0,0,.45);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text-primary);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--accent-teal); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .wrap {
+      max-width: 1280px;
+      margin-inline: auto;
+      padding-inline: clamp(1.25rem, 4vw, 3rem);
+    }
+
+    /* ─── Header ─────────────────────────────────────────────── */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13,17,23,.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .site-header .wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding-block: .9rem;
+    }
+
+    .brand-wordmark {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: -.01em;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .brand-wordmark .energy    { color: var(--accent-amber); }
+    .brand-wordmark .dashboard { color: var(--text-primary); }
+
+    .pillnav { display: flex; flex-wrap: wrap; gap: .35rem; }
+
+    .pillnav__link {
+      font-family: var(--font-display);
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .03em;
+      color: var(--text-secondary);
+      padding: .3rem .85rem;
+      border-radius: 99px;
+      border: 1px solid transparent;
+      transition: color .18s, border-color .18s, background .18s;
+    }
+    .pillnav__link:hover {
+      color: var(--text-primary);
+      border-color: var(--border);
+      text-decoration: none;
+    }
+    .pillnav__link.is-active {
+      color: var(--accent-amber);
+      border-color: rgba(245,166,35,.35);
+      background: rgba(245,166,35,.07);
+    }
+
+    /* ─── Page Header ─────────────────────────────────────────── */
+    .page-header {
+      border-bottom: 1px solid var(--border);
+      padding-block: clamp(2rem, 5vw, 3.5rem);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      opacity: .18;
+      pointer-events: none;
+    }
+
+    .page-header-inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .page-eyebrow {
+      font-family: var(--font-mono);
+      font-size: .72rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent-teal);
+      margin-bottom: .75rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .page-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 1px;
+      background: var(--accent-teal);
+    }
+
+    .page-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 4vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -.03em;
+      line-height: 1.1;
+      color: var(--text-primary);
+    }
+    .page-title .accent { color: var(--accent-teal); }
+
+    .page-subtitle {
+      font-size: clamp(.88rem, 1.4vw, 1rem);
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      max-width: 60ch;
+      margin-top: .65rem;
+    }
+
+    .page-meta {
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+      align-self: flex-end;
+    }
+
+    .meta-badge {
+      font-family: var(--font-mono);
+      font-size: .66rem;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      padding: .25rem .65rem;
+      border-radius: 3px;
+      border: 1px solid;
+      text-align: right;
+      white-space: nowrap;
+    }
+    .meta-badge--teal  { color: var(--accent-teal);  border-color: rgba(45,212,191,.25); background: rgba(45,212,191,.06); }
+    .meta-badge--amber { color: var(--accent-amber); border-color: rgba(245,166,35,.25); background: rgba(245,166,35,.06); }
+
+    /* ─── Main content ────────────────────────────────────────── */
+    .main-content { padding-block: 2.5rem 5rem; }
+
+    /* ─── Controls card ───────────────────────────────────────── */
+    .controls-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.75rem;
+      box-shadow: var(--shadow-card);
+    }
+
+    .controls-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      gap: 1.25rem;
+    }
+
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: .3rem;
+    }
+
+    .control-group label {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .control-group select {
+      font-family: var(--font-display);
+      font-size: .84rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: .45rem .75rem;
+      min-width: 180px;
+      cursor: pointer;
+      transition: border-color .15s;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234e5e7a' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right .7rem center;
+      padding-right: 2rem;
+    }
+    .control-group select:focus {
+      outline: none;
+      border-color: var(--accent-teal);
+    }
+
+    .control-desc {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      color: var(--text-muted);
+      margin-left: auto;
+      align-self: flex-end;
+      padding-bottom: .45rem;
+    }
+
+    /* ─── Chart card ──────────────────────────────────────────── */
+    .chart-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-card);
+      transition: border-color .2s;
+    }
+    .chart-card:hover { border-color: var(--border-glow); }
+
+    .chart-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.25rem;
+      gap: 1rem;
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: .3rem;
+    }
+
+    .chart-card-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+
+    .chart-card-subtitle {
+      font-size: .82rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      margin-top: .2rem;
+    }
+
+    .chart-badge {
+      font-family: var(--font-mono);
+      font-size: .62rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: .2rem .55rem;
+      border-radius: 3px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      background: rgba(45,212,191,.12);
+      color: var(--accent-teal);
+    }
+
+    /* ─── SVG / D3 mount area ─────────────────────────────────── */
+    /*
+     * D3 renders into #forecast-chart.
+     * The SVG is injected by ev_forecast.js — do NOT hardcode <svg> here.
+     * Width is fluid; height is fixed via the --chart-h variable below.
+     * JS should read the container width with:
+     *   const W = document.getElementById('forecast-chart').clientWidth;
+     */
+    #forecast-chart {
+      width: 100%;
+      overflow: hidden;
+      /* min-height keeps the area visible before JS loads */
+      min-height: 480px;
+      position: relative;
+    }
+
+    /* Make any SVG injected by D3 fluid */
+    #forecast-chart svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* ─── Tooltip (matches original; styled for dark theme) ──── */
+    #tooltip {
+      position: fixed;         /* fixed avoids scroll-offset issues */
+      background: var(--bg-card-alt);
+      border: 1px solid var(--border-glow);
+      border-radius: var(--radius-md);
+      padding: .65rem .9rem;
+      font-family: var(--font-mono);
+      font-size: .75rem;
+      color: var(--text-primary);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .12s;
+      z-index: 200;
+      box-shadow: 0 4px 20px rgba(0,0,0,.55);
+      max-width: 220px;
+      line-height: 1.6;
+    }
+
+    /* ─── Legend strip (D3 can populate this via id="legend") ── */
+    #legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem 1.25rem;
+      margin-top: 1rem;
+      padding-top: .85rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      color: var(--text-secondary);
+    }
+
+    .legend-swatch {
+      width: 18px;
+      height: 3px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .legend-swatch--dashed {
+      background: repeating-linear-gradient(
+        90deg, currentColor 0, currentColor 4px, transparent 4px, transparent 8px
+      );
+    }
+
+    /* ─── Insight strip ───────────────────────────────────────── */
+    .insight-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .insight-tile {
+      background: var(--bg-card-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.1rem;
+    }
+
+    .insight-tile-label {
+      font-family: var(--font-mono);
+      font-size: .65rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: .3rem;
+    }
+
+    .insight-tile-value {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--accent-teal);
+      line-height: 1;
+    }
+
+    .insight-tile-sub {
+      font-size: .8rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      margin-top: .25rem;
+    }
+
+    /* ─── Methodology note ────────────────────────────────────── */
+    .method-note {
+      margin-top: 1.75rem;
+      background: rgba(91,141,238,.05);
+      border: 1px solid rgba(91,141,238,.18);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.1rem;
+      font-size: .85rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .method-note strong {
+      font-family: var(--font-mono);
+      font-size: .75rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--accent-blue);
+      font-weight: 500;
+    }
+
+    /* ─── Footer ──────────────────────────────────────────────── */
+    .site-footer { border-top: 1px solid var(--border); padding-block: 1.5rem; }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      color: var(--text-muted);
+    }
+
+    .footer-links { display: flex; gap: 1.25rem; }
+
+    .footer-links a {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      color: var(--text-muted);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      transition: color .15s;
+    }
+    .footer-links a:hover { color: var(--text-primary); text-decoration: none; }
+
+    /* ─── Responsive ──────────────────────────────────────────── */
+    @media (max-width: 700px) {
+      .site-header .wrap  { flex-direction: column; align-items: flex-start; gap: .75rem; }
+      .pillnav            { gap: .2rem; }
+      .pillnav__link      { font-size: .72rem; padding: .25rem .65rem; }
+      .page-header-inner  { flex-direction: column; }
+      .controls-row       { flex-direction: column; align-items: stretch; }
+      .control-group select { min-width: 100%; }
+      .control-desc       { margin-left: 0; }
+    }
+
+    :focus-visible { outline: 2px solid var(--accent-teal); outline-offset: 3px; border-radius: 2px; }
+    ::selection { background: rgba(45,212,191,.25); color: var(--text-primary); }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--border-glow); }
+  </style>
 </head>
+
 <body>
 
-<h2 id="title">EV Sales Forecast (Logistic S-Curve) </h2>
+  <!-- ===== HEADER / NAV ===== -->
+  <header class="site-header" role="banner">
+    <div class="wrap">
+      <div class="brand-wordmark" aria-label="Site brand">
+        <span class="energy">Energy</span><span class="dashboard">Dashboard</span>
+      </div>
 
-<label>Select Region: </label>
-<select id="dropdown"></select>
+      <nav class="pillnav" aria-label="Primary navigation">
+        <a class="pillnav__link"           href="../index.html">Dashboard</a>
+        <a class="pillnav__link"           href="./ev-share.html">EV Share</a>
+        <a class="pillnav__link is-active" href="./ev_forecast.html" aria-current="page">EV Sales</a>
+        <a class="pillnav__link"           href="./oil-info.html">Oil Explorer</a>
+        <a class="pillnav__link"           href="./data.html">Datasets</a>
+        <a class="pillnav__link"           href="../index.html#about">About</a>
+      </nav>
+    </div>
+  </header>
 
-<svg width="1000" height="550"></svg>
 
-<div class="tooltip" id="tooltip"></div>
+  <!-- ===== PAGE HEADER ===== -->
+  <div class="page-header">
+    <div class="wrap page-header-inner">
+      <div>
+        <p class="page-eyebrow">EV Sales · Forecast</p>
+        <h1 class="page-title">EV Sales <span class="accent">Forecast</span></h1>
+        <p class="page-subtitle">
+          Logistic S-curve model projecting electric vehicle market adoption by region.
+          Historical sales data is fitted to a diffusion curve to estimate the trajectory
+          toward market saturation.
+        </p>
+      </div>
+      <aside class="page-meta" aria-label="Chart metadata">
+        <span class="meta-badge meta-badge--teal">Logistic S-Curve</span>
+        <span class="meta-badge meta-badge--amber">IEA Source Data</span>
+      </aside>
+    </div>
+  </div>
 
-<script src="../jsfile/ev_forecast.js"></script>
+
+  <!-- ===== MAIN ===== -->
+  <main class="main-content wrap" aria-label="EV Sales Forecast chart">
+
+    <!-- ── Controls ───────────────────────────────────────────── -->
+    <section class="controls-card" aria-label="Chart controls">
+      <div class="controls-row">
+        <div class="control-group">
+          <label for="dropdown">Region</label>
+          <!--
+            JS (ev_forecast.js) populates this select with region options.
+            Keep id="dropdown" — it matches the existing JS selector.
+          -->
+          <select id="dropdown" aria-label="Select region for forecast"></select>
+        </div>
+
+        <p class="control-desc">
+          Hover data points for details &nbsp;·&nbsp; Dashed line = forecast
+        </p>
+      </div>
+    </section>
+
+
+    <!-- ── Chart card ─────────────────────────────────────────── -->
+    <section class="chart-card" aria-labelledby="chartTitle">
+      <div class="chart-card-header">
+        <div>
+          <p class="section-label">Forecast Model</p>
+          <!--
+            id="title" is kept so ev_forecast.js can update it dynamically
+            when the region selection changes.
+          -->
+          <h2 class="chart-card-title" id="title">EV Sales Forecast (Logistic S-Curve)</h2>
+          <p class="chart-card-subtitle">
+            Actual sales vs. modelled diffusion curve — select a region above to update
+          </p>
+        </div>
+        <span class="chart-badge" aria-hidden="true">EV · Forecast</span>
+      </div>
+
+      <!--
+        ┌──────────────────────────────────────────────────────────┐
+        │  D3 CHART MOUNT POINT                                    │
+        │  ev_forecast.js should target: #forecast-chart           │
+        │  and inject its <svg> here.                              │
+        │                                                          │
+        │  Recommended JS pattern:                                 │
+        │    const container = document.getElementById(           │
+        │      'forecast-chart');                                  │
+        │    const W = container.clientWidth;                      │
+        │    const H = 480; // or your preferred height            │
+        │    const svg = d3.select('#forecast-chart')              │
+        │      .append('svg')                                      │
+        │      .attr('viewBox', `0 0 ${W} ${H}`)                  │
+        │      .attr('preserveAspectRatio', 'xMidYMid meet');     │
+        └──────────────────────────────────────────────────────────┘
+      -->
+      <div id="forecast-chart" role="img" aria-label="EV sales forecast chart"></div>
+
+      <!--
+        Legend strip — D3 can append .legend-item elements here,
+        or leave empty and let the SVG handle its own legend.
+      -->
+      <div id="legend" aria-label="Chart legend" role="list"></div>
+    </section>
+
+
+    <!-- ── Summary insight tiles (D3/JS can update these) ───── -->
+    <div class="insight-strip" aria-label="Key forecast statistics">
+      <!--
+        JS can update .insight-tile-value text content to reflect
+        the selected region's forecast values.
+      -->
+      <div class="insight-tile">
+        <p class="insight-tile-label">Projected peak share</p>
+        <p class="insight-tile-value" id="stat-peak">—</p>
+        <p class="insight-tile-sub">Saturation level (S-curve asymptote)</p>
+      </div>
+      <div class="insight-tile">
+        <p class="insight-tile-label">Inflection year</p>
+        <p class="insight-tile-value" id="stat-inflection">—</p>
+        <p class="insight-tile-sub">Year of fastest adoption growth</p>
+      </div>
+      <div class="insight-tile">
+        <p class="insight-tile-label">Current share</p>
+        <p class="insight-tile-value" id="stat-current">—</p>
+        <p class="insight-tile-sub">Latest year in dataset</p>
+      </div>
+      <div class="insight-tile">
+        <p class="insight-tile-label">Growth rate</p>
+        <p class="insight-tile-value" id="stat-growth">—</p>
+        <p class="insight-tile-sub">Avg. annual sales increase (last 3 yr)</p>
+      </div>
+    </div>
+
+
+    <!-- ── Methodology note ────────────────────────────────── -->
+    <aside class="method-note" role="note" aria-label="Model methodology">
+      <strong>Model &nbsp;</strong>
+      Sales adoption is modelled using a logistic (S-curve) function
+      <em>f(t) = L / (1 + e<sup>−k(t−t₀)</sup>)</em>,
+      where <em>L</em> is the market saturation ceiling, <em>k</em> is the growth rate,
+      and <em>t₀</em> is the inflection year. Parameters are fitted via nonlinear least-squares
+      regression on IEA historical EV sales data. Forecast periods are shown as dashed lines.
+    </aside>
+
+  </main>
+
+
+  <!-- Tooltip — keep id="tooltip" to match ev_forecast.js -->
+  <div id="tooltip" role="tooltip" aria-hidden="true"></div>
+
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="wrap footer-inner">
+      <p class="footer-copy">© <span id="year"></span> Energy Dashboard &nbsp;·&nbsp; Data: IEA</p>
+      <nav class="footer-links" aria-label="Footer links">
+        <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+        <a href="./data.html">Datasets</a>
+        <a href="mailto:your@email.com">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+
+  <!-- D3 v7 -->
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+
+  <!--
+    Your forecast chart logic.
+    ev_forecast.js should:
+      1. Populate #dropdown with region options
+      2. Render the SVG into #forecast-chart (NOT appended to body/svg directly)
+      3. Use the #tooltip div for hover interactions
+      4. Optionally update #title and the #stat-* spans with fitted values
+
+    If your JS currently does:  d3.select("svg") → change to: d3.select("#forecast-chart").append("svg")
+    If your JS currently does:  d3.select("#tooltip") → no change needed, id is preserved
+    If your JS currently does:  d3.select("#dropdown") → no change needed, id is preserved
+  -->
+  <script src="../jsfile/ev_forecast.js"></script>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 
 </body>
 </html>

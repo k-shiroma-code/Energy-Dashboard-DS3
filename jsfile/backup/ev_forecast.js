@@ -1,22 +1,8 @@
 const margin = {top: 50, right: 80, bottom: 60, left: 90};
+const width = 1000 - margin.left - margin.right;
+const height = 550 - margin.top - margin.bottom;
 
-// Read the container's actual width so the chart fills the card fluidly.
-// Falls back to 900 if the element isn't found.
-const container = document.getElementById("forecast-chart");
-const totalWidth  = container ? container.clientWidth : 900;
-const totalHeight = 520;
-
-const width  = totalWidth  - margin.left - margin.right;
-const height = totalHeight - margin.top  - margin.bottom;
-
-// Create the SVG inside #forecast-chart (not a bare <svg> tag)
-const svg = d3.select("#forecast-chart")
-    .append("svg")
-    .attr("width",   totalWidth)
-    .attr("height",  totalHeight)
-    .attr("viewBox", `0 0 ${totalWidth} ${totalHeight}`)
-    .attr("preserveAspectRatio", "xMidYMid meet")
-    .style("display", "block")
+const svg = d3.select("svg")
     .append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`);
 
@@ -57,7 +43,7 @@ d3.json("../data/ev_forecast.json").then(data => {
     svg.append("line")
         .attr("x1", x(2024)).attr("x2", x(2024))
         .attr("y1", 0).attr("y2", height)
-        .attr("stroke", "#8a9ab8").attr("stroke-dasharray", "4");
+        .attr("stroke", "black").attr("stroke-dasharray", "4");
 
     const grouped = d3.group(data, d => d.region_country);
 
@@ -125,7 +111,7 @@ d3.json("../data/ev_forecast.json").then(data => {
 
     // Tooltip Logic
     const tooltip = d3.select("#tooltip");
-    const focusLine = svg.append("line").attr("stroke", "#8a9ab8").attr("stroke-dasharray", "4").attr("y1", 0).attr("y2", height).style("opacity", 0);
+    const focusLine = svg.append("line").attr("stroke", "black").attr("stroke-dasharray", "4").attr("y1", 0).attr("y2", height).style("opacity", 0);
 
     const overlay = svg.append("rect")
         .attr("width", width).attr("height", height)
@@ -150,34 +136,9 @@ d3.json("../data/ev_forecast.json").then(data => {
                 `<span style="color:${color(d.region_country)}">● ${d.region_country}</span>: ${d3.format(",")(Math.round(d.ev_sales))}`
             ).join("<br>")
         )
+        .style("left", (event.pageX + 15) + "px")
+        .style("top", (event.pageY - 20) + "px")
         .style("opacity", 1);
-
-        // Use clientX/clientY (viewport coords) — these match position:fixed correctly
-        // regardless of how far the page has been scrolled.
-        const tooltipNode = tooltip.node();
-        const tooltipW    = tooltipNode.offsetWidth;
-        const tooltipH    = tooltipNode.offsetHeight;
-        const vw          = window.innerWidth;
-        const vh          = window.innerHeight;
-        const offset      = 14; // px gap between cursor and tooltip edge
-
-        // Default: tooltip appears to the right of and just above the cursor
-        let tx = event.clientX + offset;
-        let ty = event.clientY - offset - tooltipH;
-
-        // Flip horizontally if it would overflow the right edge
-        if (tx + tooltipW > vw - 8) tx = event.clientX - offset - tooltipW;
-
-        // Flip vertically if it would overflow above the top edge
-        if (ty < 8) ty = event.clientY + offset;
-
-        // Final clamp so it never escapes the viewport
-        tx = Math.max(8, Math.min(tx, vw - tooltipW - 8));
-        ty = Math.max(8, Math.min(ty, vh - tooltipH - 8));
-
-        tooltip
-          .style("left", tx + "px")
-          .style("top",  ty + "px");
     })
     .on("mouseout", () => {
         focusLine.style("opacity", 0);
