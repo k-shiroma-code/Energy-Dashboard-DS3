@@ -20,7 +20,7 @@ const svg = d3.select("#forecast-chart")
     .append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`);
 
-d3.json("../data/ev_forecast.json").then(data => {
+d3.json("../data/ev-data.json").then(data => {
 
     data.forEach(d => {
         d.year = +d.year;
