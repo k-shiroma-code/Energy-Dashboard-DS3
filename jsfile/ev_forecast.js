@@ -6,7 +6,7 @@ const svg = d3.select("svg")
     .append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`);
 
-d3.json("ev_forecast.json").then(data => {
+d3.json("../data/ev_forecast.json").then(data => {
 
     data.forEach(d => {
         d.year = +d.year;
@@ -15,31 +15,31 @@ d3.json("ev_forecast.json").then(data => {
 
     const countries = Array.from(new Set(data.map(d => d.region_country))).sort();
 
-    // x axis
+    // X scale remains static
     const x = d3.scaleLinear()
         .domain(d3.extent(data, d => d.year))
         .range([0, width]);
 
-    // y axis (dynamic rescaling)
+    // Y scale needs to be accessible globally to the script
     const y = d3.scaleLinear().range([height, 0]);
 
     const color = d3.scaleOrdinal()
         .domain(countries)
         .range(d3.schemeTableau10);
 
-   
+    // Line generator uses the 'y' scale that we will update
     const line = d3.line()
         .x(d => x(d.year))
         .y(d => y(d.ev_sales));
 
-    // initial axis render
+    // Initial Axis Render
     svg.append("g")
         .attr("transform", `translate(0,${height})`)
         .call(d3.axisBottom(x).tickFormat(d3.format("d")));
 
     const yAxisGroup = svg.append("g").attr("class", "y-axis");
 
-    // vertical separator at 2024
+    // Vertical separator at 2024
     svg.append("line")
         .attr("x1", x(2024)).attr("x2", x(2024))
         .attr("y1", 0).attr("y2", height)
@@ -47,25 +47,25 @@ d3.json("ev_forecast.json").then(data => {
 
     const grouped = d3.group(data, d => d.region_country);
 
-    //  container for lines 
+    // Create container for lines
     const countryGroups = svg.selectAll(".country")
         .data(grouped)
         .enter()
         .append("g")
         .attr("class", "country");
 
-    // function to update the chart 
+    // Function to update the chart (Scales + Paths)
     function updateChart(selected) {
-        // calculate new Y domain
+        // 1. Calculate new Y domain
         const filteredData = selected === "All" ? data : data.filter(d => d.region_country === selected);
         const maxSales = d3.max(filteredData, d => d.ev_sales);
         
         y.domain([0, maxSales]).nice();
 
-        // update Y Axis with transition
+        // 2. Update Y Axis with transition
         yAxisGroup.transition().duration(750).call(d3.axisLeft(y).tickFormat(d3.format(",")));
 
-        // update paths for each country
+        // 3. Update paths for each country
         countryGroups.each(function([country, values]) {
             const isVisible = (selected === "All" || selected === country);
             const group = d3.select(this);
@@ -76,7 +76,7 @@ d3.json("ev_forecast.json").then(data => {
                 const actual = values.filter(d => d.type === "Actual").sort((a,b) => a.year - b.year);
                 const forecast = values.filter(d => d.type === "Forecast").sort((a,b) => a.year - b.year);
 
-                // check if paths exist, if not create them
+                // Check if paths exist, if not create them
                 let pathActual = group.select(".path-actual");
                 if (pathActual.empty()) {
                     pathActual = group.append("path").attr("class", "path-actual").attr("fill", "none").attr("stroke-width", 2);
@@ -98,7 +98,7 @@ d3.json("ev_forecast.json").then(data => {
         });
     }
 
-    // dropdown 
+    // Dropdown Logic
     const dropdown = d3.select("#dropdown");
     dropdown.append("option").attr("value", "All").text("Show All Countries");
     countries.forEach(c => dropdown.append("option").attr("value", c).text(c));
@@ -109,7 +109,7 @@ d3.json("ev_forecast.json").then(data => {
         updateChart(selected);
     });
 
-    // tooltip
+    // Tooltip Logic
     const tooltip = d3.select("#tooltip");
     const focusLine = svg.append("line").attr("stroke", "black").attr("stroke-dasharray", "4").attr("y1", 0).attr("y2", height).style("opacity", 0);
 
@@ -124,7 +124,7 @@ d3.json("ev_forecast.json").then(data => {
 
         focusLine.attr("x1", x(hoveredYear)).attr("x2", x(hoveredYear)).style("opacity", 1);
 
-        // filter data for tooltip based on current selection
+        // Filter data for tooltip based on CURRENT selection
         const yearData = data.filter(d => d.year === hoveredYear && (selected === "All" || d.region_country === selected));
 
         if (yearData.length === 0) return;
@@ -145,6 +145,6 @@ d3.json("ev_forecast.json").then(data => {
         tooltip.style("opacity", 0);
     });
 
-    // run initial state
+    // Run initial state
     updateChart("All");
 });
