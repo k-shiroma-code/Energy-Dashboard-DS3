@@ -1,1615 +1,217 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Oil Import/Export Explorer — Energy Dashboard</title>
-  <meta name="description" content="Interactive oil trade forecasts — import and export volumes with Log-ARIMA projections through 2030." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
-  <style>
-    /* ── Design tokens ──────────────────────────────────────────── */
-    :root {
-      --bg:          #0d1117;
-      --bg-card:     #161b24;
-      --bg-card-alt: #1c2333;
-      --border:      #2a3347;
-      --border-glow: #3b5278;
-      --border-light: #3b5278;
-      --surface:      #161b24;
-      --surface-2:    #1c2333;
-      --text:         #e8edf5;
-      --text-muted:   #8a9ab8;
-      --text-dim:     #4e5e7a;
-      --accent:       #5b8dee;
-      --accent-glow:  rgba(91,141,238,.15);
-      --green:  #2dd4bf;
-      --red:    #ff6b6b;
-      --amber:  #f5a623;
-      --text-primary:   #e8edf5;
-      --text-secondary: #8a9ab8;
-      --accent-amber: #f5a623;
-      --accent-teal:  #2dd4bf;
-      --accent-blue:  #5b8dee;
-      --font-display: 'Syne', sans-serif;
-      --font-body:    'Source Serif 4', Georgia, serif;
-      --font-mono:    'IBM Plex Mono', monospace;
-      --radius:    14px;
-      --radius-sm:  8px;
-      --shadow-card: 0 2px 20px rgba(0,0,0,.45);
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: var(--font-body);
-      background: var(--bg);
-      color: var(--text-primary);
-      min-height: 100vh;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
-
-    a { color: var(--accent-teal); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-
-    /* ── Sticky header ───────────────────────────────────────────── */
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(13,17,23,.88);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-    .site-header .wrap {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.5rem;
-      padding-block: .9rem;
-    }
-    .brand-wordmark {
-      font-family: var(--font-display);
-      font-size: 1.15rem;
-      font-weight: 800;
-      letter-spacing: -.01em;
-      line-height: 1;
-      white-space: nowrap;
-    }
-    .brand-wordmark .energy    { color: var(--accent-amber); }
-    .brand-wordmark .dashboard { color: var(--text-primary); }
-
-    .pillnav { display: flex; flex-wrap: wrap; gap: .35rem; }
-    .pillnav__link {
-      font-family: var(--font-display);
-      font-size: .78rem;
-      font-weight: 600;
-      letter-spacing: .03em;
-      color: var(--text-secondary);
-      padding: .3rem .85rem;
-      border-radius: 99px;
-      border: 1px solid transparent;
-      transition: color .18s, border-color .18s, background .18s;
-    }
-    .pillnav__link:hover {
-      color: var(--text-primary);
-      border-color: var(--border);
-      text-decoration: none;
-    }
-    .pillnav__link.is-active {
-      color: var(--accent-amber);
-      border-color: rgba(245,166,35,.35);
-      background: rgba(245,166,35,.07);
-    }
-
-    /* ── Layout helpers ──────────────────────────────────────────── */
-    .wrap {
-      max-width: 1280px;
-      margin-inline: auto;
-      padding-inline: clamp(1.25rem, 4vw, 3rem);
-    }
-    .container {
-      max-width: 1100px;
-      margin-inline: auto;
-      padding-inline: clamp(1.25rem, 4vw, 3rem);
-    }
-    main.container { padding-top: 2rem; padding-bottom: 4rem; }
-
-    /* ── Page header ─────────────────────────────────────────────── */
-    .page-header {
-      border-bottom: 1px solid var(--border);
-      padding-block: clamp(2rem, 5vw, 3.5rem);
-      position: relative;
-      overflow: hidden;
-    }
-    .page-header::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(var(--border) 1px, transparent 1px),
-        linear-gradient(90deg, var(--border) 1px, transparent 1px);
-      background-size: 60px 60px;
-      opacity: .18;
-      pointer-events: none;
-    }
-    .page-header-inner {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
-    .page-eyebrow {
-      font-family: var(--font-mono);
-      font-size: .72rem;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--accent-teal);
-      margin-bottom: .75rem;
-      display: flex;
-      align-items: center;
-      gap: .5rem;
-    }
-    .page-eyebrow::before {
-      content: '';
-      display: inline-block;
-      width: 24px;
-      height: 1px;
-      background: var(--accent-teal);
-    }
-    .page-title {
-      font-family: var(--font-display);
-      font-size: clamp(1.5rem, 4vw, 2.4rem);
-      font-weight: 800;
-      letter-spacing: -.03em;
-      line-height: 1.1;
-      color: var(--text-primary);
-    }
-    .page-title .accent { color: var(--accent-amber); }
-    .page-subtitle {
-      font-size: clamp(.88rem, 1.4vw, 1rem);
-      font-weight: 300;
-      color: var(--text-secondary);
-      line-height: 1.7;
-      max-width: 60ch;
-      margin-top: .65rem;
-    }
-    .page-meta { display: flex; flex-direction: column; gap: .5rem; align-self: flex-end; }
-    .meta-badge {
-      font-family: var(--font-mono);
-      font-size: .66rem;
-      letter-spacing: .07em;
-      text-transform: uppercase;
-      padding: .25rem .65rem;
-      border-radius: 3px;
-      border: 1px solid;
-      text-align: right;
-      white-space: nowrap;
-    }
-    .meta-badge--amber { color: var(--accent-amber); border-color: rgba(245,166,35,.25); background: rgba(245,166,35,.06); }
-    .meta-badge--teal  { color: var(--accent-teal);  border-color: rgba(45,212,191,.25); background: rgba(45,212,191,.06); }
-    .meta-badge--blue  { color: var(--accent-blue);  border-color: rgba(91,141,238,.25); background: rgba(91,141,238,.06); }
-
-    /* ── Cards ───────────────────────────────────────────────────── */
-    .card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      margin-bottom: 1.25rem;
-      box-shadow: var(--shadow-card);
-      transition: border-color .2s;
-    }
-    .card:hover { border-color: var(--border-glow); }
-
-    /* ── Stat grid ───────────────────────────────────────────────── */
-    .stat-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-      gap: 1rem;
-      margin-bottom: 1.25rem;
-    }
-    .stat-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.25rem;
-      position: relative;
-      overflow: hidden;
-      box-shadow: var(--shadow-card);
-      transition: border-color .2s;
-      animation: fadeUp .5s ease-out both;
-    }
-    .stat-card:hover { border-color: var(--border-glow); }
-    .stat-card::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: var(--accent-blue);
-      opacity: .55;
-    }
-    .stat-card:nth-child(2)::after { background: var(--accent-teal); }
-    .stat-card:nth-child(3)::after { background: var(--accent-amber); }
-    .stat-card:nth-child(4)::after { background: #a78bfa; }
-    .stat-card:nth-child(1) { animation-delay: .05s; }
-    .stat-card:nth-child(2) { animation-delay: .10s; }
-    .stat-card:nth-child(3) { animation-delay: .15s; }
-    .stat-card:nth-child(4) { animation-delay: .20s; }
-
-    .stat-label {
-      font-family: var(--font-mono);
-      font-size: .65rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      color: var(--text-muted);
-      margin-bottom: .5rem;
-    }
-    .stat-value {
-      font-family: var(--font-display);
-      font-size: 1.7rem;
-      font-weight: 800;
-      color: var(--text-primary);
-      line-height: 1.15;
-    }
-    .stat-sub {
-      font-family: var(--font-mono);
-      font-size: .7rem;
-      color: var(--text-muted);
-      margin-top: .35rem;
-    }
-
-    /* ── Controls toolbar ────────────────────────────────────────── */
-    .toolbar {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-    .toolbar-left { display: flex; align-items: center; gap: .65rem; }
-    .toolbar-right { margin-left: auto; text-align: right; }
-
-    .label {
-      font-family: var(--font-mono);
-      font-size: .68rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      color: var(--text-muted);
-    }
-    .select {
-      font-family: var(--font-display);
-      font-size: .84rem;
-      font-weight: 600;
-      color: var(--text-primary);
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: .45rem 2rem .45rem .75rem;
-      cursor: pointer;
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234e5e7a' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right .7rem center;
-      transition: border-color .15s;
-    }
-    .select:hover { border-color: var(--border-glow); }
-    .select:focus  { outline: none; border-color: var(--accent-teal); }
-
-    .meta-title {
-      font-family: var(--font-display);
-      font-size: .9rem;
-      font-weight: 700;
-      color: var(--text-primary);
-    }
-    .meta-sub {
-      font-family: var(--font-mono);
-      font-size: .68rem;
-      color: var(--text-muted);
-      margin-top: .2rem;
-    }
-    .hint {
-      font-family: var(--font-mono);
-      font-size: .72rem;
-      color: var(--accent-amber);
-      margin-top: .75rem;
-    }
-
-    /* ── Chart wrap ──────────────────────────────────────────────── */
-    .chart-wrap {
-      position: relative;
-      overflow-x: auto;
-    }
-    .chart-wrap svg text { user-select: none; }
-
-    /* ── Country chips ───────────────────────────────────────────── */
-    .chip-header {
-      display: flex;
-      gap: .5rem;
-      align-items: center;
-      margin-bottom: .9rem;
-      flex-wrap: wrap;
-    }
-    .chip-header-label {
-      font-family: var(--font-mono);
-      font-size: .68rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: .07em;
-      color: var(--text-muted);
-    }
-    .chip-ctrl {
-      font-family: var(--font-display);
-      font-size: .75rem;
-      font-weight: 600;
-      color: var(--text-secondary);
-      background: var(--bg-card-alt);
-      border: 1px solid var(--border);
-      border-radius: 99px;
-      padding: .28rem .85rem;
-      cursor: pointer;
-      transition: color .15s, border-color .15s;
-    }
-    .chip-ctrl:hover { color: var(--text-primary); border-color: var(--border-glow); }
-
-    .chip-row { display: flex; flex-wrap: wrap; gap: .5rem; }
-    .country-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: .45rem;
-      padding: .35rem 1rem;
-      border-radius: 99px;
-      border: 1.5px solid var(--border);
-      background: var(--bg-card-alt);
-      font-family: var(--font-display);
-      font-size: .75rem;
-      font-weight: 600;
-      color: var(--text-secondary);
-      cursor: pointer;
-      transition: all .15s;
-    }
-    .country-chip:hover { border-color: var(--border-glow); color: var(--text-primary); }
-    .country-chip.active {
-      color: #fff;
-      border-color: var(--chip-c);
-      background: color-mix(in srgb, var(--chip-c) 15%, var(--bg-card-alt));
-      box-shadow: 0 0 12px color-mix(in srgb, var(--chip-c) 20%, transparent);
-    }
-    .chip-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-
-    /* ── Section label ───────────────────────────────────────────── */
-    .section-label {
-      font-family: var(--font-mono);
-      font-size: .68rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      color: var(--text-muted);
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: .5rem;
-    }
-
-    /* ── Summary table ───────────────────────────────────────────── */
-    .oil-table { width: 100%; border-collapse: collapse; font-size: .82rem; }
-    .oil-table th {
-      text-align: left;
-      padding: .65rem .9rem;
-      font-family: var(--font-mono);
-      font-size: .65rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: .07em;
-      color: var(--text-muted);
-      border-bottom: 1px solid var(--border);
-      background: var(--bg-card-alt);
-    }
-    .oil-table td {
-      padding: .75rem .9rem;
-      border-bottom: 1px solid var(--border);
-      color: var(--text-secondary);
-      font-weight: 300;
-    }
-    .oil-table tbody tr { transition: background .15s; }
-    .oil-table tbody tr:last-child td { border-bottom: none; }
-    .oil-table tbody tr:hover { background: var(--bg-card-alt); }
-    .td-country { display: flex; align-items: center; gap: .65rem; font-weight: 600; color: var(--text-primary); }
-    .td-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-    .td-mono { font-family: var(--font-mono); font-size: .75rem; }
-    .change-up   { color: var(--accent-teal);  font-weight: 600; }
-    .change-down { color: var(--red);           font-weight: 600; }
-    .change-flat { color: var(--text-secondary); font-weight: 600; }
-    .net-positive { color: var(--accent-teal); }
-    .net-negative { color: var(--red); }
-    .mape-badge {
-      display: inline-block;
-      padding: .15rem .55rem;
-      border-radius: 4px;
-      font-family: var(--font-mono);
-      font-size: .68rem;
-      font-weight: 500;
-    }
-    .mape-good { background: rgba(45,212,191,.12); color: var(--accent-teal); }
-    .mape-ok   { background: rgba(245,166,35,.12); color: var(--accent-amber); }
-    .mape-weak { background: rgba(255,107,107,.12); color: var(--red); }
-
-    /* ── Tooltip ─────────────────────────────────────────────────── */
-    .oil-tooltip {
-      position: absolute;
-      background: rgba(22,27,36,.96);
-      backdrop-filter: blur(10px);
-      border: 1px solid var(--border-glow);
-      color: var(--text-primary);
-      border-radius: var(--radius-sm);
-      padding: .75rem 1rem;
-      font-family: var(--font-mono);
-      font-size: .72rem;
-      line-height: 1.9;
-      pointer-events: none;
-      min-width: 150px;
-      box-shadow: 0 8px 32px rgba(0,0,0,.5);
-      display: none;
-      z-index: 20;
-    }
-
-    /* ── Info button ─────────────────────────────────────────────── */
-    .info-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      border: 1.5px solid var(--border-glow);
-      background: var(--bg-card-alt);
-      color: var(--text-secondary);
-      font-family: var(--font-mono);
-      font-size: .7rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all .2s;
-      margin-left: .5rem;
-      vertical-align: middle;
-      line-height: 1;
-    }
-    .info-btn:hover {
-      border-color: var(--accent-teal);
-      color: var(--accent-teal);
-      background: rgba(45,212,191,.08);
-    }
-
-    /* ── Modal ───────────────────────────────────────────────────── */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.65);
-      backdrop-filter: blur(6px);
-      z-index: 200;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1.5rem;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .25s;
-    }
-    .modal-overlay.open { opacity: 1; pointer-events: auto; }
-    .modal-overlay.open .modal-panel { transform: translateY(0) scale(1); }
-
-    .modal-panel {
-      background: var(--bg-card);
-      border: 1px solid var(--border-glow);
-      border-radius: var(--radius);
-      width: 100%;
-      max-width: 580px;
-      max-height: 82vh;
-      overflow-y: auto;
-      padding: 2rem;
-      box-shadow: 0 24px 64px rgba(0,0,0,.6);
-      transform: translateY(14px) scale(0.97);
-      transition: transform .3s;
-      position: relative;
-    }
-    .modal-close {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      width: 30px;
-      height: 30px;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border);
-      background: var(--bg-card-alt);
-      color: var(--text-secondary);
-      font-size: 1rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all .15s;
-    }
-    .modal-close:hover { color: var(--text-primary); border-color: var(--border-glow); }
-
-    .modal-panel h3 {
-      font-family: var(--font-display);
-      font-size: 1.15rem;
-      font-weight: 800;
-      color: var(--text-primary);
-      margin-bottom: .35rem;
-      letter-spacing: -.02em;
-    }
-    .modal-subtitle {
-      font-family: var(--font-mono);
-      font-size: .7rem;
-      color: var(--text-muted);
-      margin-bottom: 1.5rem;
-      letter-spacing: .04em;
-    }
-
-    /* ── Term cards (inside modal) ───────────────────────────────── */
-    .term-card {
-      background: var(--bg-card-alt);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 1rem 1.1rem;
-      margin-bottom: .75rem;
-      transition: border-color .15s;
-    }
-    .term-card:hover { border-color: var(--border-glow); }
-    .term-header { display: flex; align-items: center; gap: .65rem; margin-bottom: .5rem; }
-    .term-badge {
-      font-family: var(--font-mono);
-      font-size: .7rem;
-      font-weight: 700;
-      padding: .2rem .55rem;
-      border-radius: 4px;
-      letter-spacing: .03em;
-    }
-    .term-badge-p    { background: rgba(91,141,238,.15);  color: var(--accent-blue); }
-    .term-badge-d    { background: rgba(45,212,191,.15);  color: var(--accent-teal); }
-    .term-badge-q    { background: rgba(168,85,247,.15);  color: #a855f7; }
-    .term-badge-mape { background: rgba(245,166,35,.15);  color: var(--accent-amber); }
-    .term-badge-aic  { background: rgba(236,72,153,.15);  color: #ec4899; }
-    .term-badge-ci   { background: rgba(45,212,191,.15);  color: var(--accent-teal); }
-    .term-badge-kbd  { background: rgba(99,102,241,.15);  color: #6366f1; }
-    .term-badge-net  { background: rgba(139,92,246,.15);  color: #8b5cf6; }
-    .term-name {
-      font-family: var(--font-display);
-      font-size: .85rem;
-      font-weight: 700;
-      color: var(--text-primary);
-    }
-    .term-body {
-      font-size: .85rem;
-      font-weight: 300;
-      color: var(--text-secondary);
-      line-height: 1.65;
-    }
-    .term-example {
-      display: inline-block;
-      margin-top: .55rem;
-      font-family: var(--font-mono);
-      font-size: .68rem;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: .25rem .65rem;
-      color: var(--text-muted);
-    }
-
-    /* ── Empty state ─────────────────────────────────────────────── */
-    .empty-notice {
-      padding: 2.5rem;
-      text-align: center;
-      font-family: var(--font-mono);
-      font-size: .8rem;
-      color: var(--text-muted);
-    }
-
-    /* ── Footnote ────────────────────────────────────────────────── */
-    .footnote {
-      font-family: var(--font-mono);
-      font-size: .68rem;
-      color: var(--text-muted);
-      text-align: center;
-      margin: 1.5rem 0 0;
-      line-height: 1.7;
-    }
-
-    /* ── Footer ──────────────────────────────────────────────────── */
-    .site-footer { border-top: 1px solid var(--border); padding-block: 1.5rem; }
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-    .footer-copy {
-      font-family: var(--font-mono);
-      font-size: .68rem;
-      color: var(--text-muted);
-    }
-    .footer-links { display: flex; gap: 1.25rem; }
-    .footer-links a {
-      font-family: var(--font-mono);
-      font-size: .68rem;
-      color: var(--text-muted);
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      transition: color .15s;
-    }
-    .footer-links a:hover { color: var(--text-primary); text-decoration: none; }
-
-    /* ── Animations ──────────────────────────────────────────────── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(12px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .card { animation: fadeUp .45s ease-out both; }
-
-    /* ── Responsive ──────────────────────────────────────────────── */
-    @media (max-width: 700px) {
-      .site-header .wrap { flex-direction: column; align-items: flex-start; gap: .75rem; }
-      .pillnav { gap: .2rem; }
-      .pillnav__link { font-size: .72rem; padding: .25rem .65rem; }
-      .page-header-inner { flex-direction: column; }
-      .stat-grid { grid-template-columns: 1fr 1fr; }
-      .toolbar { gap: .9rem; }
-      .toolbar-right { margin-left: 0; text-align: left; }
-    }
-
-    :focus-visible { outline: 2px solid var(--accent-teal); outline-offset: 3px; border-radius: 2px; }
-    ::selection { background: rgba(45,212,191,.25); color: var(--text-primary); }
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--border-glow); }
-  </style>
-</head>
-<body>
-
-  <!-- ===== HEADER / NAV ===== -->
-  <header class="site-header" role="banner">
-    <div class="wrap">
-      <div class="brand-wordmark" aria-label="Site brand">
-        <span class="energy">Energy</span><span class="dashboard">Dashboard</span>
-      </div>
-      <nav class="pillnav" aria-label="Primary navigation">
-        <a class="pillnav__link"           href="../index.html">Dashboard</a>
-        <a class="pillnav__link"           href="./ev-share.html">EV Share</a>
-        <a class="pillnav__link"           href="./ev_forecast.html">EV Sales</a>
-        <a class="pillnav__link is-active" href="./oil-info.html" aria-current="page">Oil Explorer</a>
-        <a class="pillnav__link"           href="./data.html">Datasets</a>
-        <a class="pillnav__link"           href="../index.html#about">About</a>
-      </nav>
-    </div>
-  </header>
-
-
-  <!-- ===== PAGE HEADER ===== -->
-  <div class="page-header">
-    <div class="wrap page-header-inner">
-      <div>
-        <p class="page-eyebrow">Oil Trade · ARIMA Forecast</p>
-        <h1 class="page-title">Oil <span class="accent">Import/Export</span> Explorer</h1>
-        <p class="page-subtitle">
-          Interactive oil trade forecasts — import, export &amp; net trade volumes with
-          Log-ARIMA projections through 2030, fitted by country using AIC grid search.
-        </p>
-      </div>
-      <aside class="page-meta" aria-label="Dataset metadata">
-        <span class="meta-badge meta-badge--amber">Log-ARIMA Model</span>
-        <span class="meta-badge meta-badge--teal">Forecast to 2030</span>
-        <span class="meta-badge meta-badge--blue">JODI Source Data</span>
-      </aside>
-    </div>
-  </div>
-
-
-  <!-- ===== MAIN ===== -->
-  <main class="container" aria-label="Oil trade dashboard">
-
-    <!-- Stat cards -->
-    <div class="stat-grid" id="statGrid" aria-label="Summary statistics"></div>
-
-    <!-- Controls -->
-    <section class="card" aria-label="Chart controls">
-      <div class="toolbar">
-        <div class="toolbar-left">
-          <span class="label">Start Year</span>
-          <select id="yearSelect" class="select" aria-label="Select start year"></select>
-        </div>
-        <div class="toolbar-left">
-          <span class="label">View</span>
-          <select id="viewSelect" class="select" aria-label="Select data view">
-            <option value="imports" selected>Imports</option>
-            <option value="exports">Exports</option>
-            <option value="net">Net Trade</option>
-          </select>
-        </div>
-        <div class="toolbar-right">
-          <div class="meta-title" id="metaTitle">Oil Imports (KBD)</div>
-          <div class="meta-sub"   id="metaSub">Historical + Forecast</div>
-        </div>
-      </div>
-      <p class="hint" id="dataHint"></p>
-    </section>
-
-    <!-- Chart -->
-    <section class="card" aria-label="Oil trade visualization">
-      <div id="chart" class="chart-wrap" role="img" aria-label="Oil trade line chart"></div>
-      <div id="emptyState" class="empty-notice" hidden></div>
-    </section>
-
-    <!-- Country chips -->
-    <section class="card" aria-label="Country filter">
-      <div class="chip-header">
-        <span class="chip-header-label">Countries</span>
-        <button class="chip-ctrl" id="chipAll">Select All</button>
-        <button class="chip-ctrl" id="chipClear">Clear</button>
-      </div>
-      <div class="chip-row" id="chipRow"></div>
-    </section>
-
-    <!-- Summary table -->
-    <section class="card" aria-label="Forecast summary table">
-      <p class="section-label" id="tableLabel">
-        Forecast Summary
-        <button class="info-btn" id="infoBtn" title="What do these terms mean?" aria-label="Open glossary">?</button>
-      </p>
-      <div id="summaryTable" style="overflow-x:auto"></div>
-    </section>
-
-    <!-- Info / Glossary modal -->
-    <div class="modal-overlay" id="infoModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <div class="modal-panel">
-        <button class="modal-close" id="modalClose" aria-label="Close glossary">✕</button>
-        <h3 id="modalTitle">Understanding the Forecast</h3>
-        <p class="modal-subtitle">KEY TERMS USED IN THE ARIMA MODEL AND THIS DASHBOARD</p>
-
-        <div class="term-card">
-          <div class="term-header">
-            <span class="term-badge term-badge-net">NET</span>
-            <span class="term-name">Net Trade</span>
-          </div>
-          <p class="term-body">
-            The difference between a country's oil exports and imports. <strong style="color:var(--accent-teal)">Positive</strong> means net exporter (exports &gt; imports), <strong style="color:var(--red)">negative</strong> means net importer (imports &gt; exports). This shows whether a country is a supplier or consumer of oil on the global market.
-          </p>
-          <span class="term-example">Net = Exports − Imports</span>
-        </div>
-
-        <div class="term-card">
-          <div class="term-header">
-            <span class="term-badge term-badge-kbd">KBD</span>
-            <span class="term-name">Thousand Barrels per Day</span>
-          </div>
-          <p class="term-body">
-            The standard unit for measuring oil trade volume. 1 KBD = 1,000 barrels of oil flowing per day. This is the unit used across all values in this dashboard.
-          </p>
-          <span class="term-example">5,000 KBD = 5 million barrels/day</span>
-        </div>
-
-        <div class="term-card">
-          <div class="term-header">
-            <span class="term-badge term-badge-p">p</span>
-            <span class="term-name">Auto-Regressive Order</span>
-          </div>
-          <p class="term-body">
-            The number of past values (lags) the model uses to predict the next value. A higher <strong style="color:var(--accent-blue)">p</strong> means the model looks further back in history.
-          </p>
-          <span class="term-example">p=2 → uses the last 2 years to predict</span>
-        </div>
-
-        <div class="term-card">
-          <div class="term-header">
-            <span class="term-badge term-badge-d">d</span>
-            <span class="term-name">Differencing Order</span>
-          </div>
-          <p class="term-body">
-            How many times the data is differenced to make it stationary (removing trends). A value of <strong style="color:var(--accent-teal)">d=1</strong> means we look at year-over-year changes instead of raw values.
-          </p>
-          <span class="term-example">d=1 → model uses changes, not levels</span>
-        </div>
-
-        <div class="term-card">
-          <div class="term-header">
-            <span class="term-badge term-badge-q">q</span>
-            <span class="term-name">Moving Average Order</span>
-          </div>
-          <p class="term-body">
-            The number of past forecast errors the model incorporates. This helps smooth out noise and capture shock effects.
-          </p>
-          <span class="term-example">q=1 → corrects using 1 past error</span>
-        </div>
-
-        <div class="term-card">
-          <div class="term-header">
-            <span class="term-badge term-badge-mape">MAPE</span>
-            <span class="term-name">Mean Absolute Percentage Error</span>
-          </div>
-          <p class="term-body">
-            Measures forecast accuracy as a percentage. Lower is better. Under 5% is excellent, 5–10% is good, above 10% suggests volatility.
-          </p>
-          <span class="term-example">MAPE 3.2% → avg error of 3.2% per year</span>
-        </div>
-
-        <div class="term-card">
-          <div class="term-header">
-            <span class="term-badge term-badge-ci">95% CI</span>
-            <span class="term-name">Confidence Interval</span>
-          </div>
-          <p class="term-body">
-            The shaded band around forecast lines. There's a 95% probability the true value falls within this range. Wider bands = more uncertainty.
-          </p>
-          <span class="term-example">Wider band in 2030 vs 2025 = more uncertainty</span>
-        </div>
-
-      </div>
-    </div>
-
-    <p class="footnote">Source: JODI Oil World Database · Log-ARIMA models selected via AIC grid search · Imports, Exports &amp; Net Trade · Forecast horizon 2024–2030</p>
-  </main>
-
-
-  <!-- ===== FOOTER ===== -->
-  <footer class="site-footer" role="contentinfo">
-    <div class="wrap footer-inner">
-      <p class="footer-copy">© <span id="footYear"></span> Energy Dashboard &nbsp;·&nbsp; Data: JODI / IEA</p>
-      <nav class="footer-links" aria-label="Footer links">
-        <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
-        <a href="./data.html">Datasets</a>
-        <a href="mailto:your@email.com">Contact</a>
-      </nav>
-    </div>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-  <script>
-  (function () {
-    "use strict";
-
-    // ══════════════════════════════════════════════════════════════════════════
-    // RAW DATA - IMPORTS (Synthetic for demo - replace with your actual data)
-    // ══════════════════════════════════════════════════════════════════════════
-    const RAW_IMPORTS = buildImportDataset();
-
-    function buildImportDataset() {
-      // Using actual data from your CSV where available
-      const actualData = [
-        // China
-        {c:"China",y:2000,t:"history",v:1918},{c:"China",y:2005,t:"history",v:3382},{c:"China",y:2010,t:"history",v:5735},
-        {c:"China",y:2015,t:"history",v:7884},{c:"China",y:2017,t:"history",v:9812},{c:"China",y:2018,t:"history",v:10782},
-        {c:"China",y:2019,t:"history",v:11617},{c:"China",y:2020,t:"history",v:12273},{c:"China",y:2021,t:"history",v:11859},
-        {c:"China",y:2022,t:"history",v:11857},{c:"China",y:2023,t:"history",v:13621},
-        {c:"China",y:2025,t:"forecast",v:14200,lo:12800,hi:15600},{c:"China",y:2030,t:"forecast",v:15800,lo:13000,hi:18600},
-        // USA
-        {c:"USA",y:2000,t:"history",v:11983},{c:"USA",y:2005,t:"history",v:14351},{c:"USA",y:2010,t:"history",v:12390},
-        {c:"USA",y:2015,t:"history",v:9540},{c:"USA",y:2017,t:"history",v:10216},{c:"USA",y:2018,t:"history",v:10043},
-        {c:"USA",y:2019,t:"history",v:9232},{c:"USA",y:2020,t:"history",v:7992},{c:"USA",y:2021,t:"history",v:8543},
-        {c:"USA",y:2022,t:"history",v:8365},{c:"USA",y:2023,t:"history",v:8596},{c:"USA",y:2024,t:"history",v:8384},
-        {c:"USA",y:2025,t:"forecast",v:8146,lo:6623,hi:9670},{c:"USA",y:2030,t:"forecast",v:7717,lo:3606,hi:11829},
-        // India
-        {c:"India",y:2000,t:"history",v:1709},{c:"India",y:2005,t:"history",v:2319},{c:"India",y:2010,t:"history",v:3735},
-        {c:"India",y:2015,t:"history",v:4786},{c:"India",y:2017,t:"history",v:5274},{c:"India",y:2018,t:"history",v:5400},
-        {c:"India",y:2019,t:"history",v:5668},{c:"India",y:2020,t:"history",v:5033},{c:"India",y:2021,t:"history",v:5303},
-        {c:"India",y:2022,t:"history",v:6007},{c:"India",y:2023,t:"history",v:6291},
-        {c:"India",y:2025,t:"forecast",v:6800,lo:6000,hi:7600},{c:"India",y:2030,t:"forecast",v:8200,lo:6500,hi:9900},
-        // South Korea
-        {c:"South Korea",y:2000,t:"history",v:3048},{c:"South Korea",y:2005,t:"history",v:2817},{c:"South Korea",y:2010,t:"history",v:3177},
-        {c:"South Korea",y:2015,t:"history",v:3660},{c:"South Korea",y:2017,t:"history",v:3928},{c:"South Korea",y:2018,t:"history",v:3995},
-        {c:"South Korea",y:2019,t:"history",v:3892},{c:"South Korea",y:2020,t:"history",v:3626},{c:"South Korea",y:2021,t:"history",v:3715},
-        {c:"South Korea",y:2022,t:"history",v:3793},{c:"South Korea",y:2023,t:"history",v:3778},{c:"South Korea",y:2024,t:"history",v:3855},
-        {c:"South Korea",y:2025,t:"forecast",v:3996,lo:3746,hi:4245},{c:"South Korea",y:2030,t:"forecast",v:4336,lo:3726,hi:4945},
-        // Germany
-        {c:"Germany",y:2000,t:"history",v:2997},{c:"Germany",y:2005,t:"history",v:3020},{c:"Germany",y:2010,t:"history",v:2644},
-        {c:"Germany",y:2015,t:"history",v:2645},{c:"Germany",y:2017,t:"history",v:2715},{c:"Germany",y:2018,t:"history",v:2590},
-        {c:"Germany",y:2019,t:"history",v:2647},{c:"Germany",y:2020,t:"history",v:2421},{c:"Germany",y:2021,t:"history",v:2450},
-        {c:"Germany",y:2022,t:"history",v:2558},{c:"Germany",y:2023,t:"history",v:2338},{c:"Germany",y:2024,t:"history",v:2352},
-        {c:"Germany",y:2025,t:"forecast",v:2330,lo:2068,hi:2591},{c:"Germany",y:2030,t:"forecast",v:2274,lo:1763,hi:2784},
-        // Netherlands
-        {c:"Netherlands",y:2000,t:"history",v:2158},{c:"Netherlands",y:2005,t:"history",v:2606},{c:"Netherlands",y:2010,t:"history",v:3018},
-        {c:"Netherlands",y:2015,t:"history",v:3230},{c:"Netherlands",y:2017,t:"history",v:3240},{c:"Netherlands",y:2018,t:"history",v:3229},
-        {c:"Netherlands",y:2019,t:"history",v:3167},{c:"Netherlands",y:2020,t:"history",v:2767},{c:"Netherlands",y:2021,t:"history",v:2981},
-        {c:"Netherlands",y:2022,t:"history",v:3137},{c:"Netherlands",y:2023,t:"history",v:2982},{c:"Netherlands",y:2024,t:"history",v:2934},
-        {c:"Netherlands",y:2025,t:"forecast",v:3043,lo:2851,hi:3234},{c:"Netherlands",y:2030,t:"forecast",v:3268,lo:2946,hi:3591},
-        // Singapore
-        {c:"Singapore",y:2000,t:"history",v:1596},{c:"Singapore",y:2005,t:"history",v:2139},{c:"Singapore",y:2010,t:"history",v:2959},
-        {c:"Singapore",y:2015,t:"history",v:3202},{c:"Singapore",y:2017,t:"history",v:3571},{c:"Singapore",y:2018,t:"history",v:3211},
-        {c:"Singapore",y:2019,t:"history",v:3176},{c:"Singapore",y:2020,t:"history",v:2906},{c:"Singapore",y:2021,t:"history",v:2825},
-        {c:"Singapore",y:2022,t:"history",v:2861},{c:"Singapore",y:2023,t:"history",v:3038},
-        {c:"Singapore",y:2025,t:"forecast",v:2900,lo:2400,hi:3400},{c:"Singapore",y:2030,t:"forecast",v:2700,lo:2000,hi:3400},
-        // France
-        {c:"France",y:2000,t:"history",v:2290},{c:"France",y:2005,t:"history",v:2481},{c:"France",y:2010,t:"history",v:2139},
-        {c:"France",y:2015,t:"history",v:2098},{c:"France",y:2017,t:"history",v:2052},{c:"France",y:2018,t:"history",v:1977},
-        {c:"France",y:2019,t:"history",v:1943},{c:"France",y:2020,t:"history",v:1589},{c:"France",y:2021,t:"history",v:1658},
-        {c:"France",y:2022,t:"history",v:1704},{c:"France",y:2023,t:"history",v:1725},{c:"France",y:2024,t:"history",v:1721},
-        {c:"France",y:2025,t:"forecast",v:1700,lo:1500,hi:1900},{c:"France",y:2030,t:"forecast",v:1600,lo:1300,hi:1900},
-      ];
-
-      // Expand to yearly data with interpolation
-      const countries = [...new Set(actualData.map(d => d.c))];
-      const rows = [];
-
-      countries.forEach((country, ci) => {
-        const cData = actualData.filter(d => d.c === country).sort((a,b) => a.y - b.y);
-        const histData = cData.filter(d => d.t === "history");
-        const fcData = cData.filter(d => d.t === "forecast");
-
-        // Add historical data
-        histData.forEach(d => {
-          rows.push({
-            country, year: d.y, type: "history", value: d.v,
-            lower: "", upper: "", mape: 5 + ci * 0.5, order: "(1,1,1)"
-          });
-        });
-
-        // Add forecast data
-        fcData.forEach(d => {
-          rows.push({
-            country, year: d.y, type: "forecast", value: d.v,
-            lower: d.lo || d.v * 0.85, upper: d.hi || d.v * 1.15,
-            mape: 5 + ci * 0.5, order: "(1,1,1)"
-          });
-        });
-      });
-
-      return rows;
-    }
-
-    // ══════════════════════════════════════════════════════════════════════════
-    // RAW DATA - EXPORTS (From your actual CSV)
-    // ══════════════════════════════════════════════════════════════════════════
-    const RAW_EXPORTS = [
-      // USA exports
-      {country:"USA",year:2000,type:"history",value:889},{country:"USA",year:2005,type:"history",value:1059},
-      {country:"USA",year:2010,type:"history",value:2114},{country:"USA",year:2015,type:"history",value:3723},
-      {country:"USA",year:2017,type:"history",value:4657},{country:"USA",year:2018,type:"history",value:4976},
-      {country:"USA",year:2019,type:"history",value:5023},{country:"USA",year:2020,type:"history",value:4782},
-      {country:"USA",year:2021,type:"history",value:4992},{country:"USA",year:2022,type:"history",value:5424},
-      {country:"USA",year:2023,type:"history",value:5592},{country:"USA",year:2024,type:"history",value:5841},
-      {country:"USA",year:2025,type:"forecast",value:6037,lower:5584,upper:6491,mape:12.55,order:"(2,1,0)"},
-      {country:"USA",year:2030,type:"forecast",value:6452,lower:3496,upper:9408,mape:12.55,order:"(2,1,0)"},
-      // Netherlands exports
-      {country:"Netherlands",year:2000,type:"history",value:1283},{country:"Netherlands",year:2005,type:"history",value:1576},
-      {country:"Netherlands",year:2010,type:"history",value:2062},{country:"Netherlands",year:2015,type:"history",value:2320},
-      {country:"Netherlands",year:2017,type:"history",value:2401},{country:"Netherlands",year:2018,type:"history",value:2390},
-      {country:"Netherlands",year:2019,type:"history",value:2298},{country:"Netherlands",year:2020,type:"history",value:1932},
-      {country:"Netherlands",year:2021,type:"history",value:2267},{country:"Netherlands",year:2022,type:"history",value:2250},
-      {country:"Netherlands",year:2023,type:"history",value:2214},{country:"Netherlands",year:2024,type:"history",value:2127},
-      {country:"Netherlands",year:2025,type:"forecast",value:2183,lower:1902,upper:2464,mape:13.15,order:"(2,1,1)"},
-      {country:"Netherlands",year:2030,type:"forecast",value:2218,lower:1908,upper:2527,mape:13.15,order:"(2,1,1)"},
-      // South Korea exports
-      {country:"South Korea",year:2000,type:"history",value:821},{country:"South Korea",year:2005,type:"history",value:711},
-      {country:"South Korea",year:2010,type:"history",value:936},{country:"South Korea",year:2015,type:"history",value:1307},
-      {country:"South Korea",year:2017,type:"history",value:1389},{country:"South Korea",year:2018,type:"history",value:1465},
-      {country:"South Korea",year:2019,type:"history",value:1447},{country:"South Korea",year:2020,type:"history",value:1285},
-      {country:"South Korea",year:2021,type:"history",value:1228},{country:"South Korea",year:2022,type:"history",value:1372},
-      {country:"South Korea",year:2023,type:"history",value:1364},{country:"South Korea",year:2024,type:"history",value:1411},
-      {country:"South Korea",year:2025,type:"forecast",value:1462,lower:1325,upper:1599,mape:12.61,order:"(1,1,2)"},
-      {country:"South Korea",year:2030,type:"forecast",value:1391,lower:1103,upper:1680,mape:12.61,order:"(1,1,2)"},
-      // Singapore exports
-      {country:"Singapore",year:2000,type:"history",value:845},{country:"Singapore",year:2005,type:"history",value:1284},
-      {country:"Singapore",year:2010,type:"history",value:1759},{country:"Singapore",year:2015,type:"history",value:1819},
-      {country:"Singapore",year:2017,type:"history",value:2025},{country:"Singapore",year:2018,type:"history",value:1693},
-      {country:"Singapore",year:2019,type:"history",value:1704},{country:"Singapore",year:2020,type:"history",value:1481},
-      {country:"Singapore",year:2021,type:"history",value:1449},{country:"Singapore",year:2022,type:"history",value:1417},
-      {country:"Singapore",year:2023,type:"history",value:1537},{country:"Singapore",year:2024,type:"history",value:1399},
-      {country:"Singapore",year:2025,type:"forecast",value:1448,lower:1195,upper:1701,mape:13.98,order:"(2,1,1)"},
-      {country:"Singapore",year:2030,type:"forecast",value:1378,lower:652,upper:2105,mape:13.98,order:"(2,1,1)"},
-      // India exports
-      {country:"India",year:2000,type:"history",value:170},{country:"India",year:2005,type:"history",value:497},
-      {country:"India",year:2010,type:"history",value:1266},{country:"India",year:2015,type:"history",value:1345},
-      {country:"India",year:2017,type:"history",value:1477},{country:"India",year:2018,type:"history",value:1339},
-      {country:"India",year:2019,type:"history",value:1459},{country:"India",year:2020,type:"history",value:1247},
-      {country:"India",year:2021,type:"history",value:1398},{country:"India",year:2022,type:"history",value:1303},
-      {country:"India",year:2023,type:"history",value:1341},{country:"India",year:2024,type:"history",value:1295},
-      {country:"India",year:2025,type:"forecast",value:1314,lower:1193,upper:1435,mape:12.05,order:"(2,1,2)"},
-      {country:"India",year:2030,type:"forecast",value:1246,lower:1111,upper:1382,mape:12.05,order:"(2,1,2)"},
-      // Germany exports
-      {country:"Germany",year:2000,type:"history",value:387},{country:"Germany",year:2005,type:"history",value:543},
-      {country:"Germany",year:2010,type:"history",value:372},{country:"Germany",year:2015,type:"history",value:457},
-      {country:"Germany",year:2017,type:"history",value:483},{country:"Germany",year:2018,type:"history",value:463},
-      {country:"Germany",year:2019,type:"history",value:452},{country:"Germany",year:2020,type:"history",value:456},
-      {country:"Germany",year:2021,type:"history",value:524},{country:"Germany",year:2022,type:"history",value:566},
-      {country:"Germany",year:2023,type:"history",value:508},{country:"Germany",year:2024,type:"history",value:608},
-      {country:"Germany",year:2025,type:"forecast",value:579,lower:501,upper:657,mape:14.41,order:"(2,1,1)"},
-      {country:"Germany",year:2030,type:"forecast",value:643,lower:481,upper:805,mape:14.41,order:"(2,1,1)"},
-      // China exports
-      {country:"China",year:2000,type:"history",value:221},{country:"China",year:2005,type:"history",value:353},
-      {country:"China",year:2010,type:"history",value:626},{country:"China",year:2015,type:"history",value:847},
-      {country:"China",year:2017,type:"history",value:1182},{country:"China",year:2018,type:"history",value:1324},
-      {country:"China",year:2019,type:"history",value:1512},{country:"China",year:2020,type:"history",value:1363},
-      {country:"China",year:2021,type:"history",value:1327},{country:"China",year:2022,type:"history",value:1181},
-      {country:"China",year:2023,type:"history",value:1370},{country:"China",year:2024,type:"history",value:1211},
-      {country:"China",year:2025,type:"forecast",value:1289,lower:1016,upper:1562,mape:17.55,order:"(2,1,1)"},
-      {country:"China",year:2030,type:"forecast",value:1221,lower:334,upper:2108,mape:17.55,order:"(2,1,1)"},
-      // France exports
-      {country:"France",year:2000,type:"history",value:446},{country:"France",year:2005,type:"history",value:578},
-      {country:"France",year:2010,type:"history",value:484},{country:"France",year:2015,type:"history",value:450},
-      {country:"France",year:2017,type:"history",value:439},{country:"France",year:2018,type:"history",value:432},
-      {country:"France",year:2019,type:"history",value:370},{country:"France",year:2020,type:"history",value:272},
-      {country:"France",year:2021,type:"history",value:268},{country:"France",year:2022,type:"history",value:295},
-      {country:"France",year:2023,type:"history",value:311},{country:"France",year:2024,type:"history",value:345},
-      {country:"France",year:2025,type:"forecast",value:360,lower:296,upper:425,mape:15.72,order:"(1,1,1)"},
-      {country:"France",year:2030,type:"forecast",value:360,lower:112,upper:609,mape:15.72,order:"(1,1,1)"},
-    ];
-
-    // ══════════════════════════════════════════════════════════════════════════
-    // NET TRADE CALCULATION
-    // ══════════════════════════════════════════════════════════════════════════
-    function calculateNetTrade(importsData, exportsData) {
-      const normalize = (name) => name.toLowerCase().replace(/\s+/g, '').replace('.', '');
-
-      // Build lookup maps
-      const importsByCountry = {};
-      importsData.forEach(d => {
-        const key = normalize(d.country);
-        if (!importsByCountry[key]) importsByCountry[key] = { name: d.country, data: {} };
-        importsByCountry[key].data[d.year] = d;
-      });
-
-      const exportsByCountry = {};
-      exportsData.forEach(d => {
-        const key = normalize(d.country);
-        if (!exportsByCountry[key]) exportsByCountry[key] = { name: d.country, data: {} };
-        exportsByCountry[key].data[d.year] = d;
-      });
-
-      // Find countries in BOTH datasets
-      const commonKeys = Object.keys(importsByCountry).filter(k => exportsByCountry[k]);
-
-      const netTradeRows = [];
-
-      commonKeys.forEach(key => {
-        const impCountry = importsByCountry[key];
-        const expCountry = exportsByCountry[key];
-        const displayName = expCountry.name;
-
-        const allYears = [...new Set([
-          ...Object.keys(impCountry.data).map(Number),
-          ...Object.keys(expCountry.data).map(Number)
-        ])].sort((a, b) => a - b);
-
-        allYears.forEach(year => {
-          const imp = impCountry.data[year];
-          const exp = expCountry.data[year];
-
-          if (imp && exp && imp.value != null && exp.value != null) {
-            const netValue = exp.value - imp.value;
-            const type = imp.type === 'forecast' || exp.type === 'forecast' ? 'forecast' : 'history';
-
-            let lower = "";
-            let upper = "";
-            if (type === 'forecast' && exp.lower && exp.upper) {
-              lower = (exp.lower || exp.value) - imp.value;
-              upper = (exp.upper || exp.value) - imp.value;
-            }
-
-            netTradeRows.push({
-              country: displayName,
-              year: year,
-              type: type,
-              value: netValue,
-              lower: lower,
-              upper: upper,
-              mape: exp.mape ?? imp.mape ?? null,
-              order: exp.order ?? null
-            });
-          }
-        });
-      });
-
-      return netTradeRows;
-    }
-
-    // ══════════════════════════════════════════════════════════════════════════
-    // VISUALIZATION CODE
-    // ══════════════════════════════════════════════════════════════════════════
-
-    const COLORS = [
-      "#3b82f6", "#22c55e", "#ef4444", "#f59e0b", "#a78bfa",
-      "#06b6d4", "#ec4899", "#10b981", "#f97316", "#6366f1",
-    ];
-
-    const MARGIN = { top: 24, right: 36, bottom: 52, left: 72 };
-    const TOTAL_W = 900;
-    const TOTAL_H = 420;
-    const W = TOTAL_W - MARGIN.left - MARGIN.right;
-    const H = TOTAL_H - MARGIN.top - MARGIN.bottom;
-
-    let allData = [];
-    let active = [];
-    let startYear = 2000;
-    let view = "imports";
-
-    const chartDiv   = document.getElementById("chart");
-    const emptyState = document.getElementById("emptyState");
-    const yearSelect = document.getElementById("yearSelect");
-    const viewSelect = document.getElementById("viewSelect");
-    const metaTitle  = document.getElementById("metaTitle");
-    const metaSub    = document.getElementById("metaSub");
-    const dataHint   = document.getElementById("dataHint");
-    const statGrid   = document.getElementById("statGrid");
-
-    document.getElementById("footYear").textContent = new Date().getFullYear();
-
-    // Modal
-    const infoModal = document.getElementById("infoModal");
-    document.getElementById("infoBtn").onclick = () => infoModal.classList.add("open");
-    document.getElementById("modalClose").onclick = () => infoModal.classList.remove("open");
-    infoModal.addEventListener("click", (e) => { if (e.target === infoModal) infoModal.classList.remove("open"); });
-    document.addEventListener("keydown", (e) => { if (e.key === "Escape") infoModal.classList.remove("open"); });
-
-    let svg, gMain, xScale, yScale, tooltip;
-
-    function buildSVG() {
-      chartDiv.querySelectorAll("svg, .oil-tooltip, .oil-legend").forEach(el => el.remove());
-
-      const svgEl = d3.select(chartDiv)
-        .append("svg")
-        .attr("viewBox", `0 0 ${TOTAL_W} ${TOTAL_H}`)
-        .attr("width", "100%")
-        .style("display", "block")
-        .style("cursor", "crosshair");
-
-      svg = svgEl;
-      gMain = svgEl.append("g").attr("transform", `translate(${MARGIN.left},${MARGIN.top})`);
-      tooltip = d3.select(chartDiv).append("div").attr("class", "oil-tooltip");
-
-      svgEl.append("rect")
-        .attr("transform", `translate(${MARGIN.left},${MARGIN.top})`)
-        .attr("width", W).attr("height", H)
-        .attr("fill", "none").attr("pointer-events", "all")
-        .on("mousemove", onMouseMove)
-        .on("mouseleave", () => {
-          gMain.select(".crosshair").style("display", "none");
-          tooltip.style("display", "none");
-        });
-    }
-
-    function render() {
-      if (!allData.length) return;
-      const selected = allData.filter(d => active.includes(d.country));
-      emptyState.hidden = true;
-      updateStats(selected);
-      renderChart(selected);
-      renderTable();
-    }
-
-    function updateStats(selected) {
-      const lastFcYear = 2030;
-      const isExports = view === "exports";
-      const isNet = view === "net";
-
-      const total2023 = allData.reduce((s, d) => s + (d.history.at(-1)?.value ?? 0), 0);
-
-      const sorted = [...allData].sort((a, b) => {
-        const aVal = a.history.at(-1)?.value ?? 0;
-        const bVal = b.history.at(-1)?.value ?? 0;
-        return isNet ? Math.abs(bVal) - Math.abs(aVal) : bVal - aVal;
-      });
-      const top = sorted[0];
-
-      const avgChange = allData.length
-        ? allData.reduce((s, d) => {
-            const a = d.history.at(-1)?.value ?? 0;
-            const f = d.forecast.at(-1)?.value ?? 0;
-            if (isNet) return s + (f - a);
-            return s + (a ? ((f - a) / a) * 100 : 0);
-          }, 0) / allData.length
-        : 0;
-
-      let label, roleLabel, trendLabel;
-
-      if (isNet) {
-        label = "Net Trade";
-        roleLabel = "Largest Net Position · 2023";
-        trendLabel = avgChange > 50 ? "↑ Shifting to export" : avgChange < -50 ? "↓ Shifting to import" : "→ Stable balance";
-      } else if (isExports) {
-        label = "Exports";
-        roleLabel = "Largest Exporter · 2023";
-        trendLabel = avgChange >= 2 ? "↑ Growing supply" : avgChange <= -2 ? "↓ Declining supply" : "→ Stable supply";
-      } else {
-        label = "Imports";
-        roleLabel = "Largest Importer · 2023";
-        trendLabel = avgChange >= 2 ? "↑ Growing demand" : avgChange <= -2 ? "↓ Declining demand" : "→ Stable demand";
-      }
-
-      const topVal = top?.history.at(-1)?.value ?? 0;
-      const topValDisplay = isNet
-        ? `${topVal > 0 ? "+" : ""}${Math.round(topVal).toLocaleString()} KBD`
-        : `${Math.round(Math.abs(topVal)).toLocaleString()} KBD`;
-
-      const topSubtext = isNet
-        ? (topVal > 0 ? "Net Exporter" : "Net Importer")
-        : "";
-
-      statGrid.innerHTML = `
-        <div class="stat-card">
-          <p class="stat-label">${isNet ? "Combined Net Position" : `Total 2023 ${label}`}</p>
-          <p class="stat-value">${isNet && total2023 > 0 ? "+" : ""}${Math.round(total2023).toLocaleString()}</p>
-          <p class="stat-sub">KBD ${isNet ? (total2023 > 0 ? "(net export)" : "(net import)") : "combined"}</p>
-        </div>
-        <div class="stat-card">
-          <p class="stat-label">${roleLabel}</p>
-          <p class="stat-value" style="font-size:1.3rem">${top?.country ?? "—"}</p>
-          <p class="stat-sub">${topValDisplay}${topSubtext ? ` · ${topSubtext}` : ""}</p>
-        </div>
-        <div class="stat-card">
-          <p class="stat-label">Avg ${isNet ? "Shift" : "Forecast Δ"} to ${lastFcYear}</p>
-          <p class="stat-value" style="color:${avgChange >= 0 ? "var(--green)" : "var(--red)"}">
-            ${isNet ? (avgChange >= 0 ? "+" : "") + Math.round(avgChange).toLocaleString() + " KBD" : (avgChange >= 0 ? "+" : "") + avgChange.toFixed(1) + "%"}
-          </p>
-          <p class="stat-sub">${trendLabel}</p>
-        </div>
-        <div class="stat-card">
-          <p class="stat-label">Countries Selected</p>
-          <p class="stat-value">${active.length}</p>
-          <p class="stat-sub">of ${allData.length} tracked</p>
-        </div>`;
-
-      metaTitle.textContent = `Oil ${label} (KBD)`;
-      metaSub.textContent = `Historical + Forecast · From ${startYear}`;
-    }
-
-    function renderChart(selected) {
-      buildSVG();
-
-      const fs = selected.map(d => ({
-        ...d,
-        history: d.history.filter(p => p.year >= startYear),
-        forecast: d.forecast,
-        conf_int: d.conf_int,
-      }));
-
-      const allPts = fs.flatMap(d => [
-        ...d.history, ...d.forecast,
-        ...d.conf_int.map(p => ({ year: p.year, value: p.upper })),
-        ...d.conf_int.map(p => ({ year: p.year, value: p.lower })),
-      ]);
-      if (!allPts.length) return;
-
-      const xMin = d3.min(allPts, p => p.year);
-      const xMax = d3.max(allPts, p => p.year);
-
-      // Handle negative values for net trade
-      const yMin = d3.min(allPts, p => p.value);
-      const yMax = d3.max(allPts, p => p.value);
-      const yPadding = (yMax - yMin) * 0.1 || 100;
-      const yDomainMin = view === "net" ? Math.min(0, yMin - yPadding) : 0;
-      const yDomainMax = yMax + yPadding;
-
-      xScale = d3.scaleLinear().domain([xMin, xMax]).range([0, W]);
-      yScale = d3.scaleLinear().domain([yDomainMin, yDomainMax]).range([H, 0]);
-
-      // Grid
-      const yTicks = yScale.ticks(6);
-      gMain.selectAll(".y-grid").data(yTicks).join("line")
-        .attr("x1", 0).attr("x2", W)
-        .attr("y1", d => yScale(d)).attr("y2", d => yScale(d))
-        .attr("stroke", "var(--border)").attr("stroke-dasharray", "3,4").attr("stroke-width", 0.7);
-
-      // Zero line for net trade
-      if (view === "net" && yDomainMin < 0) {
-        gMain.append("line")
-          .attr("x1", 0).attr("x2", W)
-          .attr("y1", yScale(0)).attr("y2", yScale(0))
-          .attr("stroke", "var(--text-muted)")
-          .attr("stroke-width", 1.5);
-        gMain.append("text")
-          .attr("x", W + 8).attr("y", yScale(0) + 4)
-          .attr("fill", "var(--text-muted)")
-          .attr("font-size", 10)
-          .attr("font-family", "Space Mono, monospace")
-          .text("0 (balanced)");
-      }
-
-      // Forecast divider
-      const divX = xScale(2024);
-      gMain.append("line")
-        .attr("x1", divX).attr("x2", divX).attr("y1", 0).attr("y2", H)
-        .attr("stroke", "var(--border-light)").attr("stroke-dasharray", "6,4").attr("stroke-width", 1);
-      gMain.append("text")
-        .attr("x", divX + 8).attr("y", 14)
-        .attr("fill", "var(--text-dim)").attr("font-size", 10)
-        .attr("font-family", "Space Mono, monospace")
-        .text("Forecast →");
-
-      // CI bands
-      fs.forEach(d => {
-        if (!d.conf_int.length) return;
-        const validCI = d.conf_int.filter(p => !isNaN(p.lower) && !isNaN(p.upper));
-        if (!validCI.length) return;
-        gMain.append("path")
-          .datum(validCI)
-          .attr("d", d3.area().x(p => xScale(p.year)).y0(p => yScale(p.lower)).y1(p => yScale(p.upper)))
-          .attr("fill", d.color).attr("opacity", 0.08);
-      });
-
-      const line = d3.line().x(p => xScale(p.year)).y(p => yScale(p.value)).defined(p => !isNaN(p.value));
-
-      // History
-      fs.forEach(d => {
-        gMain.append("path").datum(d.history)
-          .attr("d", line).attr("fill", "none")
-          .attr("stroke", d.color).attr("stroke-width", 2.2)
-          .attr("stroke-linecap", "round").attr("stroke-linejoin", "round");
-      });
-
-      // Forecast
-      fs.forEach(d => {
-        const lastHist = d.history.at(-1);
-        const conn = lastHist ? [lastHist, ...d.forecast] : d.forecast;
-        gMain.append("path").datum(conn.filter(p => !isNaN(p.value)))
-          .attr("d", line).attr("fill", "none")
-          .attr("stroke", d.color).attr("stroke-width", 2.2)
-          .attr("stroke-dasharray", "7,5")
-          .attr("stroke-linecap", "round").attr("stroke-linejoin", "round");
-      });
-
-      // End dots
-      fs.forEach(d => {
-        const last = d.forecast.at(-1);
-        if (!last || isNaN(last.value)) return;
-        gMain.append("circle")
-          .attr("cx", xScale(last.year)).attr("cy", yScale(last.value))
-          .attr("r", 4).attr("fill", d.color)
-          .attr("stroke", "var(--surface)").attr("stroke-width", 2);
-      });
-
-      // Crosshair
-      gMain.append("line").attr("class", "crosshair")
-        .attr("y1", 0).attr("y2", H)
-        .attr("stroke", "var(--text-dim)").attr("stroke-width", 0.8).attr("stroke-dasharray", "4,3")
-        .style("display", "none");
-
-      // Axes
-      gMain.append("line").attr("x1", 0).attr("x2", W).attr("y1", H).attr("y2", H).attr("stroke", "var(--border)");
-      const xStep = xMax - xMin > 20 ? 4 : 2;
-      d3.range(Math.ceil(xMin / xStep) * xStep, xMax + 1, xStep).forEach(y => {
-        gMain.append("line").attr("x1", xScale(y)).attr("x2", xScale(y)).attr("y1", H).attr("y2", H + 5).attr("stroke", "var(--border-light)");
-        gMain.append("text").attr("x", xScale(y)).attr("y", H + 20)
-          .attr("text-anchor", "middle").attr("fill", "var(--text-dim)").attr("font-size", 11)
-          .attr("font-family", "Space Mono, monospace").text(y);
-      });
-
-      gMain.append("line").attr("x1", 0).attr("x2", 0).attr("y1", 0).attr("y2", H).attr("stroke", "var(--border)");
-      yTicks.forEach(v => {
-        const label = Math.abs(v) >= 1000 ? `${(v / 1000).toFixed(v % 1000 === 0 ? 0 : 1)}k` : v;
-        gMain.append("text").attr("x", -10).attr("y", yScale(v) + 4)
-          .attr("text-anchor", "end").attr("fill", "var(--text-dim)").attr("font-size", 11)
-          .attr("font-family", "Space Mono, monospace")
-          .text(label);
-      });
-
-      // Axis labels
-      const yLabel = view === "net" ? "Net Trade (KBD)" : view === "exports" ? "Exports (KBD)" : "Imports (KBD)";
-      gMain.append("text").attr("x", W / 2).attr("y", H + 46)
-        .attr("text-anchor", "middle").attr("fill", "var(--text-muted)").attr("font-size", 12)
-        .attr("font-family", "DM Sans, sans-serif").text("Year");
-      gMain.append("text")
-        .attr("transform", `translate(-56,${H / 2}) rotate(-90)`)
-        .attr("text-anchor", "middle").attr("fill", "var(--text-muted)").attr("font-size", 12)
-        .attr("font-family", "DM Sans, sans-serif").text(yLabel);
-
-      // Legend
-      const leg = d3.select(chartDiv).append("div").attr("class", "oil-legend")
-        .style("display", "flex").style("justify-content", "center")
-        .style("gap", "28px").style("margin-top", "16px")
-        .style("font-size", "0.72rem").style("color", "var(--text-muted)");
-      leg.append("div").style("display","flex").style("align-items","center").style("gap","7px")
-        .html(`<svg width="28" height="4"><line x1="0" x2="28" y1="2" y2="2" stroke="var(--text-muted)" stroke-width="2"/></svg>Historical`);
-      leg.append("div").style("display","flex").style("align-items","center").style("gap","7px")
-        .html(`<svg width="28" height="4"><line x1="0" x2="28" y1="2" y2="2" stroke="var(--text-muted)" stroke-width="2" stroke-dasharray="7,5"/></svg>Forecast`);
-      leg.append("div").style("display","flex").style("align-items","center").style("gap","7px")
-        .html(`<div style="width:28px;height:10px;background:var(--text-muted);opacity:.2;border-radius:3px"></div>95% CI`);
-      if (view === "net") {
-        leg.append("div").style("display","flex").style("align-items","center").style("gap","7px")
-          .html(`<div style="width:28px;height:2px;background:var(--text-muted)"></div>Zero line`);
-      }
-
-      svg._fs = fs;
-      svg._xMin = xMin;
-      svg._xMax = xMax;
-    }
-
-    function onMouseMove(event) {
-      const fs = svg._fs;
-      if (!fs || !fs.length) return;
-      const [mx] = d3.pointer(event);
-      const year = Math.round(xScale.invert(mx));
-      if (year < svg._xMin || year > svg._xMax) {
-        gMain.select(".crosshair").style("display", "none");
-        tooltip.style("display", "none");
-        return;
-      }
-      const cx = xScale(year);
-      gMain.select(".crosshair").style("display", null).attr("x1", cx).attr("x2", cx);
-
-      const points = fs.map(d => {
-        const p = d.forecast.find(p => p.year === year) ?? d.history.find(p => p.year === year);
-        return { country: d.country, color: d.color, value: p?.value };
-      }).filter(p => p.value != null && !isNaN(p.value)).sort((a, b) => b.value - a.value);
-
-      if (!points.length) { tooltip.style("display", "none"); return; }
-
-      const chartRect = chartDiv.getBoundingClientRect();
-      const svgRect = chartDiv.querySelector("svg").getBoundingClientRect();
-      const scaleRatio = svgRect.width / TOTAL_W;
-      const tooltipX = MARGIN.left * scaleRatio + cx * scaleRatio + 16;
-
-      const formatVal = (v) => {
-        if (view === "net") {
-          return `${v > 0 ? "+" : ""}${Math.round(v).toLocaleString()}`;
-        }
-        return Math.round(v).toLocaleString();
+/**
+ * oil-info.js 
+ * Handles Imports, Exports, and Net Trade with custom parsing for different CSV schemas.
+ */
+(function () {
+  "use strict";
+
+  // ── Configuration ────────────────────────────────────────────────────────
+  const COLORS = ["#2dd4bf", "#5b8dee", "#f5a623", "#a78bfa", "#ff6b6b", "#0891b2", "#be185d", "#059669", "#b45309", "#6366f1"];
+  const MARGIN = { top: 30, right: 40, bottom: 50, left: 70 };
+  const TOTAL_W = 860;
+  const TOTAL_H = 420;
+  const W = TOTAL_W - MARGIN.left - MARGIN.right;
+  const H = TOTAL_H - MARGIN.top - MARGIN.bottom;
+
+  // ── State ────────────────────────────────────────────────────────────────
+  let forecastData = [], netTradeData = [], exportData = [];
+  let allData = [], active = [], startYear = 2000, view = "imports";
+
+  // ── DOM Elements ─────────────────────────────────────────────────────────
+  const chartDiv   = document.getElementById("chart");
+  const yearSelect = document.getElementById("yearSelect");
+  const viewSelect = document.getElementById("viewSelect");
+  const metaTitle  = document.getElementById("metaTitle");
+  const chipRow    = document.getElementById("chipRow");
+  const statGrid   = document.getElementById("statGrid");
+  const summaryTable = document.getElementById("summaryTable");
+
+  // Populate Year Select
+  if (yearSelect) {
+    [1971, 1980, 1990, 2000, 2010, 2020].forEach(y => {
+      const opt = document.createElement("option");
+      opt.value = y; opt.textContent = y;
+      if (y === 2000) opt.selected = true;
+      yearSelect.appendChild(opt);
+    });
+  }
+
+  // ── Data Parsing ─────────────────────────────────────────────────────────
+  function parseCSV(rawData, type) {
+    const isNet = type === "net";
+    const countryKey = isNet ? "Country" : "country";
+    const yearKey    = isNet ? "Year" : "year";
+    const valueKey   = isNet ? "Net_Trade" : "value";
+    const lowKey     = isNet ? "Net_CI_Low" : "lower";
+    const highKey    = isNet ? "Net_CI_High" : "upper";
+    const typeKey    = isNet ? "Type" : "type";
+
+    const countries = [...new Set(rawData.map(d => d[countryKey]))].filter(Boolean);
+    
+    return countries.map((name, i) => {
+      const rows = rawData.filter(d => d[countryKey] === name);
+      return {
+        country: name,
+        color: COLORS[i % COLORS.length],
+        history: rows.filter(d => d[typeKey]?.toLowerCase().startsWith("his")).map(d => ({
+          year: +d[yearKey], value: +d[valueKey]
+        })).sort((a,b) => a.year - b.year),
+        forecast: rows.filter(d => d[typeKey]?.toLowerCase().startsWith("for")).map(d => ({
+          year: +d[yearKey], value: +d[valueKey], lower: +d[lowKey], upper: +d[highKey]
+        })).sort((a,b) => a.year - b.year),
+        fullRow: rows[0] // Store for metadata like MAPE
       };
+    });
+  }
 
-      tooltip.style("display", "block")
-        .style("left", `${Math.min(tooltipX, chartRect.width - 180)}px`)
-        .style("top", `${MARGIN.top * scaleRatio + 8}px`)
-        .html(`<div style="font-family:Space Mono,monospace;font-size:0.68rem;color:var(--text-dim);margin-bottom:6px">${year}${view === "net" ? " · Net Trade" : ""}</div>` +
-          points.map(p =>
-            `<div style="display:flex;align-items:center;gap:7px">
-              <span style="width:7px;height:7px;border-radius:50%;background:${p.color};flex-shrink:0"></span>
-              <span style="color:var(--text-muted)">${p.country}</span>
-              <span style="margin-left:auto;font-family:Space Mono,monospace;font-size:0.68rem;color:${view === "net" ? (p.value > 0 ? "var(--green)" : "var(--red)") : "var(--text)"}">${formatVal(p.value)}</span>
-            </div>`
-          ).join(""));
+  // ── Visualization ────────────────────────────────────────────────────────
+  function renderChart() {
+    chartDiv.innerHTML = "";
+    const selected = allData.filter(d => active.includes(d.country));
+    
+    if (!selected.length) {
+      chartDiv.innerHTML = `<div class="empty-notice">Select countries below to visualize ${view} data.</div>`;
+      return;
     }
 
-    function renderTable() {
-      const hasMape = allData.some(d => d.mape != null);
-      const hasOrder = allData.some(d => d.order != null);
-      const isNet = view === "net";
-      const label = isNet ? "Net Trade" : view === "exports" ? "Exports" : "Imports";
+    const svg = d3.select(chartDiv).append("svg")
+      .attr("viewBox", `0 0 ${TOTAL_W} ${TOTAL_H}`)
+      .style("width", "100%").style("height", "auto");
 
-      document.getElementById("tableLabel").innerHTML = `${label} Forecast Summary — 2023 → 2030 <button class="info-btn" id="infoBtn2" title="What do these terms mean?" aria-label="Open glossary">?</button>`;
-      document.getElementById("infoBtn2")?.addEventListener("click", () => infoModal.classList.add("open"));
+    const g = svg.append("g").attr("transform", `translate(${MARGIN.left},${MARGIN.top})`);
 
-      const rows = allData.map(d => {
-        const actual = d.history.at(-1)?.value ?? 0;
-        const fc = d.forecast.at(-1)?.value ?? 0;
+    const displayData = selected.map(d => ({
+      ...d,
+      history: d.history.filter(p => p.year >= startYear)
+    }));
 
-        let changeDisplay, changeClass;
-        if (isNet) {
-          const change = fc - actual;
-          changeClass = change >= 50 ? "change-up" : change <= -50 ? "change-down" : "change-flat";
-          changeDisplay = `${change >= 0 ? "+" : ""}${Math.round(change).toLocaleString()} KBD`;
-        } else {
-          const pct = actual ? ((fc - actual) / actual) * 100 : 0;
-          changeClass = pct >= 2 ? "change-up" : pct <= -2 ? "change-down" : "change-flat";
-          changeDisplay = `${pct >= 0 ? "+" : ""}${pct.toFixed(1)}%`;
-        }
+    const allPts = displayData.flatMap(d => [...d.history, ...d.forecast]);
+    const xExtent = d3.extent(allPts, d => d.year);
+    const yMin = d3.min(allPts, d => d.value);
+    const yMax = d3.max(allPts, d => d.value);
 
-        const arrow = changeClass === "change-up" ? "↑" : changeClass === "change-down" ? "↓" : "→";
-        const mape = hasMape && d.mape != null
-          ? `<span class="mape-badge ${d.mape < 5 ? "mape-good" : d.mape < 10 ? "mape-ok" : "mape-weak"}">${d.mape.toFixed(1)}%</span>` : "—";
+    const xScale = d3.scaleLinear().domain(xExtent).range([0, W]);
+    const yScale = d3.scaleLinear()
+      .domain([yMin * 1.1, yMax * 1.1])
+      .range([H, 0]).nice();
 
-        const actualDisplay = isNet
-          ? `<span class="${actual > 0 ? "net-positive" : "net-negative"}">${actual > 0 ? "+" : ""}${Math.round(actual).toLocaleString()}</span>`
-          : Math.round(actual).toLocaleString();
-        const fcDisplay = isNet
-          ? `<span class="${fc > 0 ? "net-positive" : "net-negative"}">${fc > 0 ? "+" : ""}${Math.round(fc).toLocaleString()}</span>`
-          : Math.round(fc).toLocaleString();
+    // Gridlines
+    g.append("g").attr("class", "grid").attr("opacity", 0.1)
+      .call(d3.axisLeft(yScale).tickSize(-W).tickFormat(""));
 
-        return `<tr>
-          <td><div class="td-country"><span class="td-dot" style="background:${d.color}"></span>${d.country}</div></td>
-          <td class="td-mono">${actualDisplay}</td>
-          <td class="td-mono">${fcDisplay}</td>
-          <td><span class="${changeClass}">${arrow} ${changeDisplay}</span></td>
-          ${hasMape ? `<td>${mape}</td>` : ""}
-          ${hasOrder ? `<td class="td-mono">${d.order ?? "—"}</td>` : ""}
-        </tr>`;
-      }).join("");
+    // Axes
+    g.append("g").attr("transform", `translate(0,${H})`).call(d3.axisBottom(xScale).tickFormat(d3.format("d")));
+    g.append("g").call(d3.axisLeft(yScale).tickFormat(d3.format(".2s")));
 
-      document.getElementById("summaryTable").innerHTML = `
-        <table class="oil-table">
-          <thead><tr>
-            <th>Country</th>
-            <th>2023 ${isNet ? "Net" : label}</th>
-            <th>2030 Forecast</th>
-            <th>Change</th>
-            ${hasMape ? `<th>MAPE</th>` : ""}
-            ${hasOrder ? `<th>ARIMA</th>` : ""}
-          </tr></thead>
-          <tbody>${rows}</tbody>
-        </table>`;
+    // Zero line for Net Trade
+    if (yMin < 0) {
+      g.append("line").attr("x1", 0).attr("x2", W).attr("y1", yScale(0)).attr("y2", yScale(0))
+        .attr("stroke", "var(--text-dim)").attr("stroke-width", 1).attr("stroke-dasharray", "4,4");
     }
 
-    function buildChips() {
-      const row = document.getElementById("chipRow");
-      row.innerHTML = "";
-      allData.forEach(d => {
-        const btn = document.createElement("button");
-        btn.className = `country-chip${active.includes(d.country) ? " active" : ""}`;
-        btn.style.setProperty("--chip-c", d.color);
-        btn.innerHTML = `<span class="chip-dot" style="background:${d.color}"></span>${d.country}`;
-        btn.onclick = () => {
-          if (active.includes(d.country)) {
-            if (active.length > 1) active = active.filter(c => c !== d.country);
-          } else {
-            active.push(d.country);
-          }
-          buildChips(); render();
-        };
-        row.appendChild(btn);
-      });
-      document.getElementById("chipAll").onclick = () => { active = allData.map(d => d.country); buildChips(); render(); };
-      document.getElementById("chipClear").onclick = () => { active = [allData[0]?.country].filter(Boolean); buildChips(); render(); };
-    }
+    const lineGen = d3.line().x(d => xScale(d.year)).y(d => yScale(d.value));
 
-    function buildYearSelect() {
-      [1971, 1980, 1990, 2000, 2010, 2015, 2020].forEach(y => {
-        const opt = document.createElement("option");
-        opt.value = y; opt.textContent = `From ${y}`;
-        if (y === startYear) opt.selected = true;
-        yearSelect.appendChild(opt);
-      });
-      yearSelect.onchange = () => { startYear = +yearSelect.value; render(); };
-    }
+    displayData.forEach(d => {
+      // Confidence Interval Area
+      const areaGen = d3.area().x(p => xScale(p.year)).y0(p => yScale(p.lower)).y1(p => yScale(p.upper));
+      g.append("path").datum(d.forecast).attr("d", areaGen).attr("fill", d.color).attr("opacity", 0.12);
 
-    function parseData(rawData) {
-      const countries = [...new Set(rawData.map(d => d.country))];
-      return countries.map((country, i) => {
-        const rows = rawData.filter(d => d.country === country);
-        const first = rows[0];
-        return {
-          country,
-          color: COLORS[i % COLORS.length],
-          mape: first?.mape ?? null,
-          order: first?.order ?? null,
-          history: rows.filter(d => d.type === "history").map(d => ({ year: d.year, value: d.value })),
-          forecast: rows.filter(d => d.type === "forecast").map(d => ({ year: d.year, value: d.value })),
-          conf_int: rows.filter(d => d.type === "forecast").map(d => ({
-            year: d.year,
-            lower: typeof d.lower === 'number' ? d.lower : parseFloat(d.lower) || d.value * 0.85,
-            upper: typeof d.upper === 'number' ? d.upper : parseFloat(d.upper) || d.value * 1.15
-          })),
-        };
-      });
-    }
+      // History Line
+      g.append("path").datum(d.history).attr("d", lineGen).attr("fill", "none").attr("stroke", d.color).attr("stroke-width", 2.5);
+      
+      // Forecast Line (Dashed)
+      const conn = [d.history.at(-1), ...d.forecast].filter(Boolean);
+      g.append("path").datum(conn).attr("d", lineGen).attr("fill", "none").attr("stroke", d.color).attr("stroke-width", 2.5).attr("stroke-dasharray", "6,4");
+    });
+  }
 
-    const allImports = parseData(RAW_IMPORTS);
-    const allExports = parseData(RAW_EXPORTS);
+  function updateStats() {
+    const selected = allData.filter(d => active.includes(d.country));
+    const latestYear = selected[0]?.history.at(-1)?.year || "2023";
+    const totalVal = selected.reduce((s, d) => s + (d.history.at(-1)?.value || 0), 0);
+    
+    statGrid.innerHTML = `
+      <div class="stat-card">
+        <div class="stat-label">${view.toUpperCase()} VOLUME (${latestYear})</div>
+        <div class="stat-value">${Math.round(totalVal).toLocaleString()}</div>
+        <div class="stat-sub">Thousand Barrels / Day</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">ACTIVE SELECTION</div>
+        <div class="stat-value">${active.length}</div>
+        <div class="stat-sub">Countries displayed</div>
+      </div>
+    `;
+  }
 
-    // View switcher with NET TRADE calculation
-    viewSelect.onchange = () => {
+  function renderTable() {
+    let html = `<table class="oil-table"><thead><tr><th>Country</th><th>Current</th><th>2030 Forecast</th><th>Trend</th></tr></thead><tbody>`;
+    allData.forEach(d => {
+      const cur = d.history.at(-1)?.value || 0;
+      const fct = d.forecast.at(-1)?.value || 0;
+      const diff = ((fct - cur) / Math.abs(cur) * 100) || 0;
+      const colorClass = diff > 1 ? "change-up" : diff < -1 ? "change-down" : "change-flat";
+      
+      html += `<tr>
+        <td class="td-country"><span class="td-dot" style="background:${d.color}"></span>${d.country}</td>
+        <td class="td-mono">${Math.round(cur).toLocaleString()}</td>
+        <td class="td-mono">${Math.round(fct).toLocaleString()}</td>
+        <td class="${colorClass}">${diff > 0 ? '↑' : '↓'} ${Math.abs(diff).toFixed(1)}%</td>
+      </tr>`;
+    });
+    summaryTable.innerHTML = html + `</tbody></table>`;
+  }
+
+  function buildChips() {
+    chipRow.innerHTML = "";
+    allData.forEach(d => {
+      const isActive = active.includes(d.country);
+      const btn = document.createElement("button");
+      btn.className = `country-chip ${isActive ? 'active' : ''}`;
+      btn.style.setProperty("--chip-c", d.color);
+      btn.innerHTML = `<span class="chip-dot" style="background:${d.color}"></span>${d.country}`;
+      btn.onclick = () => {
+        active = isActive ? active.filter(c => c !== d.country) : [...active, d.country];
+        buildChips(); updateStats(); renderChart();
+      };
+      chipRow.appendChild(btn);
+    });
+  }
+
+  // ── Bootstrap ─────────────────────────────────────────────────────────────
+  Promise.all([
+    d3.csv("../data/oil_forecast.csv"),
+    d3.csv("../data/net_trade.csv")
+    // Note: add export csv here if separate
+  ]).then(([impRaw, netRaw]) => {
+    forecastData = parseCSV(impRaw, "imports");
+    netTradeData = parseCSV(netRaw, "net");
+
+    const updateView = () => {
       view = viewSelect.value;
-
-      if (view === "exports") {
-        allData = allExports;
-        dataHint.textContent = "";
-      } else if (view === "net") {
-        const netTradeRows = calculateNetTrade(RAW_IMPORTS, RAW_EXPORTS);
-        allData = parseData(netTradeRows);
-        dataHint.textContent = "Net Trade = Exports − Imports. Positive (green) = net exporter, Negative (red) = net importer.";
-      } else {
-        allData = allImports;
-        dataHint.textContent = "";
-      }
-
-      active = allData.map(d => d.country);
-      buildChips();
-      render();
+      allData = (view === "net") ? netTradeData : forecastData;
+      if (metaTitle) metaTitle.textContent = `Oil ${view.charAt(0).toUpperCase() + view.slice(1)} (KBD)`;
+      active = allData.slice(0, 4).map(d => d.country);
+      buildChips(); updateStats(); renderChart(); renderTable();
     };
 
-    // Boot
-    allData = allImports;
-    active = allData.map(d => d.country);
-    buildYearSelect();
-    buildChips();
-    render();
+    viewSelect.onchange = updateView;
+    yearSelect.onchange = (e) => { startYear = +e.target.value; renderChart(); };
+    document.getElementById("chipAll").onclick = () => { active = allData.map(d => d.country); buildChips(); renderChart(); updateStats(); };
+    document.getElementById("chipClear").onclick = () => { active = []; buildChips(); renderChart(); updateStats(); };
 
-  })();
-  </script>
-</body>
-</html>
+    // Initial Run
+    updateView();
+
+  }).catch(err => {
+    console.error(err);
+    chartDiv.innerHTML = `<div class="empty-notice" style="color:var(--red)">Error loading datasets. Check file paths.</div>`;
+  });
+
+  // Modal Logic
+  const modal = document.getElementById("infoModal");
+  document.getElementById("infoBtn").onclick = () => modal.classList.add("open");
+  document.getElementById("modalClose").onclick = () => modal.classList.remove("open");
+
+})();
+
