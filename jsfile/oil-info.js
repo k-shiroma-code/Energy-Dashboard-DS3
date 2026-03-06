@@ -1,6 +1,13 @@
 // oil-info.js  –  vanilla D3 v7, no React
 // Mounts into:  <div id="chart">  (oil-info.html)
 // CSV path:     /data/oil_forecast.csv
+// ── State ─────────────────────────────────────────────────────────────────
+  let forecastData = []; // <--- Add this (for oil_forecast.csv)
+  let netTradeData = []; // <--- Add this (for net_trade.csv)
+  let allData      = []; // This remains your "active" source for the chart
+  let active       = []; 
+  let startYear    = 2000;
+  let view         = "imports";
 
 (function () {
   "use strict";
@@ -585,3 +592,4 @@
   });
 
 })();
+
