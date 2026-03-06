@@ -578,18 +578,46 @@
     });
   }
 
-  // ── Bootstrap ─────────────────────────────────────────────────────────────
-  d3.csv("/data/oil_forecast.csv").then(rawData => {
-    allData = parseCSV(rawData);
-    active  = allData.map(d => d.country);
+// ── Bootstrap ─────────────────────────────────────────────────────────────
+  Promise.all([
+    d3.csv("/data/oil_forecast.csv"),
+    d3.csv("/data/net_trade.csv")
+  ]).then(([forecastRaw, netRaw]) => {
+    
+    // 1. Parse both datasets into the format your chart expects
+    forecastData = parseCSV(forecastRaw);
+    netTradeData = parseCSV(netRaw);
 
+    // 2. Initial logic: Set allData to whichever view is selected by default
+    // If your HTML default is "imports", use forecastData
+    allData = (view === "net") ? netTradeData : forecastData;
+    
+    active = allData.map(d => d.country);
+
+    // 3. Listen for View Changes (Imports vs Net Trade)
+    d3.select("#viewSelect").on("change", function() {
+      view = this.value;
+      
+      // SWAP: update allData based on the dropdown
+      allData = (view === "net") ? netTradeData : forecastData;
+      
+      // Optionally update meta titles
+      d3.select("#metaTitle").text(view === "net" ? "Net Oil Trade (KBD)" : "Oil Imports (KBD)");
+      
+      render(); // Redraw the chart
+    });
+
+    // 4. Initialize the rest
     buildYearSelect();
     buildChips();
     render();
+
   }).catch(err => {
-    console.error("Failed to load oil_forecast.csv:", err);
-    chartDiv.innerHTML = `<div class="oil-notice">⚠ Could not load /data/oil_forecast.csv — make sure it exists in your /public/data folder.</div>`;
+    console.error("Failed to load CSVs:", err);
+    const chartDiv = document.getElementById("chart");
+    if(chartDiv) chartDiv.innerHTML = `<div class="empty-notice">Check console: Data files missing.</div>`;
   });
 
-})();
+})(); // End of IIFE
+
 
