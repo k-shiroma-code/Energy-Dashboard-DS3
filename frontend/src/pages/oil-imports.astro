@@ -1,0 +1,423 @@
+---
+import Oil from "../components/Oil.jsx";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Refined Oil Imports | Energy Dashboard DS3</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav-brand">
+        <span class="brand-icon">⚡</span>
+        <span class="brand-text">ENERGY<span class="brand-accent">DS3</span></span>
+      </div>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/global-targets">Global Targets</a>
+        <a href="/energy-access">Energy Access</a>
+        <a href="/affordability">Affordability</a>
+        <a href="/oil-imports" class="active">Oil Imports</a>
+      </div>
+    </nav>
+
+    <main class="page-container">
+      <Oil client:load />
+    </main>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <span class="brand-icon">⚡</span>
+          <span>ENERGY DS3</span>
+        </div>
+        <p>Center for Energy Research · Data Science Project</p>
+        <p class="footer-source">Data: JODI Oil World Database · Log-ARIMA Forecast</p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  :root {
+    --color-bg: #ffffff;
+    --color-bg-alt: #f8faf9;
+    --color-surface: #f1f5f3;
+    --color-primary: #16a34a;
+    --color-primary-dim: #22c55e;
+    --color-accent: #15803d;
+    --color-text: #1a1a1a;
+    --color-text-muted: #6b7280;
+    --color-border: #e5e7eb;
+    --font-sans: 'DM Sans', system-ui, sans-serif;
+    --font-mono: 'Space Mono', monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+  }
+
+  .navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 3rem;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-border);
+    z-index: 100;
+  }
+
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--color-text);
+  }
+
+  .brand-icon { font-size: 1.5rem; }
+  .brand-accent { color: var(--color-primary); }
+
+  .nav-links { display: flex; gap: 2.5rem; }
+
+  .nav-links a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover,
+  .nav-links a.active {
+    color: var(--color-primary);
+  }
+
+  .page-container {
+    padding-top: 80px;
+    min-height: 100vh;
+  }
+
+  .footer {
+    padding: 3rem;
+    border-top: 1px solid var(--color-border);
+    text-align: center;
+    background: var(--color-bg);
+  }
+
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+  }
+
+  .footer-content p {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+  }
+
+  .footer-source {
+    font-family: var(--font-mono);
+    font-size: 0.8rem !important;
+    margin-top: 0.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .navbar { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+  }
+</style>
+
+<style is:global>
+  /* ============================================
+     OIL COMPONENT STYLES (light theme)
+     ============================================ */
+
+  .oil-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+    color: #16a34a;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.5rem;
+  }
+
+  .oil-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 0.75rem;
+  }
+
+  .oil-subtitle {
+    font-size: 1.1rem;
+    color: #6b7280;
+    line-height: 1.7;
+    max-width: 700px;
+  }
+
+  .oil-subtitle strong {
+    color: #16a34a;
+    font-family: 'Space Mono', monospace;
+  }
+
+  /* Controls */
+  .oil-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .oil-ctrl-btn {
+    padding: 6px 14px;
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
+    background: transparent;
+    color: #6b7280;
+    font-size: 0.75rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .oil-ctrl-btn:hover {
+    color: #16a34a;
+    border-color: #16a34a;
+  }
+
+  /* Chips */
+  .oil-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+
+  .oil-chip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 18px;
+    border-radius: 100px;
+    border: 2px solid #e5e7eb;
+    background: #ffffff;
+    color: #6b7280;
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    user-select: none;
+    letter-spacing: 0.3px;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .oil-chip:hover {
+    border-color: #d1d5db;
+    background: #f8faf9;
+    color: #1a1a1a;
+    transform: translateY(-1px);
+  }
+
+  .oil-chip.active {
+    border-color: var(--chip-color);
+    background: #ffffff;
+    color: #1a1a1a;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+
+  .oil-chip-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    opacity: 0.4;
+    transition: opacity 0.2s;
+  }
+
+  .oil-chip.active .oil-chip-dot {
+    opacity: 1;
+  }
+
+  /* Stats */
+  .oil-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    margin-bottom: 28px;
+  }
+
+  .oil-stat-card {
+    background: #f1f5f3;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.3s;
+  }
+
+  .oil-stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  }
+
+  .oil-stat-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: #6b7280;
+    margin-bottom: 8px;
+  }
+
+  .oil-stat-value {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1a1a1a;
+  }
+
+  .oil-stat-sub {
+    font-size: 0.78rem;
+    color: #6b7280;
+    margin-top: 4px;
+  }
+
+  .oil-stat-sub.change-up, .change-up { color: #16a34a; font-weight: 600; }
+  .oil-stat-sub.change-down, .change-down { color: #ef4444; font-weight: 600; }
+  .oil-stat-sub.change-flat, .change-flat { color: #f59e0b; font-weight: 600; }
+
+  /* Chart */
+  .oil-chart-box {
+    background: #ffffff;
+    border: 2px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 24px 16px 16px;
+    margin-bottom: 28px;
+  }
+
+  .oil-section-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #6b7280;
+    margin-bottom: 12px;
+    padding-left: 8px;
+    font-weight: 500;
+  }
+
+  .oil-empty {
+    color: #d1d5db;
+    text-align: center;
+    padding: 80px 0;
+    font-size: 0.95rem;
+  }
+
+  /* Table */
+  .oil-table-box {
+    background: #ffffff;
+    border: 2px solid #e5e7eb;
+    border-radius: 16px;
+    overflow: hidden;
+    padding-top: 20px;
+    margin-bottom: 28px;
+  }
+
+  .oil-table-box .oil-section-label {
+    padding-left: 24px;
+  }
+
+  .oil-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .oil-table th {
+    text-align: left;
+    padding: 10px 24px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #6b7280;
+    border-bottom: 1px solid #e5e7eb;
+    font-weight: 500;
+  }
+
+  .oil-table td {
+    padding: 14px 24px;
+    font-size: 0.88rem;
+    border-bottom: 1px solid #f1f5f3;
+    color: #1a1a1a;
+  }
+
+  .oil-table tr:last-child td { border-bottom: none; }
+
+  .oil-table tr:hover td { background: #f8faf9; }
+
+  .oil-td-country {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+  }
+
+  .oil-td-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .oil-td-mono {
+    font-family: 'Space Mono', monospace;
+    color: #6b7280;
+    font-size: 0.82rem;
+  }
+
+  .oil-mape-badge {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 100px;
+    font-size: 0.76rem;
+    font-weight: 600;
+  }
+
+  .mape-good { background: #dcfce7; color: #16a34a; }
+  .mape-ok { background: #fef3c7; color: #d97706; }
+  .mape-weak { background: #fee2e2; color: #ef4444; }
+
+  /* Footer note */
+  .oil-footnote {
+    text-align: center;
+    margin-top: 16px;
+    color: #9ca3af;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+  }
+
+  @media (max-width: 768px) {
+    .oil-title { font-size: 1.8rem; }
+    .oil-stats { grid-template-columns: repeat(2, 1fr); }
+    .oil-table-box { overflow-x: auto; }
+  }
+</style>
