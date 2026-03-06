@@ -579,46 +579,52 @@
   }
 
 // ── Bootstrap ─────────────────────────────────────────────────────────────
+// ── Bootstrap ─────────────────────────────────────────────────────────────
   Promise.all([
-    d3.csv("/data/oil_forecast.csv"),
-    d3.csv("/data/net_trade.csv")
+    d3.csv("../data/oil_forecast.csv"),
+    d3.csv("../data/net_trade.csv")
   ]).then(([forecastRaw, netRaw]) => {
     
-    // 1. Parse both datasets into the format your chart expects
+    // 1. Parse both files
     forecastData = parseCSV(forecastRaw);
     netTradeData = parseCSV(netRaw);
 
-    // 2. Initial logic: Set allData to whichever view is selected by default
-    // If your HTML default is "imports", use forecastData
+    // 2. Set the initial view based on the dropdown
+    view = d3.select("#viewSelect").property("value");
     allData = (view === "net") ? netTradeData : forecastData;
-    
-    active = allData.map(d => d.country);
+    active  = allData.map(d => d.country);
 
-    // 3. Listen for View Changes (Imports vs Net Trade)
+    // 3. THE KEY: The Dropdown Listener
     d3.select("#viewSelect").on("change", function() {
       view = this.value;
       
-      // SWAP: update allData based on the dropdown
+      // Swap the data source
       allData = (view === "net") ? netTradeData : forecastData;
       
-      // Optionally update meta titles
-      d3.select("#metaTitle").text(view === "net" ? "Net Oil Trade (KBD)" : "Oil Imports (KBD)");
+      // Update the UI Text to match the view
+      const titleText = view === "net" ? "Net Oil Trade (KBD)" : 
+                        view === "exports" ? "Oil Exports (KBD)" : "Oil Imports (KBD)";
+      d3.select("#metaTitle").text(titleText);
       
-      render(); // Redraw the chart
+      // Refresh the chart and the country chips
+      buildChips(); 
+      render();
     });
 
-    // 4. Initialize the rest
+    // 4. Kick off the initial render
     buildYearSelect();
     buildChips();
     render();
 
   }).catch(err => {
-    console.error("Failed to load CSVs:", err);
-    const chartDiv = document.getElementById("chart");
-    if(chartDiv) chartDiv.innerHTML = `<div class="empty-notice">Check console: Data files missing.</div>`;
+    console.error("Data loading failed:", err);
+    document.getElementById("chart").innerHTML = `
+      <div class="empty-notice">Check console: Data files not found in /data/</div>
+    `;
   });
 
 })(); // End of IIFE
+
 
 
 
