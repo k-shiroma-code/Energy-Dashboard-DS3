@@ -529,17 +529,6 @@
     });
   }
 
-  // ── View select ───────────────────────────────────────────────────────────
-  viewSelect?.addEventListener("change", () => {
-    view = viewSelect.value;
-    if (dataHint) {
-      dataHint.textContent = view !== "imports"
-        ? `Note: only import data is available in this dataset. Showing imports.`
-        : "";
-    }
-    render();
-  });
-
   // ── Parse CSV ─────────────────────────────────────────────────────────────
   function parseCSV(rawData) {
     const countries = [...new Set(rawData.map(d => d.country))];
@@ -611,6 +600,7 @@
   });
 
 })(); // End of IIFE
+
 
 
 
