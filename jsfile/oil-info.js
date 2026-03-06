@@ -1,36 +1,50 @@
-// oil-info.js – vanilla D3 v7
+/**
+ * oil-info.js 
+ * Handles Imports, Exports, and Net Trade with custom parsing for different CSV schemas.
+ */
 (function () {
   "use strict";
 
-  // ── Configuration & State ────────────────────────────────────────────────
-  const COLORS = ["#16a34a", "#2563eb", "#dc2626", "#d97706", "#7c3aed", "#0891b2", "#be185d", "#059669", "#b45309", "#6366f1"];
-  const MARGIN = { top: 30, right: 30, bottom: 50, left: 70 };
+  // ── Configuration ────────────────────────────────────────────────────────
+  const COLORS = ["#2dd4bf", "#5b8dee", "#f5a623", "#a78bfa", "#ff6b6b", "#0891b2", "#be185d", "#059669", "#b45309", "#6366f1"];
+  const MARGIN = { top: 30, right: 40, bottom: 50, left: 70 };
   const TOTAL_W = 860;
-  const TOTAL_H = 400;
+  const TOTAL_H = 420;
   const W = TOTAL_W - MARGIN.left - MARGIN.right;
   const H = TOTAL_H - MARGIN.top - MARGIN.bottom;
 
-  let forecastData = []; 
-  let netTradeData = []; 
-  let allData      = []; 
-  let active       = []; 
-  let startYear    = 2000;
-  let view         = "imports";
+  // ── State ────────────────────────────────────────────────────────────────
+  let forecastData = [], netTradeData = [], exportData = [];
+  let allData = [], active = [], startYear = 2000, view = "imports";
 
-  // DOM Elements
+  // ── DOM Elements ─────────────────────────────────────────────────────────
   const chartDiv   = document.getElementById("chart");
   const yearSelect = document.getElementById("yearSelect");
   const viewSelect = document.getElementById("viewSelect");
   const metaTitle  = document.getElementById("metaTitle");
   const chipRow    = document.getElementById("chipRow");
+  const statGrid   = document.getElementById("statGrid");
+  const summaryTable = document.getElementById("summaryTable");
+
+  // Populate Year Select
+  if (yearSelect) {
+    [1971, 1980, 1990, 2000, 2010, 2020].forEach(y => {
+      const opt = document.createElement("option");
+      opt.value = y; opt.textContent = y;
+      if (y === 2000) opt.selected = true;
+      yearSelect.appendChild(opt);
+    });
+  }
 
   // ── Data Parsing ─────────────────────────────────────────────────────────
-  function parseCSV(rawData, isNetTrade = false) {
-    // Detect column names based on file type
-    const countryKey = isNetTrade ? "Country" : "country";
-    const yearKey    = isNetTrade ? "Year" : "year";
-    const valueKey   = isNetTrade ? "Net_Trade" : "value";
-    const typeKey    = isNetTrade ? "Type" : "type";
+  function parseCSV(rawData, type) {
+    const isNet = type === "net";
+    const countryKey = isNet ? "Country" : "country";
+    const yearKey    = isNet ? "Year" : "year";
+    const valueKey   = isNet ? "Net_Trade" : "value";
+    const lowKey     = isNet ? "Net_CI_Low" : "lower";
+    const highKey    = isNet ? "Net_CI_High" : "upper";
+    const typeKey    = isNet ? "Type" : "type";
 
     const countries = [...new Set(rawData.map(d => d[countryKey]))].filter(Boolean);
     
@@ -39,14 +53,13 @@
       return {
         country: name,
         color: COLORS[i % COLORS.length],
-        history: rows
-          .filter(d => d[typeKey]?.toLowerCase() === "historical" || d[typeKey]?.toLowerCase() === "history")
-          .map(d => ({ year: +d[yearKey], value: +d[valueKey] }))
-          .sort((a, b) => a.year - b.year),
-        forecast: rows
-          .filter(d => d[typeKey]?.toLowerCase() === "forecast")
-          .map(d => ({ year: +d[yearKey], value: +d[valueKey] }))
-          .sort((a, b) => a.year - b.year)
+        history: rows.filter(d => d[typeKey]?.toLowerCase().startsWith("his")).map(d => ({
+          year: +d[yearKey], value: +d[valueKey]
+        })).sort((a,b) => a.year - b.year),
+        forecast: rows.filter(d => d[typeKey]?.toLowerCase().startsWith("for")).map(d => ({
+          year: +d[yearKey], value: +d[valueKey], lower: +d[lowKey], upper: +d[highKey]
+        })).sort((a,b) => a.year - b.year),
+        fullRow: rows[0] // Store for metadata like MAPE
       };
     });
   }
@@ -55,8 +68,9 @@
   function renderChart() {
     chartDiv.innerHTML = "";
     const selected = allData.filter(d => active.includes(d.country));
+    
     if (!selected.length) {
-      chartDiv.innerHTML = `<div style="padding:100px; text-align:center; color:#9ca3af;">Select a country to view data</div>`;
+      chartDiv.innerHTML = `<div class="empty-notice">Select countries below to visualize ${view} data.</div>`;
       return;
     }
 
@@ -66,15 +80,12 @@
 
     const g = svg.append("g").attr("transform", `translate(${MARGIN.left},${MARGIN.top})`);
 
-    // Flatten data for scale calculations
     const displayData = selected.map(d => ({
       ...d,
       history: d.history.filter(p => p.year >= startYear)
     }));
 
     const allPts = displayData.flatMap(d => [...d.history, ...d.forecast]);
-    if (!allPts.length) return;
-
     const xExtent = d3.extent(allPts, d => d.year);
     const yMin = d3.min(allPts, d => d.value);
     const yMax = d3.max(allPts, d => d.value);
@@ -84,50 +95,84 @@
       .domain([yMin < 0 ? yMin * 1.1 : 0, yMax * 1.1])
       .range([H, 0]).nice();
 
-    // Axes
-    g.append("g").attr("transform", `translate(0,${H})`)
-      .call(d3.axisBottom(xScale).tickFormat(d3.format("d")).ticks(10));
-    g.append("g").call(d3.axisLeft(yScale).tickFormat(d => d3.format(".2s")(d).replace('G', 'B')));
+    // Gridlines
+    g.append("g").attr("class", "grid").attr("opacity", 0.1)
+      .call(d3.axisLeft(yScale).tickSize(-W).tickFormat(""));
 
-    // Zero Line (for Net Trade)
+    // Axes
+    g.append("g").attr("transform", `translate(0,${H})`).call(d3.axisBottom(xScale).tickFormat(d3.format("d")));
+    g.append("g").call(d3.axisLeft(yScale).tickFormat(d3.format(".2s")));
+
+    // Zero line for Net Trade
     if (yMin < 0) {
-      g.append("line")
-        .attr("x1", 0).attr("x2", W).attr("y1", yScale(0)).attr("y2", yScale(0))
-        .attr("stroke", "#000").attr("stroke-width", 1).attr("stroke-dasharray", "2,2");
+      g.append("line").attr("x1", 0).attr("x2", W).attr("y1", yScale(0)).attr("y2", yScale(0))
+        .attr("stroke", "var(--text-dim)").attr("stroke-width", 1).attr("stroke-dasharray", "4,4");
     }
 
     const lineGen = d3.line().x(d => xScale(d.year)).y(d => yScale(d.value));
 
-    // Draw Lines
     displayData.forEach(d => {
-      // History
-      g.append("path").datum(d.history).attr("d", lineGen)
-        .attr("fill", "none").attr("stroke", d.color).attr("stroke-width", 2.5);
+      // Confidence Interval Area
+      const areaGen = d3.area().x(p => xScale(p.year)).y0(p => yScale(p.lower)).y1(p => yScale(p.upper));
+      g.append("path").datum(d.forecast).attr("d", areaGen).attr("fill", d.color).attr("opacity", 0.12);
+
+      // History Line
+      g.append("path").datum(d.history).attr("d", lineGen).attr("fill", "none").attr("stroke", d.color).attr("stroke-width", 2.5);
       
-      // Forecast Connection
+      // Forecast Line (Dashed)
       const conn = [d.history.at(-1), ...d.forecast].filter(Boolean);
-      g.append("path").datum(conn).attr("d", lineGen)
-        .attr("fill", "none").attr("stroke", d.color).attr("stroke-width", 2.5).attr("stroke-dasharray", "5,5");
+      g.append("path").datum(conn).attr("d", lineGen).attr("fill", "none").attr("stroke", d.color).attr("stroke-width", 2.5).attr("stroke-dasharray", "6,4");
     });
   }
 
+  function updateStats() {
+    const selected = allData.filter(d => active.includes(d.country));
+    const latestYear = selected[0]?.history.at(-1)?.year || "2023";
+    const totalVal = selected.reduce((s, d) => s + (d.history.at(-1)?.value || 0), 0);
+    
+    statGrid.innerHTML = `
+      <div class="stat-card">
+        <div class="stat-label">${view.toUpperCase()} VOLUME (${latestYear})</div>
+        <div class="stat-value">${Math.round(totalVal).toLocaleString()}</div>
+        <div class="stat-sub">Thousand Barrels / Day</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">ACTIVE SELECTION</div>
+        <div class="stat-value">${active.length}</div>
+        <div class="stat-sub">Countries displayed</div>
+      </div>
+    `;
+  }
+
+  function renderTable() {
+    let html = `<table class="oil-table"><thead><tr><th>Country</th><th>Current</th><th>2030 Forecast</th><th>Trend</th></tr></thead><tbody>`;
+    allData.forEach(d => {
+      const cur = d.history.at(-1)?.value || 0;
+      const fct = d.forecast.at(-1)?.value || 0;
+      const diff = ((fct - cur) / Math.abs(cur) * 100) || 0;
+      const colorClass = diff > 1 ? "change-up" : diff < -1 ? "change-down" : "change-flat";
+      
+      html += `<tr>
+        <td class="td-country"><span class="td-dot" style="background:${d.color}"></span>${d.country}</td>
+        <td class="td-mono">${Math.round(cur).toLocaleString()}</td>
+        <td class="td-mono">${Math.round(fct).toLocaleString()}</td>
+        <td class="${colorClass}">${diff > 0 ? '↑' : '↓'} ${Math.abs(diff).toFixed(1)}%</td>
+      </tr>`;
+    });
+    summaryTable.innerHTML = html + `</tbody></table>`;
+  }
+
   function buildChips() {
-    if (!chipRow) return;
     chipRow.innerHTML = "";
     allData.forEach(d => {
       const isActive = active.includes(d.country);
       const btn = document.createElement("button");
       btn.className = `country-chip ${isActive ? 'active' : ''}`;
-      btn.style.cssText = `
-        padding: 5px 12px; border-radius: 20px; border: 1px solid ${isActive ? d.color : '#e5e7eb'};
-        background: ${isActive ? d.color + '1a' : '#fff'}; cursor: pointer; font-size: 12px; margin: 4px;
-      `;
-      btn.innerHTML = `<span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:${d.color}; margin-right:6px;"></span>${d.country}`;
+      btn.style.setProperty("--chip-c", d.color);
+      btn.innerHTML = `<span class="chip-dot" style="background:${d.color}"></span>${d.country}`;
       btn.onclick = () => {
-        if (active.includes(d.country)) active = active.filter(c => c !== d.country);
-        else active.push(d.country);
-        buildChips();
-        renderChart();
+        active = isActive ? active.filter(c => c !== d.country) : [...active, d.country];
+        buildChips(); updateStats(); renderChart();
       };
       chipRow.appendChild(btn);
     });
@@ -137,47 +182,35 @@
   Promise.all([
     d3.csv("../data/oil_forecast.csv"),
     d3.csv("../data/net_trade.csv")
-  ]).then(([forecastRaw, netRaw]) => {
-    forecastData = parseCSV(forecastRaw, false);
-    netTradeData = parseCSV(netRaw, true);
+    // Note: add export csv here if separate
+  ]).then(([impRaw, netRaw]) => {
+    forecastData = parseCSV(impRaw, "imports");
+    netTradeData = parseCSV(netRaw, "net");
 
-    // Initial Load
-    view = viewSelect?.value || "imports";
-    allData = (view === "net") ? netTradeData : forecastData;
-    active = allData.slice(0, 3).map(d => d.country);
-
-    if (metaTitle) metaTitle.textContent = view === "net" ? "Net Oil Trade (KBD)" : "Oil Imports (KBD)";
-
-    // Event Listeners
-    viewSelect?.addEventListener("change", (e) => {
-      view = e.target.value;
+    const updateView = () => {
+      view = viewSelect.value;
       allData = (view === "net") ? netTradeData : forecastData;
-      if (metaTitle) metaTitle.textContent = view === "net" ? "Net Oil Trade (KBD)" : "Oil Imports (KBD)";
-      buildChips();
-      renderChart();
-    });
+      if (metaTitle) metaTitle.textContent = `Oil ${view.charAt(0).toUpperCase() + view.slice(1)} (KBD)`;
+      active = allData.slice(0, 4).map(d => d.country);
+      buildChips(); updateStats(); renderChart(); renderTable();
+    };
 
-    yearSelect?.addEventListener("change", (e) => {
-      startYear = +e.target.value;
-      renderChart();
-    });
+    viewSelect.onchange = updateView;
+    yearSelect.onchange = (e) => { startYear = +e.target.value; renderChart(); };
+    document.getElementById("chipAll").onclick = () => { active = allData.map(d => d.country); buildChips(); renderChart(); updateStats(); };
+    document.getElementById("chipClear").onclick = () => { active = []; buildChips(); renderChart(); updateStats(); };
 
-    document.getElementById("chipAll")?.addEventListener("click", () => {
-      active = allData.map(d => d.country);
-      buildChips(); renderChart();
-    });
-
-    document.getElementById("chipClear")?.addEventListener("click", () => {
-      active = [];
-      buildChips(); renderChart();
-    });
-
-    buildChips();
-    renderChart();
+    // Initial Run
+    updateView();
 
   }).catch(err => {
-    console.error("Data Load Error:", err);
-    chartDiv.innerHTML = `<div style="color:red; padding:20px;">Error loading CSV files. Check console.</div>`;
+    console.error(err);
+    chartDiv.innerHTML = `<div class="empty-notice" style="color:var(--red)">Error loading datasets. Check file paths.</div>`;
   });
+
+  // Modal Logic
+  const modal = document.getElementById("infoModal");
+  document.getElementById("infoBtn").onclick = () => modal.classList.add("open");
+  document.getElementById("modalClose").onclick = () => modal.classList.remove("open");
 
 })();
