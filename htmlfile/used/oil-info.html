@@ -3,468 +3,349 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Oil Import/Export Explorer — Energy Dashboard</title>
-  <meta name="description" content="Interactive oil trade forecasts — import and export volumes with Log-ARIMA projections through 2030." />
-  <link rel="stylesheet" href="../css/styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+  <title>Oil Import/Export Explorer</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    /* ── Design tokens (mirror index.html) ──────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     :root {
-      --bg:          #0d1117;
-      --bg-card:     #161b24;
-      --bg-card-alt: #1c2333;
-      --border:      #2a3347;
-      --border-glow: #3b5278;
-
-      /* Legacy aliases kept so D3 inline styles still resolve */
-      --border-light: #3b5278;
-      --surface:      #161b24;
-      --surface-2:    #1c2333;
-      --text:         #e8edf5;
-      --text-muted:   #8a9ab8;
-      --text-dim:     #4e5e7a;
-      --accent:       #5b8dee;
-      --accent-glow:  rgba(91,141,238,.15);
-      --green:  #2dd4bf;
-      --red:    #ff6b6b;
-      --amber:  #f5a623;
-
-      --text-primary:   #e8edf5;
-      --text-secondary: #8a9ab8;
-      --accent-amber: #f5a623;
-      --accent-teal:  #2dd4bf;
-      --accent-blue:  #5b8dee;
-
-      --font-display: 'Syne', sans-serif;
-      --font-body:    'Source Serif 4', Georgia, serif;
-      --font-mono:    'IBM Plex Mono', monospace;
-
-      --radius:    14px;
-      --radius-sm:  8px;
-      --shadow-card: 0 2px 20px rgba(0,0,0,.45);
+      --bg: #0c0f14;
+      --surface: #151920;
+      --surface-2: #1c2028;
+      --border: #2a2f3a;
+      --border-light: #363c4a;
+      --text: #e8eaed;
+      --text-muted: #8b919e;
+      --text-dim: #5a6070;
+      --accent: #3b82f6;
+      --accent-glow: rgba(59, 130, 246, 0.15);
+      --green: #22c55e;
+      --red: #ef4444;
+      --amber: #f59e0b;
+      --radius: 12px;
+      --radius-sm: 8px;
     }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-
+    html { font-size: 15px; }
     body {
-      font-family: var(--font-body);
+      font-family: 'DM Sans', -apple-system, sans-serif;
       background: var(--bg);
-      color: var(--text-primary);
+      color: var(--text);
+      line-height: 1.6;
       min-height: 100vh;
-      -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
 
-    a { color: var(--accent-teal); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-
-    /* ── Sticky header ───────────────────────────────────────────── */
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(13,17,23,.88);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-    }
-    .site-header .wrap {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.5rem;
-      padding-block: .9rem;
-    }
-    .brand-wordmark {
-      font-family: var(--font-display);
-      font-size: 1.15rem;
-      font-weight: 800;
-      letter-spacing: -.01em;
-      line-height: 1;
-      white-space: nowrap;
-    }
-    .brand-wordmark .energy    { color: var(--accent-amber); }
-    .brand-wordmark .dashboard { color: var(--text-primary); }
-
-    .pillnav { display: flex; flex-wrap: wrap; gap: .35rem; }
-    .pillnav__link {
-      font-family: var(--font-display);
-      font-size: .78rem;
-      font-weight: 600;
-      letter-spacing: .03em;
-      color: var(--text-secondary);
-      padding: .3rem .85rem;
-      border-radius: 99px;
-      border: 1px solid transparent;
-      transition: color .18s, border-color .18s, background .18s;
-    }
-    .pillnav__link:hover {
-      color: var(--text-primary);
-      border-color: var(--border);
-      text-decoration: none;
-    }
-    .pillnav__link.is-active {
-      color: var(--accent-amber);
-      border-color: rgba(245,166,35,.35);
-      background: rgba(245,166,35,.07);
-    }
-
-    /* ── Layout helpers ──────────────────────────────────────────── */
-    .wrap {
-      max-width: 1280px;
-      margin-inline: auto;
-      padding-inline: clamp(1.25rem, 4vw, 3rem);
-    }
-    .container {
-      max-width: 1100px;
-      margin-inline: auto;
-      padding-inline: clamp(1.25rem, 4vw, 3rem);
-    }
-    main.container { padding-top: 2rem; padding-bottom: 4rem; }
-
-    /* ── Page header ─────────────────────────────────────────────── */
-    .page-header {
-      border-bottom: 1px solid var(--border);
-      padding-block: clamp(2rem, 5vw, 3.5rem);
+    /* ── Hero ─────────────────────────────────────────── */
+    .hero {
       position: relative;
+      padding: 56px 0 40px;
+      background: linear-gradient(170deg, #0f1923 0%, #0c0f14 50%, #111827 100%);
+      border-bottom: 1px solid var(--border);
       overflow: hidden;
     }
-    .page-header::before {
+    .hero::before {
       content: '';
       position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(var(--border) 1px, transparent 1px),
-        linear-gradient(90deg, var(--border) 1px, transparent 1px);
-      background-size: 60px 60px;
-      opacity: .18;
+      top: -60%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%);
       pointer-events: none;
     }
-    .page-header-inner {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
-    .page-eyebrow {
-      font-family: var(--font-mono);
-      font-size: .72rem;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--accent-teal);
-      margin-bottom: .75rem;
-      display: flex;
-      align-items: center;
-      gap: .5rem;
-    }
-    .page-eyebrow::before {
+    .hero::after {
       content: '';
-      display: inline-block;
-      width: 24px;
-      height: 1px;
-      background: var(--accent-teal);
+      position: absolute;
+      bottom: -40%;
+      left: -5%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(34,197,94,0.04) 0%, transparent 70%);
+      pointer-events: none;
     }
-    .page-title {
-      font-family: var(--font-display);
-      font-size: clamp(1.5rem, 4vw, 2.4rem);
-      font-weight: 800;
-      letter-spacing: -.03em;
-      line-height: 1.1;
-      color: var(--text-primary);
+    .hero .container { position: relative; z-index: 1; }
+    .hero h1 {
+      font-family: 'Space Mono', monospace;
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #fff;
+      margin-bottom: 8px;
     }
-    .page-title .accent { color: var(--accent-amber); }
-    .page-subtitle {
-      font-size: clamp(.88rem, 1.4vw, 1rem);
-      font-weight: 300;
-      color: var(--text-secondary);
-      line-height: 1.7;
-      max-width: 60ch;
-      margin-top: .65rem;
+    .hero h1 span { color: var(--accent); }
+    .hero .subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 500px;
     }
-    .page-meta { display: flex; flex-direction: column; gap: .5rem; align-self: flex-end; }
-    .meta-badge {
-      font-family: var(--font-mono);
-      font-size: .66rem;
-      letter-spacing: .07em;
-      text-transform: uppercase;
-      padding: .25rem .65rem;
-      border-radius: 3px;
-      border: 1px solid;
-      text-align: right;
-      white-space: nowrap;
-    }
-    .meta-badge--amber { color: var(--accent-amber); border-color: rgba(245,166,35,.25); background: rgba(245,166,35,.06); }
-    .meta-badge--teal  { color: var(--accent-teal);  border-color: rgba(45,212,191,.25); background: rgba(45,212,191,.06); }
-    .meta-badge--blue  { color: var(--accent-blue);  border-color: rgba(91,141,238,.25); background: rgba(91,141,238,.06); }
 
-    /* ── Cards ───────────────────────────────────────────────────── */
+    /* ── Nav ──────────────────────────────────────────── */
+    .nav {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    .nav a {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 5px 14px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      transition: all 0.2s;
+    }
+    .nav a:hover { color: var(--text); border-color: var(--border-light); background: var(--surface-2); }
+    .nav a[aria-current="page"] {
+      color: var(--accent);
+      border-color: var(--accent);
+      background: var(--accent-glow);
+    }
+
+    /* ── Layout ──────────────────────────────────────── */
+    .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+    main.container { padding-top: 24px; padding-bottom: 60px; }
+
+    /* ── Cards ────────────────────────────────────────── */
     .card {
-      background: var(--bg-card);
+      background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 1.5rem;
-      margin-bottom: 1.25rem;
-      box-shadow: var(--shadow-card);
-      transition: border-color .2s;
+      padding: 24px;
+      margin-bottom: 20px;
     }
-    .card:hover { border-color: var(--border-glow); }
 
-    /* ── Stat grid ───────────────────────────────────────────────── */
+    /* ── Controls Toolbar ────────────────────────────── */
+    .toolbar {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .toolbar-left { display: flex; align-items: center; gap: 10px; }
+    .toolbar-right { margin-left: auto; text-align: right; }
+    .label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+    }
+    .select {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--text);
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 7px 30px 7px 12px;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%235a6070'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      transition: border-color 0.2s;
+    }
+    .select:hover { border-color: var(--border-light); }
+    .select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+
+    .meta-title {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .meta-sub { font-size: 0.72rem; color: var(--text-dim); margin-top: 2px; }
+    .hint { font-size: 0.75rem; color: var(--amber); margin-top: 12px; }
+
+    /* ── Stat Grid ────────────────────────────────────── */
     .stat-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-      gap: 1rem;
-      margin-bottom: 1.25rem;
+      gap: 16px;
+      margin-bottom: 20px;
     }
     .stat-card {
-      background: var(--bg-card);
+      background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 1.25rem;
+      padding: 20px;
       position: relative;
       overflow: hidden;
-      box-shadow: var(--shadow-card);
-      transition: border-color .2s;
-      animation: fadeUp .5s ease-out both;
     }
-    .stat-card:hover { border-color: var(--border-glow); }
     .stat-card::after {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 2px;
-      background: var(--accent-blue);
-      opacity: .55;
+      background: var(--accent);
+      opacity: 0.4;
     }
-    .stat-card:nth-child(2)::after { background: var(--accent-teal); }
-    .stat-card:nth-child(3)::after { background: var(--accent-amber); }
+    .stat-card:nth-child(2)::after { background: var(--green); }
+    .stat-card:nth-child(3)::after { background: var(--amber); }
     .stat-card:nth-child(4)::after { background: #a78bfa; }
-    .stat-card:nth-child(1) { animation-delay: .05s; }
-    .stat-card:nth-child(2) { animation-delay: .10s; }
-    .stat-card:nth-child(3) { animation-delay: .15s; }
-    .stat-card:nth-child(4) { animation-delay: .20s; }
-
     .stat-label {
-      font-family: var(--font-mono);
-      font-size: .65rem;
-      font-weight: 500;
+      font-size: 0.65rem;
+      font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: .08em;
-      color: var(--text-muted);
-      margin-bottom: .5rem;
+      letter-spacing: 0.07em;
+      color: var(--text-dim);
+      margin-bottom: 8px;
     }
     .stat-value {
-      font-family: var(--font-display);
+      font-family: 'Space Mono', monospace;
       font-size: 1.7rem;
-      font-weight: 800;
-      color: var(--text-primary);
-      line-height: 1.15;
-    }
-    .stat-sub {
-      font-family: var(--font-mono);
-      font-size: .7rem;
-      color: var(--text-muted);
-      margin-top: .35rem;
-    }
-
-    /* ── Controls toolbar ────────────────────────────────────────── */
-    .toolbar {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-    .toolbar-left { display: flex; align-items: center; gap: .65rem; }
-    .toolbar-right { margin-left: auto; text-align: right; }
-
-    .label {
-      font-family: var(--font-mono);
-      font-size: .68rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      color: var(--text-muted);
-    }
-    .select {
-      font-family: var(--font-display);
-      font-size: .84rem;
-      font-weight: 600;
-      color: var(--text-primary);
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: .45rem 2rem .45rem .75rem;
-      cursor: pointer;
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234e5e7a' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right .7rem center;
-      transition: border-color .15s;
-    }
-    .select:hover { border-color: var(--border-glow); }
-    .select:focus  { outline: none; border-color: var(--accent-teal); }
-
-    .meta-title {
-      font-family: var(--font-display);
-      font-size: .9rem;
       font-weight: 700;
-      color: var(--text-primary);
+      color: #fff;
+      line-height: 1.2;
     }
-    .meta-sub {
-      font-family: var(--font-mono);
-      font-size: .68rem;
-      color: var(--text-muted);
-      margin-top: .2rem;
-    }
-    .hint {
-      font-family: var(--font-mono);
-      font-size: .72rem;
-      color: var(--accent-amber);
-      margin-top: .75rem;
-    }
+    .stat-sub { font-size: 0.72rem; color: var(--text-muted); margin-top: 4px; }
 
-    /* ── Chart wrap ──────────────────────────────────────────────── */
+    /* ── Chart ────────────────────────────────────────── */
     .chart-wrap {
       position: relative;
       overflow-x: auto;
     }
     .chart-wrap svg text { user-select: none; }
 
-    /* ── Country chips ───────────────────────────────────────────── */
+    /* ── Chips ────────────────────────────────────────── */
     .chip-header {
       display: flex;
-      gap: .5rem;
+      gap: 8px;
       align-items: center;
-      margin-bottom: .9rem;
+      margin-bottom: 14px;
       flex-wrap: wrap;
     }
     .chip-header-label {
-      font-family: var(--font-mono);
-      font-size: .68rem;
-      font-weight: 500;
+      font-size: 0.7rem;
+      font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: .07em;
-      color: var(--text-muted);
+      letter-spacing: 0.06em;
+      color: var(--text-dim);
     }
     .chip-ctrl {
-      font-family: var(--font-display);
-      font-size: .75rem;
-      font-weight: 600;
-      color: var(--text-secondary);
-      background: var(--bg-card-alt);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      background: var(--surface-2);
       border: 1px solid var(--border);
-      border-radius: 99px;
-      padding: .28rem .85rem;
+      border-radius: 20px;
+      padding: 4px 14px;
       cursor: pointer;
-      transition: color .15s, border-color .15s;
+      transition: all 0.15s;
     }
-    .chip-ctrl:hover { color: var(--text-primary); border-color: var(--border-glow); }
-
-    .chip-row { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .chip-ctrl:hover { color: var(--text); border-color: var(--border-light); }
+    .chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
     .country-chip {
       display: inline-flex;
       align-items: center;
-      gap: .45rem;
-      padding: .35rem 1rem;
-      border-radius: 99px;
+      gap: 7px;
+      padding: 6px 16px;
+      border-radius: 20px;
       border: 1.5px solid var(--border);
-      background: var(--bg-card-alt);
-      font-family: var(--font-display);
-      font-size: .75rem;
-      font-weight: 600;
-      color: var(--text-secondary);
+      background: var(--surface-2);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--text-muted);
       cursor: pointer;
-      transition: all .15s;
+      transition: all 0.15s;
     }
-    .country-chip:hover { border-color: var(--border-glow); color: var(--text-primary); }
+    .country-chip:hover { border-color: var(--border-light); color: var(--text); }
     .country-chip.active {
       color: #fff;
       border-color: var(--chip-c);
-      background: color-mix(in srgb, var(--chip-c) 15%, var(--bg-card-alt));
+      background: color-mix(in srgb, var(--chip-c) 15%, var(--surface-2));
       box-shadow: 0 0 12px color-mix(in srgb, var(--chip-c) 20%, transparent);
     }
     .chip-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
 
-    /* ── Section label ───────────────────────────────────────────── */
+    /* ── Table ────────────────────────────────────────── */
     .section-label {
-      font-family: var(--font-mono);
-      font-size: .68rem;
-      font-weight: 500;
+      font-size: 0.65rem;
+      font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: .08em;
-      color: var(--text-muted);
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: .5rem;
+      letter-spacing: 0.07em;
+      color: var(--text-dim);
+      margin-bottom: 16px;
     }
-
-    /* ── Summary table ───────────────────────────────────────────── */
-    .oil-table { width: 100%; border-collapse: collapse; font-size: .82rem; }
+    .oil-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
     .oil-table th {
       text-align: left;
-      padding: .65rem .9rem;
-      font-family: var(--font-mono);
-      font-size: .65rem;
-      font-weight: 500;
+      padding: 10px 14px;
+      font-size: 0.65rem;
+      font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: .07em;
-      color: var(--text-muted);
-      border-bottom: 1px solid var(--border);
-      background: var(--bg-card-alt);
+      letter-spacing: 0.06em;
+      color: var(--text-dim);
+      border-bottom: 2px solid var(--border);
     }
     .oil-table td {
-      padding: .75rem .9rem;
+      padding: 12px 14px;
       border-bottom: 1px solid var(--border);
-      color: var(--text-secondary);
-      font-weight: 300;
+      color: var(--text-muted);
     }
-    .oil-table tbody tr { transition: background .15s; }
-    .oil-table tbody tr:last-child td { border-bottom: none; }
-    .oil-table tbody tr:hover { background: var(--bg-card-alt); }
-    .td-country { display: flex; align-items: center; gap: .65rem; font-weight: 600; color: var(--text-primary); }
+    .oil-table tbody tr { transition: background 0.15s; }
+    .oil-table tbody tr:hover { background: var(--surface-2); }
+    .td-country { display: flex; align-items: center; gap: 10px; font-weight: 500; color: var(--text); }
     .td-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-    .td-mono { font-family: var(--font-mono); font-size: .75rem; }
-    .change-up   { color: var(--accent-teal);  font-weight: 600; }
-    .change-down { color: var(--red);           font-weight: 600; }
-    .change-flat { color: var(--text-secondary); font-weight: 600; }
+    .td-mono { font-family: 'Space Mono', monospace; font-size: 0.72rem; }
+    .change-up { color: var(--green); font-weight: 600; }
+    .change-down { color: var(--red); font-weight: 600; }
+    .change-flat { color: var(--text-muted); font-weight: 600; }
     .mape-badge {
       display: inline-block;
-      padding: .15rem .55rem;
-      border-radius: 4px;
-      font-family: var(--font-mono);
-      font-size: .68rem;
-      font-weight: 500;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: 0.68rem;
+      font-weight: 600;
     }
-    .mape-good { background: rgba(45,212,191,.12); color: var(--accent-teal); }
-    .mape-ok   { background: rgba(245,166,35,.12); color: var(--accent-amber); }
-    .mape-weak { background: rgba(255,107,107,.12); color: var(--red); }
+    .mape-good { background: rgba(34,197,94,0.15); color: var(--green); }
+    .mape-ok   { background: rgba(245,158,11,0.15); color: var(--amber); }
+    .mape-weak { background: rgba(239,68,68,0.15); color: var(--red); }
 
-    /* ── Tooltip ─────────────────────────────────────────────────── */
+    /* ── Tooltip ──────────────────────────────────────── */
     .oil-tooltip {
       position: absolute;
-      background: rgba(22,27,36,.96);
-      backdrop-filter: blur(10px);
-      border: 1px solid var(--border-glow);
-      color: var(--text-primary);
-      border-radius: var(--radius-sm);
-      padding: .75rem 1rem;
-      font-family: var(--font-mono);
-      font-size: .72rem;
+      background: rgba(21,25,32,0.95);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--border-light);
+      color: var(--text);
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 0.75rem;
       line-height: 1.9;
       pointer-events: none;
       min-width: 150px;
-      box-shadow: 0 8px 32px rgba(0,0,0,.5);
+      font-family: 'DM Sans', sans-serif;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
       display: none;
       z-index: 20;
     }
 
-    /* ── Info button ─────────────────────────────────────────────── */
+    /* ── Footer ──────────────────────────────────────── */
+    .site-footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 0;
+      text-align: center;
+    }
+    .site-footer p {
+      font-size: 0.72rem;
+      color: var(--text-dim);
+    }
+    .footnote {
+      font-size: 0.68rem;
+      color: var(--text-dim);
+      text-align: center;
+      margin: 20px 0 0;
+      line-height: 1.6;
+    }
+
+    /* ── Info Button & Modal ─────────────────────────── */
     .info-btn {
       display: inline-flex;
       align-items: center;
@@ -472,267 +353,206 @@
       width: 22px;
       height: 22px;
       border-radius: 50%;
-      border: 1.5px solid var(--border-glow);
-      background: var(--bg-card-alt);
-      color: var(--text-secondary);
-      font-family: var(--font-mono);
-      font-size: .7rem;
+      border: 1.5px solid var(--border-light);
+      background: var(--surface-2);
+      color: var(--text-muted);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
       font-weight: 700;
       cursor: pointer;
-      transition: all .2s;
-      margin-left: .5rem;
+      transition: all 0.2s;
+      margin-left: 8px;
       vertical-align: middle;
       line-height: 1;
     }
     .info-btn:hover {
-      border-color: var(--accent-teal);
-      color: var(--accent-teal);
-      background: rgba(45,212,191,.08);
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-glow);
+      box-shadow: 0 0 12px var(--accent-glow);
     }
 
-    /* ── Modal ───────────────────────────────────────────────────── */
     .modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,.65);
-      backdrop-filter: blur(6px);
-      z-index: 200;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
+      z-index: 100;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 1.5rem;
+      padding: 24px;
       opacity: 0;
       pointer-events: none;
-      transition: opacity .25s;
+      transition: opacity 0.25s ease;
     }
-    .modal-overlay.open { opacity: 1; pointer-events: auto; }
-    .modal-overlay.open .modal-panel { transform: translateY(0) scale(1); }
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal-overlay.open .modal-panel {
+      transform: translateY(0) scale(1);
+    }
 
     .modal-panel {
-      background: var(--bg-card);
-      border: 1px solid var(--border-glow);
-      border-radius: var(--radius);
+      background: var(--surface);
+      border: 1px solid var(--border-light);
+      border-radius: 16px;
       width: 100%;
-      max-width: 580px;
-      max-height: 82vh;
+      max-width: 560px;
+      max-height: 80vh;
       overflow-y: auto;
-      padding: 2rem;
-      box-shadow: 0 24px 64px rgba(0,0,0,.6);
-      transform: translateY(14px) scale(0.97);
-      transition: transform .3s;
-      position: relative;
+      padding: 32px;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+      transform: translateY(12px) scale(0.97);
+      transition: transform 0.3s ease;
     }
+
     .modal-close {
       position: absolute;
-      top: 1rem;
-      right: 1rem;
-      width: 30px;
-      height: 30px;
-      border-radius: var(--radius-sm);
+      top: 16px;
+      right: 16px;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
       border: 1px solid var(--border);
-      background: var(--bg-card-alt);
-      color: var(--text-secondary);
-      font-size: 1rem;
+      background: var(--surface-2);
+      color: var(--text-muted);
+      font-size: 1.1rem;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all .15s;
+      transition: all 0.15s;
     }
-    .modal-close:hover { color: var(--text-primary); border-color: var(--border-glow); }
+    .modal-close:hover { color: var(--text); border-color: var(--border-light); }
 
     .modal-panel h3 {
-      font-family: var(--font-display);
-      font-size: 1.15rem;
-      font-weight: 800;
-      color: var(--text-primary);
-      margin-bottom: .35rem;
-      letter-spacing: -.02em;
+      font-family: 'Space Mono', monospace;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
     }
-    .modal-subtitle {
-      font-family: var(--font-mono);
-      font-size: .7rem;
-      color: var(--text-muted);
-      margin-bottom: 1.5rem;
-      letter-spacing: .04em;
+    .modal-panel .modal-subtitle {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      margin-bottom: 24px;
     }
 
-    /* ── Term cards (inside modal) ───────────────────────────────── */
     .term-card {
-      background: var(--bg-card-alt);
+      background: var(--surface-2);
       border: 1px solid var(--border);
       border-radius: var(--radius-sm);
-      padding: 1rem 1.1rem;
-      margin-bottom: .75rem;
-      transition: border-color .15s;
+      padding: 16px 18px;
+      margin-bottom: 12px;
     }
-    .term-card:hover { border-color: var(--border-glow); }
-    .term-header { display: flex; align-items: center; gap: .65rem; margin-bottom: .5rem; }
+    .term-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
     .term-badge {
-      font-family: var(--font-mono);
-      font-size: .7rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
       font-weight: 700;
-      padding: .2rem .55rem;
-      border-radius: 4px;
-      letter-spacing: .03em;
+      padding: 3px 10px;
+      border-radius: 6px;
+      letter-spacing: 0.02em;
     }
-    .term-badge-p    { background: rgba(91,141,238,.15);  color: var(--accent-blue); }
-    .term-badge-d    { background: rgba(45,212,191,.15);  color: var(--accent-teal); }
-    .term-badge-q    { background: rgba(168,85,247,.15);  color: #a855f7; }
-    .term-badge-mape { background: rgba(245,166,35,.15);  color: var(--accent-amber); }
-    .term-badge-aic  { background: rgba(236,72,153,.15);  color: #ec4899; }
-    .term-badge-ci   { background: rgba(45,212,191,.15);  color: var(--accent-teal); }
-    .term-badge-kbd  { background: rgba(99,102,241,.15);  color: #6366f1; }
+    .term-badge-p { background: rgba(59,130,246,0.15); color: var(--accent); }
+    .term-badge-d { background: rgba(34,197,94,0.15); color: var(--green); }
+    .term-badge-q { background: rgba(168,85,247,0.15); color: #a855f7; }
+    .term-badge-mape { background: rgba(245,158,11,0.15); color: var(--amber); }
+    .term-badge-aic { background: rgba(236,72,153,0.15); color: #ec4899; }
+    .term-badge-ci { background: rgba(6,182,212,0.15); color: #06b6d4; }
+    .term-badge-kbd { background: rgba(99,102,241,0.15); color: #6366f1; }
     .term-name {
-      font-family: var(--font-display);
-      font-size: .85rem;
-      font-weight: 700;
-      color: var(--text-primary);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text);
     }
     .term-body {
-      font-size: .85rem;
-      font-weight: 300;
-      color: var(--text-secondary);
+      font-size: 0.78rem;
+      color: var(--text-muted);
       line-height: 1.65;
     }
     .term-example {
       display: inline-block;
-      margin-top: .55rem;
-      font-family: var(--font-mono);
-      font-size: .68rem;
+      margin-top: 8px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
       background: var(--bg);
       border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: .25rem .65rem;
-      color: var(--text-muted);
+      border-radius: 6px;
+      padding: 4px 12px;
+      color: var(--text-dim);
     }
 
-    /* ── Empty state ─────────────────────────────────────────────── */
+    /* ── Empty state ─────────────────────────────────── */
     .empty-notice {
-      padding: 2.5rem;
+      padding: 40px;
       text-align: center;
-      font-family: var(--font-mono);
-      font-size: .8rem;
-      color: var(--text-muted);
+      color: var(--text-dim);
+      font-size: 0.85rem;
     }
 
-    /* ── Footnote ────────────────────────────────────────────────── */
-    .footnote {
-      font-family: var(--font-mono);
-      font-size: .68rem;
-      color: var(--text-muted);
-      text-align: center;
-      margin: 1.5rem 0 0;
-      line-height: 1.7;
-    }
-
-    /* ── Footer ──────────────────────────────────────────────────── */
-    .site-footer { border-top: 1px solid var(--border); padding-block: 1.5rem; }
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-    .footer-copy {
-      font-family: var(--font-mono);
-      font-size: .68rem;
-      color: var(--text-muted);
-    }
-    .footer-links { display: flex; gap: 1.25rem; }
-    .footer-links a {
-      font-family: var(--font-mono);
-      font-size: .68rem;
-      color: var(--text-muted);
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      transition: color .15s;
-    }
-    .footer-links a:hover { color: var(--text-primary); text-decoration: none; }
-
-    /* ── Animations ──────────────────────────────────────────────── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(12px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .card { animation: fadeUp .45s ease-out both; }
-
-    /* ── Responsive ──────────────────────────────────────────────── */
-    @media (max-width: 700px) {
-      .site-header .wrap { flex-direction: column; align-items: flex-start; gap: .75rem; }
-      .pillnav { gap: .2rem; }
-      .pillnav__link { font-size: .72rem; padding: .25rem .65rem; }
-      .page-header-inner { flex-direction: column; }
+    /* ── Responsive ──────────────────────────────────── */
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 1.5rem; }
       .stat-grid { grid-template-columns: 1fr 1fr; }
-      .toolbar { gap: .9rem; }
+      .toolbar { gap: 14px; }
       .toolbar-right { margin-left: 0; text-align: left; }
     }
 
-    :focus-visible { outline: 2px solid var(--accent-teal); outline-offset: 3px; border-radius: 2px; }
-    ::selection { background: rgba(45,212,191,.25); color: var(--text-primary); }
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--border-glow); }
+    /* ── Animations ──────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .card, .stat-card {
+      animation: fadeUp 0.5s ease-out both;
+    }
+    .stat-card:nth-child(1) { animation-delay: 0.05s; }
+    .stat-card:nth-child(2) { animation-delay: 0.1s; }
+    .stat-card:nth-child(3) { animation-delay: 0.15s; }
+    .stat-card:nth-child(4) { animation-delay: 0.2s; }
   </style>
 </head>
 <body>
 
-  <!-- ===== HEADER / NAV ===== -->
-  <header class="site-header" role="banner">
-    <div class="wrap">
-      <div class="brand-wordmark" aria-label="Site brand">
-        <span class="energy">Energy</span><span class="dashboard">Dashboard</span>
-      </div>
-      <nav class="pillnav" aria-label="Primary navigation">
-        <a class="pillnav__link"           href="../index.html">Dashboard</a>
-        <a class="pillnav__link"           href="./ev-share.html">EV Share</a>
-        <a class="pillnav__link"           href="./ev_forecast.html">EV Sales</a>
-        <a class="pillnav__link is-active" href="./oil-info.html" aria-current="page">Oil Explorer</a>
-        <a class="pillnav__link"           href="./data.html">Datasets</a>
-        <a class="pillnav__link"           href="../index.html#about">About</a>
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
+    <div class="container">
+      <h1>Oil <span>Import/Export</span> Explorer</h1>
+      <p class="subtitle">Interactive oil trade forecasts — import &amp; export volumes with Log-ARIMA projections through 2030</p>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="../index.html">Dashboard</a>
+        <a href="./ev-share.html">EV Share</a>
+        <a href="./ev_forecast.html">EV Forecast</a>
+        <a href="./oil-info.html" aria-current="page">Oil Explorer</a>
+        <a href="./data.html">Datasets</a>
+        <a href="../index.html#about">About</a>
       </nav>
     </div>
-  </header>
+  </section>
 
+  <main class="container">
 
-  <!-- ===== PAGE HEADER ===== -->
-  <div class="page-header">
-    <div class="wrap page-header-inner">
-      <div>
-        <p class="page-eyebrow">Oil Trade · ARIMA Forecast</p>
-        <h1 class="page-title">Oil <span class="accent">Import/Export</span> Explorer</h1>
-        <p class="page-subtitle">
-          Interactive oil trade forecasts — import &amp; export volumes with
-          Log-ARIMA projections through 2030, fitted by country using AIC grid search.
-        </p>
-      </div>
-      <aside class="page-meta" aria-label="Dataset metadata">
-        <span class="meta-badge meta-badge--amber">Log-ARIMA Model</span>
-        <span class="meta-badge meta-badge--teal">Forecast to 2030</span>
-        <span class="meta-badge meta-badge--blue">JODI Source Data</span>
-      </aside>
-    </div>
-  </div>
+    <!-- ═══ STAT CARDS ═══ -->
+    <div class="stat-grid" id="statGrid"></div>
 
-
-  <!-- ===== MAIN ===== -->
-  <main class="container" aria-label="Oil trade dashboard">
-
-    <!-- Stat cards (populated by JS) -->
-    <div class="stat-grid" id="statGrid" aria-label="Summary statistics"></div>
-
-    <!-- Controls -->
-    <section class="card" aria-label="Chart controls">
+    <!-- ═══ CONTROLS ═══ -->
+    <section class="card" aria-label="Controls">
       <div class="toolbar">
         <div class="toolbar-left">
           <span class="label">Start Year</span>
-          <select id="yearSelect" class="select" aria-label="Select start year"></select>
+          <select id="yearSelect" class="select"></select>
         </div>
         <div class="toolbar-left">
           <span class="label">View</span>
-          <select id="viewSelect" class="select" aria-label="Select data view">
+          <select id="viewSelect" class="select">
             <option value="imports" selected>Imports</option>
             <option value="exports">Exports</option>
             <option value="net">Net Trade</option>
@@ -740,19 +560,19 @@
         </div>
         <div class="toolbar-right">
           <div class="meta-title" id="metaTitle">Oil Imports (KBD)</div>
-          <div class="meta-sub"   id="metaSub">Historical + Forecast</div>
+          <div class="meta-sub" id="metaSub">Historical + Forecast</div>
         </div>
       </div>
       <p class="hint" id="dataHint"></p>
     </section>
 
-    <!-- Chart -->
+    <!-- ═══ CHART ═══ -->
     <section class="card" aria-label="Oil trade visualization">
       <div id="chart" class="chart-wrap" role="img" aria-label="Oil trade line chart"></div>
       <div id="emptyState" class="empty-notice" hidden></div>
     </section>
 
-    <!-- Country chips -->
+    <!-- ═══ CHIPS ═══ -->
     <section class="card" aria-label="Country filter">
       <div class="chip-header">
         <span class="chip-header-label">Countries</span>
@@ -762,21 +582,18 @@
       <div class="chip-row" id="chipRow"></div>
     </section>
 
-    <!-- Summary table -->
+    <!-- ═══ TABLE ═══ -->
     <section class="card" aria-label="Forecast summary table">
-      <p class="section-label" id="tableLabel">
-        Forecast Summary
-        <button class="info-btn" id="infoBtn" title="What do these terms mean?" aria-label="Open glossary">?</button>
-      </p>
+      <p class="section-label" id="tableLabel">Forecast Summary <button class="info-btn" id="infoBtn" title="What do these terms mean?">?</button></p>
       <div id="summaryTable" style="overflow-x:auto"></div>
     </section>
 
-    <!-- Info / Glossary modal -->
-    <div class="modal-overlay" id="infoModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <div class="modal-panel">
-        <button class="modal-close" id="modalClose" aria-label="Close glossary">✕</button>
-        <h3 id="modalTitle">Understanding the Forecast</h3>
-        <p class="modal-subtitle">KEY TERMS USED IN THE ARIMA MODEL AND THIS DASHBOARD</p>
+    <!-- ═══ INFO MODAL ═══ -->
+    <div class="modal-overlay" id="infoModal">
+      <div class="modal-panel" style="position:relative">
+        <button class="modal-close" id="modalClose">✕</button>
+        <h3>Understanding the Forecast</h3>
+        <p class="modal-subtitle">Key terms used in the ARIMA model and this dashboard</p>
 
         <div class="term-card">
           <div class="term-header">
@@ -784,7 +601,7 @@
             <span class="term-name">Auto-Regressive Order</span>
           </div>
           <p class="term-body">
-            The number of past values (lags) the model uses to predict the next value. A higher <strong style="color:var(--accent-blue)">p</strong> means the model looks further back in history. Think of it as "memory length."
+            The number of past values (lags) the model uses to predict the next value. A higher <strong style="color:var(--accent)">p</strong> means the model looks further back in history. Think of it as "memory length."
           </p>
           <span class="term-example">p=2 → uses the last 2 years to predict</span>
         </div>
@@ -795,7 +612,7 @@
             <span class="term-name">Differencing Order</span>
           </div>
           <p class="term-body">
-            How many times the data is differenced to make it stationary (removing trends). A value of <strong style="color:var(--accent-teal)">d=1</strong> means we look at year-over-year changes instead of raw values.
+            How many times the data is differenced to make it stationary (removing trends). A value of <strong style="color:var(--green)">d=1</strong> means we look at year-over-year changes instead of raw values.
           </p>
           <span class="term-example">d=1 → model uses changes, not levels</span>
         </div>
@@ -861,36 +678,48 @@
             <span class="term-name">Why Each Export Country Got a Different Model</span>
           </div>
           <p class="term-body">
-            These orders apply to the <strong style="color:var(--accent-blue)">Exports</strong> page only — not imports. Not every country exports oil the same way — some are steady, some are driven by politics, some had sudden booms. We looked at how "jumpy" each country's export data was year-to-year and picked the model that best matches that behaviour.
+            These orders apply to the <strong style="color:var(--accent)">Exports</strong> page only — not imports. Not every country exports oil the same way — some are steady, some are driven by politics, some had sudden booms. We looked at how "jumpy" each country's export data was year-to-year and picked the model that best matches that behaviour.
           </p>
-          <div style="margin-top:.75rem;display:flex;flex-direction:column;gap:.6rem;font-size:.82rem;line-height:1.65;font-family:var(--font-body);font-weight:300;color:var(--text-secondary);">
-            <div><span style="color:var(--accent-blue);font-family:var(--font-mono);font-weight:600">USA → (2,1,0)</span><br>The US shale revolution made exports grow in a very consistent, momentum-driven way — nearly tripling since 2015. The model only needs to look at past growth (AR), no error-correction needed. Forecasts continue this strong upward trend.</div>
-            <div><span style="color:var(--accent-blue);font-family:var(--font-mono);font-weight:600">Canada, India → (2,1,2)</span><br>Both had choppy export histories with sharp swings that don't fully settle down on their own. Canada's oil sands output has been uneven; India's refinery exports jumped dramatically in the 2000s then levelled off. The model needs both a longer memory and an error-correction component.</div>
-            <div><span style="color:var(--accent-blue);font-family:var(--font-mono);font-weight:600">Saudi Arabia → (2,1,2)</span><br>Saudi exports are heavily controlled by OPEC+ production cuts and quota decisions — meaning big sudden changes happen regularly. The 2020 price war, the 2022 output cuts, and ongoing geopolitical tensions all create unpredictable swings that need the most flexible model we used.</div>
-            <div><span style="color:var(--accent-blue);font-family:var(--font-mono);font-weight:600">Belgium, China, Germany, Iran, Kuwait, Netherlands, Singapore, UAE → (2,1,1)</span><br>These countries showed more momentum in their exports than a simple model could capture. China's refined product surge, Iran's sanctions-driven volatility, and the UAE's rapid ramp-up all benefit from a model that looks back two years.</div>
-            <div><span style="color:var(--accent-blue);font-family:var(--font-mono);font-weight:600">South Korea → (1,1,2)</span><br>South Korea's exports have largely plateaued around 1,300–1,400 KBD since the mid-2010s. When they deviate, they tend to snap back. A model that focuses on correcting past errors (MA) rather than chasing trends works best here.</div>
-            <div><span style="color:var(--accent-blue);font-family:var(--font-mono);font-weight:600">Italy → (1,1,1)</span><br>Italy's export data only gave us 12 data points to work with — a more complex model caused numerical errors on such a small window, so we kept it simple and stable.</div>
-            <div><span style="color:var(--accent-blue);font-family:var(--font-mono);font-weight:600">Algeria, France, Russia, UK, Curacao, Venezuela → (1,1,1)</span><br>These are all either in long steady decline or too unpredictable for a complex model to help. Russia's exports have fallen sharply since the 2022 Ukraine invasion. Venezuela has collapsed from over 1,000 KBD in the 1970s to under 200 today. UK North Sea fields are steadily depleting.</div>
+          <div style="margin-top:0.75rem;display:flex;flex-direction:column;gap:0.6rem;font-size:0.78rem;line-height:1.6;">
+            <div>
+              <span style="color:var(--accent);font-family:monospace;font-weight:600">USA → (2,1,0)</span><br>
+              The US shale revolution made exports grow in a very consistent, momentum-driven way — nearly tripling since 2015. The model only needs to look at past growth (AR), no error-correction needed. Forecasts continue this strong upward trend.
+            </div>
+            <div>
+              <span style="color:var(--accent);font-family:monospace;font-weight:600">Canada, India → (2,1,2)</span><br>
+              Both had choppy export histories with sharp swings that don't fully settle down on their own. Canada's oil sands output has been uneven; India's refinery exports jumped dramatically in the 2000s then levelled off. The model needs both a longer memory and an error-correction component.
+            </div>
+            <div>
+              <span style="color:var(--accent);font-family:monospace;font-weight:600">Saudi Arabia → (2,1,2)</span><br>
+              Saudi exports are heavily controlled by OPEC+ production cuts and quota decisions — meaning big sudden changes happen regularly. The 2020 price war, the 2022 output cuts, and ongoing geopolitical tensions all create unpredictable swings that need the most flexible model we used.
+            </div>
+            <div>
+              <span style="color:var(--accent);font-family:monospace;font-weight:600">Belgium, China, Germany, Iran, Kuwait, Netherlands, Singapore, UAE → (2,1,1)</span><br>
+              These countries showed more momentum in their exports than a simple model could capture — meaning one year's change tends to influence the next. China's refined product surge, Iran's sanctions-driven volatility, and the UAE's rapid ramp-up all benefit from a model that looks back two years.
+            </div>
+            <div>
+              <span style="color:var(--accent);font-family:monospace;font-weight:600">South Korea → (1,1,2)</span><br>
+              South Korea's exports have largely plateaued around 1,300–1,400 KBD since the mid-2010s. When they deviate, they tend to snap back. A model that focuses on correcting past errors (MA) rather than chasing trends works best here.
+            </div>
+            <div>
+              <span style="color:var(--accent);font-family:monospace;font-weight:600">Italy → (1,1,1)</span><br>
+              Italy's export data only gave us 12 data points to work with — a more complex model caused numerical errors on such a small window, so we kept it simple and stable.
+            </div>
+            <div>
+              <span style="color:var(--accent);font-family:monospace;font-weight:600">Algeria, France, Russia, UK, Curacao, Venezuela → (1,1,1)</span><br>
+              These are all either in long steady decline or too unpredictable for a complex model to help. Russia's exports have fallen sharply since the 2022 Ukraine invasion and Western sanctions. Venezuela has collapsed from over 1,000 KBD in the 1970s to under 200 today. UK North Sea fields are steadily depleting. For these, a simple model is the most honest forecast.
+            </div>
           </div>
         </div>
 
       </div>
     </div>
 
-    <p class="footnote">Source: JODI Oil World Database · Log-ARIMA models selected via AIC grid search · Imports &amp; Exports · Forecast horizon 2024–2030</p>
+    <p class="footnote">Source: JODI Oil World Database · Log-ARIMA models selected via AIC grid search · Imports & Exports · Forecast horizon 2024–2030</p>
   </main>
 
-
-  <!-- ===== FOOTER ===== -->
-  <footer class="site-footer" role="contentinfo">
-    <div class="wrap footer-inner">
-      <p class="footer-copy">© <span id="footYear"></span> Energy Dashboard &nbsp;·&nbsp; Data: JODI / IEA</p>
-      <nav class="footer-links" aria-label="Footer links">
-        <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
-        <a href="./data.html">Datasets</a>
-        <a href="mailto:your@email.com">Contact</a>
-      </nav>
-    </div>
+  <footer class="site-footer">
+    <p>&copy; <span id="footYear"></span> Energy Dashboard</p>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>

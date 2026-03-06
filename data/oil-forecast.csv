@@ -1,598 +1,611 @@
-country,type,year,value,lower,upper,mape,order
-CHINA,history,1971,1.0,,,8.9,"(2, 1, 2)"
-CHINA,history,1972,3.0,,,8.9,"(2, 1, 2)"
-CHINA,history,1973,3.0,,,8.9,"(2, 1, 2)"
-CHINA,history,1974,3.0,,,8.9,"(2, 1, 2)"
-CHINA,history,1975,4.0,,,8.9,"(2, 1, 2)"
-CHINA,history,1976,3.0,,,8.9,"(2, 1, 2)"
-CHINA,history,1977,4.0,,,8.9,"(2, 1, 2)"
-CHINA,history,1978,4.0,,,8.9,"(2, 1, 2)"
-CHINA,history,1979,2.0,,,8.9,"(2, 1, 2)"
-CHINA,history,1980,9.0,,,8.9,"(2, 1, 2)"
-CHINA,history,1981,13.0,,,8.9,"(2, 1, 2)"
-CHINA,history,1982,18.0,,,8.9,"(2, 1, 2)"
-CHINA,history,1983,19.0,,,8.9,"(2, 1, 2)"
-CHINA,history,1984,17.0,,,8.9,"(2, 1, 2)"
-CHINA,history,1985,17.0,,,8.9,"(2, 1, 2)"
-CHINA,history,1986,61.0,,,8.9,"(2, 1, 2)"
-CHINA,history,1987,62.0,,,8.9,"(2, 1, 2)"
-CHINA,history,1988,79.0,,,8.9,"(2, 1, 2)"
-CHINA,history,1989,134.0,,,8.9,"(2, 1, 2)"
-CHINA,history,1990,71.0,,,8.9,"(2, 1, 2)"
-CHINA,history,1991,98.0,,,8.9,"(2, 1, 2)"
-CHINA,history,1992,147.0,,,8.9,"(2, 1, 2)"
-CHINA,history,1993,373.0,,,8.9,"(2, 1, 2)"
-CHINA,history,1994,288.0,,,8.9,"(2, 1, 2)"
-CHINA,history,1995,358.0,,,8.9,"(2, 1, 2)"
-CHINA,history,1996,415.0,,,8.9,"(2, 1, 2)"
-CHINA,history,1997,616.0,,,8.9,"(2, 1, 2)"
-CHINA,history,1998,577.0,,,8.9,"(2, 1, 2)"
-CHINA,history,1999,515.0,,,8.9,"(2, 1, 2)"
-CHINA,history,2000,513.0,,,8.9,"(2, 1, 2)"
-CHINA,history,2001,576.0,,,8.9,"(2, 1, 2)"
-CHINA,history,2002,632.0,,,8.9,"(2, 1, 2)"
-CHINA,history,2003,785.0,,,8.9,"(2, 1, 2)"
-CHINA,history,2004,950.0,,,8.9,"(2, 1, 2)"
-CHINA,history,2005,839.0,,,8.9,"(2, 1, 2)"
-CHINA,history,2006,904.0,,,8.9,"(2, 1, 2)"
-CHINA,history,2007,854.0,,,8.9,"(2, 1, 2)"
-CHINA,history,2008,921.0,,,8.9,"(2, 1, 2)"
-CHINA,history,2009,961.0,,,8.9,"(2, 1, 2)"
-CHINA,history,2010,968.0,,,8.9,"(2, 1, 2)"
-CHINA,history,2011,1068.0,,,8.9,"(2, 1, 2)"
-CHINA,history,2012,1028.0,,,8.9,"(2, 1, 2)"
-CHINA,history,2013,1059.0,,,8.9,"(2, 1, 2)"
-CHINA,history,2014,966.0,,,8.9,"(2, 1, 2)"
-CHINA,history,2015,1156.0,,,8.9,"(2, 1, 2)"
-CHINA,history,2016,1238.0,,,8.9,"(2, 1, 2)"
-CHINA,history,2017,1399.47,,,8.9,"(2, 1, 2)"
-CHINA,history,2018,1519.37,,,8.9,"(2, 1, 2)"
-CHINA,history,2019,1475.75,,,8.9,"(2, 1, 2)"
-CHINA,history,2020,1433.14,,,8.9,"(2, 1, 2)"
-CHINA,history,2021,1572.55,,,8.9,"(2, 1, 2)"
-CHINA,history,2022,1664.26,,,8.9,"(2, 1, 2)"
-CHINA,history,2023,2310.42,,,8.9,"(2, 1, 2)"
-CHINA,forecast,2024,2095.49,1077.06,4076.9,8.9,"(2, 1, 2)"
-CHINA,forecast,2025,2129.37,1001.87,4525.78,8.9,"(2, 1, 2)"
-CHINA,forecast,2026,2270.69,1016.68,5071.44,8.9,"(2, 1, 2)"
-CHINA,forecast,2027,2464.83,1042.77,5826.17,8.9,"(2, 1, 2)"
-CHINA,forecast,2028,2685.89,1048.36,6881.26,8.9,"(2, 1, 2)"
-CHINA,forecast,2029,2919.98,1019.98,8359.27,8.9,"(2, 1, 2)"
-CHINA,forecast,2030,3159.03,958.51,10411.47,8.9,"(2, 1, 2)"
-SINGAPORE,history,1971,107.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,1972,115.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,1973,120.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,1974,84.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,1975,102.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,1976,130.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,1977,85.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,1978,65.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,1979,80.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,1980,101.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,1981,83.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,1982,173.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,1983,181.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,1984,115.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,1985,198.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,1986,223.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,1987,284.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,1988,386.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,1989,342.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,1990,348.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,1991,352.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,1992,430.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,1993,436.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,1994,489.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,1995,531.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,1996,580.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,1997,637.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,1998,639.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,1999,773.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,2000,756.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,2001,831.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,2002,874.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,2003,885.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,2004,993.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,2005,959.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,2006,1117.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,2007,1242.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,2008,1488.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,2009,1886.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,2010,2049.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,2011,2116.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,2012,1924.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,2013,2047.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,2014,2108.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,2015,2301.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,2016,2425.0,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,2017,2509.88,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,2018,2171.04,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,2019,2191.37,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,2020,2060.1,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,2021,1956.97,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,2022,1977.85,,,7.8,"(0, 1, 3)"
-SINGAPORE,history,2023,2186.86,,,7.8,"(0, 1, 3)"
-SINGAPORE,forecast,2024,2302.27,1614.43,3283.15,7.8,"(0, 1, 3)"
-SINGAPORE,forecast,2025,2109.2,1256.8,3539.71,7.8,"(0, 1, 3)"
-SINGAPORE,forecast,2026,2266.63,1272.39,4037.77,7.8,"(0, 1, 3)"
-SINGAPORE,forecast,2027,2266.63,1126.59,4560.33,7.8,"(0, 1, 3)"
-SINGAPORE,forecast,2028,2266.63,1015.87,5057.39,7.8,"(0, 1, 3)"
-SINGAPORE,forecast,2029,2266.63,926.98,5542.32,7.8,"(0, 1, 3)"
-SINGAPORE,forecast,2030,2266.63,853.13,6022.09,7.8,"(0, 1, 3)"
-NETHERLAN,history,1971,173.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,1972,173.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,1973,213.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,1974,233.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,1975,205.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,1976,216.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,1977,205.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,1978,295.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,1979,419.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,1980,606.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,1981,696.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,1982,769.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,1983,785.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,1984,716.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,1985,806.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,1986,865.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,1987,759.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,1988,751.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,1989,834.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,1990,882.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,1991,795.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,1992,686.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,1993,717.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,1994,667.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,1995,615.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,1996,656.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,1997,766.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,1998,725.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,1999,762.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,2000,906.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,2001,927.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,2002,1026.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,2003,1012.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,2004,1177.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,2005,1291.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,2006,1433.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,2007,1354.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,2008,1448.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,2009,1591.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,2010,1730.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,2011,1732.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,2012,1830.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,2013,1823.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,2014,1770.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,2015,1973.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,2016,1952.0,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,2017,1966.68,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,2018,1937.78,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,2019,1850.22,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,2020,1569.76,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,2021,1763.79,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,2022,1822.76,,,11.3,"(1, 1, 0)"
-NETHERLAN,history,2023,1653.4,,,11.3,"(1, 1, 0)"
-NETHERLAN,forecast,2024,1591.46,1271.48,1991.96,11.3,"(1, 1, 0)"
-NETHERLAN,forecast,2025,1567.84,1067.21,2303.32,11.3,"(1, 1, 0)"
-NETHERLAN,forecast,2026,1558.69,928.63,2616.24,11.3,"(1, 1, 0)"
-NETHERLAN,forecast,2027,1555.12,827.52,2922.45,11.3,"(1, 1, 0)"
-NETHERLAN,forecast,2028,1553.72,749.42,3221.25,11.3,"(1, 1, 0)"
-NETHERLAN,forecast,2029,1553.18,686.44,3514.31,11.3,"(1, 1, 0)"
-NETHERLAN,forecast,2030,1552.96,634.05,3803.67,11.3,"(1, 1, 0)"
-USA,history,1971,2078.0,,,5.6,"(2, 0, 1)"
-USA,history,1972,2313.0,,,5.6,"(2, 0, 1)"
-USA,history,1973,2715.0,,,5.6,"(2, 0, 1)"
-USA,history,1974,2400.0,,,5.6,"(2, 0, 1)"
-USA,history,1975,1362.0,,,5.6,"(2, 0, 1)"
-USA,history,1976,1406.0,,,5.6,"(2, 0, 1)"
-USA,history,1977,1713.0,,,5.6,"(2, 0, 1)"
-USA,history,1978,1470.0,,,5.6,"(2, 0, 1)"
-USA,history,1979,1248.0,,,5.6,"(2, 0, 1)"
-USA,history,1980,1011.0,,,5.6,"(2, 0, 1)"
-USA,history,1981,966.0,,,5.6,"(2, 0, 1)"
-USA,history,1982,1013.0,,,5.6,"(2, 0, 1)"
-USA,history,1983,1135.0,,,5.6,"(2, 0, 1)"
-USA,history,1984,1355.0,,,5.6,"(2, 0, 1)"
-USA,history,1985,1184.0,,,5.6,"(2, 0, 1)"
-USA,history,1986,1343.0,,,5.6,"(2, 0, 1)"
-USA,history,1987,1327.0,,,5.6,"(2, 0, 1)"
-USA,history,1988,1592.0,,,5.6,"(2, 0, 1)"
-USA,history,1989,1458.0,,,5.6,"(2, 0, 1)"
-USA,history,1990,1264.0,,,5.6,"(2, 0, 1)"
-USA,history,1991,1086.0,,,5.6,"(2, 0, 1)"
-USA,history,1992,1067.0,,,5.6,"(2, 0, 1)"
-USA,history,1993,1001.0,,,5.6,"(2, 0, 1)"
-USA,history,1994,1058.0,,,5.6,"(2, 0, 1)"
-USA,history,1995,866.0,,,5.6,"(2, 0, 1)"
-USA,history,1996,1122.0,,,5.6,"(2, 0, 1)"
-USA,history,1997,1113.0,,,5.6,"(2, 0, 1)"
-USA,history,1998,1208.0,,,5.6,"(2, 0, 1)"
-USA,history,1999,1303.0,,,5.6,"(2, 0, 1)"
-USA,history,2000,1569.0,,,5.6,"(2, 0, 1)"
-USA,history,2001,1699.0,,,5.6,"(2, 0, 1)"
-USA,history,2002,1617.0,,,5.6,"(2, 0, 1)"
-USA,history,2003,1782.0,,,5.6,"(2, 0, 1)"
-USA,history,2004,2058.0,,,5.6,"(2, 0, 1)"
-USA,history,2005,2455.0,,,5.6,"(2, 0, 1)"
-USA,history,2006,2362.0,,,5.6,"(2, 0, 1)"
-USA,history,2007,2265.0,,,5.6,"(2, 0, 1)"
-USA,history,2008,1940.0,,,5.6,"(2, 0, 1)"
-USA,history,2009,1710.0,,,5.6,"(2, 0, 1)"
-USA,history,2010,1743.0,,,5.6,"(2, 0, 1)"
-USA,history,2011,1590.0,,,5.6,"(2, 0, 1)"
-USA,history,2012,1488.0,,,5.6,"(2, 0, 1)"
-USA,history,2013,1495.0,,,5.6,"(2, 0, 1)"
-USA,history,2014,1429.0,,,5.6,"(2, 0, 1)"
-USA,history,2015,1595.0,,,5.6,"(2, 0, 1)"
-USA,history,2016,1599.0,,,5.6,"(2, 0, 1)"
-USA,history,2017,1579.26,,,5.6,"(2, 0, 1)"
-USA,history,2018,1639.46,,,5.6,"(2, 0, 1)"
-USA,history,2019,1760.88,,,5.6,"(2, 0, 1)"
-USA,history,2020,1532.09,,,5.6,"(2, 0, 1)"
-USA,history,2021,1832.35,,,5.6,"(2, 0, 1)"
-USA,history,2022,1559.38,,,5.6,"(2, 0, 1)"
-USA,history,2023,1540.85,,,5.6,"(2, 0, 1)"
-USA,forecast,2024,1484.09,1148.9,1917.08,5.6,"(2, 0, 1)"
-USA,forecast,2025,1436.79,1027.63,2008.85,5.6,"(2, 0, 1)"
-USA,forecast,2026,1398.5,957.92,2041.73,5.6,"(2, 0, 1)"
-USA,forecast,2027,1368.66,915.73,2045.62,5.6,"(2, 0, 1)"
-USA,forecast,2028,1346.6,890.75,2035.73,5.6,"(2, 0, 1)"
-USA,forecast,2029,1331.6,877.06,2021.71,5.6,"(2, 0, 1)"
-USA,forecast,2030,1322.95,870.73,2010.03,5.6,"(2, 0, 1)"
-INDIA,history,1971,38.0,,,22.6,"(1, 1, 0)"
-INDIA,history,1972,62.0,,,22.6,"(1, 1, 0)"
-INDIA,history,1973,69.0,,,22.6,"(1, 1, 0)"
-INDIA,history,1974,56.0,,,22.6,"(1, 1, 0)"
-INDIA,history,1975,45.0,,,22.6,"(1, 1, 0)"
-INDIA,history,1976,44.0,,,22.6,"(1, 1, 0)"
-INDIA,history,1977,54.0,,,22.6,"(1, 1, 0)"
-INDIA,history,1978,72.0,,,22.6,"(1, 1, 0)"
-INDIA,history,1979,95.0,,,22.6,"(1, 1, 0)"
-INDIA,history,1980,144.0,,,22.6,"(1, 1, 0)"
-INDIA,history,1981,103.0,,,22.6,"(1, 1, 0)"
-INDIA,history,1982,102.0,,,22.6,"(1, 1, 0)"
-INDIA,history,1983,86.0,,,22.6,"(1, 1, 0)"
-INDIA,history,1984,116.0,,,22.6,"(1, 1, 0)"
-INDIA,history,1985,90.0,,,22.6,"(1, 1, 0)"
-INDIA,history,1986,66.0,,,22.6,"(1, 1, 0)"
-INDIA,history,1987,80.0,,,22.6,"(1, 1, 0)"
-INDIA,history,1988,127.0,,,22.6,"(1, 1, 0)"
-INDIA,history,1989,137.0,,,22.6,"(1, 1, 0)"
-INDIA,history,1990,183.0,,,22.6,"(1, 1, 0)"
-INDIA,history,1991,197.0,,,22.6,"(1, 1, 0)"
-INDIA,history,1992,236.0,,,22.6,"(1, 1, 0)"
-INDIA,history,1993,254.0,,,22.6,"(1, 1, 0)"
-INDIA,history,1994,294.0,,,22.6,"(1, 1, 0)"
-INDIA,history,1995,416.0,,,22.6,"(1, 1, 0)"
-INDIA,history,1996,420.0,,,22.6,"(1, 1, 0)"
-INDIA,history,1997,491.0,,,22.6,"(1, 1, 0)"
-INDIA,history,1998,514.0,,,22.6,"(1, 1, 0)"
-INDIA,history,1999,364.0,,,22.6,"(1, 1, 0)"
-INDIA,history,2000,203.0,,,22.6,"(1, 1, 0)"
-INDIA,history,2001,154.0,,,22.6,"(1, 1, 0)"
-INDIA,history,2002,161.0,,,22.6,"(1, 1, 0)"
-INDIA,history,2003,188.0,,,22.6,"(1, 1, 0)"
-INDIA,history,2004,214.0,,,22.6,"(1, 1, 0)"
-INDIA,history,2005,293.0,,,22.6,"(1, 1, 0)"
-INDIA,history,2006,384.0,,,22.6,"(1, 1, 0)"
-INDIA,history,2007,500.0,,,22.6,"(1, 1, 0)"
-INDIA,history,2008,411.0,,,22.6,"(1, 1, 0)"
-INDIA,history,2009,319.0,,,22.6,"(1, 1, 0)"
-INDIA,history,2010,400.0,,,22.6,"(1, 1, 0)"
-INDIA,history,2011,382.0,,,22.6,"(1, 1, 0)"
-INDIA,history,2012,386.0,,,22.6,"(1, 1, 0)"
-INDIA,history,2013,392.0,,,22.6,"(1, 1, 0)"
-INDIA,history,2014,493.0,,,22.6,"(1, 1, 0)"
-INDIA,history,2015,651.0,,,22.6,"(1, 1, 0)"
-INDIA,history,2016,787.0,,,22.6,"(1, 1, 0)"
-INDIA,history,2017,780.41,,,22.6,"(1, 1, 0)"
-INDIA,history,2018,783.57,,,22.6,"(1, 1, 0)"
-INDIA,history,2019,994.35,,,22.6,"(1, 1, 0)"
-INDIA,history,2020,1001.25,,,22.6,"(1, 1, 0)"
-INDIA,history,2021,935.43,,,22.6,"(1, 1, 0)"
-INDIA,history,2022,1044.85,,,22.6,"(1, 1, 0)"
-INDIA,history,2023,1113.25,,,22.6,"(1, 1, 0)"
-INDIA,forecast,2024,1138.78,739.07,1754.68,22.6,"(1, 1, 0)"
-INDIA,forecast,2025,1148.06,553.82,2379.9,22.6,"(1, 1, 0)"
-INDIA,forecast,2026,1151.39,435.8,3042.04,22.6,"(1, 1, 0)"
-INDIA,forecast,2027,1152.59,355.7,3734.78,22.6,"(1, 1, 0)"
-INDIA,forecast,2028,1153.02,298.09,4459.93,22.6,"(1, 1, 0)"
-INDIA,forecast,2029,1153.17,254.67,5221.73,22.6,"(1, 1, 0)"
-INDIA,forecast,2030,1153.22,220.75,6024.62,22.6,"(1, 1, 0)"
-MEXICO,history,1971,49.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,1972,67.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,1973,83.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,1974,59.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,1975,65.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,1976,41.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,1977,24.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,1978,38.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,1979,29.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,1980,25.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,1981,10.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,1982,8.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,1983,18.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,1984,35.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,1985,54.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,1986,64.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,1987,74.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,1988,86.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,1989,125.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,1990,102.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,1991,134.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,1992,163.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,1993,169.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,1994,180.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,1995,135.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,1996,175.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,1997,292.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,1998,326.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,1999,367.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,2000,453.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,2001,397.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,2002,364.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,2003,309.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,2004,333.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,2005,414.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,2006,468.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,2007,529.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,2008,583.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,2009,530.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,2010,648.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,2011,705.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,2012,696.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,2013,624.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,2014,655.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,2015,755.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,2016,924.0,,,14.9,"(2, 1, 3)"
-MEXICO,history,2017,1099.96,,,14.9,"(2, 1, 3)"
-MEXICO,history,2018,1153.28,,,14.9,"(2, 1, 3)"
-MEXICO,history,2019,1165.58,,,14.9,"(2, 1, 3)"
-MEXICO,history,2020,984.83,,,14.9,"(2, 1, 3)"
-MEXICO,history,2021,1068.19,,,14.9,"(2, 1, 3)"
-MEXICO,history,2022,1080.56,,,14.9,"(2, 1, 3)"
-MEXICO,history,2023,1050.26,,,14.9,"(2, 1, 3)"
-MEXICO,forecast,2024,1002.86,627.82,1601.93,14.9,"(2, 1, 3)"
-MEXICO,forecast,2025,936.16,397.63,2204.07,14.9,"(2, 1, 3)"
-MEXICO,forecast,2026,1008.92,298.08,3414.88,14.9,"(2, 1, 3)"
-MEXICO,forecast,2027,970.48,219.7,4286.9,14.9,"(2, 1, 3)"
-MEXICO,forecast,2028,961.74,181.36,5099.97,14.9,"(2, 1, 3)"
-MEXICO,forecast,2029,1000.89,151.69,6604.15,14.9,"(2, 1, 3)"
-MEXICO,forecast,2030,960.35,123.67,7457.88,14.9,"(2, 1, 3)"
-KOREA,history,1974,4.0,,,2.9,"(3, 1, 1)"
-KOREA,history,1975,5.0,,,2.9,"(3, 1, 1)"
-KOREA,history,1976,nan,,,2.9,"(3, 1, 1)"
-KOREA,history,1977,15.0,,,2.9,"(3, 1, 1)"
-KOREA,history,1978,10.0,,,2.9,"(3, 1, 1)"
-KOREA,history,1979,28.0,,,2.9,"(3, 1, 1)"
-KOREA,history,1980,38.0,,,2.9,"(3, 1, 1)"
-KOREA,history,1981,36.0,,,2.9,"(3, 1, 1)"
-KOREA,history,1982,54.0,,,2.9,"(3, 1, 1)"
-KOREA,history,1983,59.0,,,2.9,"(3, 1, 1)"
-KOREA,history,1984,66.0,,,2.9,"(3, 1, 1)"
-KOREA,history,1985,65.0,,,2.9,"(3, 1, 1)"
-KOREA,history,1986,85.0,,,2.9,"(3, 1, 1)"
-KOREA,history,1987,131.0,,,2.9,"(3, 1, 1)"
-KOREA,history,1988,114.0,,,2.9,"(3, 1, 1)"
-KOREA,history,1989,134.0,,,2.9,"(3, 1, 1)"
-KOREA,history,1990,275.0,,,2.9,"(3, 1, 1)"
-KOREA,history,1991,298.0,,,2.9,"(3, 1, 1)"
-KOREA,history,1992,368.0,,,2.9,"(3, 1, 1)"
-KOREA,history,1993,452.0,,,2.9,"(3, 1, 1)"
-KOREA,history,1994,514.0,,,2.9,"(3, 1, 1)"
-KOREA,history,1995,554.0,,,2.9,"(3, 1, 1)"
-KOREA,history,1996,601.0,,,2.9,"(3, 1, 1)"
-KOREA,history,1997,507.0,,,2.9,"(3, 1, 1)"
-KOREA,history,1998,477.0,,,2.9,"(3, 1, 1)"
-KOREA,history,1999,512.0,,,2.9,"(3, 1, 1)"
-KOREA,history,2000,565.0,,,2.9,"(3, 1, 1)"
-KOREA,history,2001,564.0,,,2.9,"(3, 1, 1)"
-KOREA,history,2002,631.0,,,2.9,"(3, 1, 1)"
-KOREA,history,2003,606.0,,,2.9,"(3, 1, 1)"
-KOREA,history,2004,531.0,,,2.9,"(3, 1, 1)"
-KOREA,history,2005,494.0,,,2.9,"(3, 1, 1)"
-KOREA,history,2006,526.0,,,2.9,"(3, 1, 1)"
-KOREA,history,2007,576.0,,,2.9,"(3, 1, 1)"
-KOREA,history,2008,621.0,,,2.9,"(3, 1, 1)"
-KOREA,history,2009,733.0,,,2.9,"(3, 1, 1)"
-KOREA,history,2010,770.0,,,2.9,"(3, 1, 1)"
-KOREA,history,2011,771.0,,,2.9,"(3, 1, 1)"
-KOREA,history,2012,859.0,,,2.9,"(3, 1, 1)"
-KOREA,history,2013,910.0,,,2.9,"(3, 1, 1)"
-KOREA,history,2014,894.0,,,2.9,"(3, 1, 1)"
-KOREA,history,2015,847.0,,,2.9,"(3, 1, 1)"
-KOREA,history,2016,922.0,,,2.9,"(3, 1, 1)"
-KOREA,history,2017,868.22,,,2.9,"(3, 1, 1)"
-KOREA,history,2018,932.68,,,2.9,"(3, 1, 1)"
-KOREA,history,2019,962.15,,,2.9,"(3, 1, 1)"
-KOREA,history,2020,938.86,,,2.9,"(3, 1, 1)"
-KOREA,history,2021,1065.07,,,2.9,"(3, 1, 1)"
-KOREA,history,2022,991.66,,,2.9,"(3, 1, 1)"
-KOREA,history,2023,1007.84,,,2.9,"(3, 1, 1)"
-KOREA,forecast,2024,1099.33,749.31,1612.84,2.9,"(3, 1, 1)"
-KOREA,forecast,2025,1077.85,636.36,1825.63,2.9,"(3, 1, 1)"
-KOREA,forecast,2026,1072.43,580.78,1980.26,2.9,"(3, 1, 1)"
-KOREA,forecast,2027,1138.06,496.02,2611.15,2.9,"(3, 1, 1)"
-KOREA,forecast,2028,1147.18,402.86,3266.75,2.9,"(3, 1, 1)"
-KOREA,forecast,2029,1139.34,340.1,3816.83,2.9,"(3, 1, 1)"
-KOREA,forecast,2030,1182.47,284.49,4914.95,2.9,"(3, 1, 1)"
-JAPAN,history,1971,598.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,1972,608.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,1973,577.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,1974,636.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,1975,459.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,1976,624.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,1977,650.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,1978,665.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,1979,767.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,1980,672.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,1981,659.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,1982,740.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,1983,827.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,1984,883.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,1985,928.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,1986,1111.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,1987,1330.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,1988,1443.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,1989,1547.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,1990,1356.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,1991,1238.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,1992,1197.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,1993,1107.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,1994,1171.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,1995,1283.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,1996,1336.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,1997,1176.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,1998,1147.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,1999,1261.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,2000,1251.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,2001,1159.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,2002,1223.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,2003,1210.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,2004,1203.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,2005,1195.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,2006,1150.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,2007,1062.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,2008,1002.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,2009,968.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,2010,1056.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,2011,1142.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,2012,1197.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,2013,1085.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,2014,1062.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,2015,1043.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,2016,949.0,,,3.2,"(0, 1, 0)"
-JAPAN,history,2017,1039.38,,,3.2,"(0, 1, 0)"
-JAPAN,history,2018,1020.09,,,3.2,"(0, 1, 0)"
-JAPAN,history,2019,986.51,,,3.2,"(0, 1, 0)"
-JAPAN,history,2020,1024.71,,,3.2,"(0, 1, 0)"
-JAPAN,history,2021,1036.85,,,3.2,"(0, 1, 0)"
-JAPAN,history,2022,972.07,,,3.2,"(0, 1, 0)"
-JAPAN,history,2023,965.61,,,3.2,"(0, 1, 0)"
-JAPAN,forecast,2024,965.61,795.79,1171.67,3.2,"(0, 1, 0)"
-JAPAN,forecast,2025,965.61,734.52,1269.4,3.2,"(0, 1, 0)"
-JAPAN,forecast,2026,965.61,690.72,1349.89,3.2,"(0, 1, 0)"
-JAPAN,forecast,2027,965.61,655.83,1421.7,3.2,"(0, 1, 0)"
-JAPAN,forecast,2028,965.61,626.56,1488.12,3.2,"(0, 1, 0)"
-JAPAN,forecast,2029,965.61,601.22,1550.84,3.2,"(0, 1, 0)"
-JAPAN,forecast,2030,965.61,578.83,1610.84,3.2,"(0, 1, 0)"
-AUSTRALIA,history,1971,62.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,1972,66.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,1973,70.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,1974,83.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,1975,61.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,1976,71.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,1977,71.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,1978,68.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,1979,75.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,1980,81.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,1981,72.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,1982,51.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,1983,48.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,1984,43.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,1985,48.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,1986,51.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,1987,74.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,1988,61.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,1989,75.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,1990,84.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,1991,54.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,1992,43.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,1993,56.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,1994,58.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,1995,65.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,1996,66.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,1997,79.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,1998,61.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,1999,75.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,2000,83.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,2001,87.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,2002,85.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,2003,100.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,2004,185.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,2005,198.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,2006,244.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,2007,224.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,2008,293.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,2009,319.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,2010,326.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,2011,302.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,2012,370.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,2013,408.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,2014,421.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,2015,475.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,2016,562.0,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,2017,588.48,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,2018,625.24,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,2019,620.06,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,2020,619.94,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,2021,623.03,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,2022,727.76,,,8.6,"(0, 1, 0)"
-AUSTRALIA,history,2023,856.17,,,8.6,"(0, 1, 0)"
-AUSTRALIA,forecast,2024,856.17,597.55,1226.72,8.6,"(0, 1, 0)"
-AUSTRALIA,forecast,2025,856.17,514.85,1423.77,8.6,"(0, 1, 0)"
-AUSTRALIA,forecast,2026,856.17,459.24,1596.18,8.6,"(0, 1, 0)"
-AUSTRALIA,forecast,2027,856.17,417.05,1757.65,8.6,"(0, 1, 0)"
-AUSTRALIA,forecast,2028,856.17,383.11,1913.38,8.6,"(0, 1, 0)"
-AUSTRALIA,forecast,2029,856.17,354.8,2066.02,8.6,"(0, 1, 0)"
-AUSTRALIA,forecast,2030,856.17,330.63,2217.12,8.6,"(0, 1, 0)"
-FRANCE,history,1971,173.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,1972,187.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,1973,152.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,1974,141.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,1975,159.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,1976,173.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,1977,165.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,1978,188.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,1979,207.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,1980,258.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,1981,295.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,1982,402.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,1983,402.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,1984,419.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,1985,362.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,1986,473.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,1987,591.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,1988,484.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,1989,535.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,1990,535.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,1991,586.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,1992,546.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,1993,518.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,1994,466.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,1995,475.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,1996,497.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,1997,416.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,1998,498.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,1999,575.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,2000,564.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,2001,585.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,2002,682.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,2003,644.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,2004,680.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,2005,781.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,2006,809.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,2007,763.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,2008,753.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,2009,806.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,2010,841.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,2011,852.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,2012,925.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,2013,909.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,2014,926.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,2015,917.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,2016,880.0,,,6.1,"(0, 1, 0)"
-FRANCE,history,2017,880.1,,,6.1,"(0, 1, 0)"
-FRANCE,history,2018,898.29,,,6.1,"(0, 1, 0)"
-FRANCE,history,2019,959.1,,,6.1,"(0, 1, 0)"
-FRANCE,history,2020,919.96,,,6.1,"(0, 1, 0)"
-FRANCE,history,2021,971.22,,,6.1,"(0, 1, 0)"
-FRANCE,history,2022,873.08,,,6.1,"(0, 1, 0)"
-FRANCE,history,2023,804.51,,,6.1,"(0, 1, 0)"
-FRANCE,forecast,2024,804.51,643.59,1005.67,6.1,"(0, 1, 0)"
-FRANCE,forecast,2025,804.51,586.77,1103.07,6.1,"(0, 1, 0)"
-FRANCE,forecast,2026,804.51,546.59,1184.15,6.1,"(0, 1, 0)"
-FRANCE,forecast,2027,804.51,514.86,1257.12,6.1,"(0, 1, 0)"
-FRANCE,forecast,2028,804.51,488.44,1325.12,6.1,"(0, 1, 0)"
-FRANCE,forecast,2029,804.51,465.72,1389.77,6.1,"(0, 1, 0)"
-FRANCE,forecast,2030,804.51,445.76,1451.99,6.1,"(0, 1, 0)"
+Country,Year,Type,Oil Imports (KBD),CI Low (KBD),CI High (KBD)
+China,1971,Historical,2.0,,
+China,1972,Historical,3.0,,
+China,1973,Historical,3.0,,
+China,1974,Historical,3.0,,
+China,1975,Historical,4.0,,
+China,1976,Historical,3.0,,
+China,1977,Historical,14.0,,
+China,1978,Historical,18.0,,
+China,1979,Historical,7.0,,
+China,1980,Historical,16.0,,
+China,1981,Historical,14.0,,
+China,1982,Historical,31.0,,
+China,1983,Historical,26.0,,
+China,1984,Historical,22.0,,
+China,1985,Historical,22.0,,
+China,1986,Historical,70.0,,
+China,1987,Historical,72.0,,
+China,1988,Historical,96.0,,
+China,1989,Historical,199.0,,
+China,1990,Historical,130.0,,
+China,1991,Historical,218.0,,
+China,1992,Historical,374.0,,
+China,1993,Historical,687.0,,
+China,1994,Historical,536.0,,
+China,1995,Historical,701.0,,
+China,1996,Historical,867.0,,
+China,1997,Historical,1327.0,,
+China,1998,Historical,1125.0,,
+China,1999,Historical,1249.0,,
+China,2000,Historical,1918.0,,
+China,2001,Historical,1785.0,,
+China,2002,Historical,2024.0,,
+China,2003,Historical,2610.0,,
+China,2004,Historical,3404.0,,
+China,2005,Historical,3382.0,,
+China,2006,Historical,3815.0,,
+China,2007,Historical,4126.0,,
+China,2008,Historical,4499.0,,
+China,2009,Historical,5045.0,,
+China,2010,Historical,5735.0,,
+China,2011,Historical,6157.0,,
+China,2012,Historical,6449.0,,
+China,2013,Historical,6709.0,,
+China,2014,Historical,7150.0,,
+China,2015,Historical,7884.0,,
+China,2016,Historical,8858.0,,
+China,2017,Historical,9811.7,,
+China,2018,Historical,10782.4,,
+China,2019,Historical,11617.0,,
+China,2020,Historical,12273.3,,
+China,2021,Historical,11859.1,,
+China,2022,Historical,11856.7,,
+China,2023,Historical,13621.2,,
+China,2024,Historical,0.0,,
+China,2024,Forecast,6987.5,,
+China,2025,Forecast,-12690.9,-16605.4,-8776.4
+China,2026,Forecast,19035.0,,
+China,2027,Forecast,-24130.3,-33166.8,-15093.7
+China,2028,Forecast,29894.4,,
+China,2029,Forecast,-34441.5,-49429.7,-19453.3
+China,2030,Forecast,39682.8,,
+Usa,1971,Historical,3916.0,,
+Usa,1972,Historical,4717.0,,
+Usa,1973,Historical,6175.0,,
+Usa,1974,Historical,6027.0,,
+Usa,1975,Historical,6370.0,,
+Usa,1976,Historical,7529.0,,
+Usa,1977,Historical,9272.0,,
+Usa,1978,Historical,8657.0,,
+Usa,1979,Historical,8632.0,,
+Usa,1980,Historical,6995.0,,
+Usa,1981,Historical,6111.0,,
+Usa,1982,Historical,5292.0,,
+Usa,1983,Historical,5232.0,,
+Usa,1984,Historical,5617.0,,
+Usa,1985,Historical,5270.0,,
+Usa,1986,Historical,6434.0,,
+Usa,1987,Historical,6885.0,,
+Usa,1988,Historical,7554.0,,
+Usa,1989,Historical,8186.0,,
+Usa,1990,Historical,8211.0,,
+Usa,1991,Historical,7849.0,,
+Usa,1992,Historical,8235.0,,
+Usa,1993,Historical,8995.0,,
+Usa,1994,Historical,9385.0,,
+Usa,1995,Historical,9197.0,,
+Usa,1996,Historical,9895.0,,
+Usa,1997,Historical,10655.0,,
+Usa,1998,Historical,11177.0,,
+Usa,1999,Historical,11333.0,,
+Usa,2000,Historical,11983.0,,
+Usa,2001,Historical,12445.0,,
+Usa,2002,Historical,12111.0,,
+Usa,2003,Historical,12899.0,,
+Usa,2004,Historical,13797.0,,
+Usa,2005,Historical,14351.0,,
+Usa,2006,Historical,14359.0,,
+Usa,2007,Historical,14097.0,,
+Usa,2008,Historical,13551.0,,
+Usa,2009,Historical,12292.0,,
+Usa,2010,Historical,12390.0,,
+Usa,2011,Historical,11862.0,,
+Usa,2012,Historical,10677.0,,
+Usa,2013,Historical,9950.0,,
+Usa,2014,Historical,9353.0,,
+Usa,2015,Historical,9540.0,,
+Usa,2016,Historical,10098.0,,
+Usa,2017,Historical,10216.4,,
+Usa,2018,Historical,10042.7,,
+Usa,2019,Historical,9232.4,,
+Usa,2020,Historical,7991.8,,
+Usa,2021,Historical,8542.5,,
+Usa,2022,Historical,8365.4,,
+Usa,2023,Historical,8595.8,,
+Usa,2024,Historical,8383.9,,
+Usa,2024,Forecast,8249.6,7388.7,9110.5
+Usa,2025,Forecast,8146.2,6622.7,9669.7
+Usa,2026,Forecast,8055.0,5939.1,10170.8
+Usa,2027,Forecast,7968.7,5312.3,10625.0
+Usa,2028,Forecast,7884.3,4722.6,11046.0
+Usa,2029,Forecast,7800.7,4156.7,11444.6
+Usa,2030,Forecast,7717.4,3605.9,11828.8
+India,1971,Historical,302.0,,
+India,1972,Historical,308.0,,
+India,1973,Historical,352.0,,
+India,1974,Historical,342.0,,
+India,1975,Historical,323.0,,
+India,1976,Historical,330.0,,
+India,1977,Historical,350.0,,
+India,1978,Historical,371.0,,
+India,1979,Historical,424.0,,
+India,1980,Historical,474.0,,
+India,1981,Historical,415.0,,
+India,1982,Historical,447.0,,
+India,1983,Historical,411.0,,
+India,1984,Historical,393.0,,
+India,1985,Historical,399.0,,
+India,1986,Historical,381.0,,
+India,1987,Historical,441.0,,
+India,1988,Historical,489.0,,
+India,1989,Historical,534.0,,
+India,1990,Historical,605.0,,
+India,1991,Historical,686.0,,
+India,1992,Historical,831.0,,
+India,1993,Historical,882.0,,
+India,1994,Historical,851.0,,
+India,1995,Historical,973.0,,
+India,1996,Historical,1109.0,,
+India,1997,Historical,1194.0,,
+India,1998,Historical,1325.0,,
+India,1999,Historical,1542.0,,
+India,2000,Historical,1709.0,,
+India,2001,Historical,1758.0,,
+India,2002,Historical,1832.0,,
+India,2003,Historical,2031.0,,
+India,2004,Historical,2163.0,,
+India,2005,Historical,2319.0,,
+India,2006,Historical,2657.0,,
+India,2007,Historical,2980.0,,
+India,2008,Historical,3110.0,,
+India,2009,Historical,3565.0,,
+India,2010,Historical,3735.0,,
+India,2011,Historical,3882.0,,
+India,2012,Historical,4142.0,,
+India,2013,Historical,4249.0,,
+India,2014,Historical,4354.0,,
+India,2015,Historical,4786.0,,
+India,2016,Historical,5136.0,,
+India,2017,Historical,5273.6,,
+India,2018,Historical,5400.4,,
+India,2019,Historical,5668.1,,
+India,2020,Historical,5032.7,,
+India,2021,Historical,5302.9,,
+India,2022,Historical,6007.3,,
+India,2023,Historical,6291.3,,
+India,2024,Historical,0.0,,
+India,2024,Forecast,-8445.2,-9325.4,-7565.0
+India,2025,Forecast,-13647.4,-16173.3,-11121.4
+India,2026,Forecast,-10413.6,-14734.6,-6092.6
+India,2027,Forecast,-8076.9,-13451.2,-2702.5
+India,2028,Forecast,-11178.7,-17215.1,-5142.3
+India,2029,Forecast,-20854.5,-27642.3,-14066.7
+India,2030,Forecast,-26476.8,-34736.7,-18216.9
+Korea,1971,Historical,234.0,,
+Korea,1972,Historical,253.0,,
+Korea,1973,Historical,283.0,,
+Korea,1974,Historical,313.0,,
+Korea,1975,Historical,328.0,,
+Korea,1976,Historical,362.0,,
+Korea,1977,Historical,438.0,,
+Korea,1978,Historical,466.0,,
+Korea,1979,Historical,536.0,,
+Korea,1980,Historical,538.0,,
+Korea,1981,Historical,540.0,,
+Korea,1982,Historical,543.0,,
+Korea,1983,Historical,587.0,,
+Korea,1984,Historical,612.0,,
+Korea,1985,Historical,608.0,,
+Korea,1986,Historical,715.0,,
+Korea,1987,Historical,723.0,,
+Korea,1988,Historical,827.0,,
+Korea,1989,Historical,946.0,,
+Korea,1990,Historical,1120.0,,
+Korea,1991,Historical,1392.0,,
+Korea,1992,Historical,1760.0,,
+Korea,1993,Historical,1988.0,,
+Korea,1994,Historical,2122.0,,
+Korea,1995,Historical,2318.0,,
+Korea,1996,Historical,2617.0,,
+Korea,1997,Historical,2955.0,,
+Korea,1998,Historical,2774.0,,
+Korea,1999,Historical,2946.0,,
+Korea,2000,Historical,3048.0,,
+Korea,2001,Historical,2965.0,,
+Korea,2002,Historical,2816.0,,
+Korea,2003,Historical,2788.0,,
+Korea,2004,Historical,2832.0,,
+Korea,2005,Historical,2817.0,,
+Korea,2006,Historical,2956.0,,
+Korea,2007,Historical,2969.0,,
+Korea,2008,Historical,2968.0,,
+Korea,2009,Historical,3062.0,,
+Korea,2010,Historical,3177.0,,
+Korea,2011,Historical,3304.0,,
+Korea,2012,Historical,3447.0,,
+Korea,2013,Historical,3395.0,,
+Korea,2014,Historical,3436.0,,
+Korea,2015,Historical,3660.0,,
+Korea,2016,Historical,3869.0,,
+Korea,2017,Historical,3927.8,,
+Korea,2018,Historical,3994.8,,
+Korea,2019,Historical,3892.1,,
+Korea,2020,Historical,3625.8,,
+Korea,2021,Historical,3715.3,,
+Korea,2022,Historical,3793.1,,
+Korea,2023,Historical,3777.6,,
+Korea,2024,Historical,3854.7,,
+Korea,2024,Forecast,3926.2,3782.7,4069.7
+Korea,2025,Forecast,3995.5,3746.4,4244.7
+Korea,2026,Forecast,4064.0,3724.7,4403.2
+Korea,2027,Forecast,4132.0,3714.5,4549.6
+Korea,2028,Forecast,4200.0,3712.7,4687.3
+Korea,2029,Forecast,4267.9,3717.1,4818.7
+Korea,2030,Forecast,4335.7,3726.1,4945.3
+Japan,1971,Historical,4414.0,,
+Japan,1972,Historical,4711.0,,
+Japan,1973,Historical,5526.0,,
+Japan,1974,Historical,5478.0,,
+Japan,1975,Historical,4996.0,,
+Japan,1976,Historical,5248.0,,
+Japan,1977,Historical,5448.0,,
+Japan,1978,Historical,5330.0,,
+Japan,1979,Historical,5610.0,,
+Japan,1980,Historical,5094.0,,
+Japan,1981,Historical,4634.0,,
+Japan,1982,Historical,4447.0,,
+Japan,1983,Historical,4415.0,,
+Japan,1984,Historical,4578.0,,
+Japan,1985,Historical,4352.0,,
+Japan,1986,Historical,4469.0,,
+Japan,1987,Historical,4531.0,,
+Japan,1988,Historical,4781.0,,
+Japan,1989,Historical,5167.0,,
+Japan,1990,Historical,5474.0,,
+Japan,1991,Historical,5362.0,,
+Japan,1992,Historical,5608.0,,
+Japan,1993,Historical,5545.0,,
+Japan,1994,Historical,5913.0,,
+Japan,1995,Historical,5885.0,,
+Japan,1996,Historical,5895.0,,
+Japan,1997,Historical,5809.0,,
+Japan,1998,Historical,5549.0,,
+Japan,1999,Historical,5564.0,,
+Japan,2000,Historical,5648.0,,
+Japan,2001,Historical,5316.0,,
+Japan,2002,Historical,5412.0,,
+Japan,2003,Historical,5451.0,,
+Japan,2004,Historical,5378.0,,
+Japan,2005,Historical,5509.0,,
+Japan,2006,Historical,5277.0,,
+Japan,2007,Historical,5241.0,,
+Japan,2008,Historical,5039.0,,
+Japan,2009,Historical,4623.0,,
+Japan,2010,Historical,4758.0,,
+Japan,2011,Historical,4754.0,,
+Japan,2012,Historical,4831.0,,
+Japan,2013,Historical,4717.0,,
+Japan,2014,Historical,4432.0,,
+Japan,2015,Historical,4402.0,,
+Japan,2016,Historical,4239.0,,
+Japan,2017,Historical,4235.2,,
+Japan,2018,Historical,4076.7,,
+Japan,2019,Historical,3974.2,,
+Japan,2020,Historical,3374.3,,
+Japan,2021,Historical,3607.6,,
+Japan,2022,Historical,3675.0,,
+Japan,2023,Historical,3465.5,,
+Japan,2024,Historical,3355.4,,
+Japan,2024,Forecast,3262.4,2929.1,3595.6
+Japan,2025,Forecast,3169.4,2673.5,3665.3
+Japan,2026,Forecast,3076.4,2438.4,3714.3
+Japan,2027,Forecast,2983.4,2211.1,3755.7
+Japan,2028,Forecast,2890.4,1986.6,3794.1
+Japan,2029,Forecast,2797.4,1762.9,3831.9
+Japan,2030,Forecast,2704.4,1538.6,3870.2
+Singapore,1971,Historical,438.0,,
+Singapore,1972,Historical,534.0,,
+Singapore,1973,Historical,574.0,,
+Singapore,1974,Historical,596.0,,
+Singapore,1975,Historical,534.0,,
+Singapore,1976,Historical,606.0,,
+Singapore,1977,Historical,664.0,,
+Singapore,1978,Historical,633.0,,
+Singapore,1979,Historical,655.0,,
+Singapore,1980,Historical,722.0,,
+Singapore,1981,Historical,896.0,,
+Singapore,1982,Historical,990.0,,
+Singapore,1983,Historical,995.0,,
+Singapore,1984,Historical,842.0,,
+Singapore,1985,Historical,791.0,,
+Singapore,1986,Historical,869.0,,
+Singapore,1987,Historical,979.0,,
+Singapore,1988,Historical,1077.0,,
+Singapore,1989,Historical,1083.0,,
+Singapore,1990,Historical,1207.0,,
+Singapore,1991,Historical,1259.0,,
+Singapore,1992,Historical,1361.0,,
+Singapore,1993,Historical,1496.0,,
+Singapore,1994,Historical,1613.0,,
+Singapore,1995,Historical,1568.0,,
+Singapore,1996,Historical,1694.0,,
+Singapore,1997,Historical,1755.0,,
+Singapore,1998,Historical,1686.0,,
+Singapore,1999,Historical,1668.0,,
+Singapore,2000,Historical,1596.0,,
+Singapore,2001,Historical,1653.0,,
+Singapore,2002,Historical,1693.0,,
+Singapore,2003,Historical,1824.0,,
+Singapore,2004,Historical,2104.0,,
+Singapore,2005,Historical,2139.0,,
+Singapore,2006,Historical,2271.0,,
+Singapore,2007,Historical,2406.0,,
+Singapore,2008,Historical,2650.0,,
+Singapore,2009,Historical,2855.0,,
+Singapore,2010,Historical,2959.0,,
+Singapore,2011,Historical,3046.0,,
+Singapore,2012,Historical,2952.0,,
+Singapore,2013,Historical,3010.0,,
+Singapore,2014,Historical,2991.0,,
+Singapore,2015,Historical,3202.0,,
+Singapore,2016,Historical,3390.0,,
+Singapore,2017,Historical,3570.9,,
+Singapore,2018,Historical,3210.6,,
+Singapore,2019,Historical,3175.7,,
+Singapore,2020,Historical,2905.9,,
+Singapore,2021,Historical,2825.3,,
+Singapore,2022,Historical,2861.3,,
+Singapore,2023,Historical,3038.1,,
+Singapore,2024,Historical,0.0,,
+Singapore,2024,Forecast,977.4,481.8,1473.0
+Singapore,2025,Forecast,-87.4,-628.9,454.1
+Singapore,2026,Forecast,-1152.1,-1836.5,-467.7
+Singapore,2027,Forecast,-2216.9,-3139.6,-1294.2
+Singapore,2028,Forecast,-3281.7,-4515.6,-2047.8
+Singapore,2029,Forecast,-4346.4,-5947.0,-2745.8
+Singapore,2030,Forecast,-5411.2,-7423.6,-3398.8
+Netherlands,1971,Historical,1399.0,,
+Netherlands,1972,Historical,1538.0,,
+Netherlands,1973,Historical,1670.0,,
+Netherlands,1974,Historical,1537.0,,
+Netherlands,1975,Historical,1320.0,,
+Netherlands,1976,Historical,1502.0,,
+Netherlands,1977,Historical,1395.0,,
+Netherlands,1978,Historical,1420.0,,
+Netherlands,1979,Historical,1621.0,,
+Netherlands,1980,Historical,1612.0,,
+Netherlands,1981,Historical,1473.0,,
+Netherlands,1982,Historical,1529.0,,
+Netherlands,1983,Historical,1612.0,,
+Netherlands,1984,Historical,1632.0,,
+Netherlands,1985,Historical,1629.0,,
+Netherlands,1986,Historical,1836.0,,
+Netherlands,1987,Historical,1758.0,,
+Netherlands,1988,Historical,1810.0,,
+Netherlands,1989,Historical,1893.0,,
+Netherlands,1990,Historical,1904.0,,
+Netherlands,1991,Historical,1887.0,,
+Netherlands,1992,Historical,1842.0,,
+Netherlands,1993,Historical,1880.0,,
+Netherlands,1994,Historical,1845.0,,
+Netherlands,1995,Historical,1870.0,,
+Netherlands,1996,Historical,1935.0,,
+Netherlands,1997,Historical,2034.0,,
+Netherlands,1998,Historical,2013.0,,
+Netherlands,1999,Historical,1992.0,,
+Netherlands,2000,Historical,2158.0,,
+Netherlands,2001,Historical,2199.0,,
+Netherlands,2002,Historical,2199.0,,
+Netherlands,2003,Historical,2246.0,,
+Netherlands,2004,Historical,2455.0,,
+Netherlands,2005,Historical,2606.0,,
+Netherlands,2006,Historical,2731.0,,
+Netherlands,2007,Historical,2611.0,,
+Netherlands,2008,Historical,2688.0,,
+Netherlands,2009,Historical,2841.0,,
+Netherlands,2010,Historical,3018.0,,
+Netherlands,2011,Historical,2952.0,,
+Netherlands,2012,Historical,3055.0,,
+Netherlands,2013,Historical,2991.0,,
+Netherlands,2014,Historical,2926.0,,
+Netherlands,2015,Historical,3230.0,,
+Netherlands,2016,Historical,3227.0,,
+Netherlands,2017,Historical,3240.4,,
+Netherlands,2018,Historical,3229.2,,
+Netherlands,2019,Historical,3166.7,,
+Netherlands,2020,Historical,2767.2,,
+Netherlands,2021,Historical,2980.8,,
+Netherlands,2022,Historical,3136.6,,
+Netherlands,2023,Historical,2981.5,,
+Netherlands,2024,Historical,2934.3,,
+Netherlands,2024,Forecast,3143.4,3010.3,3276.6
+Netherlands,2025,Forecast,3042.8,2851.4,3234.1
+Netherlands,2026,Forecast,3039.3,2821.7,3256.9
+Netherlands,2027,Forecast,3200.2,2961.2,3439.2
+Netherlands,2028,Forecast,3153.5,2870.2,3436.8
+Netherlands,2029,Forecast,3126.3,2821.6,3431.1
+Netherlands,2030,Forecast,3268.2,2945.7,3590.7
+Germany,1971,Historical,3002.0,,
+Germany,1972,Historical,3142.0,,
+Germany,1973,Historical,3411.0,,
+Germany,1974,Historical,3178.0,,
+Germany,1975,Historical,2932.0,,
+Germany,1976,Historical,3253.0,,
+Germany,1977,Historical,3250.0,,
+Germany,1978,Historical,3308.0,,
+Germany,1979,Historical,3409.0,,
+Germany,1980,Historical,3196.0,,
+Germany,1981,Historical,2732.0,,
+Germany,1982,Historical,2646.0,,
+Germany,1983,Historical,2590.0,,
+Germany,1984,Historical,2596.0,,
+Germany,1985,Historical,2644.0,,
+Germany,1986,Historical,2801.0,,
+Germany,1987,Historical,2699.0,,
+Germany,1988,Historical,2726.0,,
+Germany,1989,Historical,2610.0,,
+Germany,1990,Historical,2668.0,,
+Germany,1991,Historical,2816.0,,
+Germany,1992,Historical,2981.0,,
+Germany,1993,Historical,2984.0,,
+Germany,1994,Historical,3027.0,,
+Germany,1995,Historical,2964.0,,
+Germany,1996,Historical,3068.0,,
+Germany,1997,Historical,3088.0,,
+Germany,1998,Historical,3174.0,,
+Germany,1999,Historical,2974.0,,
+Germany,2000,Historical,2997.0,,
+Germany,2001,Historical,3066.0,,
+Germany,2002,Historical,2899.0,,
+Germany,2003,Historical,2925.0,,
+Germany,2004,Historical,2950.0,,
+Germany,2005,Historical,3020.0,,
+Germany,2006,Historical,3004.0,,
+Germany,2007,Historical,2776.0,,
+Germany,2008,Historical,2859.0,,
+Germany,2009,Historical,2682.0,,
+Germany,2010,Historical,2644.0,,
+Germany,2011,Historical,2531.0,,
+Germany,2012,Historical,2570.0,,
+Germany,2013,Historical,2633.0,,
+Germany,2014,Historical,2599.0,,
+Germany,2015,Historical,2645.0,,
+Germany,2016,Historical,2664.0,,
+Germany,2017,Historical,2715.4,,
+Germany,2018,Historical,2590.3,,
+Germany,2019,Historical,2647.0,,
+Germany,2020,Historical,2420.7,,
+Germany,2021,Historical,2450.0,,
+Germany,2022,Historical,2557.9,,
+Germany,2023,Historical,2337.9,,
+Germany,2024,Historical,2352.0,,
+Germany,2024,Forecast,2340.8,2157.8,2523.8
+Germany,2025,Forecast,2329.6,2068.3,2590.8
+Germany,2026,Forecast,2318.4,1995.5,2641.2
+Germany,2027,Forecast,2307.2,1931.0,2683.3
+Germany,2028,Forecast,2295.9,1871.7,2720.2
+Germany,2029,Forecast,2284.7,1815.9,2753.5
+Germany,2030,Forecast,2273.5,1762.8,2784.2
+France,1971,Historical,2345.0,,
+France,1972,Historical,2559.0,,
+France,1973,Historical,2876.0,,
+France,1974,Historical,2762.0,,
+France,1975,Historical,2301.0,,
+France,1976,Historical,2612.0,,
+France,1977,Historical,2535.0,,
+France,1978,Historical,2523.0,,
+France,1979,Historical,2775.0,,
+France,1980,Historical,2545.0,,
+France,1981,Historical,2216.0,,
+France,1982,Historical,2034.0,,
+France,1983,Historical,1908.0,,
+France,1984,Historical,1935.0,,
+France,1985,Historical,1890.0,,
+France,1986,Historical,1916.0,,
+France,1987,Historical,1973.0,,
+France,1988,Historical,1984.0,,
+France,1989,Historical,2010.0,,
+France,1990,Historical,2061.0,,
+France,1991,Historical,2163.0,,
+France,1992,Historical,2086.0,,
+France,1993,Historical,2109.0,,
+France,1994,Historical,2035.0,,
+France,1995,Historical,2064.0,,
+France,1996,Historical,2194.0,,
+France,1997,Historical,2199.0,,
+France,1998,Historical,2324.0,,
+France,1999,Historical,2234.0,,
+France,2000,Historical,2290.0,,
+France,2001,Historical,2330.0,,
+France,2002,Historical,2300.0,,
+France,2003,Historical,2370.0,,
+France,2004,Historical,2394.0,,
+France,2005,Historical,2481.0,,
+France,2006,Historical,2468.0,,
+France,2007,Historical,2404.0,,
+France,2008,Historical,2432.0,,
+France,2009,Historical,2258.0,,
+France,2010,Historical,2139.0,,
+France,2011,Historical,2166.0,,
+France,2012,Historical,2086.0,,
+France,2013,Historical,2057.0,,
+France,2014,Historical,2039.0,,
+France,2015,Historical,2098.0,,
+France,2016,Historical,2014.0,,
+France,2017,Historical,2052.1,,
+France,2018,Historical,1976.7,,
+France,2019,Historical,1943.2,,
+France,2020,Historical,1588.8,,
+France,2021,Historical,1657.9,,
+France,2022,Historical,1704.1,,
+France,2023,Historical,1724.5,,
+France,2024,Historical,1720.7,,
+France,2024,Forecast,0.0,,
+France,2025,Forecast,0.0,,
+France,2026,Forecast,0.0,,
+France,2027,Forecast,0.0,,
+France,2028,Forecast,0.0,,
+France,2029,Forecast,0.0,,
+France,2030,Forecast,0.0,,
+Spain,1971,Historical,755.0,,
+Spain,1972,Historical,787.0,,
+Spain,1973,Historical,902.0,,
+Spain,1974,Historical,925.0,,
+Spain,1975,Historical,881.0,,
+Spain,1976,Historical,1020.0,,
+Spain,1977,Historical,1008.0,,
+Spain,1978,Historical,1021.0,,
+Spain,1979,Historical,1039.0,,
+Spain,1980,Historical,1065.0,,
+Spain,1981,Historical,1044.0,,
+Spain,1982,Historical,1073.0,,
+Spain,1983,Historical,1092.0,,
+Spain,1984,Historical,1029.0,,
+Spain,1985,Historical,1007.0,,
+Spain,1986,Historical,1072.0,,
+Spain,1987,Historical,1081.0,,
+Spain,1988,Historical,1192.0,,
+Spain,1989,Historical,1206.0,,
+Spain,1990,Historical,1237.0,,
+Spain,1991,Historical,1281.0,,
+Spain,1992,Historical,1311.0,,
+Spain,1993,Historical,1275.0,,
+Spain,1994,Historical,1335.0,,
+Spain,1995,Historical,1370.0,,
+Spain,1996,Historical,1344.0,,
+Spain,1997,Historical,1428.0,,
+Spain,1998,Historical,1545.0,,
+Spain,1999,Historical,1543.0,,
+Spain,2000,Historical,1586.0,,
+Spain,2001,Historical,1598.0,,
+Spain,2002,Historical,1627.0,,
+Spain,2003,Historical,1656.0,,
+Spain,2004,Historical,1707.0,,
+Spain,2005,Historical,1771.0,,
+Spain,2006,Historical,1797.0,,
+Spain,2007,Historical,1814.0,,
+Spain,2008,Historical,1754.0,,
+Spain,2009,Historical,1653.0,,
+Spain,2010,Historical,1624.0,,
+Spain,2011,Historical,1602.0,,
+Spain,2012,Historical,1586.0,,
+Spain,2013,Historical,1571.0,,
+Spain,2014,Historical,1602.0,,
+Spain,2015,Historical,1688.0,,
+Spain,2016,Historical,1721.0,,
+Spain,2017,Historical,1807.0,,
+Spain,2018,Historical,1789.5,,
+Spain,2019,Historical,1772.9,,
+Spain,2020,Historical,1494.7,,
+Spain,2021,Historical,1545.6,,
+Spain,2022,Historical,1676.9,,
+Spain,2023,Historical,1634.5,,
+Spain,2024,Historical,1730.0,,
+Spain,2024,Forecast,1748.4,1663.0,1833.7
+Spain,2025,Forecast,1766.7,1644.9,1888.6
+Spain,2026,Forecast,1785.1,1634.5,1935.7
+Spain,2027,Forecast,1803.4,1627.9,1978.9
+Spain,2028,Forecast,1821.7,1623.8,2019.7
+Spain,2029,Forecast,1840.1,1621.3,2058.9
+Spain,2030,Forecast,1858.4,1620.0,2096.8
