@@ -744,6 +744,315 @@
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: var(--border-glow); }
+
+    /* ─── EV Share Preview Section ───────────────────────────── */
+
+    /* Strip / divider between hero and main charts */
+    .preview-section {
+      border-bottom: 1px solid var(--border);
+      padding-block: 3rem 2.5rem;
+      background: var(--bg);
+    }
+
+    /* Section header row: eyebrow + headline + CTA on same line */
+    .preview-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .preview-header-copy {}
+
+    .preview-eyebrow {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent-teal);
+      margin-bottom: .5rem;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+
+    .preview-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 1px;
+      background: var(--accent-teal);
+    }
+
+    .preview-headline {
+      font-family: var(--font-display);
+      font-size: clamp(1.15rem, 2.5vw, 1.55rem);
+      font-weight: 800;
+      letter-spacing: -.025em;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+
+    .preview-headline em {
+      font-style: normal;
+      color: var(--accent-teal);
+    }
+
+    .preview-subline {
+      font-size: .88rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin-top: .4rem;
+      max-width: 52ch;
+    }
+
+    /* The card that holds chart + right panel */
+    .preview-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;           /* clip rounded corners on children */
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      transition: border-color .2s;
+    }
+
+    .preview-card:hover { border-color: var(--border-glow); }
+
+    /* Left: chart area */
+    .preview-chart-pane {
+      padding: 1.5rem 1.5rem 1rem;
+      border-right: 1px solid var(--border);
+      min-width: 0;               /* allow shrink below natural width */
+    }
+
+    .preview-chart-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Year picker row inside the chart pane */
+    .preview-controls {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      flex-shrink: 0;
+    }
+
+    .preview-controls .preview-label {
+      font-family: var(--font-mono);
+      font-size: .65rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .preview-controls select {
+      font-family: var(--font-display);
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: .35rem 1.8rem .35rem .65rem;
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%234e5e7a' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right .55rem center;
+      transition: border-color .15s;
+    }
+
+    .preview-controls select:hover  { border-color: var(--border-glow); }
+    .preview-controls select:focus  { outline: none; border-color: var(--accent-teal); }
+
+    /* D3 mounts here */
+    #ev-preview-chart {
+      width: 100%;
+      min-height: 300px;
+      overflow: hidden;
+    }
+
+    #ev-preview-chart svg {
+      display: block;
+      overflow: visible;
+    }
+
+    /* Right: metadata panel */
+    .preview-meta-pane {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      background: var(--bg-card-alt);
+    }
+
+    .preview-meta-label {
+      font-family: var(--font-mono);
+      font-size: .62rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: .3rem;
+    }
+
+    /* Three stat tiles stacked in the panel */
+    .preview-stat {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: .9rem 1rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .18s;
+    }
+
+    .preview-stat:hover { border-color: var(--border-glow); }
+
+    .preview-stat::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--accent-teal);
+      opacity: .6;
+    }
+
+    .preview-stat:nth-child(2)::before { background: var(--accent-amber); }
+    .preview-stat:nth-child(3)::before { background: var(--accent-blue); }
+
+    .preview-stat-value {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1.1;
+    }
+
+    .preview-stat-label {
+      font-family: var(--font-mono);
+      font-size: .62rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: .25rem;
+    }
+
+    .preview-stat-sub {
+      font-size: .78rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      margin-top: .15rem;
+    }
+
+    /* Top-5 ranked list */
+    .preview-ranking {
+      flex: 1;
+    }
+
+    .preview-rank-row {
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+      padding: .45rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .preview-rank-row:last-child { border-bottom: none; }
+
+    .preview-rank-num {
+      font-family: var(--font-mono);
+      font-size: .62rem;
+      color: var(--text-muted);
+      width: 1.6rem;
+      flex-shrink: 0;
+      text-align: right;
+    }
+
+    .preview-rank-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .preview-rank-name {
+      font-family: var(--font-display);
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .preview-rank-val {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      color: var(--text-secondary);
+      flex-shrink: 0;
+    }
+
+    /* CTA row below card */
+    .preview-cta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: .75rem;
+      margin-top: 1rem;
+    }
+
+    .preview-note {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      color: var(--text-muted);
+    }
+
+    /* Loading/error text inside chart area */
+    .preview-status {
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      color: var(--accent-amber);
+      margin-top: .5rem;
+      min-height: 1rem;
+    }
+
+    /* Responsive collapse: stack on narrow screens */
+    @media (max-width: 860px) {
+      .preview-card {
+        grid-template-columns: 1fr;
+      }
+
+      .preview-chart-pane {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .preview-meta-pane {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+
+      .preview-ranking { display: none; }    /* hidden on mobile — too narrow */
+    }
+
+    @media (max-width: 600px) {
+      .preview-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
   </style>
 </head>
 
@@ -812,6 +1121,106 @@
       </div>
     </div>
   </section>
+
+
+  <!-- ===== EV SHARE PREVIEW ===== -->
+  <!--
+    Self-contained preview of the EV Share Explorer bar chart.
+    Powered by ./jsfile/ev-preview.js — uses its own namespaced IDs
+    (ev-preview-*) so it never conflicts with index.js or ev-share.js.
+  -->
+  <section class="preview-section" aria-labelledby="previewHeading">
+    <div class="wrap">
+
+      <!-- Section header -->
+      <div class="preview-header">
+        <div class="preview-header-copy">
+          <p class="preview-eyebrow">EV Sales · Top Countries · Forecast 2025–2030</p>
+          <h2 class="preview-headline" id="previewHeading">
+            Global <em>EV market share</em> at a glance
+          </h2>
+          <p class="preview-subline">
+            Top-10 EV sales countries for the selected year, ranked by volume.
+            Explore the full dataset with country chips, filters, and a forecast summary table.
+          </p>
+        </div>
+        <a class="btn btn-ghost" href="./htmlfile/ev-share.html" aria-label="Open EV Share Explorer">
+          View Full Explorer →
+        </a>
+      </div>
+
+      <!-- Preview card: D3 chart (left) + stats + ranking (right) -->
+      <div class="preview-card" role="region" aria-label="EV Share preview chart">
+
+        <!-- Left pane: year picker + D3 bar chart -->
+        <div class="preview-chart-pane">
+          <div class="preview-chart-top">
+            <div>
+              <p class="section-label">Preview · Top 10 Countries</p>
+              <p style="font-family:var(--font-display);font-size:.9rem;font-weight:700;color:var(--text-primary)" id="ev-preview-meta-title">Top 10 Countries</p>
+              <p style="font-family:var(--font-mono);font-size:.66rem;color:var(--text-muted);margin-top:.15rem" id="ev-preview-meta-sub">EV Sales</p>
+            </div>
+            <div class="preview-controls">
+              <span class="preview-label">Year</span>
+              <!--
+                Populated by ev-preview.js — id is "ev-preview-year" to avoid
+                any conflict with #yearSelect in the main dashboard controls.
+              -->
+              <select id="ev-preview-year" aria-label="Select preview year"></select>
+            </div>
+          </div>
+
+          <!-- D3 appends an <svg> into this div -->
+          <div id="ev-preview-chart"
+               role="img"
+               aria-label="Top 10 EV sales countries horizontal bar chart — loading"></div>
+
+          <p class="preview-status" id="ev-preview-hint" aria-live="polite"></p>
+        </div>
+
+        <!-- Right pane: live stats + top-5 ranking list -->
+        <div class="preview-meta-pane" aria-label="EV share summary statistics">
+
+          <div>
+            <p class="preview-meta-label">Year summary</p>
+            <div class="preview-stat">
+              <div class="preview-stat-value" id="ev-preview-stat-total">—</div>
+              <div class="preview-stat-label">Total EV Sales</div>
+              <div class="preview-stat-sub" id="ev-preview-stat-total-sub">Top 10 countries</div>
+            </div>
+            <div class="preview-stat" style="margin-top:.65rem">
+              <div class="preview-stat-value" id="ev-preview-stat-leader">—</div>
+              <div class="preview-stat-label">Market Leader</div>
+              <div class="preview-stat-sub" id="ev-preview-stat-leader-sub">vehicles sold</div>
+            </div>
+            <div class="preview-stat" style="margin-top:.65rem">
+              <div class="preview-stat-value" id="ev-preview-stat-share">—</div>
+              <div class="preview-stat-label">Leader Share</div>
+              <div class="preview-stat-sub">of top-10 total</div>
+            </div>
+          </div>
+
+          <!-- Top-5 ranked list — populated by ev-preview.js -->
+          <div class="preview-ranking">
+            <p class="preview-meta-label" style="margin-bottom:.5rem">Top 5</p>
+            <div id="ev-preview-ranking"></div>
+          </div>
+
+        </div><!-- /preview-meta-pane -->
+      </div><!-- /preview-card -->
+
+      <!-- Bottom CTA row -->
+      <div class="preview-cta-row">
+        <p class="preview-note">
+          Source: IEA Global EV Outlook &nbsp;·&nbsp; Forecast values are model projections
+        </p>
+        <a class="btn btn-primary" href="./htmlfile/ev-share.html">
+          Explore with chips &amp; filters →
+        </a>
+      </div>
+
+    </div><!-- /wrap -->
+  </section><!-- /preview-section -->
 
 
   <!-- ===== MAIN CONTENT ===== -->
@@ -1096,22 +1505,21 @@
       <nav class="footer-links" aria-label="Footer links">
         <a href="https://github.com"       target="_blank" rel="noopener">GitHub</a>
         <a href="./htmlfile/data.html">Datasets</a>
-        <a href="mailto:your@email.com">Contact</a>
+        <a href="/cdn-cgi/l/email-protection#b5ccdac0c7f5d0d8d4dcd99bd6dad8">Contact</a>
       </nav>
     </div>
   </footer>
 
 
   <!-- D3 (keep; charts load from JS modules) -->
-  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+
+  <!--
+    EV Share preview — standalone IIFE, uses only "ev-preview-*" IDs.
+    Must load AFTER D3 CDN script above. Does NOT conflict with index.js
+    or ev-share.js because all its DOM queries are namespaced.
+  -->
+  <script src="./jsfile/ev-preview.js"></script>
 
   <!-- Your wiring layer -->
-  <script type="module" src="./main.js"></script>
-
-  <!-- Footer year -->
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
-
-</body>
-</html>
+  <script type="module" src="./main.js"></scr

@@ -1053,6 +1053,285 @@
         align-items: flex-start;
       }
     }
+
+    /* ═══════════════════════════════════════════════════════════
+       PREVIEW CARD — shared layout for all three preview sections
+       (Oil Imports, EV Forecast — the EV Share section above uses
+       .preview-card/.preview-chart-pane which are already defined)
+    ═══════════════════════════════════════════════════════════ */
+
+    .prev-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
+      margin-bottom: 2rem;
+      transition: border-color .2s;
+      overflow: hidden;
+    }
+
+    .prev-card:hover { border-color: var(--border-glow); }
+
+    /* ── Header row ── */
+    .prev-card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding: 1.5rem 1.5rem 1rem;
+      flex-wrap: wrap;
+    }
+
+    .prev-card-title-group { flex: 1; min-width: 0; }
+
+    .prev-card-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.3;
+      margin-bottom: .3rem;
+    }
+
+    .prev-card-desc {
+      font-size: .85rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      max-width: 58ch;
+      margin-top: .25rem;
+    }
+
+    .prev-card-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: .6rem;
+      flex-shrink: 0;
+    }
+
+    .prev-cta-btn {
+      font-size: .78rem;
+      padding: .45rem 1rem;
+      white-space: nowrap;
+    }
+
+    /* ── Body: chart (left) + side panel (right) ── */
+    .prev-card-body {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      border-top: 1px solid var(--border);
+    }
+
+    .prev-chart-area {
+      padding: 1.25rem 1.25rem 1rem;
+      min-width: 0;
+      border-right: 1px solid var(--border);
+    }
+
+    /* D3 mounts here — each preview script sizes its own SVG */
+    #oil-prev-chart,
+    #fcast-prev-chart {
+      width: 100%;
+      min-height: 260px;
+      overflow: hidden;
+    }
+
+    #oil-prev-chart svg,
+    #fcast-prev-chart svg {
+      display: block;
+      overflow: visible;
+    }
+
+    .prev-hint {
+      font-family: var(--font-mono);
+      font-size: .68rem;
+      color: var(--accent-amber);
+      min-height: 1.1rem;
+      margin-top: .4rem;
+    }
+
+    /* ── Side panel ── */
+    .prev-side-panel {
+      background: var(--bg-card-alt);
+      padding: 1.25rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: .5rem;
+    }
+
+    .prev-side-label {
+      font-family: var(--font-mono);
+      font-size: .6rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: .15rem;
+    }
+
+    .prev-side-stat {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: .75rem .85rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .prev-side-stat::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--accent-teal);
+      opacity: .55;
+    }
+
+    .prev-side-stat:nth-of-type(2)::before { background: var(--accent-amber); }
+    .prev-side-stat:nth-of-type(3)::before { background: var(--accent-blue); }
+
+    .prev-side-val {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1.1;
+    }
+
+    .prev-side-key {
+      font-family: var(--font-mono);
+      font-size: .6rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: .2rem;
+    }
+
+    .prev-side-sub {
+      font-size: .76rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      margin-top: .1rem;
+    }
+
+    /* ── Legend block ── */
+    .prev-legend-block { flex: 1; }
+
+    .oil-prev-legend-row,
+    .fcast-prev-legend-row {
+      display: flex;
+      align-items: center;
+      gap: .45rem;
+      padding: .28rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .oil-prev-legend-row:last-child,
+    .fcast-prev-legend-row:last-child { border-bottom: none; }
+
+    .oil-prev-legend-dot,
+    .fcast-prev-legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .oil-prev-legend-name,
+    .fcast-prev-legend-name {
+      font-family: var(--font-display);
+      font-size: .76rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* ── Footer row ── */
+    .prev-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: .75rem;
+      padding: .85rem 1.5rem;
+      border-top: 1px solid var(--border);
+      background: rgba(0,0,0,.12);
+    }
+
+    .prev-footnote {
+      font-family: var(--font-mono);
+      font-size: .65rem;
+      color: var(--text-muted);
+    }
+
+    /* ── Responsive collapse ── */
+    @media (max-width: 860px) {
+      .prev-card-body {
+        grid-template-columns: 1fr;
+      }
+      .prev-chart-area { border-right: none; border-bottom: 1px solid var(--border); }
+      .prev-side-panel { flex-direction: row; flex-wrap: wrap; }
+      .prev-side-stat  { flex: 1; min-width: 130px; }
+      .prev-legend-block { display: none; } /* too narrow on mobile */
+    }
+
+    @media (max-width: 600px) {
+      .prev-card-header { flex-direction: column; }
+      .prev-card-meta   { align-items: flex-start; }
+      .prev-card-footer { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       PROJECT GOAL SECTION
+    ═══════════════════════════════════════════════════════════ */
+
+    .goal-section {
+      border-top: 1px solid var(--border);
+      padding-top: 3rem;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .goal-header {
+      margin-bottom: 2rem;
+    }
+
+    .goal-pillars {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .goal-pillar {
+      background: var(--bg-card-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.4rem;
+      transition: border-color .2s;
+    }
+
+    .goal-pillar:hover { border-color: var(--border-glow); }
+
+    .goal-pillar-icon {
+      font-size: 1.5rem;
+      margin-bottom: .55rem;
+    }
+
+    .goal-pillar h3 {
+      font-family: var(--font-display);
+      font-size: .92rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: .5rem;
+    }
+
+    .goal-pillar p {
+      font-size: .87rem;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .goal-pillar a { color: var(--accent-teal); }
   </style>
 </head>
 
@@ -1226,222 +1505,222 @@
   <!-- ===== MAIN CONTENT ===== -->
   <main class="main-content wrap" id="charts" aria-label="Dashboard content">
 
-    <!-- ── Dashboard Controls ──────────────────────────────────── -->
-    <section class="controls-card" aria-label="Dashboard controls">
-      <div class="controls-row">
+    <!-- Controls card removed — replaced by self-contained preview sections below -->
 
-        <div class="control-group">
-          <label for="yearSelect">Year</label>
-          <!-- JS populates options -->
-          <select id="yearSelect" aria-label="Select year"></select>
+
+    <!-- ── Preview 1: Oil Imports / Trade ───────────────────────
+         Powered by ./jsfile/oil-preview.js
+         All IDs are prefixed "oil-prev-" — no conflict with oil-info.html
+    ─────────────────────────────────────────────────────────── -->
+    <section class="prev-card" aria-labelledby="oilPrevTitle">
+      <div class="prev-card-header">
+        <div class="prev-card-title-group">
+          <p class="section-label">Oil Trade · Preview</p>
+          <h2 class="prev-card-title" id="oilPrevTitle">Oil Imports by Country</h2>
+          <p class="prev-card-desc">
+            Historical oil import volumes (kb/d) for the world's largest importers, with
+            ARIMA-model forecasts through 2030. Solid = recorded data · Dashed = projection.
+          </p>
         </div>
-
-        <div class="control-group">
-          <label for="metricSelect">Metric</label>
-          <select id="metricSelect" aria-label="Select metric">
-            <option value="metric_a">Metric A</option>
-            <option value="metric_b">Metric B</option>
-          </select>
-        </div>
-
-        <div class="control-group">
-          <label for="topNSelect">Top N countries</label>
-          <select id="topNSelect" aria-label="Select number of countries">
-            <option value="10">10</option>
-            <option value="20" selected>20</option>
-            <option value="30">30</option>
-          </select>
-        </div>
-
-        <div class="control-group" style="margin-left:auto;">
-          <label>&nbsp;</label>
-          <button id="resetBtn" class="btn btn-ghost" type="button" aria-label="Reset all filters">
-            ↺ Reset
-          </button>
+        <div class="prev-card-meta">
+          <span class="chart-badge chart-badge--oil">Oil · Imports</span>
+          <a class="btn btn-ghost prev-cta-btn" href="./htmlfile/oil-info.html">
+            Full Explorer →
+          </a>
         </div>
       </div>
 
-      <div class="status-row" role="status" aria-live="polite">
-        <div class="status-dot" aria-hidden="true"></div>
-        <div id="statusText">Waiting for data…</div>
-        <div id="lastUpdated" aria-label="Last updated"></div>
+      <div class="prev-card-body">
+        <!-- D3 chart (left) -->
+        <div class="prev-chart-area">
+          <div id="oil-prev-chart"
+               role="img"
+               aria-label="Oil imports multi-line chart — loading"></div>
+          <p class="prev-hint" id="oil-prev-hint" aria-live="polite"></p>
+        </div>
+
+        <!-- Stats + legend (right) -->
+        <aside class="prev-side-panel" aria-label="Oil imports summary">
+          <p class="prev-side-label">2023 snapshot</p>
+
+          <div class="prev-side-stat">
+            <div class="prev-side-val" id="oil-prev-stat-total">—</div>
+            <div class="prev-side-key">Combined Imports</div>
+            <div class="prev-side-sub">Top 6 countries · kb/d</div>
+          </div>
+
+          <div class="prev-side-stat" style="margin-top:.65rem">
+            <div class="prev-side-val" id="oil-prev-stat-top">—</div>
+            <div class="prev-side-key">Largest Importer</div>
+            <div class="prev-side-sub">by volume · 2023</div>
+          </div>
+
+          <div class="prev-side-stat" style="margin-top:.65rem">
+            <div class="prev-side-val" id="oil-prev-stat-trend">—</div>
+            <div class="prev-side-key">Demand Trend</div>
+            <div class="prev-side-sub">avg. 2023 → 2030</div>
+          </div>
+
+          <div class="prev-legend-block" style="margin-top:1rem">
+            <p class="prev-side-label" style="margin-bottom:.4rem">Countries</p>
+            <div id="oil-prev-legend"></div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="prev-card-footer">
+        <span class="prev-footnote">Source: IEA Oil Information · ARIMA forecast model</span>
+        <a class="btn btn-primary" href="./htmlfile/oil-info.html">
+          Explore with chips &amp; filters →
+        </a>
       </div>
     </section>
 
 
-    <!-- ── Row 1: EV growth (wide) + Key insight (side) ──────── -->
-    <div class="chart-grid">
-
-      <!-- CHART A: EV Sales / Growth over Time -->
-      <!-- ↓↓↓ D3 TARGET: id="chart-ev-growth" — replace placeholder content ↓↓↓ -->
-      <section class="chart-card chart-card--wide" aria-labelledby="chartATitle" id="chart-ev">
-        <div class="chart-card-header">
-          <div>
-            <p class="section-label">Chart A</p>
-            <h2 class="chart-card-title" id="chartATitle">EV Sales &amp; Market Growth</h2>
-            <p class="chart-card-subtitle" id="chartASubtitle">Annual EV sales by country/region — IEA Global EV Outlook</p>
-          </div>
-          <span class="chart-badge chart-badge--ev">EV</span>
-        </div>
-
-        <!-- D3 mounts into this div; remove placeholder once data loads -->
-        <div id="chart-a" class="chart-mount" role="img" aria-label="EV sales and growth chart — loading">
-          <!-- Placeholder bar chart skeleton -->
-          <div class="chart-placeholder chart-placeholder--bar" aria-hidden="true">
-            <div class="ph-bar" style="height:35%"></div>
-            <div class="ph-bar" style="height:55%"></div>
-            <div class="ph-bar" style="height:42%"></div>
-            <div class="ph-bar" style="height:68%"></div>
-            <div class="ph-bar" style="height:75%"></div>
-            <div class="ph-bar" style="height:60%"></div>
-            <div class="ph-bar" style="height:88%"></div>
-            <div class="ph-bar" style="height:100%"></div>
-            <div class="chart-placeholder-label">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.5l5-5 4 4 5.5-6 3.5 4" /></svg>
-              <span>D3 chart renders here</span>
-            </div>
-          </div>
-        </div>
-
-        <div id="chart-a-empty" class="empty-state" hidden>No data available for this selection.</div>
-      </section>
-
-      <!-- Insight panel beside Chart A -->
-      <aside class="chart-card chart-card--side" aria-label="Key insight">
-        <p class="section-label">Key insight</p>
-        <div class="insight-card" style="margin-top:.75rem;">
-          <div class="insight-card-header">
-            <span class="insight-icon" aria-hidden="true">⚡</span>
-            <span class="insight-card-title">Why EV adoption matters</span>
-          </div>
-          <p>
-            In countries with high oil import dependency, every percentage-point gain in EV
-            market share translates directly to reduced crude imports — freeing foreign-exchange
-            reserves that can be redirected toward electricity grid and infrastructure investment.
+    <!-- ── Preview 2: EV Sales Forecast ────────────────────────
+         Powered by ./jsfile/forecast-preview.js
+         All IDs are prefixed "fcast-prev-" — no conflict with ev_forecast.js
+    ─────────────────────────────────────────────────────────── -->
+    <section class="prev-card" aria-labelledby="forecastPrevTitle">
+      <div class="prev-card-header">
+        <div class="prev-card-title-group">
+          <p class="section-label">EV Forecast · Preview</p>
+          <h2 class="prev-card-title" id="forecastPrevTitle">EV Sales Forecast (S-Curve)</h2>
+          <p class="prev-card-desc">
+            Logistic S-curve projections of EV sales by region through 2035 — from early
+            adoption through rapid acceleration to market saturation.
+            Solid = actual · Dashed = modelled forecast.
           </p>
         </div>
-        <div class="insight-card" style="margin-top:1rem; background: linear-gradient(135deg, rgba(245,166,35,.06), rgba(255,107,107,.06)); border-color: rgba(245,166,35,.2);">
-          <div class="insight-card-header">
-            <span class="insight-icon" aria-hidden="true">🛢️</span>
-            <span class="insight-card-title" style="color:var(--accent-amber)">Oil import dependency</span>
+        <div class="prev-card-meta">
+          <span class="chart-badge chart-badge--invest">EV · Forecast</span>
+          <a class="btn btn-ghost prev-cta-btn" href="./htmlfile/ev_forecast.html">
+            Full Explorer →
+          </a>
+        </div>
+      </div>
+
+      <div class="prev-card-body">
+        <!-- D3 chart (left) -->
+        <div class="prev-chart-area">
+          <div id="fcast-prev-chart"
+               role="img"
+               aria-label="EV forecast S-curve line chart — loading"></div>
+          <p class="prev-hint" id="fcast-prev-hint" aria-live="polite"></p>
+        </div>
+
+        <!-- Stats + legend (right) -->
+        <aside class="prev-side-panel" aria-label="EV forecast summary">
+          <p class="prev-side-label">Forecast highlights</p>
+
+          <div class="prev-side-stat">
+            <div class="prev-side-val" id="fcast-prev-stat-peak">—</div>
+            <div class="prev-side-key">Peak Sales (2035)</div>
+            <div class="prev-side-sub">Top region · vehicles/yr</div>
           </div>
-          <p>
-            Non-oil-producing nations spend a significant share of GDP on oil imports. This dashboard
-            tracks whether that burden is easing as EV fleets grow.
+
+          <div class="prev-side-stat" style="margin-top:.65rem">
+            <div class="prev-side-val" id="fcast-prev-stat-region">—</div>
+            <div class="prev-side-key">Regions Modelled</div>
+            <div class="prev-side-sub">in full explorer</div>
+          </div>
+
+          <div class="prev-side-stat" style="margin-top:.65rem">
+            <div class="prev-side-val" id="fcast-prev-stat-year">—</div>
+            <div class="prev-side-key">Forecast Horizon</div>
+            <div class="prev-side-sub">end of projection</div>
+          </div>
+
+          <div class="prev-legend-block" style="margin-top:1rem">
+            <p class="prev-side-label" style="margin-bottom:.4rem">Regions</p>
+            <div id="fcast-prev-legend"></div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="prev-card-footer">
+        <span class="prev-footnote">Model: logistic S-curve · Source: IEA Global EV Outlook</span>
+        <a class="btn btn-primary" href="./htmlfile/ev_forecast.html">
+          Explore by region →
+        </a>
+      </div>
+    </section>
+
+
+    <!-- ── Project Goal / About ──────────────────────────────── -->
+    <section class="goal-section" id="goal" aria-labelledby="goalHeading">
+      <div class="goal-header">
+        <div>
+          <p class="section-label">Project goal</p>
+          <h2 class="section-heading" id="goalHeading">
+            Does <em style="font-style:normal;color:var(--accent-teal)">EV adoption</em>
+            reduce oil dependency?
+          </h2>
+          <p class="section-lead">
+            This dashboard investigates one question using freely available IEA data: as
+            electric vehicle fleets grow, do oil import volumes in non-producing nations
+            measurably decline — and how large could the resulting fiscal dividend be?
           </p>
         </div>
-      </aside>
+      </div>
 
-    </div><!-- /chart-grid row 1 -->
+      <div class="goal-pillars">
 
-
-    <!-- ── Row 2: Oil imports + Scatter correlation ───────────── -->
-    <div class="chart-grid">
-
-      <!-- CHART B: Oil Imports Over Time -->
-      <!-- ↓↓↓ D3 TARGET: id="chart-oil-imports" — line chart ↓↓↓ -->
-      <section class="chart-card chart-card--half" aria-labelledby="chartBTitle" id="chart-oil">
-        <div class="chart-card-header">
-          <div>
-            <p class="section-label">Chart B</p>
-            <h2 class="chart-card-title" id="chartBTitle">Oil Imports by Country</h2>
-            <p class="chart-card-subtitle" id="chartBSubtitle">Import volumes (kb/d) — IEA Oil Trade Data</p>
-          </div>
-          <span class="chart-badge chart-badge--oil">Oil</span>
+        <div class="goal-pillar">
+          <div class="goal-pillar-icon" aria-hidden="true">⚡</div>
+          <h3>EV Growth</h3>
+          <p>
+            Global EV sales have followed a textbook S-curve: slow early uptake through
+            ~2019, then a steep acceleration phase. The
+            <a href="./htmlfile/ev-share.html">EV Share Explorer</a> and
+            <a href="./htmlfile/ev_forecast.html">Forecast page</a>
+            map this trajectory by country and project it through 2035.
+          </p>
         </div>
 
-        <!-- D3 mounts into this div -->
-        <div id="chart-b" class="chart-mount" role="img" aria-label="Oil imports line chart — loading">
-          <div class="chart-placeholder chart-placeholder--line" aria-hidden="true">
-            <div class="chart-placeholder-label">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" /></svg>
-              <span>D3 chart renders here</span>
-            </div>
-          </div>
+        <div class="goal-pillar">
+          <div class="goal-pillar-icon" aria-hidden="true">🛢️</div>
+          <h3>Oil Import Pressure</h3>
+          <p>
+            Light-vehicle transport is the primary consumer of petroleum in most import-dependent
+            nations. As EV penetration rises, per-vehicle fuel demand falls. The
+            <a href="./htmlfile/oil-info.html">Oil Explorer</a>
+            tracks whether this shows up in country-level import volumes.
+          </p>
         </div>
 
-        <div id="chart-b-empty" class="empty-state" hidden>Select a country to view imports.</div>
-      </section>
-
-      <!-- CHART C: EV vs Oil import scatter / correlation -->
-      <!-- ↓↓↓ D3 TARGET: id="chart-correlation" — scatter plot ↓↓↓ -->
-      <section class="chart-card chart-card--half" aria-labelledby="chartCTitle" id="chart-correlation">
-        <div class="chart-card-header">
-          <div>
-            <p class="section-label">Chart C</p>
-            <h2 class="chart-card-title" id="chartCTitle">EV Share vs. Oil Import Δ</h2>
-            <p class="chart-card-subtitle" id="chartCSubtitle">Scatter: EV market share vs. change in oil imports per country</p>
-          </div>
-          <span class="chart-badge chart-badge--invest">Correlation</span>
+        <div class="goal-pillar">
+          <div class="goal-pillar-icon" aria-hidden="true">🏗️</div>
+          <h3>Infrastructure Dividend</h3>
+          <p>
+            Reduced oil imports free foreign-exchange reserves. At conservative oil-price
+            assumptions, even modest displacement translates to billions of dollars that
+            could be redirected toward electricity grid and clean-energy infrastructure.
+          </p>
         </div>
 
-        <!-- D3 mounts into this div -->
-        <div id="chart-c" class="chart-mount" role="img" aria-label="Correlation scatter plot — loading">
-          <div class="chart-placeholder chart-placeholder--scatter" aria-hidden="true">
-            <!-- Dots scattered for visual -->
-            <div class="ph-dot" style="top:30%;left:20%"></div>
-            <div class="ph-dot" style="top:55%;left:40%"></div>
-            <div class="ph-dot" style="top:20%;left:60%"></div>
-            <div class="ph-dot" style="top:70%;left:75%"></div>
-            <div class="ph-dot" style="top:40%;left:85%"></div>
-            <div class="ph-dot" style="top:65%;left:15%"></div>
-            <div class="ph-dot" style="top:25%;left:50%"></div>
-            <div class="chart-placeholder-label">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="17" r="2"/><circle cx="17" cy="7" r="2"/><circle cx="12" cy="12" r="2"/><path stroke-linecap="round" d="M7 17L17 7"/></svg>
-              <span>D3 chart renders here</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-    </div><!-- /chart-grid row 2 -->
-
-
-    <!-- ── Row 3: Investment redirect (full-width) ────────────── -->
-    <!-- ↓↓↓ D3 TARGET: id="chart-investment" — bar/area chart ↓↓↓ -->
-    <div class="chart-grid">
-      <section class="chart-card chart-card--full" aria-labelledby="chartDTitle" id="chart-investment">
-        <div class="chart-card-header">
-          <div>
-            <p class="section-label">Chart D</p>
-            <h2 class="chart-card-title" id="chartDTitle">Potential Infrastructure Investment from Oil Savings</h2>
-            <p class="chart-card-subtitle" id="chartDSubtitle">
-              Estimated financial value of reduced oil imports reinvested in electricity infrastructure
-            </p>
-          </div>
-          <span class="chart-badge chart-badge--invest">Investment</span>
+        <div class="goal-pillar">
+          <div class="goal-pillar-icon" aria-hidden="true">⚠️</div>
+          <h3>Caveats</h3>
+          <p>
+            Oil demand is shaped by industry, heating, and shipping — not just cars.
+            This analysis focuses on light-vehicle transport fuel and should be read as
+            indicative rather than causal. GDP growth and energy-mix shifts are controlled
+            for but not eliminated.
+          </p>
         </div>
 
-        <!-- D3 mounts into this div -->
-        <div id="chart-d" class="chart-mount" style="min-height:200px;" role="img" aria-label="Investment potential chart — loading">
-          <div class="chart-placeholder chart-placeholder--bar" aria-hidden="true" style="padding:.5rem 1rem;">
-            <div class="ph-bar" style="height:30%; background: linear-gradient(180deg, rgba(91,141,238,.35) 0%, transparent 100%)"></div>
-            <div class="ph-bar" style="height:45%; background: linear-gradient(180deg, rgba(91,141,238,.35) 0%, transparent 100%)"></div>
-            <div class="ph-bar" style="height:40%; background: linear-gradient(180deg, rgba(91,141,238,.35) 0%, transparent 100%)"></div>
-            <div class="ph-bar" style="height:62%; background: linear-gradient(180deg, rgba(91,141,238,.35) 0%, transparent 100%)"></div>
-            <div class="ph-bar" style="height:58%; background: linear-gradient(180deg, rgba(91,141,238,.35) 0%, transparent 100%)"></div>
-            <div class="ph-bar" style="height:74%; background: linear-gradient(180deg, rgba(91,141,238,.35) 0%, transparent 100%)"></div>
-            <div class="ph-bar" style="height:90%; background: linear-gradient(180deg, rgba(91,141,238,.35) 0%, transparent 100%)"></div>
-            <div class="ph-bar" style="height:100%; background: linear-gradient(180deg, rgba(91,141,238,.35) 0%, transparent 100%)"></div>
-            <div class="ph-bar" style="height:95%; background: linear-gradient(180deg, rgba(91,141,238,.35) 0%, transparent 100%)"></div>
-            <div class="chart-placeholder-label">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-8-6h16"/></svg>
-              <span>D3 chart renders here</span>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div><!-- /chart-grid row 3 -->
+      </div>
+    </section>
 
 
-    <!-- ── About / Methods / Data Sources ────────────────────── -->
+    <!-- ── Data Sources (compact) ────────────────────────────── -->
     <section class="about-section" id="about" aria-labelledby="aboutHeading">
       <p class="section-label">About this project</p>
       <h2 class="section-heading" id="aboutHeading">Methods &amp; Data Sources</h2>
       <p class="section-lead">
-        This dashboard uses freely available IEA datasets to investigate one question: does growing
-        EV adoption demonstrably reduce oil imports in non-oil-producing nations, and how large could
-        the fiscal dividend be?
+        All charts draw on freely available IEA datasets. Coverage spans 50+ countries from
+        1971–2023 for oil trade and 2010–2030 for EV sales, with forecasts extending to 2035.
       </p>
 
       <div class="about-grid">
@@ -1450,13 +1729,12 @@
           <div class="about-block-icon" aria-hidden="true">📊</div>
           <h3>Data Sources</h3>
           <p>
-            Oil import/export figures are drawn from the
+            Oil import/export figures from the
             <a href="https://www.iea.org/data-and-statistics" target="_blank" rel="noopener">
               IEA Oil Information database</a>.
-            EV sales and market-share data come from the
+            EV sales and market-share data from the
             <a href="https://www.iea.org/reports/global-ev-outlook-2023" target="_blank" rel="noopener">
               IEA Global EV Outlook</a>.
-            Coverage: 50+ countries, 2000–2023.
           </p>
         </div>
 
@@ -1464,19 +1742,20 @@
           <div class="about-block-icon" aria-hidden="true">🔬</div>
           <h3>Methodology</h3>
           <p>
-            We compare country-level annual EV market share to year-over-year changes in oil import
-            volumes, controlling for GDP growth. The investment-redirect estimate applies a conservative
-            average oil price to the barrels displaced and scales to per-capita grid investment benchmarks.
+            Country-level EV market share is compared to year-over-year oil import changes,
+            controlling for GDP growth. Investment estimates apply a conservative oil price to
+            displaced barrels and scale to per-capita grid benchmarks.
           </p>
         </div>
 
         <div class="about-block">
-          <div class="about-block-icon" aria-hidden="true">⚠️</div>
-          <h3>Caveats</h3>
+          <div class="about-block-icon" aria-hidden="true">📈</div>
+          <h3>Forecast Models</h3>
           <p>
-            Oil demand is influenced by many factors beyond EV adoption (industrial demand, heating,
-            shipping). This analysis focuses on light-vehicle transport fuel only and should be read as
-            indicative, not causal.
+            Oil forecasts use Log-ARIMA models fitted to historical IEA data.
+            EV adoption is projected via a logistic S-curve
+            (<em>f(t) = L / (1 + e<sup>−k(t−t₀)</sup>)</em>)
+            fitted by nonlinear least-squares regression.
           </p>
         </div>
 
@@ -1484,8 +1763,8 @@
           <div class="about-block-icon" aria-hidden="true">🤝</div>
           <h3>Contributing</h3>
           <p>
-            This is an open project. Chart implementations live in <code>./jsfile/</code> and datasets
-            in <code>./data/</code>. Pull requests welcome on
+            Open project. Chart implementations in <code>./jsfile/</code>, datasets in
+            <code>./data/</code>. Pull requests welcome on
             <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>.
           </p>
         </div>
@@ -1521,5 +1800,21 @@
   -->
   <script src="./jsfile/ev-preview.js"></script>
 
-  <!-- Your wiring layer -->
-  <script type="module" src="./main.js"></scr
+  <!--
+    Oil Imports preview — standalone IIFE, uses only "oil-prev-*" IDs.
+    Data is inline (sample); no CSV/JSON fetch required.
+  -->
+  <script src="./jsfile/oil-preview.js"></script>
+
+  <!--
+    EV Forecast preview — standalone IIFE, uses only "fcast-prev-*" IDs.
+    Attempts ./data/ev-data.json; falls back to built-in S-curve sample data.
+  -->
+  <script src="./jsfile/forecast-preview.js"></script>
+
+  <!-- Footer year -->
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

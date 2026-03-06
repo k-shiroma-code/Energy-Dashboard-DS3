@@ -456,108 +456,6 @@
       font-weight: 500;
     }
 
-    /* ─── About this chart ────────────────────────────────────── */
-    .about-chart {
-      margin-top: 1.75rem;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 1.5rem;
-      box-shadow: var(--shadow-card);
-    }
-
-    .about-chart-header {
-      display: flex;
-      align-items: center;
-      gap: .75rem;
-      margin-bottom: 1rem;
-    }
-
-    .about-chart-heading {
-      font-family: var(--font-display);
-      font-size: .95rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      letter-spacing: -.01em;
-    }
-
-    .about-chart-icon {
-      width: 28px;
-      height: 28px;
-      border-radius: var(--radius-sm);
-      background: rgba(45,212,191,.1);
-      border: 1px solid rgba(45,212,191,.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      color: var(--accent-teal);
-      font-size: .85rem;
-    }
-
-    .about-chart-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: .65rem;
-    }
-
-    .about-chart-list li {
-      display: flex;
-      gap: .75rem;
-      font-size: .88rem;
-      font-weight: 300;
-      color: var(--text-secondary);
-      line-height: 1.65;
-    }
-
-    .about-chart-list li::before {
-      content: '';
-      display: block;
-      width: 3px;
-      min-width: 3px;          /* prevent flex shrink */
-      height: 1.3em;
-      margin-top: .18em;
-      border-radius: 2px;
-      background: var(--accent-teal);
-      opacity: .55;
-      flex-shrink: 0;
-    }
-
-    /* Amber accent for the second bullet (dashed / forecast) */
-    .about-chart-list li:nth-child(2)::before { background: var(--accent-amber); }
-    /* Blue for S-curve bullet */
-    .about-chart-list li:nth-child(3)::before { background: var(--accent-blue); }
-
-    .about-chart-list strong {
-      color: var(--text-primary);
-      font-weight: 600;
-    }
-
-    /* Inline encoding swatches used inside bullet text */
-    .enc-solid {
-      display: inline-block;
-      width: 18px;
-      height: 2px;
-      background: currentColor;
-      vertical-align: middle;
-      border-radius: 1px;
-      margin: 0 2px;
-    }
-
-    .enc-dashed {
-      display: inline-block;
-      width: 18px;
-      height: 2px;
-      vertical-align: middle;
-      margin: 0 2px;
-      background: repeating-linear-gradient(
-        90deg,
-        currentColor 0, currentColor 4px,
-        transparent 4px, transparent 7px
-      );
-    }
-
     /* ─── Footer ──────────────────────────────────────────────── */
     .site-footer { border-top: 1px solid var(--border); padding-block: 1.5rem; }
 
@@ -604,87 +502,6 @@
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: var(--border-glow); }
-    /* ─── About this chart block ──────────────────────────────── */
-    .about-chart {
-      background: var(--bg-card-alt);
-      border: 1px solid var(--border);
-      border-left: 3px solid var(--accent-teal);
-      border-radius: var(--radius-md);
-      padding: 1.1rem 1.35rem;
-      margin-bottom: 1.75rem;
-    }
-
-    .about-chart-header {
-      display: flex;
-      align-items: center;
-      gap: .55rem;
-      margin-bottom: .75rem;
-    }
-
-    .about-chart-heading {
-      font-family: var(--font-display);
-      font-size: .85rem;
-      font-weight: 700;
-      letter-spacing: .01em;
-      color: var(--text-primary);
-    }
-
-    .about-chart ul {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: .45rem;
-      padding: 0;
-      margin: 0;
-    }
-
-    .about-chart li {
-      display: flex;
-      align-items: baseline;
-      gap: .65rem;
-      font-size: .875rem;
-      font-weight: 300;
-      color: var(--text-secondary);
-      line-height: 1.65;
-    }
-
-    .about-chart li::before {
-      content: '';
-      display: inline-block;
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--accent-teal);
-      flex-shrink: 0;
-      margin-top: .42em;  /* optical alignment with cap-height */
-    }
-
-    /* Inline encoding swatches inside list items */
-    .enc-solid {
-      display: inline-block;
-      width: 22px;
-      height: 2.5px;
-      background: var(--accent-teal);
-      border-radius: 2px;
-      vertical-align: middle;
-      margin: 0 .15rem;
-      flex-shrink: 0;
-    }
-
-    .enc-dashed {
-      display: inline-block;
-      width: 22px;
-      height: 2.5px;
-      background: repeating-linear-gradient(
-        90deg,
-        var(--accent-amber) 0, var(--accent-amber) 5px,
-        transparent 5px, transparent 9px
-      );
-      vertical-align: middle;
-      margin: 0 .15rem;
-      flex-shrink: 0;
-    }
-
   </style>
 </head>
 
@@ -716,8 +533,9 @@
         <p class="page-eyebrow">EV Sales · Forecast</p>
         <h1 class="page-title">EV Sales <span class="accent">Forecast</span></h1>
         <p class="page-subtitle">
-          Tracks total EV sales volume across global markets using a logistic S-curve model —
-          from early adoption through mass-market acceleration to eventual saturation.
+          Logistic S-curve model projecting electric vehicle market adoption by region.
+          Historical sales data is fitted to a diffusion curve to estimate the trajectory
+          toward market saturation.
         </p>
       </div>
       <aside class="page-meta" aria-label="Chart metadata">
@@ -744,65 +562,10 @@
         </div>
 
         <p class="control-desc">
-          Solid = historical &nbsp;·&nbsp; Dashed = forecast &nbsp;·&nbsp; Hover for details
+          Hover data points for details &nbsp;·&nbsp; Dashed line = forecast
         </p>
       </div>
     </section>
-
-
-    <!-- ── About this chart ──────────────────────────────────── -->
-    <aside class="about-chart" aria-label="About this chart">
-      <div class="about-chart-header">
-        <!-- Icon: info circle -->
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
-             stroke="var(--accent-teal)" stroke-width="2"
-             stroke-linecap="round" stroke-linejoin="round"
-             aria-hidden="true" focusable="false">
-          <circle cx="12" cy="12" r="10"/>
-          <line x1="12" y1="8" x2="12" y2="8"/>
-          <polyline points="11 12 12 12 12 16"/>
-        </svg>
-        <h2 class="about-chart-heading">About this chart</h2>
-      </div>
-
-      <ul>
-        <li>
-          Tracks total EV sales volume across global markets from early adoption
-          through mass-market acceleration to eventual saturation — following a
-          classic <strong style="color:var(--text-primary);font-weight:600">S-curve</strong>
-          diffusion pattern.
-        </li>
-        <li>
-          <span class="enc-solid" aria-hidden="true"></span>
-          <span>
-            <strong style="color:var(--text-primary);font-weight:600">Solid lines</strong>
-            show historical actual EV sales drawn directly from IEA source data.
-          </span>
-        </li>
-        <li>
-          <span class="enc-dashed" aria-hidden="true"></span>
-          <span>
-            <strong style="color:var(--text-primary);font-weight:600">Dashed lines</strong>
-            show modelled forecast projections of EV sales through 2035, fitted using a
-            logistic curve.
-          </span>
-        </li>
-        <li>
-          The S-curve moves through three phases:
-          <strong style="color:var(--text-primary);font-weight:600">early growth</strong>
-          (slow initial uptake) →
-          <strong style="color:var(--text-primary);font-weight:600">acceleration</strong>
-          (rapid mass-market expansion near the inflection year) →
-          <strong style="color:var(--text-primary);font-weight:600">saturation</strong>
-          (growth flattens as the market approaches its ceiling).
-        </li>
-        <li>
-          Use the <strong style="color:var(--text-primary);font-weight:600">Region</strong>
-          dropdown to switch between markets. Hover the chart for exact values at each
-          data point.
-        </li>
-      </ul>
-    </aside>
 
 
     <!-- ── Chart card ─────────────────────────────────────────── -->
@@ -816,7 +579,7 @@
           -->
           <h2 class="chart-card-title" id="title">EV Sales Forecast (Logistic S-Curve)</h2>
           <p class="chart-card-subtitle">
-            Select a region above · <strong style="color:var(--text-primary);font-weight:600">Solid line</strong> = historical sales &nbsp;·&nbsp; <strong style="color:var(--text-primary);font-weight:600">Dashed line</strong> = forecast to 2035
+            Actual sales vs. modelled diffusion curve — select a region above to update
           </p>
         </div>
         <span class="chart-badge" aria-hidden="true">EV · Forecast</span>
@@ -878,53 +641,6 @@
     </div>
 
 
-    <!-- ── About this chart ──────────────────────────────────── -->
-    <aside class="about-chart" aria-labelledby="aboutChartHeading">
-      <div class="about-chart-header">
-        <div class="about-chart-icon" aria-hidden="true">ℹ</div>
-        <h2 class="about-chart-heading" id="aboutChartHeading">About this chart</h2>
-      </div>
-
-      <ul class="about-chart-list">
-
-        <li>
-          <strong>Historical actuals —</strong>
-          <span class="enc-solid" aria-hidden="true"></span>
-          <strong>solid lines</strong> show real EV sales volume recorded by the IEA,
-          capturing the market as it actually developed from early adoption onward.
-        </li>
-
-        <li>
-          <strong>Forecast projections —</strong>
-          <span class="enc-dashed" aria-hidden="true"></span>
-          <strong>dashed lines</strong> extend the fitted model through 2035,
-          representing modelled projections rather than confirmed data.
-        </li>
-
-        <li>
-          <strong>S-curve adoption pattern —</strong> the trajectory follows a logistic
-          diffusion curve: an initial slow-growth phase as the market establishes itself,
-          a rapid acceleration phase once adoption reaches critical mass, and a flattening
-          saturation phase as the addressable market fills.
-        </li>
-
-        <li>
-          <strong>Region selector —</strong> each region has its own fitted curve
-          with independently estimated growth rate (<em>k</em>), inflection year
-          (<em>t₀</em>), and saturation ceiling (<em>L</em>). Use the dropdown above
-          to compare trajectories across markets.
-        </li>
-
-        <li>
-          <strong>Stat tiles —</strong> the four tiles below the chart update automatically
-          to show the selected region's projected peak share, inflection year, current share,
-          and recent average growth rate.
-        </li>
-
-      </ul>
-    </aside>
-
-
     <!-- ── Methodology note ────────────────────────────────── -->
     <aside class="method-note" role="note" aria-label="Model methodology">
       <strong>Model &nbsp;</strong>
@@ -949,14 +665,14 @@
       <nav class="footer-links" aria-label="Footer links">
         <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
         <a href="./data.html">Datasets</a>
-        <a href="/cdn-cgi/l/email-protection#0d7462787f4d68606c6461236e6260">Contact</a>
+        <a href="mailto:your@email.com">Contact</a>
       </nav>
     </div>
   </footer>
 
 
   <!-- D3 v7 -->
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
 
   <!--
     Your forecast chart logic.
@@ -971,5 +687,10 @@
     If your JS currently does:  d3.select("#dropdown") → no change needed, id is preserved
   -->
   <script src="../jsfile/ev_forecast.js"></script>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
 </body>
 </html>
