@@ -735,7 +735,6 @@
           <select id="viewSelect" class="select" aria-label="Select data view">
             <option value="imports" selected>Imports</option>
             <option value="exports">Exports</option>
-            <option value="net">Net Trade</option>
           </select>
         </div>
         <div class="toolbar-right">
@@ -2583,7 +2582,7 @@
         dataHint.textContent = "";
       } else if (view === "net") {
         allData = allNetTrade;
-        dataHint.textContent = "Note: Net trade view is not yet available. Showing import data.";
+        dataHint.textContent = "";
       } else {
         allData = allImports;
         dataHint.textContent = "";
