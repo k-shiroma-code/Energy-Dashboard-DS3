@@ -92,7 +92,7 @@
 
     const xScale = d3.scaleLinear().domain(xExtent).range([0, W]);
     const yScale = d3.scaleLinear()
-      .domain([yMin < 0 ? yMin * 1.1 : 0, yMax * 1.1])
+      .domain([yMin * 1.1, yMax * 1.1])
       .range([H, 0]).nice();
 
     // Gridlines
@@ -214,3 +214,4 @@
   document.getElementById("modalClose").onclick = () => modal.classList.remove("open");
 
 })();
+
