@@ -2,10 +2,10 @@
 // Mounts into:  <div id="chart">  (oil-info.html)
 // CSV path:     /data/oil_forecast.csv
 // ── State ─────────────────────────────────────────────────────────────────
-  let forecastData = []; // <--- Add this (for oil_forecast.csv)
-  let netTradeData = []; // <--- Add this (for net_trade.csv)
-  let allData      = []; // This remains your "active" source for the chart
-  let active       = []; 
+  let forecastData = []; // Store oil_forecast.csv
+  let netTradeData = []; // Store net_trade.csv
+  let allData      = []; // The "active" dataset being graphed
+  let active       = []; // Selected countries
   let startYear    = 2000;
   let view         = "imports";
 
@@ -619,5 +619,6 @@
   });
 
 })(); // End of IIFE
+
 
 
