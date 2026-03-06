@@ -157,24 +157,17 @@
 
   // ── Render everything ─────────────────────────────────────────────────────
   function render() {
-    if (!allData.length) return;
-
-    const selected = allData.filter(d => active.includes(d.country));
-
-    // Handle non-import views
-    if (view !== "imports") {
-      emptyState && (emptyState.hidden = false);
-      emptyState && (emptyState.textContent = `${view === "exports" ? "Export" : "Net trade"} data is not available in this dataset. Showing import data only.`);
-      // still render but with a notice
-    } else {
-      emptyState && (emptyState.hidden = true);
+    if (!allData || !allData.length) {
+      emptyState.hidden = false;
+      emptyState.textContent = "No data available for this selection.";
+      return;
     }
-
+    emptyState.hidden = true;
+  
     updateStats(selected);
     renderChart(selected);
     renderTable();
   }
-
   // ── Stats cards ───────────────────────────────────────────────────────────
   function updateStats(selected) {
     const lastFcYear = allData[0]?.forecast.at(-1)?.year ?? 2030;
@@ -618,6 +611,7 @@
   });
 
 })(); // End of IIFE
+
 
 
 
