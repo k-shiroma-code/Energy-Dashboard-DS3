@@ -365,7 +365,7 @@
       .attr("text-anchor", "middle")
       .attr("fill", "#6b7280").attr("font-size", 12)
       .attr("font-family", "DM Sans,sans-serif")
-      .text("Imports (KBD)");
+      .text(view === "net" ? "Net Trade (KBD)" : "Imports (KBD)");
 
     // Legend
     const legendDiv = d3.select(chartDiv).select(".oil-legend");
@@ -611,6 +611,7 @@
   });
 
 })(); // End of IIFE
+
 
 
 
