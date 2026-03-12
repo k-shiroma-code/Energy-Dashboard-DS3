@@ -105,12 +105,14 @@
     const yK = k["year"];
     const cK = k["country"] ?? k["region"] ?? k["name"];
     const vK = k["ev_sales"] ?? k["ev_sale"] ?? k["sales"] ?? k["value"] ?? k["evs"];
+    const tK = k["total_car_sales"] ?? k["total_sales"] ?? k["total_cars"];
     if (!yK || !cK || !vK) return null;
     const year    = Number(row[yK]);
     const country = String(row[cK]).trim();
     const value   = Number(row[vK]);
+    const totalCars = tK ? Number(row[tK]) : 0;
     if (!Number.isFinite(year) || !country || !Number.isFinite(value)) return null;
-    return { year, country, value };
+    return { year, country, value, totalCars: Number.isFinite(totalCars) ? totalCars : 0 };
   }
 
   async function loadData() {
@@ -153,10 +155,15 @@
     return entry.values.find(v => v.year === year)?.value ?? 0;
   }
 
+  /** Get totalCars for a specific country + year */
+  function getTotalCars(entry, year) {
+    return entry.values.find(v => v.year === year)?.totalCars ?? 0;
+  }
+
   /** Return top-N rows for a given year, sorted desc */
   function topNForYear(year, n) {
     return allData
-      .map(d => ({ ...d, value: getValue(d, year) }))
+      .map(d => ({ ...d, value: getValue(d, year), totalCars: getTotalCars(d, year) }))
       .filter(d => d.value > 0)
       .sort((a, b) => b.value - a.value)
       .slice(0, n);
@@ -208,6 +215,10 @@
       }
     }
 
+    const leaderMktShare = leader?.totalCars > 0
+      ? ((leader.value / leader.totalCars) * 100).toFixed(1)
+      : null;
+
     const stats = [
       {
         label: "Total EV Sales",
@@ -220,9 +231,9 @@
         sub:   `${d3.format("~s")(leader?.value ?? 0)} vehicles`,
       },
       {
-        label: "Leader Share",
-        value: `${leaderPct}%`,
-        sub:   `of top-${rows.length} total`,
+        label: "Leader Mkt Share",
+        value: leaderMktShare ? `${leaderMktShare}%` : `${leaderPct}%`,
+        sub:   leaderMktShare ? `of all cars in ${leader?.country}` : `of top-${rows.length} EV total`,
       },
       {
         label: "YoY Growth",
@@ -268,12 +279,18 @@
   })();
 
   function showTooltip(event, d, rank, totalSales) {
-    const share = totalSales ? ((d.value / totalSales) * 100).toFixed(1) : "—";
+    const evShare = totalSales ? ((d.value / totalSales) * 100).toFixed(1) : "—";
+    const mktShare = d.totalCars > 0 ? ((d.value / d.totalCars) * 100).toFixed(1) : null;
+    const shareHtml = mktShare
+      ? `<div style="color:#2dd4bf;margin-top:.1rem">${mktShare}% market share</div>
+         <div style="color:#4e5e7a;font-size:.58rem">${evShare}% of top-N EV total</div>`
+      : `<div style="color:#8a9ab8;margin-top:.1rem">${evShare}% of top-N EV total</div>`;
     tooltip.innerHTML = `
       <div style="color:#4e5e7a;font-size:.63rem;margin-bottom:.3rem">#${rank} · ${d.year ?? ""}</div>
       <div style="font-size:.82rem;font-weight:600;color:#e8edf5;margin-bottom:.2rem">${d.country}</div>
-      <div style="color:#8a9ab8">${d3.format(",")(Math.round(d.value))} <span style="font-size:.63rem">vehicles</span></div>
-      <div style="color:#8a9ab8;margin-top:.1rem">${share}% of total</div>`;
+      <div style="color:#8a9ab8">${d3.format(",")(Math.round(d.value))} <span style="font-size:.63rem">EV vehicles</span></div>
+      ${d.totalCars > 0 ? `<div style="color:#4e5e7a;font-size:.63rem">${d3.format(",")(d.totalCars)} total cars sold</div>` : ""}
+      ${shareHtml}`;
     tooltip.style.opacity = "1";
     moveTooltip(event);
   }
@@ -592,7 +609,8 @@
       `Sales Summary — ${year}${prevYear ? ` (vs ${prevYear})` : ""}`;
 
     const tableRows = rows.map((d, i) => {
-      const share = totalSales ? ((d.value / totalSales) * 100).toFixed(1) : "—";
+      const evShare = totalSales ? ((d.value / totalSales) * 100).toFixed(1) : "—";
+      const mktShare = d.totalCars > 0 ? ((d.value / d.totalCars) * 100).toFixed(1) + "%" : "—";
       let changeHtml = '<span class="change-flat">—</span>';
 
       if (prevYear != null) {
@@ -609,7 +627,8 @@
         <td class="td-mono">#${String(i + 1).padStart(2, "0")}</td>
         <td><div class="td-country"><span class="td-dot" style="background:${d.color}"></span>${d.country}</div></td>
         <td class="td-mono">${Math.round(d.value).toLocaleString()}</td>
-        <td class="td-mono">${share}%</td>
+        <td class="td-mono">${mktShare}</td>
+        <td class="td-mono">${evShare}%</td>
         <td>${changeHtml}</td>
       </tr>`;
     }).join("");
@@ -619,8 +638,9 @@
         <thead><tr>
           <th>Rank</th>
           <th>Country</th>
-          <th>${year} Sales</th>
-          <th>Share</th>
+          <th>${year} EV Sales</th>
+          <th>Mkt Share</th>
+          <th>EV Share</th>
           <th>vs ${prevYear ?? "—"}</th>
         </tr></thead>
         <tbody>${tableRows}</tbody>
